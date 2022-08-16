@@ -34,7 +34,7 @@ const Auth = createStackNavigator({
     navigationOptions: {
       headerShown: false,
     },
-  },
+  }, 
   SignupPage: {
     screen: SignupPage,
     navigationOptions: {
