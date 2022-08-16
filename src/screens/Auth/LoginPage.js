@@ -6,7 +6,6 @@ class LoginPage extends React.Component {
 
 	constructor(props) {
 		super(props);
-		props.navigation.navigate('ShoppingListsPage');
 	}
 	render(props) {
 		return (
