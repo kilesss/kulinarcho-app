@@ -18,69 +18,138 @@ import WeekMenuPage from "./src/screens/WeekMenuPage";
 
 global.MyVar = 'http://192.168.100.5/kulinarchophp/public/api/';
 
-const Navigation = createStackNavigator({
+// export default class App extends React.Component {
+//   render() {
+//     return (
+//       <NavigationContainer>
+//         <Tab.Navigator
+//           initialRouteName="Feed"
+//           tabBarOptions={{
+//             activeTintColor: '#42f44b',
+//           }}>
+//           <Tab.Screen
+//             name="ShoppingListsPage"
+//             component={ShoppingListsPage}
+//             options={{
+//               tabBarLabel: 'Списъци за пазар',
+//               tabBarIcon: ({ focused, color, size }) => (
+//                 <Image
+//                   style={{
+//                     width: size,
+//                     height: size,
+//                     borderRadius: size,
+//                   }}
+//                 />
+//               ),
+//             }}
+//           />
+//           <Tab.Screen
+//             name="ProductsAncCategoriesPage"
+//             component={ProductsAndCategoriesPage}
+//             options={{
+//               tabBarLabel: 'Продукти и категории',
+//               tabBarIcon: ({ focused, color, size }) => (
+//                 <Image
+//                   style={{
+//                     width: size,
+//                     height: size,
+//                     borderRadius: size,
+//                   }}
+//                 />
+//               ),
+//             }}
+//           />
+//           <Tab.Screen
+//             name="CookingBookPage"
+//             component={CookingBookPage}
+//             options={{
+//               tabBarLabel: 'Готварска книга',
+//               tabBarIcon: ({ focused, color, size }) => (
+//                 <Image
+//                   style={{
+//                     width: size,
+//                     height: size,
+//                     borderRadius: size,
+//                   }}
+//                 />
+//               ),
+//             }}
+//           />
+//           <Tab.Screen
+//             name="CookersPage"
+//             component={CookersPage}
+//             options={{
+//               tabBarLabel: 'Готвачи',
+//               tabBarIcon: ({ focused, color, size }) => (
+//                 <Image
+//                   style={{
+//                     width: size,
+//                     height: size,
+//                     borderRadius: size,
+//                   }}
+//                 />
+//               ),
+//             }}
+//           />
+//           <Tab.Screen
+//             name="WeekMenuPage"
+//             component={WeekMenuPage}
+//             options={{
+//               tabBarLabel: 'WeekMenuPage',
+//               tabBarIcon: ({ focused, color, size }) => (
+//                 <Image
+//                   style={{
+//                     width: size,
+//                     height: size,
+//                     borderRadius: size,
+//                   }}
+//                 />
+//               ),
+//             }}
+//           />
+//         </Tab.Navigator>
+//       </NavigationContainer>
+//     );
+//   }
+// }
+// const Tab = createBottomTabNavigator();
+// createAppContainer(MainNavigation);
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-  //Stack Navigator for Login and Sign up Screen 
-  LoginPage: {
-    screen: LoginPage,
-    navigationOptions: {
-      headerShown: false,
-    },
-  },
-  ForgottenPasswordPage: {
-    screen: ForgottenPasswordPage,
-    navigationOptions: {
-      headerShown: false,
-    },
-  },
-  SignupPage: {
-    screen: SignupPage,
-    navigationOptions: {
-      headerShown: false,
-    },
-  },
+const Stack = createNativeStackNavigator();
 
-  //this page show where to go first
-  LoginPage: {
-    screen: LoginPage,
-    navigationOptions: {
-      headerShown: false,
-    },
-  },
+function App() {
+  return (
+    <NavigationContainer screenOptions={{ headerShown: false }} >
+      <Stack.Navigator >
+      <Stack.Screen name="LoginPage" component={LoginPage} />
+      <Stack.Screen name="ShoppingListsPage" component={ShoppingListsPage} />
+      <Stack.Screen name="ProductsAndCategoriesPage" component={ProductsAndCategoriesPage} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
 
-  //this page show where to go first
-  ShoppingListsPage: {
-    screen: ShoppingListsPage,
-    navigationOptions: {
-      headerShown: false,
-    },
-  },
-  //this page show where to go first
-  ProductsAndCategoriesPage: {
-    screen: ProductsAndCategoriesPage,
-    navigationOptions: {
-      headerShown: false,
-    },
-  },
-  //this page show where to go first
-  CookingBookPage: {
-    screen: CookingBookPage,
-    navigationOptions: {
-      headerShown: false,
-    },
-  },
-  //this page show where to go first
-  CookersPage: {
-    screen: CookersPage,
-    navigationOptions: {
-      headerShown: false,
-    },
-  },
+export default App;
 
-});
+// export default class App extends React.Component {
+//   render() {
+//     return <AppContainer style={{backgroundColor:"blue"}} />;
+//   }
+// }
 
-/* Switch Navigator for those screens which needs to be switched only once
-and we don't want to switch back once we switch from them to the next one */
-// const App = createSwitchNavigator({Navigation});
+// const AppNavigator = createStackNavigator({
+//   LoginPage: {screen: LoginPage},
+//   SignupPage: {screen: SignupPage},
+//   ForgottenPasswordPage: {screen: ForgottenPasswordPage},
+//   ShoppingListsPage: {screen: ShoppingListsPage},
+//   ProductsAndCategoriesPage: {screen: ProductsAndCategoriesPage},
+//   CookingBookPage: {screen: CookingBookPage},
+//   CookersPage: {screen: CookersPage},
+//   WeekMenuPage: {screen: WeekMenuPage},
+// },{
+//   headerMode: 'none',
+// });
 
-export default createAppContainer(createSwitchNavigator({Navigation}));
+// const AppContainer = createAppContainer(AppNavigator);
+
