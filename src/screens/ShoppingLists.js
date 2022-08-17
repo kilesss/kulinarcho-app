@@ -1,14 +1,19 @@
 import React from "react";
 import { Text, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import styles from './../styles/styles'
-const ShoppingList = () => {
-	return (
-		<View style={styles.container}>
-			<Text style={styles.title}>ShoppingList Screen!</Text>
-			<Ionicons name="md-home" size={80} color="#006600" />
-		</View>
-	);
+import {BottomMenu} from '../components/BottomMenu'
+
+
+export default class ShoppingList extends React.Component {
+
+	render() {
+
+		return (
+			<View style={{ backgroundColor: 'red', flex: 1 }}>
+				<BottomMenu></BottomMenu>
+			</View>
+		);
+
+	}
 };
 
-export default ShoppingList;
+
