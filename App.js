@@ -1,8 +1,7 @@
 import React from 'react';
 import 'react-native-gesture-handler';
 
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack'
+import { NavigationContainer } from '@react-navigation/native';
 
 
 //Import all the screens needed
@@ -114,9 +113,9 @@ global.MyVar = 'http://192.168.100.5/kulinarchophp/public/api/';
 // }
 // const Tab = createBottomTabNavigator();
 // createAppContainer(MainNavigation);
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 function App() {
   return (

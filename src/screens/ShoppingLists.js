@@ -4,7 +4,7 @@ import { Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import BottomMenu from './../components/BottomMenu.js'
 
-class ShoppingList extends React.Component {
+export default class ShoppingList extends React.Component {
 
 	constructor(props) {
 		super(props);
