@@ -1,17 +1,14 @@
 import React from "react";
-import { Text, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import {Button, Text, View} from "react-native";
+import styles from "../../styles/styles";
 
-class SignupPage extends React.Component {
+export default function LoginPage({ navigation }) {
+	return (
+		<View style={styles.container}>
 
-	render(props) {
-		return (
-			<View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-				<Text style={{ color: "#006600", fontSize: 40 }}>Signup!</Text>
-				<Ionicons name="md-home" size={80} color="#006600" />
-			</View>
-		);
-	};
-};
-
-export default SignupPage;
+			<Text style={{fontSize: 30}}>SIGN UP PAGE</Text>
+			<Button title={"Sign Up"}></Button>
+			<Button title={"Back to Log In"}></Button>
+		</View>
+	);
+}

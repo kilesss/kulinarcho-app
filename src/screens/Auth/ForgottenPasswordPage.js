@@ -1,21 +1,12 @@
 import React from "react";
-import { Text, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import {Button, Text, View} from "react-native";
+import styles from '../../styles/styles'
 
-class ForgottenPasswordPage extends React.Component {
-
-	render(props) {
-
+export default function CookersPage({ navigation }) {
 	return (
+		<View style={styles.container}>
 
-
-		
-	<View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-	<Text style={{ color: "#006600", fontSize: 40 }}>forgoten password!</Text>
-	<Ionicons name="md-home" size={80} color="#006600" />
-	</View>
-);
-};
-};
-
-export default ForgottenPasswordPage;
+			<Text>FORGOTTEN PASSWORD PAGE</Text>
+		</View>
+	);
+}

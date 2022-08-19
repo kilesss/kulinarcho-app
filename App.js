@@ -9,18 +9,20 @@ import SignupPage from './src/screens/Auth/SignupPage';
 import LoginPage from './src/screens/Auth/LoginPage';
 import ForgottenPasswordPage from './src/screens/Auth/ForgottenPasswordPage';
 
-import ShoppingListsPage from "./src/screens/ShoppingLists";
-import ProductsAndCategoriesPage from "./src/screens/ProductsAndCategoriesPage";
-import CookingBookPage from "./src/screens/CookingBookPage";
-import CookersPage from "./src/screens/CookersPage";
-import WeekMenuPage from "./src/screens/WeekMenuPage";
+import ShoppingListsPage from "./src/screens/ShoppingListPage/ShoppingLists";
+import ProductsAndCategoriesPage from "./src/screens/ProfilePage/ProductsAndCategoriesPage";
+import CookingBookPage from "./src/screens/CookingBookPage/CookingBookPage";
+import CookersPage from "./src/screens/CookersPage/CookersPage";
+import WeekMenuPage from "./src/screens/WeekMenuPage/WeekMenuPage";
 
 global.MyVar = 'http://192.168.100.5/kulinarchophp/public/api/';
 
-import { createStackNavigator } from '@react-navigation/stack';
 import {Text} from "react-native";
+import TabNavigator from "./src/roots/TabNavigator";
+import AuthSack from "./src/roots/AuthNavigation";
+import FullNavigator from "./src/roots/TabNavigator";
 
-const Stack = createStackNavigator();
+
 
 function LogoTitle() {
     return (
@@ -30,13 +32,8 @@ function LogoTitle() {
 
 function App() {
   return (
-    <NavigationContainer screenOptions={{ headerShown: false }} >
-      <Stack.Navigator >
-      <Stack.Screen name="LoginPage" component={LoginPage} />
-      <Stack.Screen name="ShoppingListsPage" component={ShoppingListsPage} options={{ headerTitle: props => <LogoTitle {...props} /> }} />
-      <Stack.Screen name="ProductsAndCategoriesPage" component={ProductsAndCategoriesPage} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    // <TabNavigator/>
+      <AuthSack/>
   );
 }
 
