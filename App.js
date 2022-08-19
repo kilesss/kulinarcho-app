@@ -17,112 +17,23 @@ import WeekMenuPage from "./src/screens/WeekMenuPage";
 
 global.MyVar = 'http://192.168.100.5/kulinarchophp/public/api/';
 
-// export default class App extends React.Component {
-//   render() {
-//     return (
-//       <NavigationContainer>
-//         <Tab.Navigator
-//           initialRouteName="Feed"
-//           tabBarOptions={{
-//             activeTintColor: '#42f44b',
-//           }}>
-//           <Tab.Screen
-//             name="ShoppingListsPage"
-//             component={ShoppingListsPage}
-//             options={{
-//               tabBarLabel: 'Списъци за пазар',
-//               tabBarIcon: ({ focused, color, size }) => (
-//                 <Image
-//                   style={{
-//                     width: size,
-//                     height: size,
-//                     borderRadius: size,
-//                   }}
-//                 />
-//               ),
-//             }}
-//           />
-//           <Tab.Screen
-//             name="ProductsAncCategoriesPage"
-//             component={ProductsAndCategoriesPage}
-//             options={{
-//               tabBarLabel: 'Продукти и категории',
-//               tabBarIcon: ({ focused, color, size }) => (
-//                 <Image
-//                   style={{
-//                     width: size,
-//                     height: size,
-//                     borderRadius: size,
-//                   }}
-//                 />
-//               ),
-//             }}
-//           />
-//           <Tab.Screen
-//             name="CookingBookPage"
-//             component={CookingBookPage}
-//             options={{
-//               tabBarLabel: 'Готварска книга',
-//               tabBarIcon: ({ focused, color, size }) => (
-//                 <Image
-//                   style={{
-//                     width: size,
-//                     height: size,
-//                     borderRadius: size,
-//                   }}
-//                 />
-//               ),
-//             }}
-//           />
-//           <Tab.Screen
-//             name="CookersPage"
-//             component={CookersPage}
-//             options={{
-//               tabBarLabel: 'Готвачи',
-//               tabBarIcon: ({ focused, color, size }) => (
-//                 <Image
-//                   style={{
-//                     width: size,
-//                     height: size,
-//                     borderRadius: size,
-//                   }}
-//                 />
-//               ),
-//             }}
-//           />
-//           <Tab.Screen
-//             name="WeekMenuPage"
-//             component={WeekMenuPage}
-//             options={{
-//               tabBarLabel: 'WeekMenuPage',
-//               tabBarIcon: ({ focused, color, size }) => (
-//                 <Image
-//                   style={{
-//                     width: size,
-//                     height: size,
-//                     borderRadius: size,
-//                   }}
-//                 />
-//               ),
-//             }}
-//           />
-//         </Tab.Navigator>
-//       </NavigationContainer>
-//     );
-//   }
-// }
-// const Tab = createBottomTabNavigator();
-// createAppContainer(MainNavigation);
 import { createStackNavigator } from '@react-navigation/stack';
+import {Text} from "react-native";
 
 const Stack = createStackNavigator();
+
+function LogoTitle() {
+    return (
+        <Text style={{backgroundColor:'green', color:'#fff', height:40}}>Example</Text>
+    );
+}
 
 function App() {
   return (
     <NavigationContainer screenOptions={{ headerShown: false }} >
       <Stack.Navigator >
       <Stack.Screen name="LoginPage" component={LoginPage} />
-      <Stack.Screen name="ShoppingListsPage" component={ShoppingListsPage} />
+      <Stack.Screen name="ShoppingListsPage" component={ShoppingListsPage} options={{ headerTitle: props => <LogoTitle {...props} /> }} />
       <Stack.Screen name="ProductsAndCategoriesPage" component={ProductsAndCategoriesPage} />
       </Stack.Navigator>
     </NavigationContainer>
@@ -130,25 +41,4 @@ function App() {
 }
 
 export default App;
-
-// export default class App extends React.Component {
-//   render() {
-//     return <AppContainer style={{backgroundColor:"blue"}} />;
-//   }
-// }
-
-// const AppNavigator = createStackNavigator({
-//   LoginPage: {screen: LoginPage},
-//   SignupPage: {screen: SignupPage},
-//   ForgottenPasswordPage: {screen: ForgottenPasswordPage},
-//   ShoppingListsPage: {screen: ShoppingListsPage},
-//   ProductsAndCategoriesPage: {screen: ProductsAndCategoriesPage},
-//   CookingBookPage: {screen: CookingBookPage},
-//   CookersPage: {screen: CookersPage},
-//   WeekMenuPage: {screen: WeekMenuPage},
-// },{
-//   headerMode: 'none',
-// });
-
-// const AppContainer = createAppContainer(AppNavigator);
 
