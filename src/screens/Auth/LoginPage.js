@@ -1,31 +1,8 @@
 import React from "react";
-import {Button, Text, View} from "react-native";
+import {Button, Image, Text, View} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import styles from "../../styles/styles";
-
-
-// class LoginPage extends React.Component {
-//
-// 	constructor(props) {
-// 		super(props);
-// 		// replace instead of navigate
-// 		props.navigation.navigate('ShoppingListsPage');
-//
-// 	}
-// 	render(props) {
-// 		return (
-// 			<View style={{ flex: 3, backgroundColor: 'white' }}>
-// 				<Button onPress={() => this.props.navigation.navigate('ShoppingListsPage')} title={"opa"}/>
-// 				<Text style={{ color: "#006600", fontSize: 40, }}>login!</Text>
-// 				<Ionicons name="md-home" size={80} color="#006600"/>
-// 				<View style={{ flex: 11, backgroundColor:'white'}}></View>
-//
-// 			</View>
-// 		);
-// 	};
-// };
-//
-// export default LoginPage;
+import {CustomButton} from "../../components/CustomButton"
 
 
 export default function LoginPage({ navigation }) {
@@ -33,16 +10,46 @@ export default function LoginPage({ navigation }) {
 
 		<View style={styles.container}>
 
-			<Text style={{fontSize: 30}}>LOG IN PAGE</Text>
-			<Button
-				title="Log in"
-				onPress={() => navigation.reset({
-					index: 0,
-					routes: [{name: 'Shopping List'}],
-				})}
+			<Text style={{fontSize: 40, fontWeight:"bold", color:"#4B4C4C"}}>Влизане</Text>
+			<Image
+				style={{height: 260, width: 270}}
+				source={require('../../../public/images/loginImage.png')}
 			/>
-			<Button title={"Sign Up"} onPress={() => navigation.navigate('Signup')}/>
-			<Button title={"Forgotten password"} onPress={() => navigation.navigate('Forgotten Password')}/>
+
+			<CustomButton
+				title={"..."}
+				txtColor={"#15A051"}
+				bgColor={"#fff"}
+				/>
+
+			<CustomButton
+				title={"..."}
+				txtColor={"#15A051"}
+				bgColor={"#fff"}
+				/>
+			<Text style={{paddingBottom: 15}}>Забравена Парола</Text>
+
+			<CustomButton
+				title={"Вход"}
+				txtColor={"#fff"}
+				bgColor={"#15A051"}
+				onPress={() => navigation.reset({
+				index: 0,
+				routes: [{name: 'Shopping List'}],
+			})}/>
+			<Text style={{fontSize:16}}>или</Text>
+			<CustomButton
+				title={"Facebook"}
+				txtColor={"#fff"}
+				bgColor={"#006AD9"}
+				onPress={() => navigation.navigate('Signup')}/>
+
+			<CustomButton
+				title={"Регистрирация"}
+				txtColor={"#15A051"}
+				bgColor={"#fff"}
+				onPress={() => navigation.navigate('Signup')}/>
+
 		</View>
 	);
 }

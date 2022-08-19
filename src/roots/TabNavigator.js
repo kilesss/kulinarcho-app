@@ -19,8 +19,6 @@ import LoginPage from "../screens/Auth/LoginPage";
 import ForgottenPasswordPage from "../screens/Auth/ForgottenPasswordPage";
 import SignupPage from "../screens/Auth/SignupPage";
 
-import {Icon, InlineIcon} from '@iconify/react';
-import bitcoinIcon from '@iconify-icons/cib/bitcoin';
 
 const ProfileNavigation = createNativeStackNavigator();
 

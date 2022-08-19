@@ -13,9 +13,9 @@ export default function AuthStack() {
     return (
         <NavigationContainer>
         <AuthNavigation.Navigator >
-            <AuthNavigation.Screen name="Login" component={LoginPage} />
-            <AuthNavigation.Screen name="Forgotten Password" component={ForgottenPasswordPage} />
-            <AuthNavigation.Screen name="Signup" component={SignupPage} />
+            <AuthNavigation.Screen name="Login" component={LoginPage} options={{headerShown: false}} />
+            <AuthNavigation.Screen name="Forgotten Password" component={ForgottenPasswordPage} options={{headerShown: false}} />
+            <AuthNavigation.Screen name="Signup" component={SignupPage} options={{headerShown: false}} />
             <AuthNavigation.Screen name="Shopping List" component={TabNavigator} options={{headerShown: false}}/>
         </AuthNavigation.Navigator>
         </NavigationContainer>

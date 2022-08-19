@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
 
-
 export const styles = StyleSheet.create({
   container: {
     flex: 1, alignItems: "center", justifyContent: "center"
@@ -9,26 +8,20 @@ export const styles = StyleSheet.create({
     color: "#006600", fontSize: 40
   },
 
-  bottomNav: {
-    display:'flex',
-    alignSelf: "stretch",
-    backgroundColor: '#fff',
-    padding: 0,
-    margin: 0,
-    flexDirection: 'row'
+  customButton:{
+    width: "80%",
+    padding: 15,
+    borderRadius: 6,
+    shadowColor: "#999",
+    elevation: 5,
+    margin: 5
 
   },
-  bottomNavItem:{
-    display: "flex",
-    padding: 15,
-    justifyContent: 'space-around',
-    width: "20%",
-    backgroundColor: '#fff'
+  customButtonText: {
+    fontSize: 18,
+    fontWeight: "bold"
   },
-  bottomNavIcon:{
-    color: '#c0c0c0',
-    textAlign: 'center'
-  }
+
 
 });
 
