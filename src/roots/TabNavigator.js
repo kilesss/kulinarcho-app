@@ -61,7 +61,7 @@ function CookingBookStack() {
     return (
         <CookingBookNavigation.Navigator >
             <CookingBookNavigation.Screen name="Cooking Book" component={CookingBookPage} />
-            <CookingBookNavigation.Screen name="Cooking Book Details" component={RecipeDetails} />
+            <CookingBookNavigation.Screen name="Recipe Details" component={RecipeDetails} />
         </CookingBookNavigation.Navigator>
     );
 }
