@@ -9,6 +9,7 @@ import AuthSack from "./src/roots/AuthNavigation";
 
 
 function LogoTitle() {
+
     return (
         <Text style={{backgroundColor:'green', color:'#fff', height:40}}>Example</Text>
     );
