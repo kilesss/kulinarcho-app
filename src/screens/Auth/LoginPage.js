@@ -7,6 +7,7 @@ import styles from "../../styles/styles";
 import {CustomButton} from "../../components/CustomButton"
 import CustomInput from '../../components/CustomInput';
 import validateFields from "../../validator/Validator";
+import language from '../../language/language';
 
 export default class LoginPage extends React.Component {
     constructor(props) {
@@ -20,11 +21,11 @@ export default class LoginPage extends React.Component {
     async componentDidMount() {
         const token = await AsyncStorage.getItem('access_token');
         //TODO maybe is good to check this if after we add logot function
-        if (token.length > 0) {
-            this.props.navigation.reset({
-                index: 0,
-                routes: [{name: 'Shopping List'}],
-            })
+        if (token === null || token.length > 0) {
+            // this.props.navigation.reset({
+            //     index: 0,
+            //     routes: [{name: 'Shopping List'}],
+            // })
         }
 
     }
@@ -49,8 +50,8 @@ export default class LoginPage extends React.Component {
             {'email': state.email, 'password': state.password},
             {'email': {required: true, email: true}, 'password': {required: true, min: 6}}
         );
+        if (Object.keys(err).length === 0) {
 
-        if (err.length === 0 || err.length === undefined) {
             await fetch('https://kulinarcho.com/api/login', {
                 method: 'POST',
                 body: JSON.stringify({
@@ -86,7 +87,7 @@ export default class LoginPage extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={{fontSize: 40, fontWeight: "bold", color: "#4B4C4C"}}>Влизане</Text>
+                <Text style={{fontSize: 40, fontWeight: "bold", color: "#4B4C4C"}}>{language('enter')}</Text>
                 <Image
                     style={{height: 260, width: 270}}
                     source={require('../../../public/images/loginImage.png')}
@@ -94,7 +95,7 @@ export default class LoginPage extends React.Component {
                 {/*Maybe it will be good to make component to render errors , some fancy popup messages or something
                 like that, but for now i will leave it like this */}
                 <Text style={{marginLeft: 10, color: 'red'}}>{this.state.restError}</Text>
-                <Text style={{marginLeft: 10}}>Име</Text>
+                <Text style={{marginLeft: 10}}>{language('name')}</Text>
                 <CustomInput
                     setValue={this.state.email}
                     value={this.state.email}
@@ -104,7 +105,7 @@ export default class LoginPage extends React.Component {
                     color={'#15A051'}
                     callback={this.getResponseEmail.bind(this)}
                 />
-                <Text>Парола</Text>
+                <Text>{language('password')}</Text>
 
                 <CustomInput
                     setValue={this.state.password}
@@ -117,20 +118,20 @@ export default class LoginPage extends React.Component {
                 />
 
                 <CustomButton
-                    title={"Вход"}
+                    title={language('enter')}
                     txtColor={"#fff"}
                     bgColor={"#15A051"}
                     onPress={() => this._onPressButton(this.state)}
                 />
-                <Text style={{fontSize: 16}}>или</Text>
+                <Text style={{fontSize: 16}}>{language('or')}</Text>
                 <CustomButton
-                    title={"Facebook"}
+                    title={language('facebook')}
                     txtColor={"#fff"}
                     bgColor={"#006AD9"}
                     onPress={() => this.props.navigation.navigate('Signup')}/>
 
                 <CustomButton
-                    title={"Регистрирация"}
+                    title={language('signup')}
                     txtColor={"#15A051"}
                     bgColor={"#fff"}
                     onPress={() => this.props.navigation.navigate('Signup')}/>
