@@ -22,7 +22,7 @@ export default class LoginPage extends React.Component {
         }
         // to not fill every time
         //TODO: delete before production : bad practise but simple to use
-        //  this.state = {email: "lmariqnov@gmail.com", password: "qwerty2", errors: '', restError: ''};
+        this.state = {email: "lmariqnov@gmail.com", password: "qwerty2", errors: '', restError: ''};
     }
 
     async componentDidMount() {

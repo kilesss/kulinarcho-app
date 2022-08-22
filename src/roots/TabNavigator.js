@@ -40,7 +40,9 @@ function ShoppingListStack() {
     return (
         <ShoppingListNavigator.Navigator>
             <ShoppingListNavigator.Screen name="Shopping List" component={ShoppingList}/>
-            <ShoppingListNavigator.Screen name="Shopping List Details" component={ShoppingListDetails}/>
+            <ShoppingListNavigator.Screen name="Shopping List Details"
+                                          component={ShoppingListDetails}
+                                          options={({ route }) => ({ title: route.params.title })}/>
         </ShoppingListNavigator.Navigator>
     );
 }
@@ -102,13 +104,14 @@ const Tab = createBottomTabNavigator();
 export default function TabNavigator(props) {
 
     return (
-        <Tab.Navigator screenOptions={{unmountOnBlur: true}}>
+        <Tab.Navigator screenOptions={{unmountOnBlur: true, tabBarStyle: {padding:10, height:60}}}>
             <Tab.Screen
                 name="ShoppingListStack"
                 component={ShoppingListStack}
                 options={{
                     headerShown: false,
                     tabBarLabel: '',
+
                     tabBarIcon: ({focused}) => {
                         if (focused) {
                             return <Image source={require('../../public/images/icons/shoppingList-selected.png')}/>
