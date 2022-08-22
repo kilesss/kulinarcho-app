@@ -1,5 +1,5 @@
 import {TouchableOpacity, Text } from "react-native";
-import styles from "../styles/styles";
+import styles from "../../styles/styles";
 
 export const CustomButton = ({ onPress, title, txtColor, bgColor }) => (
     <TouchableOpacity

@@ -3,7 +3,7 @@
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default  function generalfuntion(url, body, method) {
+export default async function generalfuntion(url, body, method) {
     fetch(global.url + url, {
         method: method,
         body: JSON.stringify(body), headers: {
