@@ -1,5 +1,5 @@
 import {View, TextInput, Text} from "react-native";
-import styles from "../styles/styles";
+import styles from "../../styles/styles";
 import React, {Component, useState} from 'react';
 
 

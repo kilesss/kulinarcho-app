@@ -1,7 +1,7 @@
 import React from "react";
 import {Button, Image, Text, View} from "react-native";
 import styles from "../../styles/styles";
-import {CustomButton} from "../../components/CustomButton";
+import {CustomButton} from "../../components/display/CustomButton";
 
 export default function LoginPage({ navigation }) {
 	return (

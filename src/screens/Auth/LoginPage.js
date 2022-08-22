@@ -4,23 +4,25 @@ import {Image, Text, View} from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import styles from "../../styles/styles";
-import {CustomButton} from "../../components/CustomButton"
-import CustomInput from '../../components/CustomInput';
+import {CustomButton} from "../../components/display/CustomButton"
+import CustomInput from '../../components/display/CustomInput';
 import validateFields from "../../validator/Validator";
 import language from '../../language/language';
-
+import loadingIndicator from "../../components/loading/loadingIndicator";
 export default class LoginPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {email: "", password: "", errors: '', restError: ''};
         // to not fill every time
         //TODO: delete before production : bad practise but simple to use
-        // this.state = {email: "lmariqnov@gmail.com", password: "qwerty2", errors: '', restError: ''};
+        //  this.state = {email: "lmariqnov@gmail.com", password: "qwerty2", errors: '', restError: ''};
     }
 
     async componentDidMount() {
         const token = await AsyncStorage.getItem('access_token');
-        //TODO maybe is good to check this if after we add logot function
+        //TODO: its need to make api call and to check is it actual this token or its expired. If expired need to
+        //TODO: login again
+        //TODO: maybe is good to check this if after we add logout function
         if (token === null || token.length > 0) {
             // this.props.navigation.reset({
             //     index: 0,
@@ -51,7 +53,6 @@ export default class LoginPage extends React.Component {
             {'email': {required: true, email: true}, 'password': {required: true, min: 6}}
         );
         if (Object.keys(err).length === 0) {
-
             await fetch('https://kulinarcho.com/api/login', {
                 method: 'POST',
                 body: JSON.stringify({
@@ -64,17 +65,20 @@ export default class LoginPage extends React.Component {
             }).then(response => response.json())
                 .then(response => {
                         if (response.access_token) {
+                            loadingIndicator(false);
                             AsyncStorage.setItem('access_token', response.access_token);
                             this.props.navigation.reset({
                                 index: 0,
                                 routes: [{name: 'Shopping List'}],
                             })
                         } else if (response.errors) {
+                            loadingIndicator(false);
                             const restErr = JSON.stringify(response.errors);
                             this.setState({restError: restErr.substring(2, restErr.length - 2)})
                         }
                     }
                 ).catch(error => {
+                    loadingIndicator(false);
                     console.log('ERROR:::::');
                     console.log(error);
                 });
@@ -87,6 +91,7 @@ export default class LoginPage extends React.Component {
     render() {
         return (
             <View style={styles.container}>
+
                 <Text style={{fontSize: 40, fontWeight: "bold", color: "#4B4C4C"}}>{language('enter')}</Text>
                 <Image
                     style={{height: 260, width: 270}}
@@ -97,7 +102,6 @@ export default class LoginPage extends React.Component {
                 <Text style={{marginLeft: 10, color: 'red'}}>{this.state.restError}</Text>
                 <Text style={{marginLeft: 10}}>{language('name')}</Text>
                 <CustomInput
-                    setValue={this.state.email}
                     value={this.state.email}
                     errorMessage={this.state.errors.email}
                     bgColor={"#fff"}
@@ -108,7 +112,6 @@ export default class LoginPage extends React.Component {
                 <Text>{language('password')}</Text>
 
                 <CustomInput
-                    setValue={this.state.password}
                     value={this.state.password}
                     errorMessage={this.state.errors.password}
                     isPassword={true}
