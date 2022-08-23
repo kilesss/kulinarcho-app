@@ -22,6 +22,12 @@ export const styles = StyleSheet.create({
     fontWeight: "bold"
   },
 
+  boldTextButton: {
+    color: "#006600",
+    fontWeight: "bold"
+
+
+  }
 
 });
 
