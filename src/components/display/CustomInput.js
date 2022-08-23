@@ -22,7 +22,9 @@ export default class CustomButton extends React.Component {
                         ...styles.customButton,
                         width: '100%',
                         backgroundColor: this.props.bgColor,
-                        color: this.props.color
+                        color: this.props.color,
+                        paddingBottom:10,
+                        marginBottom:0
                     }}
                     secureTextEntry={this.props.isPassword}
                     onChangeText={(name) => this.sendCallback(name)} value={this.props.value}/>

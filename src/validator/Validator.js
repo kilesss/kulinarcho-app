@@ -32,6 +32,12 @@ export default function validateFields(fields, rules) {
                             errors[keyr] = rulesMessages[keyr]['valid']
                         }
                     }
+                    if (keyrr === 'same'){
+                        if(fields[rules[keyr][keyrr]] !== fields[keyr]){
+
+                            errors[keyr] = rulesMessages[keyr][keyrr]
+                        }
+                    }
                 })
             }
         })
