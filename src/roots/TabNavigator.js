@@ -14,10 +14,12 @@ import CookerDetails from "../screens/CookersPage/CookerDetails";
 import ShoppingListDetails from "../screens/ShoppingListPage/ShoppingListDetails";
 import {createStackNavigator} from "@react-navigation/stack";
 import {Image} from 'react-native';
+import {MaterialIcons} from "@expo/vector-icons";
 
 import LoginPage from "../screens/Auth/LoginPage";
 import ForgottenPasswordPage from "../screens/Auth/ForgottenPasswordPage";
 import SignupPage from "../screens/Auth/SignupPage";
+import Header from "../components/display/header";
 
 
 const ProfileNavigation = createNativeStackNavigator();
@@ -38,8 +40,9 @@ const ShoppingListNavigator = createNativeStackNavigator();
 // Shopping List Page
 function ShoppingListStack() {
     return (
-        <ShoppingListNavigator.Navigator>
-            <ShoppingListNavigator.Screen name="Shopping List" component={ShoppingList}/>
+        <ShoppingListNavigator.Navigator >
+            <ShoppingListNavigator.Screen name="Shopping List"
+                                          component={ShoppingList}/>
             <ShoppingListNavigator.Screen name="Shopping List Details"
                                           component={ShoppingListDetails}
                                           options={({ route }) => ({ title: route.params.title })}/>
@@ -104,7 +107,10 @@ const Tab = createBottomTabNavigator();
 export default function TabNavigator(props) {
 
     return (
-        <Tab.Navigator screenOptions={{unmountOnBlur: true, tabBarStyle: {padding:10, height:60}}}>
+        <Tab.Navigator screenOptions={{
+            unmountOnBlur: true,
+            tabBarStyle: {padding:10, height:60},
+        }}>
             <Tab.Screen
                 name="ShoppingListStack"
                 component={ShoppingListStack}
@@ -127,7 +133,7 @@ export default function TabNavigator(props) {
                 tabBarLabel: '',
                 tabBarIcon: ({focused}) => {
                     if (focused) {
-                        return <Image source={require('../../public/images/icons/recipes-selected.png')}/>
+                        return <MaterialIcons name={"dinner-dining"} color={"#15A051"} size={35}/>
                     } else {
                         return <Image source={require('../../public/images/icons/recipes.png')}/>
                     }

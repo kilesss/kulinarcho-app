@@ -1,4 +1,4 @@
-import {FlatList, Image, Text, View} from "react-native";
+import {FlatList, Image, SafeAreaView, ScrollView, Text, View} from "react-native";
 import styles from "../../styles/styles";
 import {CustomButton} from "../../components/display/CustomButton";
 import {ShoppingListItem} from "../../components/display/ShoppingListItem";
@@ -26,6 +26,7 @@ export default function ShoppingListDetails({route, navigation}) {
     ]);
 
     return (
+
         <View style={[styles.container, {justifyContent: "flex-start"}]}>
             <View style={shoppingListStyle.summaryItems}>
                 <View style={shoppingListStyle.totalItems}>
@@ -51,20 +52,16 @@ export default function ShoppingListDetails({route, navigation}) {
             {/*/>*/}
 
             <FlatList data={items}
+                      listHeaderComponent={<Text>aa</Text>}
                       style={{alignSelf:"stretch", marginTop:10}}
                       renderItem={({item}) => (
-                          <ShoppingListItem title={item.title}
-                                            tickColor={"#15A051"}
-                                            circleColor={"#fff"}
-                                            price={item.price}
-                                            num={item.num}
+
+                          <ShoppingListItem {...item}
                           />
-                      )}
-
-            />
-
+                      )}/>
 
 
         </View>
+
     );
 }
