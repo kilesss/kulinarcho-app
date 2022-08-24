@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Image, Text, TouchableHighlight, View} from "react-native";
+import {Image, Text, TouchableHighlight, TouchableOpacity, View} from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import styles from "../../styles/styles";
@@ -116,28 +116,30 @@ export default class LoginPage extends React.Component {
                 like that, but for now i will leave it like this */}
                 <ErrorMessage showMessage={this.state.showMessage} message = {this.state.restError} />
                 {this.showMessageConfirmEmail()}
-                <Text style={{marginLeft: 10}}>{language('name')}</Text>
-                <CustomInput
-                    value={this.state.email}
-                    errorMessage={this.state.errors.email}
-                    bgColor={"#fff"}
-                    isPassword={false}
+                <View style={{justifyContent: "flex-start", alignSelf:"stretch"}}>
+                    <Text>{language('name')}</Text>
+                    <CustomInput
+                        value={this.state.email}
+                        errorMessage={this.state.errors.email}
+                        bgColor={"#fff"}
+                        isPassword={false}
+                        callback={this.getResponseEmail.bind(this)}
+                    />
+                    <Text>{language('password')}</Text>
 
-                    callback={this.getResponseEmail.bind(this)}
-                />
-                <Text>{language('password')}</Text>
-
-                <CustomInput
-                    value={this.state.password}
-                    errorMessage={this.state.errors.password}
-                    isPassword={true}
-                    bgColor={"#fff"}
-                    color={'#15A051'}
-                    callback={this.getResponsePassword.bind(this)}
-                />
-                <TouchableHighlight onPress={() => this.props.navigation.navigate('Forgotten Password')}>
-                <Text style={styles.boldTextButton}>{language('forgottenPassword')}!</Text>
-                </TouchableHighlight>
+                    <CustomInput
+                        value={this.state.password}
+                        errorMessage={this.state.errors.password}
+                        isPassword={true}
+                        bgColor={"#fff"}
+                        color={'#15A051'}
+                        callback={this.getResponsePassword.bind(this)}
+                    />
+                    <TouchableOpacity style={{marginTop:-20}}
+                                        onPress={() => this.props.navigation.navigate('Forgotten Password')}>
+                        <Text style={styles.boldTextButton}>{language('forgottenPassword')}!</Text>
+                    </TouchableOpacity>
+                </View>
                 <CustomButton
                     title={language('enter')}
                     txtColor={"#fff"}

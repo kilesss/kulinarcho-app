@@ -1,9 +1,9 @@
 import {View, TextInput, Text} from "react-native";
 import styles from "../../styles/styles";
-import React, {Component, useState} from 'react';
+import React from 'react';
 
 
-export default class CustomButton extends React.Component {
+export default class CustomInout extends React.Component {
 
     constructor(props) {
         super(props);
@@ -16,15 +16,14 @@ export default class CustomButton extends React.Component {
 
     render() {
         return (
-            <View style={{width: '80%', marginLeft: -10, paddingLeft: 0}}>
+            <View style={{alignSelf:"stretch"}}>
                 <TextInput
                     style={{
                         ...styles.customButton,
                         alignSelf: "stretch",
                         backgroundColor: this.props.bgColor,
                         color: this.props.color,
-                        paddingBottom:10,
-                        marginBottom:0
+                        padding: 10,
                     }}
                     secureTextEntry={this.props.isPassword}
                     onChangeText={(name) => this.sendCallback(name)} value={this.props.value}/>

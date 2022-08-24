@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    color: "#006600", fontSize: 40
+    color: "#15A051", fontSize: 40
   },
 
   customButton:{
@@ -33,8 +33,9 @@ export const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   boldTextButton: {
-    color: "#006600",
-    fontWeight: "bold"
+    color: "#15A051",
+    fontWeight: "bold",
+    marginBottom: 30
   },
   heading: {
     fontSize: 18,

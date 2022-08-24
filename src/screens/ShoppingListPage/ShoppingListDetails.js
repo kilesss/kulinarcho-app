@@ -1,16 +1,16 @@
-import {FlatList, Image, SafeAreaView, ScrollView, Text, View} from "react-native";
+import {FlatList, Image, SafeAreaView, Text, View} from "react-native";
 import styles from "../../styles/styles";
 import {CustomButton} from "../../components/display/CustomButton";
 import {ShoppingListItem} from "../../components/display/ShoppingListItem";
 import language from "../../language/language";
-import {Ionicons} from "@expo/vector-icons";
 import * as React from "react";
 import shoppingListStyle from "../../styles/stylesShoppingList";
 import {useState} from "react";
 import {BottomPopup} from "../../components/display/BottomPopup";
+import BottomPopup2 from "../../components/display/BottomPopup2";
 
 
-export default function ShoppingListDetails({route, navigation}) {
+export default function ShoppingListDetails() {
 
     const [items, editItems] = useState([
         { key: '1', title: "Яйца", num: "6", price: "2", checked: true},
@@ -32,39 +32,17 @@ export default function ShoppingListDetails({route, navigation}) {
         editItems(arr);
     };
 
-    const add = (title, num, price) => {
-        editItems((prevItems) => {
-            return[
-                {key: Math.random().toString(),
-                    title: {title},
-                    num: {num},
-                    price: {price},
-                    checked: false}
-            ]
-        })
-    }
-
     const [modalData, setModalData] = useState([]);
+    const [addModalVisible, setAddModalVisible] = useState(false);
+    const [buyModalVisible, setBuyModalVisible] = useState(false);
 
-    let addProductRef = React.createRef()
-    let editProductRef = React.createRef()
 
     const showEditProduct = (item) => {
-        editProductRef.show()
+        setBuyModalVisible(true)
         setModalData(item)
     };
 
-    const closeEditProduct = () => {
-        editProductRef.close()
-    }
 
-    const showAddProduct = () => {
-        addProductRef.show()
-    };
-
-    const closeAddProduct = () => {
-        addProductRef.close()
-    }
     return (
 
         <SafeAreaView style={[styles.container, {justifyContent: "flex-start"}]}>
@@ -86,7 +64,8 @@ export default function ShoppingListDetails({route, navigation}) {
 
             <CustomButton title={language("addProduct")}
                           txtColor={"#fff"}
-                          onPress={showAddProduct}
+                          onPress={() => {setAddModalVisible(!addModalVisible)}}
+
             />
 
 
@@ -103,18 +82,17 @@ export default function ShoppingListDetails({route, navigation}) {
                           />
                       )}/>
 
-            <BottomPopup ref={(addProduct) => addProductRef = addProduct}
-                         title={language("addProduct")}
-                         onTouchOutside={closeAddProduct}
+            <BottomPopup2 modalVisible={addModalVisible}
+                          setModalVisible={setAddModalVisible}
+                          title={"Add Product"}
             />
 
-            <BottomPopup ref={(editProduct) => editProductRef = editProduct}
-                         title={language("buyProduct")}
-                         product={modalData.title}
-                         amount={modalData.num}
-                         price={modalData.price}
-                         onTouchOutside={closeEditProduct}
+            <BottomPopup2 modalVisible={buyModalVisible}
+                          setModalVisible={setBuyModalVisible}
+                          title={"Buy Product"}
+                          product={modalData.title}
             />
+
         </SafeAreaView>
 
     );

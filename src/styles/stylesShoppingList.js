@@ -33,7 +33,8 @@ export const shoppingListStyle = StyleSheet.create({
     receipt: {
         height: 100,
         width: 100,
-        marginLeft: 10
+        marginLeft: 10,
+        position: "absolute"
     },
     editButton: {
         position: "relative",

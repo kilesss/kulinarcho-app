@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Image, Text, TouchableHighlight, View} from "react-native";
+import {Image, Text, TouchableHighlight, TouchableOpacity, View} from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import styles from "../../styles/styles";
@@ -105,9 +105,9 @@ export default class ForgottenPassword extends React.Component {
 					bgColor={"#15A051"}
 					onPress={() => this._onPressButton(this.state)}
 				/>
-				<TouchableHighlight onPress={() => this.props.navigation.navigate('Login')}>
+				<TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
 					<Text style={styles.boldTextButton}>{language('backTo')} {language('enter')}!</Text>
-				</TouchableHighlight>
+				</TouchableOpacity>
 
 
 			</View>

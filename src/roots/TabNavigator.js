@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import ProfilePage from "../screens/ProfilePage/ProfilePage";
@@ -12,14 +12,13 @@ import WeekMenuPage from "../screens/WeekMenuPage/WeekMenuPage";
 import RecipeDetails from "../screens/RecipesPage/RecipeDetails";
 import CookerDetails from "../screens/CookersPage/CookerDetails";
 import ShoppingListDetails from "../screens/ShoppingListPage/ShoppingListDetails";
-import {createStackNavigator} from "@react-navigation/stack";
+
 import {Image} from 'react-native';
 import {MaterialIcons} from "@expo/vector-icons";
 
 import LoginPage from "../screens/Auth/LoginPage";
 import ForgottenPasswordPage from "../screens/Auth/ForgottenPasswordPage";
 import SignupPage from "../screens/Auth/SignupPage";
-import Header from "../components/display/header";
 
 
 const ProfileNavigation = createNativeStackNavigator();

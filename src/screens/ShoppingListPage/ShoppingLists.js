@@ -1,13 +1,11 @@
 import React, {useState} from "react";
-import {Alert, Button, FlatList, Modal, Pressable, Text, View, StyleSheet, TextInput} from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import {FlatList, Text, View} from "react-native";
 import styles from '../../styles/styles'
 import language from '../../language/language';
 import {ShoppingListCard} from "../../components/display/ShoppingListCard";
 import {CustomButton} from "../../components/display/CustomButton";
-import shoppingListStyle from "../../styles/stylesShoppingList";
 import stylesShoppingList from "../../styles/stylesShoppingList";
-import {AddShoppingListModal} from "../../components/display/addShoppingListModal";
+import AddShoppingListModal from "../../components/display/AddShoppingListModal";
 
 export default function ShoppingListsPage({ navigation }) {
 
@@ -26,6 +24,20 @@ export default function ShoppingListsPage({ navigation }) {
 		setChangeModalVisible(!changeModalVisible)
 	};
 
+	const add = (text, numItems, bgColor) => {
+		editShoppingLists( (prevShoppingLists) => {
+			setAddModalVisible(!addModalVisible)
+			return [
+				{key: Math.random().toString(), title:text, numItems: numItems, bgColor: bgColor},
+				...prevShoppingLists
+			]
+		})
+	}
+
+	const change = (item) => {
+		console.log("edit function")
+	}
+
 	const [modalData, setModalData] = useState([]);
 	const [addModalVisible, setAddModalVisible] = useState(false);
 	const [changeModalVisible, setChangeModalVisible] = useState(false);
@@ -43,6 +55,7 @@ export default function ShoppingListsPage({ navigation }) {
 								  modalTitle={language("newShoppingList")}
 								  buttonTitle={language("add")}
 								  showDeleteOption={false}
+								  addFunctionality={add}
 			/>
 
 			<AddShoppingListModal modalVisible={changeModalVisible}

@@ -1,16 +1,27 @@
-import {Dimensions, Modal, Text, TextInput, TouchableWithoutFeedback, View} from "react-native"
-import React from "react"
+import {Modal, Text, TextInput, TouchableWithoutFeedback, View} from "react-native"
+import React, {useState} from "react"
 import {CustomButton} from "./CustomButton";
 import shoppingListStyle from "../../styles/stylesShoppingList";
 import language from "../../language/language";
 
 export class BottomPopup extends React.Component{
+
     constructor(props) {
         super(props);
         this.state = {
             show: false
         }
+        const [txtProduct, setProduct] = useState(" ")
+        const [txtPrice, setText] = useState(" ")
+        const [txtAmount, setAmount] = useState(" ")
+
+        function onInputChanged(changedText, set, txt) {
+            console.log(changedText)
+            set(txt)
+        }
     }
+
+    // TODO: Add ability to add shopping list items and buy them
 
     show = () => {
         this.setState({show: true})
@@ -36,10 +47,11 @@ export class BottomPopup extends React.Component{
 
 
     render() {
-
         let {show} = this.state
 
         let {onTouchOutside, title, product, amount, price} = this.props;
+
+
         return (
             <Modal animationType={"slide"}
                    transparent={true}
@@ -69,7 +81,7 @@ export class BottomPopup extends React.Component{
                             <View style={shoppingListStyle.popupPrice}>
                                 <Text>{language("price")}</Text>
                                 <TextInput style={shoppingListStyle.popupInput}
-                                           value={price}
+                                           value={this.txtPrice}
                                            placeholder={"e.g. 3лв"}/>
                             </View>
 
@@ -78,14 +90,13 @@ export class BottomPopup extends React.Component{
                                       onPress={this.close}>
                                     {language("cancel")}
                                 </Text>
-                                <CustomButton title={language("add")} txtColor={"#fff"}/>
+
+                                <CustomButton title={title}
+                                              txtColor={"#fff"}/>
                             </View>
                         </View>
-
                     </View>
-
                 </View>
-
             </Modal>
         );
     }
