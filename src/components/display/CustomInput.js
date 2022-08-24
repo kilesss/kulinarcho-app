@@ -20,7 +20,7 @@ export default class CustomButton extends React.Component {
                 <TextInput
                     style={{
                         ...styles.customButton,
-                        width: '100%',
+                        alignSelf: "stretch",
                         backgroundColor: this.props.bgColor,
                         color: this.props.color,
                         paddingBottom:10,

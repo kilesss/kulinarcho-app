@@ -1,4 +1,6 @@
-import {StyleSheet} from "react-native";
+import {Dimensions, StyleSheet} from "react-native";
+
+const deviceHeight = Dimensions.get("window").height
 
 export const shoppingListStyle = StyleSheet.create({
     cardText: {
@@ -22,22 +24,21 @@ export const shoppingListStyle = StyleSheet.create({
         color: "#fff",
         fontSize: 22,
         fontWeight: "bold",
-        paddingTop: 55
+        paddingTop: 40
     },
     editContainer: {
         flexDirection: "column",
-
+        alignItems: "flex-end"
     },
     receipt: {
         height: 100,
         width: 100,
-        position: "absolute",
-        marginLeft: -65,
-        marginTop: 5
+        marginLeft: 10
     },
     editButton: {
         position: "relative",
-        zIndex: 2,
+        zIndex: 5,
+        elevation: 5,
         color: "white",
         marginTop: -5
     },
@@ -78,8 +79,7 @@ export const shoppingListStyle = StyleSheet.create({
     },
     checkBox:{
         borderColor: "#15A051",
-        borderWidth: 2,
-        borderRadius: 45,
+        borderRadius: 90,
         width: 25,
         height: 25,
         justifyContent: "center",
@@ -92,6 +92,68 @@ export const shoppingListStyle = StyleSheet.create({
     },
     itemSubHeading: {
         fontSize: 12
+    },
+    popup: {
+        padding: 30,
+        backgroundColor: "#fff",
+        width: "100%",
+        borderTopRightRadius: 20,
+        borderTopLeftRadius: 20,
+        maxHeight: deviceHeight * 0.41,
+    },
+    outsideTouchable: {
+        flex: 1,
+        justifyContent: "flex-end",
+        backgroundColor: "rgba(74,74,74,0.4)"
+    },
+    popupTitle: {
+        textAlign: "center",
+        fontWeight: "bold",
+        fontSize: 20,
+        marginBottom: 30
+    },
+    popupProductName: {
+        textAlign: "left",
+        width: "100%",
+    },
+    popupAmount: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        margin: 10,
+        alignItems: "center"
+    },
+    popupPrice: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        margin: 10,
+        alignItems: "center"
+    },
+    popupInput:{
+        borderBottomWidth: 2,
+        borderBottomColor: "#ccc",
+        width: 60,
+        textAlign: "center",
+        fontSize: 16,
+    },
+    popupButtons: {
+        flexDirection: "row",
+        justifyContent: "flex-end",
+        alignItems: "center",
+        margin: 10,
+        marginBottom: 30
+    },
+    addListModal: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 10,
+        alignSelf: "stretch",
+        padding: 30,
+        alignItems: "center",
+        shadowColor: "#999",
+        elevation: 10,
+    },
+    addListModalText: {
+
     }
 });
 

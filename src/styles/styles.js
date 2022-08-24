@@ -10,6 +10,11 @@ export const styles = StyleSheet.create({
     marginRight: 20,
 
   },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   title: {
     color: "#006600", fontSize: 40
   },
@@ -18,7 +23,8 @@ export const styles = StyleSheet.create({
     alignSelf: "stretch",
     borderRadius: 6,
     shadowColor: "#999",
-    elevation: 3,
+    elevation: 5,
+    marginVertical: 5
   },
   customButtonText: {
     paddingLeft: 15,

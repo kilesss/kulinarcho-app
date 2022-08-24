@@ -122,7 +122,7 @@ export default class LoginPage extends React.Component {
                     errorMessage={this.state.errors.email}
                     bgColor={"#fff"}
                     isPassword={false}
-                    color={'#15A051'}
+
                     callback={this.getResponseEmail.bind(this)}
                 />
                 <Text>{language('password')}</Text>

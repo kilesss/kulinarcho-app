@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Button, FlatList, Text, View} from "react-native";
+import {Alert, Button, FlatList, Modal, Pressable, Text, View, StyleSheet, TextInput} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import styles from '../../styles/styles'
 import language from '../../language/language';
@@ -7,6 +7,7 @@ import {ShoppingListCard} from "../../components/display/ShoppingListCard";
 import {CustomButton} from "../../components/display/CustomButton";
 import shoppingListStyle from "../../styles/stylesShoppingList";
 import stylesShoppingList from "../../styles/stylesShoppingList";
+import {AddShoppingListModal} from "../../components/display/addShoppingListModal";
 
 export default function ShoppingListsPage({ navigation }) {
 
@@ -19,8 +20,39 @@ export default function ShoppingListsPage({ navigation }) {
 		{ key: '6', title: 'Списък за пазар 6', numItems: "4", bgColor: "#B587FF"},
 	]);
 
+	const remove = (i) => {
+		const arr = shoppingLists.filter((item) => item.key !== i);
+		editShoppingLists(arr);
+		setChangeModalVisible(!changeModalVisible)
+	};
+
+	const [modalData, setModalData] = useState([]);
+	const [addModalVisible, setAddModalVisible] = useState(false);
+	const [changeModalVisible, setChangeModalVisible] = useState(false);
+
+	const showEditProduct = (item) => {
+		setChangeModalVisible(true)
+		setModalData(item)
+	};
+
 	return (
+
 		<View style={styles.container}>
+			<AddShoppingListModal modalVisible={addModalVisible}
+								  setModalVisible={setAddModalVisible}
+								  modalTitle={language("newShoppingList")}
+								  buttonTitle={language("add")}
+								  showDeleteOption={false}
+			/>
+
+			<AddShoppingListModal modalVisible={changeModalVisible}
+								  setModalVisible={setChangeModalVisible}
+								  modalTitle={language("editShoppingList")}
+								  buttonTitle={language("change")}
+								  modalData={modalData.title}
+								  showDeleteOption={true}
+								  deleteFunctionality={() => remove(modalData.key)}
+			/>
 
 
 			<View style={stylesShoppingList.buttonWithTitle}>
@@ -32,6 +64,7 @@ export default function ShoppingListsPage({ navigation }) {
 								  bgColor={"#15A051"}
 								  txtColor={"#fff"}
 								  padding={7}
+								  onPress={() => setAddModalVisible(true)}
 					/>
 				</View>
 			</View>
@@ -46,7 +79,7 @@ export default function ShoppingListsPage({ navigation }) {
 											  key: item.key,
 											  title: item.title,
 										  })}
-										  // onPressEdit={}
+										  onPressEdit={() => showEditProduct(item)}
 						/>
 					  )}/>
 

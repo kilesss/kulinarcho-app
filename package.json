@@ -17,6 +17,8 @@
     "@react-navigation/stack": "^6.2.2",
     "expo": "~46.0.6",
     "expo-blur": "^11.2.0",
+    "expo-checkbox": "~2.2.0",
+    "expo-linear-gradient": "~11.4.0",
     "expo-status-bar": "~1.4.0",
     "formik": "^2.2.9",
     "react": "18.0.0",
@@ -26,7 +28,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
-    "@iconify/react": "^3.2.2"
+    "@iconify/react": "^3.2.2",
+    "react-native-linear-gradient": "^2.6.2"
   },
   "private": true
 }

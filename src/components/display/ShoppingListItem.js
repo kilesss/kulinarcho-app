@@ -3,12 +3,12 @@ import styles from "../../styles/styles";
 import React, {Component} from "react";
 import shoppingListStyle from "../../styles/stylesShoppingList";
 import {Ionicons, MaterialIcons} from "@expo/vector-icons";
-
+import Checkbox from 'expo-checkbox';
 import {GestureHandlerRootView, RectButton} from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 
-const rightSwipeActions = (progress, dragX) => {
+const rightSwipeActions = (progress, dragX, onPressDelete) => {
     const trans = dragX.interpolate({
         inputRange: [0, 50, 100, 101],
         outputRange: [-20, 0, 0, 1],
@@ -27,7 +27,9 @@ const rightSwipeActions = (progress, dragX) => {
 
             }}
         >
-            <MaterialIcons name={"delete"} size={30} color={"#fff"} />
+            <TouchableOpacity onPress={onPressDelete}>
+                <MaterialIcons name={"delete"} size={30} color={"#fff"} />
+            </TouchableOpacity>
         </Animated.View>
     );
 };
@@ -40,23 +42,25 @@ const swipeFromRightOpen = () => {
 };
 
 
-export const ShoppingListItem = ({ onPress, title, tickColor, circleColor, price, num}) => (
+export const ShoppingListItem = ({ onPress, title, price, num, checked, onPressDelete}) => (
     <GestureHandlerRootView>
     <Swipeable
-        renderRightActions={rightSwipeActions}
-        // onSwipeableRightOpen={swipeFromRightOpen}
-        // onSwipeableLeftOpen={swipeFromLeftOpen}
+        renderRightActions={(progress, dragX) => rightSwipeActions(progress, dragX, onPressDelete)}
         >
         <TouchableOpacity
             onPress={onPress}
+            // TODO: check both ways to see whats better
+            activeOpacity={1}
             style={[shoppingListStyle.item,]}>
-            <View style={[
-                shoppingListStyle.checkBox, {backgroundColor: circleColor}]}>
-                <Ionicons name={"checkmark-outline"} size={20} color={tickColor}/>
-            </View>
+            <Checkbox style={shoppingListStyle.checkBox}
+                      value={checked}
+                      color={"#15A051"}
+                      // TODO: I don't know how to make the checkbox change
+                      onValueChange={() => checked = !checked}
+            />
             <View>
                 <Text style={shoppingListStyle.itemTitle}>{title}</Text>
-                <Text style={shoppingListStyle.itemSubHeading}>{price} x {num} = 3лв</Text>
+                <Text style={shoppingListStyle.itemSubHeading}>{price}лв x {num} = 3лв</Text>
             </View>
 
         </TouchableOpacity>
