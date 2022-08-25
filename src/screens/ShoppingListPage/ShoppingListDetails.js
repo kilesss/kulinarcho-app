@@ -84,12 +84,12 @@ export default function ShoppingListDetails() {
 
             <BottomPopup2 modalVisible={addModalVisible}
                           setModalVisible={setAddModalVisible}
-                          title={"Add Product"}
+                          title={"addProduct"}
             />
 
             <BottomPopup2 modalVisible={buyModalVisible}
                           setModalVisible={setBuyModalVisible}
-                          title={"Buy Product"}
+                          title={"buyProduct"}
                           product={modalData.title}
             />
 
