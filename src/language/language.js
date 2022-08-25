@@ -25,7 +25,10 @@ export default function language(key){
         buyProduct: "Купи Продукт",
         newShoppingList: "Нов списък за пазар",
         editShoppingList: "Промени името на списъка",
-        change: "Промени"
+        change: "Промени",
+        servings: "порции",
+        min: "мин",
+
 
     }
     return words[key];

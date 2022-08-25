@@ -8,8 +8,6 @@ export const stylesRecipes = StyleSheet.create({
         borderRadius: 6,
     },
     categoriesCardIcon: {
-        height: 75,
-        width: 75,
         justifyContent: "center",
         alignItems: "center",
         marginBottom: 3
@@ -40,10 +38,11 @@ export const stylesRecipes = StyleSheet.create({
     },
     recipesCardInfo: {
         position: "relative",
-        marginTop: -77,
+        marginTop: -74,
         borderRadius: 8,
         padding: 5,
-        backgroundColor: "rgba(73,73,73,0.6)"
+        paddingVertical: 3,
+        backgroundColor: "rgba(42,42,42,0.5)"
     },
     infoIconsWithText: {
         alignItems: "center",
@@ -59,9 +58,16 @@ export const stylesRecipes = StyleSheet.create({
     },
     recipesCardTitle: {
         color: "#fff",
+        textAlign:"center",
         fontWeight: "bold",
         height: 30,
         lineHeight: 14,
+    },
+    recipesCardCategory: {
+        position:"absolute",
+        // alignSelf: "flex-start",
+        // alignItems: "flex-start",
+        // justifyContent:"flex-start"
     }
 
 })

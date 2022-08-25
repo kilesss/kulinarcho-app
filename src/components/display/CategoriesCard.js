@@ -6,21 +6,41 @@ import shoppingListStyle from "../../styles/stylesShoppingList";
 import {stylesRecipes} from "../../styles/stylesRecipes";
 
 
-export const CategoriesCard = ({title, iconName, color}) => (
-    <View style={stylesRecipes.categoriesCard}>
-        <TouchableOpacity
-            style={[
-                stylesRecipes.card,
-                stylesRecipes.categoriesCardIcon,
-                {
-                    backgroundColor: `${color}35`,
-                }]}>
-            <MaterialCommunityIcons name={iconName}
-                                    size={42}
-                                    color={color}
-            />
-        </TouchableOpacity>
-        <Text>{title}</Text>
-    </View>
-);
+
+export default function CategoriesCard({
+                                           onPress,
+                                           title,
+                                           iconName,
+                                           color,
+                                           buttonSize=75,
+                                           iconSize=45,
+                                           showText})
+{
+    function renderElement(){
+    if(showText)
+        return <Text>{title}</Text>;
+    return null;
+}
+
+    return (
+        <View style={stylesRecipes.categoriesCard}>
+            <TouchableOpacity onPress={onPress}
+                style={[
+                    stylesRecipes.card,
+                    stylesRecipes.categoriesCardIcon,
+                    {
+                        backgroundColor: `${color}4C`,
+                        height: buttonSize,
+                        width: buttonSize,
+                    }]}>
+                <MaterialCommunityIcons name={iconName}
+                                        size={iconSize}
+                                        color={color}
+                />
+            </TouchableOpacity>
+            {renderElement()}
+        </View>
+    );
+}
+
 
