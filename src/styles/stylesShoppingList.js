@@ -13,12 +13,10 @@ export const shoppingListStyle = StyleSheet.create({
         justifyContent: "space-between",
         borderRadius: 8,
         marginBottom: 10
-
     },
     cardSubHeading: {
         color: "#fff",
         fontWeight: "bold",
-
     },
     cardTitle: {
         color: "#fff",
