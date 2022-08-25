@@ -3,7 +3,7 @@ import {Button, FlatList, ScrollView, Text, View} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import styles from '../../styles/styles'
 import {stylesRecipes} from '../../styles/stylesRecipes'
-import {CategoriesCard} from "../../components/display/CategoriesCard";
+import CategoriesCard from "../../components/display/CategoriesCard";
 import {RecipesCardLarge} from "../../components/display/RecipesCardLarge";
 
 export default function RecipesPage({ navigation }) {
@@ -18,19 +18,19 @@ export default function RecipesPage({ navigation }) {
     ])
 
     const [recipes, setRecipes] = useState([
-        {key: "1", title: "Some Recipe with more text than usual", time: 30, servings: 5, category: "fish"},
-        {key: "2", title: "Some Recipe", time: 30, servings: 5, category: "fish"},
-        {key: "3", title: "Some Recipe", time: 30, servings: 5, category: "fish"},
-        {key: "4", title: "Some Recipe", time: 30, servings: 5, category: "fish"},
-        {key: "5", title: "Some Recipe", time: 30, servings: 5, category: "fish"},
-        {key: "6", title: "Some Recipe", time: 30, servings: 5, category: "fish"},
-        {key: "7", title: "Some Recipe", time: 30, servings: 5, category: "fish"}
+        {key: "1", title: "Some Recipe with more text than usual", time: "30", servings: "5", category: categories[1]},
+        {key: "2", title: "Some Recipe", time: 20, servings: 4, category: categories[2]},
+        {key: "3", title: "Some Recipe", time: 40, servings: 5, category: categories[3]},
+        {key: "4", title: "Some Recipe", time: 50, servings: 6, category: categories[5]},
+        {key: "5", title: "Some Recipe", time: 40, servings: 5, category: categories[1]},
+        {key: "6", title: "Some Recipe", time: 30, servings: 5, category: categories[2]},
+        {key: "7", title: "Some Recipe", time: 30, servings: 5, category: categories[4]}
     ])
 
 
     return (
         <ScrollView >
-        <View style={[styles.container, {alignItems:"flex-start"}]}>
+        <View style={[styles.container, {alignItems:"flex-start", marginRight: 0}]}>
                 <View style={{flex: 1.3, minHeight: 150}}>
                     <View>
                         <Text style={styles.heading}>Categories</Text>
@@ -41,6 +41,8 @@ export default function RecipesPage({ navigation }) {
                         <CategoriesCard title={item.title}
                                         iconName={item.icon}
                                         color={item.color}
+                                        size={75}
+                                        showText={true}
                         />
                     )}/>
 
@@ -51,7 +53,11 @@ export default function RecipesPage({ navigation }) {
                     <FlatList data={recipes}
                               horizontal={true}
                               renderItem={({item}) => (
-                        <RecipesCardLarge title={item.title}/>
+                        <RecipesCardLarge title={item.title}
+                                          time={item.time}
+                                          servings={item.servings}
+                                          category={item.category}
+                        />
                     )}/>
                 </View>
 
@@ -60,7 +66,11 @@ export default function RecipesPage({ navigation }) {
                     <FlatList data={recipes}
                               horizontal={true}
                               renderItem={({item}) => (
-                                  <RecipesCardLarge title={item.title}/>
+                                  <RecipesCardLarge title={item.title}
+                                                    time={item.time}
+                                                    servings={item.servings}
+                                                    category={item.category}
+                                  />
                               )}/>
                 </View>
         </View>
