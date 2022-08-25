@@ -31,10 +31,10 @@ export default class LoginPage extends React.Component {
         //TODO: login again
         //TODO: maybe is good to check this if after we add logout function
         if (token === null || token.length > 0) {
-            // this.props.navigation.reset({
-            //     index: 0,
-            //     routes: [{name: 'Shopping List'}],
-            // })
+            this.props.navigation.reset({
+                index: 0,
+                routes: [{name: 'Shopping List'}],
+            })
         }
     }
 

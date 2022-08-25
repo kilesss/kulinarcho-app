@@ -1,101 +1,128 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {FlatList, Text, View} from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import styles from '../../styles/styles'
+import stylesShoppingList from "../../styles/stylesShoppingList";
 import language from '../../language/language';
 import {ShoppingListCard} from "../../components/display/ShoppingListCard";
 import {CustomButton} from "../../components/display/CustomButton";
-import stylesShoppingList from "../../styles/stylesShoppingList";
 import AddShoppingListModal from "../../components/display/AddShoppingListModal";
+import randomColor from '../../components/HelpFunctions'
+import renderLoading from "../../components/loading/ShowLoader";
 
 export default function ShoppingListsPage({ navigation }) {
 
-	const [shoppingLists, editShoppingLists] = useState([
-		{ key: '1', title: 'Списък за пазар 1', numItems: "6", bgColor: "#6FC293"},
-		{ key: '2', title: 'Списък за пазар 2', numItems: "32", bgColor: "#698FFB"},
-		{ key: '3', title: 'Списък за пазар 3', numItems: "4", bgColor: "#B587FF"},
-		{ key: '4', title: 'Списък за пазар 4', numItems: "4", bgColor: "#B587FF"},
-		{ key: '5', title: 'Списък за пазар 5', numItems: "4", bgColor: "#B587FF"},
-		{ key: '6', title: 'Списък за пазар 6', numItems: "4", bgColor: "#B587FF"},
-	]);
+    const [shoppingLists, editShoppingLists] = useState([]);
+    const [modalData, setModalData] = useState([]);
+    const [addModalVisible, setAddModalVisible] = useState(false);
+    const [changeModalVisible, setChangeModalVisible] = useState(false);
+    const [showLoader, setShowLoader] = useState(true);
 
-	const remove = (i) => {
-		const arr = shoppingLists.filter((item) => item.key !== i);
-		editShoppingLists(arr);
-		setChangeModalVisible(!changeModalVisible)
-	};
+    useEffect(() => {
+        fetchData().then(() => {
+            setShowLoader(false)
+        })
+    }, []);
 
-	const add = (text, numItems, bgColor) => {
-		editShoppingLists( (prevShoppingLists) => {
-			setAddModalVisible(!addModalVisible)
-			return [
-				{key: Math.random().toString(), title:text, numItems: numItems, bgColor: bgColor},
-				...prevShoppingLists
-			]
-		})
-	}
+    async function fetchData() {
 
-	const change = (item) => {
-		console.log("edit function")
-	}
+        var DEMO_TOKEN = await AsyncStorage.getItem('access_token');
+        console.log(DEMO_TOKEN);
+        console.log(global.MyVar);
+        fetch(global.url + "shoppingList", {
+            method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + DEMO_TOKEN
+            }
+        }).then(response => response.json())
+            .then(data => {
+                delete data.premium;
+                delete data.first;
+                delete data.first_login;
+                delete data.user_requests;
+                if (data.new_token) {
+                    AsyncStorage.setItem('access_token', data.new_token);
+                    delete data.new_token;
+                    delete data['new_token'];
+                }
+                const result = Object.values(data);
 
-	const [modalData, setModalData] = useState([]);
-	const [addModalVisible, setAddModalVisible] = useState(false);
-	const [changeModalVisible, setChangeModalVisible] = useState(false);
+                editShoppingLists(result)
+                // this.setState({shoppingLists: data})
 
-	const showEditProduct = (item) => {
-		setChangeModalVisible(true)
-		setModalData(item)
-	};
+            }).done();
+    }
+    const remove = (i) => {
+        const arr = shoppingLists.filter((item) => item.key !== i);
+        editShoppingLists(arr);
+        setChangeModalVisible(!changeModalVisible)
+    };
 
-	return (
+    const add = (text, numItems, bgColor) => {
+        editShoppingLists((prevShoppingLists) => {
+            setAddModalVisible(!addModalVisible)
+            return [
+                {key: Math.random().toString(), title: text, numItems: numItems, bgColor: bgColor},
+                ...prevShoppingLists
+            ]
+        })
+    }
+    const change = (item) => {
+        console.log("edit function")
+    }
 
-		<View style={styles.container}>
-			<AddShoppingListModal modalVisible={addModalVisible}
-								  setModalVisible={setAddModalVisible}
-								  modalTitle={language("newShoppingList")}
-								  buttonTitle={language("add")}
-								  showDeleteOption={false}
-								  addFunctionality={add}
-			/>
+    const showEditProduct = (item) => {
+        setChangeModalVisible(true)
+        setModalData(item)
+    };
 
-			<AddShoppingListModal modalVisible={changeModalVisible}
-								  setModalVisible={setChangeModalVisible}
-								  modalTitle={language("editShoppingList")}
-								  buttonTitle={language("change")}
-								  modalData={modalData.title}
-								  showDeleteOption={true}
-								  deleteFunctionality={() => remove(modalData.key)}
-			/>
+    return renderLoading(showLoader,  <View style={styles.container}>
+        <AddShoppingListModal modalVisible={addModalVisible}
+                              setModalVisible={setAddModalVisible}
+                              modalTitle={language("newShoppingList")}
+                              buttonTitle={language("add")}
+                              showDeleteOption={false}
+                              addFunctionality={add}
+        />
+        <AddShoppingListModal modalVisible={changeModalVisible}
+                              setModalVisible={setChangeModalVisible}
+                              modalTitle={language("editShoppingList")}
+                              buttonTitle={language("change")}
+                              modalData={modalData.name}
+                              showDeleteOption={true}
+                              deleteFunctionality={() => remove(modalData.id)}
+        />
+        <View style={stylesShoppingList.buttonWithTitle}>
+            <View style={{flex: 2}}>
+                <Text style={styles.heading}>{language("shoppingLists")}</Text>
+            </View>
+            <View>
+                <CustomButton title={language("add")}
+                              bgColor={"#15A051"}
+                              txtColor={"#fff"}
+                              padding={7}
+                              onPress={() => setAddModalVisible(true)}
+                />
+            </View>
+        </View>
+        <FlatList data={shoppingLists}
+                  style={{alignSelf: "stretch"}}
+                  keyExtractor={(item, index) => index.toString()}
+                  renderItem={({item, index}) => (
+                      <ShoppingListCard bgColor={randomColor(index)}
+                                        title={item.name}
+                                        numItems={item.count}
+                                        onPress={() => navigation.navigate('Shopping List Details', {
+                                            key: item.key,
+                                            title: item.name,
+                                        })}
+                                        onPressEdit={() => {
+                                            showEditProduct(item)
+                                        }}
+                      />
+                  )}/>
 
+    </View>)
 
-			<View style={stylesShoppingList.buttonWithTitle}>
-				<View style={{flex: 2}}>
-					<Text style={styles.heading}>{language("shoppingLists")}</Text>
-				</View>
-				<View>
-					<CustomButton title={language("add")}
-								  bgColor={"#15A051"}
-								  txtColor={"#fff"}
-								  padding={7}
-								  onPress={() => setAddModalVisible(true)}
-					/>
-				</View>
-			</View>
-
-			<FlatList data={shoppingLists}
-					  style={{alignSelf:"stretch"}}
-					  renderItem={({item}) =>(
-						<ShoppingListCard bgColor={item.bgColor}
-										  title={item.title}
-										  numItems={item.numItems}
-										  onPress={() => navigation.navigate('Shopping List Details', {
-											  key: item.key,
-											  title: item.title,
-										  })}
-										  onPressEdit={() => {showEditProduct(item)}}
-						/>
-					  )}/>
-
-		</View>
-	);
 }
