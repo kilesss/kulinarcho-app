@@ -98,7 +98,7 @@ export const shoppingListStyle = StyleSheet.create({
         width: "100%",
         borderTopRightRadius: 20,
         borderTopLeftRadius: 20,
-        maxHeight: deviceHeight * 0.41,
+        maxHeight: deviceHeight * 0.47,
     },
     outsideTouchable: {
         flex: 1,
@@ -138,7 +138,7 @@ export const shoppingListStyle = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "flex-end",
         alignItems: "center",
-        margin: 10,
+        marginHorizontal: 10,
         marginBottom: 30
     },
     addListModal: {
