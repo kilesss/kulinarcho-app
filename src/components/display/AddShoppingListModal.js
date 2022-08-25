@@ -5,7 +5,7 @@ import language from "../../language/language";
 import shoppingListStyle from "../../styles/stylesShoppingList";
 import {CustomButton} from "./CustomButton";
 import {MaterialIcons} from "@expo/vector-icons";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 // Determines whether to show delete button or not
 function showDeleteIcon(show, onPress){
@@ -32,7 +32,11 @@ export default function AddShoppingListModal ({ modalVisible,
                                          changeFunctionality
                                      })
 {
-    const [text, setText] = useState(" ")
+    const [text, setText] = useState("")
+
+    useEffect(() => {
+        setText(modalData)
+    });
 
     function onInputChanged(changedText) {
         console.log(changedText)
@@ -59,7 +63,7 @@ export default function AddShoppingListModal ({ modalVisible,
 
                     <TextInput
                         style={[{marginVertical: 30}, shoppingListStyle.popupInput, shoppingListStyle.popupProductName]}
-                        value={{text}}
+                        defaultValue={text}
                         placeholder={"Име за списъка..."}
                         onChangeText={(changedText) => onInputChanged(changedText)}
                     />
@@ -67,8 +71,8 @@ export default function AddShoppingListModal ({ modalVisible,
                         onPress={() => {
                             if(addFunctionality) {
                                 addFunctionality(text, 2, `#${Math.floor(Math.random() * 16777215).toString(16)}`)
-                            }else if(changeFunctionality){
-                                changeFunctionality()
+                            }else {
+                                console.log(modalData)
                             }
                         }}
                         title={buttonTitle}

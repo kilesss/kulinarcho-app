@@ -92,7 +92,7 @@ export default function ShoppingListsPage({ navigation }) {
 											  key: item.key,
 											  title: item.title,
 										  })}
-										  onPressEdit={() => showEditProduct(item)}
+										  onPressEdit={() => {showEditProduct(item)}}
 						/>
 					  )}/>
 

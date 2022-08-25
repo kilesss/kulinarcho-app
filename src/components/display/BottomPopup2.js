@@ -5,7 +5,7 @@ import language from "../../language/language";
 import shoppingListStyle from "../../styles/stylesShoppingList";
 import {CustomButton} from "./CustomButton";
 import {MaterialIcons} from "@expo/vector-icons";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 // Component for Modal on shopping lists page
 export default function BottomPopup2 ({
@@ -22,12 +22,15 @@ export default function BottomPopup2 ({
     const [txtAmount, setAmount] = useState(" ")
     const [txtPrice, setPrice] = useState(" ")
 
+
     function onInputChanged(changedText, set, text) {
         console.log(changedText)
         set(text)
     }
 
-
+    useEffect(() => {
+        setProduct(product)
+    });
 
 
     return (
@@ -49,8 +52,8 @@ export default function BottomPopup2 ({
                             <View style={shoppingListStyle.popupPrice}>
                                 <TextInput style={[shoppingListStyle.popupInput, shoppingListStyle.popupProductName]}
                                            placeholder={"e.g. Broccoli"}
-                                           value={{txtProduct}}
-                                           onChange={({changedText}) => onInputChanged(changedText, setProduct, txtProduct)}
+                                           defaultValue={txtProduct}
+                                           onChangeText={(changedText) => onInputChanged(changedText, setProduct, txtProduct)}
                                 />
                             </View>
                             <View style={shoppingListStyle.popupAmount}>
