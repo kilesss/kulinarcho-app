@@ -8,7 +8,6 @@ export const styles = StyleSheet.create({
     marginLeft: 20,
     marginTop: 10,
     marginRight: 20,
-
   },
   centeredView: {
     flex: 1,
@@ -40,7 +39,9 @@ export const styles = StyleSheet.create({
   heading: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#4B4C4C"
+    color: "#4B4C4C",
+    marginBottom: 10,
+    marginTop: 5
   }
 });
 
