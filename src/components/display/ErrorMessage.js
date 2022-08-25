@@ -13,7 +13,7 @@ export default class ErrorMessage extends React.Component {
 
 
 
-    //TODO: leave styling like this because all module need to be refactored
+    // TODO: leave styling like this because all module need to be refactored
     render() {
         console.log(this.props.showMessage)
         console.log(this.props.message)

@@ -1,13 +1,14 @@
-import {TouchableOpacity, Text } from "react-native";
+import {TouchableOpacity, Text} from "react-native";
 import styles from "../../styles/styles";
 
-export const CustomButton = ({ onPress, title, txtColor, bgColor }) => (
+export const CustomButton = ({ onPress, title, txtColor, bgColor="#15A051", padding = 15}) => (
     <TouchableOpacity
         onPress={onPress}
         style={[
             styles.customButton,
             {
-                backgroundColor: bgColor
+                backgroundColor: bgColor,
+                paddingVertical: padding,
             }]}>
         <Text
             style={[
@@ -18,3 +19,5 @@ export const CustomButton = ({ onPress, title, txtColor, bgColor }) => (
             ]}>{title}</Text>
     </TouchableOpacity>
 );
+
+CustomButton.default
