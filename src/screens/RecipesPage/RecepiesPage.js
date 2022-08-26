@@ -57,6 +57,7 @@ export default function RecipesPage({ navigation }) {
                                           time={item.time}
                                           servings={item.servings}
                                           category={item.category}
+                                          onPress={() => {navigation.navigate("Recipe Details")}}
                         />
                     )}/>
                 </View>
@@ -70,6 +71,7 @@ export default function RecipesPage({ navigation }) {
                                                     time={item.time}
                                                     servings={item.servings}
                                                     category={item.category}
+                                                    onPress={() => {navigation.push("Recipe Details")}}
                                   />
                               )}/>
                 </View>

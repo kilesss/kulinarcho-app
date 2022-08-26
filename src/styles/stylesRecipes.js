@@ -1,4 +1,5 @@
 import {StyleSheet} from "react-native";
+import {BANNER_H, TOPNAVI_H} from "../components/constants";
 
 export const stylesRecipes = StyleSheet.create({
     categoriesSection:{
@@ -65,9 +66,123 @@ export const stylesRecipes = StyleSheet.create({
     },
     recipesCardCategory: {
         position:"absolute",
-        // alignSelf: "flex-start",
-        // alignItems: "flex-start",
-        // justifyContent:"flex-start"
-    }
+    },
+    recipeDetails: {
+        height: 900,
+        backgroundColor: "#F5F5F5",
+        borderTopRightRadius: 24,
+        borderTopLeftRadius: 24,
+        marginTop: -24,
+        padding: 25,
+        paddingTop: 15
+    },
+    recipeDetailsBanner: {
+        marginTop: -1000,
+        paddingTop: 1000,
+        alignItems: 'center',
+        overflow: 'hidden',
+    },
+    topLine: {
+        borderWidth: 3,
+        borderColor: "rgba(153,153,153,0.3)",
+        width: 60,
+        borderRadius: 50,
+        alignSelf:"center",
+        marginBottom: 5
+    },
+    headingSection: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "flex-end"
+    },
+    timeSection:{
+        alignItems: "center"
+    },
+    portionsSection: {
+        flexDirection: "row",
+        alignItems: "center",
+        marginVertical: 15
+    },
+    cookCard: {
+        shadowColor: "#999",
+        elevation: 3,
+        backgroundColor: "#fff",
+        borderRadius: 45,
+        flexDirection: "row",
+        marginVertical: 20,
+        alignItems: "center",
+    },
+    switchMenu: {
+        width: "100%"
+    },
+    steps: {
+        marginTop: 10,
+    },
+    cookCardImage: {
+        borderRadius: 45,
+        height: 55,
+        width: 55
+    },
+    stepsHeading: {
+        marginTop: 12,
+        fontSize: 16,
+    },
+    productCard: {
+        elevation: 3,
+        shadowColor: "#999",
+        backgroundColor: "#fff",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        borderRadius: 8,
+        paddingVertical: 7,
+        paddingHorizontal: 10,
+        marginTop: 7
+    },
+    productCardIconTitle: {
+        flexDirection: "row",
+        alignItems: "center"
+    },
+
+
+    banner: scrollA => ({
+        height: BANNER_H,
+        width: '120%',
+        transform: [
+            {
+                translateY: scrollA.interpolate({
+                    inputRange: [-BANNER_H, 0, BANNER_H, BANNER_H + 1],
+                    outputRange: [-BANNER_H / 2, 0, BANNER_H * 0.75, BANNER_H * 0.75],
+                }),
+            },
+            {
+                scale: scrollA.interpolate({
+                    inputRange: [-BANNER_H, 0, BANNER_H, BANNER_H + 1],
+                    outputRange: [2, 1, .8, .8],
+                }),
+            },
+        ],
+    }),
+    container: (safeArea, isFloating, isTransparent) => ({
+        paddingTop: safeArea.top,
+        marginBottom: isFloating ? -TOPNAVI_H - safeArea.top : 0,
+        height: TOPNAVI_H + safeArea.top,
+        // alignItems: "center",
+        shadowOffset: {y: 0},
+        backgroundColor: isTransparent ? 'transparent' : '#15A051',
+        shadowOpacity: isTransparent ? 0 : 0.5,
+        shadowColor: "#000",
+        elevation: isTransparent ? 0.01 : 5,
+        zIndex: 100,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        paddingHorizontal: 20
+    }),
+    title: isTransparent => ({
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 16,
+        color: isTransparent ? '#FFF' : '#000',
+    })
 
 })

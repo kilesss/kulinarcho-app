@@ -6,8 +6,8 @@ import language from "../../language/language";
 import * as React from "react";
 import shoppingListStyle from "../../styles/stylesShoppingList";
 import {useState} from "react";
-import {BottomPopup} from "../../components/display/BottomPopup";
-import BottomPopup2 from "../../components/display/BottomPopup2";
+
+import BottomPopup from "../../components/display/BottomPopup";
 
 
 export default function ShoppingListDetails() {
@@ -82,15 +82,15 @@ export default function ShoppingListDetails() {
                           />
                       )}/>
 
-            <BottomPopup2 modalVisible={addModalVisible}
-                          setModalVisible={setAddModalVisible}
-                          title={"addProduct"}
+            <BottomPopup modalVisible={addModalVisible}
+                         setModalVisible={setAddModalVisible}
+                         title={"addProduct"}
             />
 
-            <BottomPopup2 modalVisible={buyModalVisible}
-                          setModalVisible={setBuyModalVisible}
-                          title={"buyProduct"}
-                          product={modalData.title}
+            <BottomPopup modalVisible={buyModalVisible}
+                         setModalVisible={setBuyModalVisible}
+                         title={"buyProduct"}
+                         product={modalData.title}
             />
 
         </SafeAreaView>

@@ -57,7 +57,10 @@ function RecipesStack() {
     return (
         <RecipesNavigator.Navigator>
             <RecipesNavigator.Screen name="Recipes" component={RecipesPage}/>
-            <RecipesNavigator.Screen name="Recipes Details" component={RecipeDetails}/>
+            <RecipesNavigator.Screen name="Recipe Details" component={RecipeDetails}
+                                     options={{headerShown: false, tabBarVisible: false}}
+
+            />
         </RecipesNavigator.Navigator>
     );
 }
@@ -81,7 +84,7 @@ const CookersNavigator = createNativeStackNavigator();
 // Cookers Page
 function CookersStackScreen() {
     return (
-        <CookersNavigator.Navigator>
+        <CookersNavigator.Navigator >
             <CookersNavigator.Screen name="Cooks" component={CookersPage}/>
             <CookersNavigator.Screen name="Cooks Details" component={CookerDetails}/>
         </CookersNavigator.Navigator>
@@ -106,7 +109,8 @@ const Tab = createBottomTabNavigator();
 export default function TabNavigator(props) {
 
     return (
-        <Tab.Navigator screenOptions={{
+        <Tab.Navigator
+            screenOptions={{
             unmountOnBlur: true,
             tabBarStyle: {padding:10, height:60},
         }}>
