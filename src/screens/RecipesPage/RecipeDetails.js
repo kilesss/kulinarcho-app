@@ -16,8 +16,8 @@ export default function RecipeDetails({navigation}) {
 
     const [steps, setSteps] = useState([
         {key: "1", title: "Step 1", description: "Some text for the description part of the step with details blah blah"},
-        {key: "2", title: "Step 2", description: "Some text for the description part of the step with details blah blah"},
-        {key: "3", title: "Step 3", description: "Some text for the description part of the step with details blah blah"},
+        {key: "2", title: "Step 2", description: "Some text for the description part of the step with details blah blah. Some text for the description part of the step with details blah blah"},
+        {key: "3", title: "Step 3", description: "Some text for the description part of the step with details blah blah, Some text for the description part of the step with details blah blah, Some text for the description part of the step with details blah blah"},
         {key: "4", title: "Step 4", description: "Some text for the description part of the step with details blah blah"},
         {key: "5", title: "Step 5", description: "Some text for the description part of the step with details blah blah"},
         {key: "6", title: "Step 6", description: "Some text for the description part of the step with details blah blah"}
@@ -64,7 +64,7 @@ export default function RecipeDetails({navigation}) {
                     <View style={stylesRecipes.headingSection}>
                         <Text style={styles.bigHeading}>Recipe Title</Text>
                         <View style={stylesRecipes.timeSection}>
-                            <MaterialCommunityIcons name={"pot-mix-outline"} size={25} color={"#4B4C4C"}/>
+                            <MaterialCommunityIcons name={"progress-clock"} size={25} color={"#4B4C4C"}/>
                             <Text style={[styles.subHeading, {fontWeight: "regular"}]}>30 min</Text>
                         </View>
                     </View>
