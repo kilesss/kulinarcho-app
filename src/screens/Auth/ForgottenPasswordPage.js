@@ -10,6 +10,7 @@ import validateFields from "../../validator/Validator";
 import language from '../../language/language';
 import loadingIndicator from "../../components/loading/loadingIndicator";
 import ErrorMessage from "../../components/display/ErrorMessage";
+import { forgotenPassword } from '../../RestRequests/generalRequest';
 
 export default class ForgottenPassword extends React.Component {
 
@@ -30,44 +31,39 @@ export default class ForgottenPassword extends React.Component {
 		this.setState({email: result});
 	}
 
-
 	async _onPressButton(state) {
 		this.cleanErrors();
 		const err = validateFields(
 			{'email': state.email},
 			{'email': {required: true, email: true}}
 		);
-		if (Object.keys(err).length === 0) {
-			await fetch('https://kulinarcho.com/api/forgotenPassword', {
-				method: 'POST',
-				body: JSON.stringify({
-					email: this.state.email,
-				}), headers: {
-					//Header Defination
-					'Content-Type': 'application/json',
-				},
-			}).then(response => response.json())
-				.then(response => {
-						if (response.access_token) {
-							loadingIndicator(false);
-							AsyncStorage.setItem('access_token', response.access_token);
-							this.props.navigation.reset({
-								index: 0,
-								routes: [{name: 'Shopping List'}],
-							})
-						} else if (response.errors) {
-							loadingIndicator(false);
-							this.setState({showMessage:true})
-							const restErr = JSON.stringify(response.errors);
-							this.setState({restError: restErr.substring(2, restErr.length - 2)})
-						}
-					}
-				).catch(error => {
-					loadingIndicator(false);
-					console.log('ERROR:::::');
-					console.log(error);
-				});
-		} else {
+    if (Object.keys(err).length === 0) {
+      const forgotenPasswordPayload = JSON.stringify({ email: this.state.email });
+      await forgotenPassword(forgotenPasswordPayload, 'POST').then(response => response.json())
+        .then(response => {
+          if (response.access_token) {
+            loadingIndicator(false);
+            AsyncStorage.setItem('access_token', response.access_token);
+            this.props.navigation.reset({
+              index: 0,
+              routes: [{ name: 'Shopping List' }],
+            })
+              
+            return response;
+          }
+          
+          if (response.errors) {
+            loadingIndicator(false);
+            this.setState({ showMessage: true })
+            const restErr = JSON.stringify(response.errors);
+            this.setState({ restError: restErr.substring(2, restErr.length - 2) });
+
+            return response.errors;
+          }
+
+        });
+    }
+     else {
 			this.setState({errors: err})
 		}
 		return true;

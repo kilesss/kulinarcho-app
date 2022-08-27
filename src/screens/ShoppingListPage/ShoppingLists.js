@@ -10,6 +10,7 @@ import {CustomButton} from "../../components/display/CustomButton";
 import AddShoppingListModal from "../../components/display/AddShoppingListModal";
 import randomColor from '../../components/HelpFunctions'
 import renderLoading from "../../components/loading/ShowLoader";
+import { getShopingList } from "../../RestRequests/generalRequest";
 
 export default function ShoppingListsPage({ navigation }) {
 
@@ -27,31 +28,34 @@ export default function ShoppingListsPage({ navigation }) {
 
     async function fetchData() {
 
-        var DEMO_TOKEN = await AsyncStorage.getItem('access_token');
-        console.log(DEMO_TOKEN);
-        console.log(global.MyVar);
-        fetch(global.url + "shoppingList", {
-            method: "GET",
-            headers: {
-                'Authorization': 'Bearer ' + DEMO_TOKEN
-            }
-        }).then(response => response.json())
-            .then(data => {
-                delete data.premium;
-                delete data.first;
-                delete data.first_login;
-                delete data.user_requests;
-                if (data.new_token) {
-                    AsyncStorage.setItem('access_token', data.new_token);
-                    delete data.new_token;
-                    delete data['new_token'];
-                }
-                const result = Object.values(data);
+      var DEMO_TOKEN = await AsyncStorage.getItem('access_token');
+      console.log(DEMO_TOKEN);
+      console.log(global.MyVar);
+      
+      await getShopingList('GET', DEMO_TOKEN).then(data => {
 
-                editShoppingLists(result)
-                // this.setState({shoppingLists: data})
+        console.log(data);
 
-            }).done();
+        if (data) {
+          delete data.premium;
+          delete data.first;
+          delete data.first_login;
+          delete data.user_requests;
+          if (data.new_token) {
+            AsyncStorage.setItem('access_token', data.new_token);
+            delete data.new_token;
+            delete data['new_token'];
+          }
+          const result = Object.values(data);
+
+          editShoppingLists(result)
+          // this.setState({shoppingLists: data})
+        }
+
+        return res;
+      }).catch((err) => {
+        console.log(err);
+      });
     }
     const remove = (i) => {
         const arr = shoppingLists.filter((item) => item.key !== i);

@@ -10,6 +10,7 @@ import validateFields from "../../validator/Validator";
 import language from '../../language/language';
 import loadingIndicator from "../../components/loading/loadingIndicator";
 import ErrorMessage from "../../components/display/ErrorMessage";
+import { login } from "../../RestRequests/generalRequest";
 export default class LoginPage extends React.Component {
 
     constructor(props) {
@@ -41,7 +42,6 @@ export default class LoginPage extends React.Component {
     cleanErrors() {
         this.setState({errors: {}})
         this.setState({restError: ''})
-
     }
 
     getResponseEmail(result) {
@@ -60,37 +60,40 @@ export default class LoginPage extends React.Component {
             {'email': state.email, 'password': state.password},
             {'email': {required: true, email: true}, 'password': {required: true, min: 6}}
         );
-        if (Object.keys(err).length === 0) {
-            await fetch('https://kulinarcho.com/api/login', {
-                method: 'POST',
-                body: JSON.stringify({
-                    email: this.state.email,
-                    password: this.state.password
-                }), headers: {
-                    //Header Defination
-                    'Content-Type': 'application/json',
-                },
-            }).then(response => response.json())
-                .then(response => {
-                        if (response.access_token) {
-                            loadingIndicator(false);
-                            AsyncStorage.setItem('access_token', response.access_token);
-                            this.props.navigation.reset({
-                                index: 0,
-                                routes: [{name: 'Shopping List'}],
-                            })
-                        } else if (response.errors) {
-                            loadingIndicator(false);
-                            this.setState({showMessage:true})
-                            const restErr = JSON.stringify(response.errors);
-                            this.setState({restError: restErr.substring(2, restErr.length - 2)})
-                        }
-                    }
-                ).catch(error => {
-                    loadingIndicator(false);
-                    console.log('ERROR:::::');
-                    console.log(error);
-                });
+      if (Object.keys(err).length === 0) {
+        const loginPayload = JSON.stringify({
+          email: this.state.email,
+          password: this.state.password
+        });
+        await login(loginPayload, 'POST').then(response => response.json())
+          .then(response => {
+              if (response.access_token) {
+                loadingIndicator(false);
+                  /** Set JWT  **/
+                  AsyncStorage.setItem('access_token', response.access_token);
+                  this.props.navigation.reset({
+                    index: 0,
+                    routes: [{ name: 'Shopping List' }],
+                  });
+                
+                return;
+              }
+        
+              if (response.errors) {
+                loadingIndicator(false);
+                this.setState({showMessage:true})
+                const restErr = JSON.stringify(response.errors);
+                this.setState({ restError: restErr.substring(2, restErr.length - 2) })
+
+                return;
+              }            
+            }
+          ).catch(error => {
+              loadingIndicator(false);
+              console.log('ERROR:::::');
+              console.log(error);
+          });
+
         } else {
             this.setState({errors: err})
         }
