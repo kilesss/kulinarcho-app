@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import {View, ScrollView, Image, Animated, Text} from 'react-native';
+import {View, ScrollView, Image, Animated, Text, SafeAreaView} from 'react-native';
 import {BANNER_H} from '../../components/constants';
 import TopNavigation from '../../components/display/TopNavigation';
 import {stylesRecipes} from "../../styles/stylesRecipes";
@@ -7,22 +7,38 @@ import {styles} from "../../styles/styles";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import SwitchSelector from "react-native-switch-selector";
 import {ConditionalCard} from "../../components/display/ConditionalCard";
+import CookCard from "../../components/display/CookCard";
 
 export default function RecipeDetails({navigation}) {
     const scrollA = useRef(new Animated.Value(0)).current;
 
-    const [steps, setSteps] = useState(false)
+    const [toggle, setToggle] = useState(false)
 
-    function renderStepsOrProducts(steps) {
+    const [steps, setSteps] = useState([
+        {key: "1", title: "Step 1", description: "Some text for the description part of the step with details blah blah"},
+        {key: "2", title: "Step 2", description: "Some text for the description part of the step with details blah blah"},
+        {key: "3", title: "Step 3", description: "Some text for the description part of the step with details blah blah"},
+        {key: "4", title: "Step 4", description: "Some text for the description part of the step with details blah blah"},
+        {key: "5", title: "Step 5", description: "Some text for the description part of the step with details blah blah"},
+        {key: "6", title: "Step 6", description: "Some text for the description part of the step with details blah blah"}
 
-        if (steps) {
-            return <Text>Rendered Steps</Text>;
-        }
-        return <Text>Rendered Products</Text>;
-    }
+    ])
+
+    const [products, setProducts] = useState([
+        {key: "1", title: "Carrot", icon: "carrot", amount: "100g", color: "#FF7410"},
+        {key: "2", title: "Apple", icon: "food-apple", amount: "100g", color: "#d91212"},
+        {key: "3", title: "Rice", icon: "rice", amount: "100g", color: "#cec6c2"},
+        {key: "4", title: "Carrot", icon: "food-drumstick", amount: "100g", color: "#693000"},
+        {key: "5", title: "Apple", icon: "food-apple", amount: "100g", color: "#e30000"},
+        {key: "6", title: "Rice", icon: "rice", amount: "100g", color: "#cec6c2"},
+        {key: "7", title: "Carrot", icon: "carrot", amount: "100g", color: "#FF7410"},
+        {key: "8", title: "Apple", icon: "food-apple", amount: "100g", color: "#e30000"},
+        {key: "9", title: "Rice", icon: "rice", amount: "100g", color: "#cec6c2"},
+    ])
+
 
     return (
-        <View>
+        <SafeAreaView>
             <TopNavigation title="Home"
                            scrollA={scrollA}
                            onPressBack={() => navigation.goBack()}/>
@@ -41,7 +57,7 @@ export default function RecipeDetails({navigation}) {
                     />
                 </View>
 
-                <View style={stylesRecipes.recipeDetails}>
+                <SafeAreaView style={stylesRecipes.recipeDetails}>
 
                     <View style={stylesRecipes.topLine}/>
 
@@ -60,40 +76,35 @@ export default function RecipeDetails({navigation}) {
 
                     <Text style={[styles.subHeading, {textAlign: "justify", lineHeight: 15, fontWeight: "regular"}]}>Lorem ipsum iste laborum maxime minima natus nemo neque, nostrum odio omnis perferendis perspiciatis quam quia quo quod recusandae reiciendis repellat reprehenderit tempore unde ut voluptates voluptatum? Distinctio, soluta.</Text>
 
-                    <View style={stylesRecipes.cookCard}>
-                        <Image source={require("../../../public/images/testimonial-2.jpg")} style={stylesRecipes.cookCardImage}/>
-                        <View style={{paddingLeft: 7}}>
-                            <Text style={[styles.heading, {marginTop: 0}]}>The Name of The Cook</Text>
-                            <Text style={[styles.smallGreenText, {marginTop: -13,}]}>13 recepies</Text>
-                        </View>
-                    </View>
+                    <CookCard name={"The name of the cook"} numRecipes={13}/>
 
                     <SwitchSelector
                         initial={0}
-                        onPress={value => setSteps(value)}
+                        onPress={value => setToggle(value)}
                         textColor={"#4B4C4C"} //'#7a44cf'
                         selectedColor={"#fff"}
                         buttonColor={"#15A051"}
                         backgroundColor={"#e8e8e8"}
-                        height={47}
-                        textStyle={{fontSize: 16}}
-                        selectedTextStyle={{fontSize: 16}}
+                        height={50}
+                        style={{marginBottom: 10}}
+                        textStyle={{fontSize: 18}}
+                        selectedTextStyle={{fontSize: 18}}
                         bold={true}
                         animationDuration={180}
                         options={[
-                            { label: "Products", value: false, }, //images.feminino = require('./path_to/assets/img/feminino.png')
-                            { label: "Steps", value: true,} //images.masculino = require('./path_to/assets/img/masculino.png')
+                            { label: "Products", value: false, },
+                            { label: "Steps", value: true,}
                         ]}
                         testID="gender-switch-selector"
                         accessibilityLabel="gender-switch-selector"
                     />
 
-                    <ConditionalCard condition={steps}/>
+                    <ConditionalCard condition={toggle} steps={steps} products={products}/>
 
 
-                </View>
+                </SafeAreaView>
 
             </Animated.ScrollView>
-        </View>
+        </SafeAreaView>
     );
 };
