@@ -131,7 +131,7 @@ export const stylesRecipes = StyleSheet.create({
         borderRadius: 8,
         paddingVertical: 6,
         paddingHorizontal: 10,
-        marginTop: 6
+        marginVertical: 4
     },
     productCardIconTitle: {
         flexDirection: "row",

@@ -13,8 +13,8 @@ export const ConditionalCard = ({ condition, steps, products }) => {
             <SafeAreaView>
                 {steps.map((step) => {
                     return (
-                        <View style={[stylesRecipes.productCard, {flexDirection: "column", alignItems: "flex-start", marginVertical: 4, paddingVertical: 10}]}>
-                            <Text style={[styles.smallGreenText, {fontSize: 18}]}>{step.title}</Text>
+                        <View style={[stylesRecipes.productCard, {flexDirection: "column", alignItems: "flex-start"}]}>
+                            <Text style={[styles.smallGreenText, {fontSize: 16}]}>{step.title}</Text>
                             <Text style={[styles.subHeading, {fontWeight: "regular"}]}>
                                 {step.description}
                             </Text>
