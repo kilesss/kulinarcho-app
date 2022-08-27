@@ -20,7 +20,7 @@ export default function CategoriesCard({
     if(showText)
         return <Text style={styles.subHeading}>{title}</Text>;
     return null;
-}
+    }
 
     return (
         <View style={stylesRecipes.categoriesCard}>

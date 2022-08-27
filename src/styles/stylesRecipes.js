@@ -68,13 +68,14 @@ export const stylesRecipes = StyleSheet.create({
         position:"absolute",
     },
     recipeDetails: {
-        height: 900,
+        flex:1,
         backgroundColor: "#F5F5F5",
         borderTopRightRadius: 24,
         borderTopLeftRadius: 24,
         marginTop: -24,
-        padding: 25,
-        paddingTop: 15
+        paddingHorizontal: 25,
+        paddingTop: 15,
+        paddingBottom: 70
     },
     recipeDetailsBanner: {
         marginTop: -1000,
@@ -115,17 +116,10 @@ export const stylesRecipes = StyleSheet.create({
     switchMenu: {
         width: "100%"
     },
-    steps: {
-        marginTop: 10,
-    },
     cookCardImage: {
         borderRadius: 45,
         height: 55,
         width: 55
-    },
-    stepsHeading: {
-        marginTop: 12,
-        fontSize: 16,
     },
     productCard: {
         elevation: 3,
@@ -135,9 +129,9 @@ export const stylesRecipes = StyleSheet.create({
         alignItems: "center",
         justifyContent: "space-between",
         borderRadius: 8,
-        paddingVertical: 7,
+        paddingVertical: 6,
         paddingHorizontal: 10,
-        marginTop: 7
+        marginTop: 6
     },
     productCardIconTitle: {
         flexDirection: "row",
