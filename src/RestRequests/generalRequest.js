@@ -15,6 +15,19 @@ const login = async function (body, method) {
   return await res.json();
 }
 
+export const updateList = async function (body, token) {
+    console.log(body)
+    const res = await fetch(endpoints.updateList, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+    return await res.json();
+}
+
 
 const signup = async function (body, method) {
   const res = await fetch(endpoints.signup, {

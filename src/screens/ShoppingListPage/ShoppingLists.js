@@ -23,6 +23,7 @@ export default function ShoppingListsPage({navigation}) {
 
     useEffect(() => {
         AsyncStorage.getItem('access_token').then((value) => {
+            setDemoToken(value);
             if (value) {
                 getShopingList('GET', value).then(data => {
                     if (data) {
@@ -37,26 +38,12 @@ export default function ShoppingListsPage({navigation}) {
             }
         }, []);
     }, []);
-    
+
     const remove = (i) => {
         const arr = shoppingLists.filter((item) => item.key !== i);
         editShoppingLists(arr);
         setChangeModalVisible(!changeModalVisible)
     };
-
-    const add = (text, numItems, bgColor) => {
-        editShoppingLists((prevShoppingLists) => {
-            setAddModalVisible(!addModalVisible)
-            return [
-                {key: Math.random().toString(), title: text, numItems: numItems, bgColor: bgColor},
-                ...prevShoppingLists
-            ]
-        })
-    }
-    const change = (item) => {
-        console.log("edit function")
-    }
-
     const showEditProduct = (item) => {
         setChangeModalVisible(true)
         setModalData(item)
@@ -66,18 +53,21 @@ export default function ShoppingListsPage({navigation}) {
 
         <AddShoppingListModal modalVisible={addModalVisible}
                               setModalVisible={setAddModalVisible}
+                              token = {DemoToken}
                               modalTitle={language("newShoppingList")}
                               buttonTitle={language("add")}
+
                               showDeleteOption={false}
-                              addFunctionality={add}
+
         />
         <AddShoppingListModal modalVisible={changeModalVisible}
                               setModalVisible={setChangeModalVisible}
+                              token = {DemoToken}
                               modalTitle={language("editShoppingList")}
                               buttonTitle={language("change")}
                               modalData={modalData.name}
+                              modalId={modalData.id}
                               showDeleteOption={true}
-                              deleteFunctionality={() => remove(modalData.id)}
         />
         <View style={stylesShoppingList.buttonWithTitle}>
             <View style={{flex: 2}}>

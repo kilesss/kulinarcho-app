@@ -6,7 +6,8 @@ import shoppingListStyle from "../../styles/stylesShoppingList";
 import {CustomButton} from "./CustomButton";
 import {MaterialIcons} from "@expo/vector-icons";
 import React, {useEffect, useState} from "react";
-
+import {updateList} from "../../RestRequests/generalRequest";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 // Determines whether to show delete button or not
 function showDeleteIcon(show, onPress){
     if(show){
@@ -24,25 +25,53 @@ function showDeleteIcon(show, onPress){
 export default function AddShoppingListModal ({ modalVisible,
                                          setModalVisible,
                                          modalTitle,
+                                         token,
                                          buttonTitle,
                                          modalData,
+                                         modalId,
                                          deleteFunctionality,
                                          showDeleteOption,
-                                         addFunctionality,
-                                         changeFunctionality
                                      })
 {
     const [text, setText] = useState("")
+    const [id] = useState("")
 
-    useEffect(() => {
-        setText(modalData)
-    });
 
-    function onInputChanged(changedText) {
-        console.log(changedText)
-        setText(text)
+    async function testForApi(text) {
+
+        var requestBody = {
+            name: text,
+            isShared: true
+        };
+        if (modalId !== ''){
+            requestBody.id = id
+        }
+        await updateList(JSON.stringify(
+            requestBody
+        ), token).then()
+            .then(response => {
+                if (response.access_token) {
+                    /** Set JWT  **/
+                    AsyncStorage.setItem('access_token', response.access_token);
+                }
+                if (response.errors) {
+                    const restErr = JSON.stringify(response.errors);
+                    console.log(restErr);
+
+                    return;
+                }
+            })
+
     }
-
+    function onInputChanged(changedText) {
+        setText(changedText)
+    }
+    function defaultText(){
+        if (text === ''){
+            return modalData
+        }
+        return text;
+    }
     return (
     <Modal animationType="slide"
            transparent={true}
@@ -63,18 +92,14 @@ export default function AddShoppingListModal ({ modalVisible,
 
                     <TextInput
                         style={[{marginVertical: 30}, shoppingListStyle.popupInput, shoppingListStyle.popupProductName]}
-                        defaultValue={text}
+                        defaultValue={defaultText()}
                         placeholder={"Име за списъка..."}
                         onChangeText={(changedText) => onInputChanged(changedText)}
                     />
                     <CustomButton
                         onPress={() => {
-                            if(addFunctionality) {
-                                addFunctionality(text, 2, `#${Math.floor(Math.random() * 16777215).toString(16)}`)
-                            }else {
-                                console.log(modalData)
-                            }
-                        }}
+                            testForApi(text).then(r => {})
+                        }}asd
                         title={buttonTitle}
                         txtColor={"#fff"}
                         padding={10}
