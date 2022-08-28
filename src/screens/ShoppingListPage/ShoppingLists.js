@@ -19,21 +19,18 @@ export default function ShoppingListsPage({ navigation }) {
     const [addModalVisible, setAddModalVisible] = useState(false);
     const [changeModalVisible, setChangeModalVisible] = useState(false);
     const [showLoader, setShowLoader] = useState(true);
-    const [DemoToken, setDemoToken] = useState(true);
 
-    useEffect(async () => {
+    useEffect(() => {
         fetchData().then(() => {
             setShowLoader(false)
         })
-        var r  = async () => {
-            var t = await AsyncStorage.getItem('access_token');
-            setDemoToken(t);
-        }
-
     }, []);
 
+    async function fetchData() {
 
       var DEMO_TOKEN = await AsyncStorage.getItem('access_token');
+      console.log(DEMO_TOKEN);
+      console.log(global.MyVar);
       
       await getShopingList('GET', DEMO_TOKEN).then(data => {
 
@@ -59,6 +56,7 @@ export default function ShoppingListsPage({ navigation }) {
       }).catch((err) => {
         console.log(err);
       });
+    }
     const remove = (i) => {
         const arr = shoppingLists.filter((item) => item.key !== i);
         editShoppingLists(arr);
@@ -84,7 +82,6 @@ export default function ShoppingListsPage({ navigation }) {
     };
 
     return renderLoading(showLoader,  <View style={styles.container}>
-
         <AddShoppingListModal modalVisible={addModalVisible}
                               setModalVisible={setAddModalVisible}
                               modalTitle={language("newShoppingList")}
@@ -131,5 +128,5 @@ export default function ShoppingListsPage({ navigation }) {
                   )}/>
 
     </View>)
-}
 
+}
