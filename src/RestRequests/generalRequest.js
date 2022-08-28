@@ -2,20 +2,57 @@
 
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import endpoints from "./endpoints/endpoints";
 
-export default async function generalfuntion(url, body, method) {
-    fetch(global.url + url, {
-        method: method,
-        body: JSON.stringify(body), headers: {
-            //Header Defination
-            'Content-Type': 'application/json',
-        },
-    }).then(response => response.json())
-        .then(response => {
-                return response
-            }
-        ).catch(error => {
-            console.log('ERROR:::::');
-            console.log(error);
-        });
+const login = async function (body, method) {
+    const res = await fetch(endpoints.login, {
+    method: method,
+    body: JSON.stringify(body),
+    headers: {
+      'Content-Type': 'application/json',
+    }
+    });
+  
+  return await res.json();
 }
+
+
+const signup = async function (body, method) {
+  const res = await fetch(endpoints.signup, {
+    method: method,
+    body: JSON.stringify(body),
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  });
+
+  return res.json();
+}
+
+const forgotenPassword = async function (body, method) {
+    const res = await fetch(endpoints.forgotenPassword, {
+    method: method,
+    body: JSON.stringify(body),
+    headers: {
+      'Content-Type': 'application/json',
+    }
+    });
+  
+  return await res.json();
+}
+
+const getShopingList = async function (method, JWT) {
+    const res = await fetch(endpoints.getShopingList, {
+    method: method,
+    headers: {
+      'Authorization': 'Bearer ' + JWT
+    }
+    });
+  
+  return await res.json();
+}
+
+export { login, forgotenPassword, signup, getShopingList }
+
+
+
