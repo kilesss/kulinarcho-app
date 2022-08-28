@@ -47,9 +47,31 @@ const getShopingList = async function (method, JWT) {
       'Authorization': 'Bearer ' + JWT
     }
     });
-  
-  return await res.json();
+  return formatResponse(await res.json());
 }
+
+function formatResponse(response) {
+    if ('premium' in response){
+        delete response.premium;
+    }
+    if ('first_login' in response){
+        delete response.first_login;
+    }
+    if ('user_requests' in response){
+        delete response.user_requests;
+    }
+    if ('new_token' in response){
+        AsyncStorage.setItem('access_token', response.new_token);
+        delete response.new_token;
+        delete response['new_token'];
+    }
+
+    return response;
+
+
+
+}
+
 
 export { login, forgotenPassword, signup, getShopingList }
 

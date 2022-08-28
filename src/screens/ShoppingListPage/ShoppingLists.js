@@ -10,9 +10,9 @@ import {CustomButton} from "../../components/display/CustomButton";
 import AddShoppingListModal from "../../components/display/AddShoppingListModal";
 import randomColor from '../../components/HelpFunctions'
 import renderLoading from "../../components/loading/ShowLoader";
-import { getShopingList } from "../../RestRequests/generalRequest";
+import {getShopingList} from "../../RestRequests/generalRequest";
 
-export default function ShoppingListsPage({ navigation }) {
+export default function ShoppingListsPage({navigation}) {
 
     const [shoppingLists, editShoppingLists] = useState([]);
     const [modalData, setModalData] = useState([]);
@@ -21,43 +21,23 @@ export default function ShoppingListsPage({ navigation }) {
     const [showLoader, setShowLoader] = useState(true);
     const [DemoToken, setDemoToken] = useState(true);
 
-    useEffect(async () => {
-        fetchData().then(() => {
-            setShowLoader(false)
-        })
-        var r  = async () => {
-            var t = await AsyncStorage.getItem('access_token');
-            setDemoToken(t);
-        }
+    useEffect(() => {
+        AsyncStorage.getItem('access_token').then((value) => {
+            if (value) {
+                getShopingList('GET', value).then(data => {
+                    if (data) {
+                        const result = Object.values(data);
+                        editShoppingLists(result)
+                        setShowLoader(false);
+                    }
 
+                }).catch((err) => {
+                    console.log(err);
+                });
+            }
+        }, []);
     }, []);
-
-
-      var DEMO_TOKEN = await AsyncStorage.getItem('access_token');
-      
-      await getShopingList('GET', DEMO_TOKEN).then(data => {
-
-        console.log(data);
-
-        if (data) {
-          delete data.premium;
-          delete data.first;
-          delete data.first_login;
-          delete data.user_requests;
-          if (data.new_token) {
-            AsyncStorage.setItem('access_token', data.new_token);
-            delete data.new_token;
-            delete data['new_token'];
-          }
-          const result = Object.values(data);
-
-          editShoppingLists(result)
-          // this.setState({shoppingLists: data})
-        }
-
-      }).catch((err) => {
-        console.log(err);
-      });
+    
     const remove = (i) => {
         const arr = shoppingLists.filter((item) => item.key !== i);
         editShoppingLists(arr);
@@ -82,7 +62,7 @@ export default function ShoppingListsPage({ navigation }) {
         setModalData(item)
     };
 
-    return renderLoading(showLoader,  <View style={styles.container}>
+    return renderLoading(showLoader, <View style={styles.container}>
 
         <AddShoppingListModal modalVisible={addModalVisible}
                               setModalVisible={setAddModalVisible}

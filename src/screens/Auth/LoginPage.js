@@ -8,7 +8,7 @@ import {CustomButton} from "../../components/display/CustomButton"
 import CustomInput from '../../components/display/CustomInput';
 import validateFields from "../../validator/Validator";
 import language from '../../language/language';
-import loadingIndicator from "../../components/loading/loadingIndicator";
+import renderLoading from "../../components/loading/ShowLoader";
 import ErrorMessage from "../../components/display/ErrorMessage";
 import { login } from "../../RestRequests/generalRequest";
 export default class LoginPage extends React.Component {
@@ -75,7 +75,7 @@ export default class LoginPage extends React.Component {
         await login(loginPayload, 'POST').then()
           .then(response => {
               if (response.access_token) {
-                loadingIndicator(false);
+                  this.setState({showLoader:false})
                   /** Set JWT  **/
                   AsyncStorage.setItem('access_token', response.access_token);
                   this.props.navigation.reset({
@@ -87,7 +87,7 @@ export default class LoginPage extends React.Component {
               }
         
               if (response.errors) {
-                loadingIndicator(false);
+                  this.setState({showLoader:false})
                 this.setState({showMessage:true})
                 const restErr = JSON.stringify(response.errors);
                 this.setState({ restError: restErr.substring(2, restErr.length - 2) })
@@ -96,7 +96,7 @@ export default class LoginPage extends React.Component {
               }            
             }
           ).catch(error => {
-              loadingIndicator(false);
+                this.setState({showLoader:false})
               console.log('ERROR:::::');
               console.log(error);
           });
