@@ -55,7 +55,6 @@ export default function ShoppingListsPage({ navigation }) {
           // this.setState({shoppingLists: data})
         }
 
-        return res;
       }).catch((err) => {
         console.log(err);
       });

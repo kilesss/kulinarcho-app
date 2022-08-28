@@ -7,12 +7,11 @@ import endpoints from "./endpoints/endpoints";
 const login = async function (body, method) {
     const res = await fetch(endpoints.login, {
     method: method,
-    body: JSON.stringify(body),
+    body: body,
     headers: {
       'Content-Type': 'application/json',
     }
     });
-  
   return await res.json();
 }
 

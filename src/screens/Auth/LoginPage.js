@@ -72,7 +72,7 @@ export default class LoginPage extends React.Component {
           email: this.state.email,
           password: this.state.password
         });
-        await login(loginPayload, 'POST').then(response => response.json())
+        await login(loginPayload, 'POST').then()
           .then(response => {
               if (response.access_token) {
                 loadingIndicator(false);
