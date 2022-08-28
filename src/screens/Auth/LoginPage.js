@@ -12,10 +12,16 @@ import loadingIndicator from "../../components/loading/loadingIndicator";
 import ErrorMessage from "../../components/display/ErrorMessage";
 import { login } from "../../RestRequests/generalRequest";
 export default class LoginPage extends React.Component {
-
     constructor(props) {
         super(props);
-        this.state = {email: "", password: "", errors: '', restError: '', showWait: false, showMessage: false};
+        this.state = {email: "",
+            password: "",
+            errors: '',
+            restError: '',
+            showWait: false,
+            showMessage: false,
+            showLoader:false
+        };
         if (this.props.route.params !== undefined) {
             if (this.props.route.params.waitConfirm !== undefined && this.props.route.params.waitConfirm === true) {
                 this.state.showWait = true;
@@ -32,10 +38,10 @@ export default class LoginPage extends React.Component {
         //TODO: login again
         //TODO: maybe is good to check this if after we add logout function
         if (token === null || token.length > 0) {
-            this.props.navigation.reset({
-                index: 0,
-                routes: [{name: 'Shopping List'}],
-            })
+            // this.props.navigation.reset({
+            //     index: 0,
+            //     routes: [{name: 'Shopping List'}],
+            // })
         }
     }
 
@@ -56,6 +62,7 @@ export default class LoginPage extends React.Component {
 
     async _onPressButton(state) {
         this.cleanErrors();
+        this.setState({showLoader:true})
         const err = validateFields(
             {'email': state.email, 'password': state.password},
             {'email': {required: true, email: true}, 'password': {required: true, min: 6}}
@@ -93,7 +100,6 @@ export default class LoginPage extends React.Component {
               console.log('ERROR:::::');
               console.log(error);
           });
-
         } else {
             this.setState({errors: err})
         }
@@ -107,7 +113,7 @@ export default class LoginPage extends React.Component {
     }
 
     render() {
-        return (
+        return renderLoading(this.state.showLoader,
             <View style={styles.container}>
 
                 <Text style={{fontSize: 30, fontWeight: "bold", color: "#4B4C4C"}}>{language('enter')}</Text>
