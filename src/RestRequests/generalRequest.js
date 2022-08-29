@@ -16,7 +16,6 @@ const login = async function (body, method) {
 }
 
 export const updateList = async function (body, token) {
-    console.log(body)
     const res = await fetch(endpoints.updateList, {
         method: 'POST',
         body: body,

@@ -8,42 +8,46 @@ import {MaterialIcons} from "@expo/vector-icons";
 import React, {useEffect, useState} from "react";
 import {updateList} from "../../RestRequests/generalRequest";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 // Determines whether to show delete button or not
-function showDeleteIcon(show, onPress){
-    if(show){
+function showDeleteIcon(show, onPress) {
+    if (show) {
         return (
-            <TouchableOpacity onPress={onPress}>
-                <MaterialIcons name={"delete"} size={30} color={"red"} />
+            <View style={{ width:'90%', alignItems:'flex-end'}}>
+            <TouchableOpacity onPress={onPress} style={{flexDirection:'row'}}>
+                <Text style={{marginTop:0, color:'red', fontWeight:'bold', fontSize:17}}>Изтрий</Text>
+                <MaterialIcons name={"delete"} size={23} color={"red"}/>
             </TouchableOpacity>
+            </View>
         )
-    }else{
+    } else {
         return <View></View>
     }
 }
 
 // Component for Modal on shopping lists page
-export default function AddShoppingListModal ({ modalVisible,
-                                         setModalVisible,
-                                         modalTitle,
-                                         token,
-                                         buttonTitle,
-                                         modalData,
-                                         modalId,
-                                         deleteFunctionality,
-                                         showDeleteOption,
-                                     })
-{
+export default function AddShoppingListModal({
+                                                 modalVisible,
+                                                 setModalVisible,
+                                                 modalTitle,
+                                                 token,
+                                                 buttonTitle,
+                                                 modalData,
+                                                 modalId,
+                                                 deleteFunctionality,
+                                                 showDeleteOption,
+                                             }) {
     const [text, setText] = useState("")
     const [id] = useState("")
 
 
-    async function testForApi(text) {
+    async function submitNewShoppingList(text) {
 
         var requestBody = {
             name: text,
             isShared: true
         };
-        if (modalId !== ''){
+        if (modalId !== '') {
             requestBody.id = id
         }
         await updateList(JSON.stringify(
@@ -56,60 +60,62 @@ export default function AddShoppingListModal ({ modalVisible,
                 }
                 if (response.errors) {
                     const restErr = JSON.stringify(response.errors);
+                    //TODO: connect with error messages
                     console.log(restErr);
-
-                    return;
                 }
             })
-
     }
+
     function onInputChanged(changedText) {
         setText(changedText)
     }
-    function defaultText(){
-        if (text === ''){
+
+    function defaultText() {
+        if (text === '') {
             return modalData
         }
         return text;
     }
-    return (
-    <Modal animationType="slide"
-           transparent={true}
-           visible={modalVisible}
-           onRequestClose={() => {
-               setModalVisible(!modalVisible);
-           }}>
-        <TouchableWithoutFeedback style={shoppingListStyle.outsideTouchable}
-                                  onPress={() => {
-                                      setModalVisible(!modalVisible)
-                                  }}>
-            <View style={[styles.centeredView, {backgroundColor: "rgba(74,74,74,0.4)"}]}>
-                <View style={stylesShoppingList.addListModal}>
-                    {showDeleteIcon(showDeleteOption, deleteFunctionality)}
-                    <View>
-                        <Text style={[styles.heading, styles]}>{modalTitle}</Text>
-                    </View>
 
-                    <TextInput
-                        style={[{marginVertical: 30}, shoppingListStyle.popupInput, shoppingListStyle.popupProductName]}
-                        defaultValue={defaultText()}
-                        placeholder={"Име за списъка..."}
-                        onChangeText={(changedText) => onInputChanged(changedText)}
-                    />
-                    <CustomButton
-                        onPress={() => {
-                            testForApi(text).then(r => {})
-                        }}asd
-                        title={buttonTitle}
-                        txtColor={"#fff"}
-                        padding={10}
-                    />
-                    <Text onPress={() => setModalVisible(!modalVisible)}>
-                        {language("cancel")}
-                    </Text>
+    return (
+        <Modal animationType="slide"
+               transparent={true}
+               visible={modalVisible}
+               onRequestClose={() => {
+                   setModalVisible(!modalVisible);
+               }}>
+            <TouchableWithoutFeedback style={shoppingListStyle.outsideTouchable}
+                                      onPress={() => {
+                                          setModalVisible(!modalVisible)
+                                      }}>
+                <View style={[styles.centeredView, {backgroundColor: "rgba(74,74,74,0.4)"}]}>
+                    <View style={stylesShoppingList.addListModal}>
+                        {showDeleteIcon(showDeleteOption, deleteFunctionality)}
+                        <View>
+                            <Text style={{...styles.heading, marginBottom:0}}>{modalTitle}</Text>
+                        </View>
+
+                        <TextInput
+                            style={[{marginVertical: 30}, shoppingListStyle.popupInput, shoppingListStyle.popupProductName]}
+                            defaultValue={defaultText()}
+                            placeholder={"Име за списъка..."}
+                            onChangeText={(changedText) => onInputChanged(changedText)}
+                        />
+                        <CustomButton
+                            onPress={() => {
+                                submitNewShoppingList(text).then(r => {
+                                })
+                            }} asd
+                            title={buttonTitle}
+                            txtColor={"#fff"}
+                            padding={10}
+                        />
+                        <Text onPress={() => setModalVisible(!modalVisible)}>
+                            {language("cancel")}
+                        </Text>
+                    </View>
                 </View>
-            </View>
-        </TouchableWithoutFeedback>
-    </Modal>
+            </TouchableWithoutFeedback>
+        </Modal>
     )
 }
