@@ -6,8 +6,8 @@ import language from "../../language/language";
 import CategoriesCard from "./CategoriesCard";
 
 
-export const RecipesCardLarge = ({title, time, servings, category}) => (
-        <TouchableOpacity
+export const RecipesCardLarge = ({onPress, title, time, servings, category}) => (
+        <TouchableOpacity onPress={onPress}
             style={[stylesRecipes.recipesCard]}
         >
 
@@ -18,8 +18,8 @@ export const RecipesCardLarge = ({title, time, servings, category}) => (
                 <CategoriesCard title={"fish"}
                                 color={category.color}
                                 iconName={category.icon}
-                                buttonSize={45}
-                                iconSize={40}
+                                buttonSize={40}
+                                iconSize={35}
                                 showText={false}
                 />
             </View>

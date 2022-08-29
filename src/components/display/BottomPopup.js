@@ -1,104 +1,105 @@
-import {Modal, Text, TextInput, TouchableWithoutFeedback, View} from "react-native"
-import React, {useState} from "react"
-import {CustomButton} from "./CustomButton";
-import shoppingListStyle from "../../styles/stylesShoppingList";
+import {Modal, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View} from "react-native";
+import styles from "../../styles/styles";
+import stylesShoppingList from "../../styles/stylesShoppingList";
 import language from "../../language/language";
+import shoppingListStyle from "../../styles/stylesShoppingList";
+import {CustomButton} from "./CustomButton";
+import {MaterialIcons} from "@expo/vector-icons";
+import React, {useEffect, useState} from "react";
+import {LinearGradient} from "expo-linear-gradient";
 
-export class BottomPopup extends React.Component{
+// Component for Modal on shopping lists page
+export default function BottomPopup ({
+                                             modalVisible,
+                                             setModalVisible,
+                                             price,
+                                             amount,
+                                             product,
+                                             title
+                                              })
+{
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            show: false
-        }
-        const [txtProduct, setProduct] = useState(" ")
-        const [txtPrice, setText] = useState(" ")
-        const [txtAmount, setAmount] = useState(" ")
+    const [txtProduct, setProduct] = useState(" ")
+    const [txtAmount, setAmount] = useState(" ")
+    const [txtPrice, setPrice] = useState(" ")
 
-        function onInputChanged(changedText, set, txt) {
-            console.log(changedText)
-            set(txt)
-        }
+
+    function onInputChanged(changedText, set, text) {
+        console.log(changedText)
+        set(text)
     }
 
-    // TODO: Add ability to add shopping list items and buy them
-
-    show = () => {
-        this.setState({show: true})
-    }
-
-    close = () =>{
-        this.setState({show: false})
-    }
+    useEffect(() => {
+        setProduct(product)
+    });
 
 
-    renderOutsideTouchable(onTouch) {
-        const view = <View style={{flex: 1, width: "100%"}}/>
-        if (!onTouch) return view
-
-        return (
-            <TouchableWithoutFeedback onPress={onTouch}
-                                      style={{flex: 1, width: "100%"}}
-            >
-                {view}
-            </TouchableWithoutFeedback>
-        )
-    }
-
-
-    render() {
-        let {show} = this.state
-
-        let {onTouchOutside, title, product, amount, price} = this.props;
-
-
-        return (
-            <Modal animationType={"slide"}
-                   transparent={true}
-                   visible={show}
-                   onRequestClose={this.close}>
-                <View style={shoppingListStyle.outsideTouchable}>
-                    {this.renderOutsideTouchable(onTouchOutside)}
-
+    return (
+        <Modal animationType="slide"
+               transparent={true}
+               visible={modalVisible}
+               onRequestClose={() => {
+                   setModalVisible(!modalVisible);
+               }}>
+            <TouchableWithoutFeedback style={shoppingListStyle.outsideTouchable}
+                                      onPress={() => {
+                                          setModalVisible(!modalVisible)
+                                      }}>
+                <View style={{backgroundColor: "rgba(74,74,74,0.4)", flex:1, justifyContent:"flex-end"}}>
                     <View style={shoppingListStyle.popup}>
-                        <Text style={shoppingListStyle.popupTitle}>{title}</Text>
+                        <Text style={shoppingListStyle.popupTitle}>{language(title)}</Text>
 
                         <View>
                             <View style={shoppingListStyle.popupPrice}>
                                 <TextInput style={[shoppingListStyle.popupInput, shoppingListStyle.popupProductName]}
                                            placeholder={"e.g. Broccoli"}
-                                           value={product}
+                                           defaultValue={txtProduct}
+                                           onChangeText={(changedText) => onInputChanged(changedText, setProduct, txtProduct)}
                                 />
                             </View>
                             <View style={shoppingListStyle.popupAmount}>
-                                <Text>{language("amount")}</Text>
+                                <Text style={{fontSize:16}}>{language("amount")}</Text>
                                 <TextInput style={shoppingListStyle.popupInput}
-                                           value={amount}
+                                           value={{txtAmount}}
+                                           onChange={({changedText}) => onInputChanged(changedText, setAmount, txtAmount)}
                                            placeholder={"2"}
                                 />
                             </View>
 
                             <View style={shoppingListStyle.popupPrice}>
-                                <Text>{language("price")}</Text>
+                                <Text style={{fontSize:16}}>{language("price")}</Text>
                                 <TextInput style={shoppingListStyle.popupInput}
-                                           value={this.txtPrice}
+                                           value={{txtPrice}}
+                                           onChange={({changedText}) => {onInputChanged(changedText, setPrice, txtPrice)}}
                                            placeholder={"e.g. 3лв"}/>
                             </View>
 
+                            <LinearGradient
+                                // Background Linear Gradient
+                                colors={['#15A051', 'rgba(21,160,81,0.35)']}
+                                start={{x:0, y:0}}
+                                end={{x:1, y:1}}
+
+                                style={{height: 2, margin:10, marginBottom: -5 }}
+                            />
+
+                            <View style={shoppingListStyle.popupPrice}>
+                                <Text style={{fontSize: 16, fontWeight:"bold"}}>{language("price")}</Text>
+                                <Text style={{fontSize: 16, fontWeight:"bold"}}>6лв</Text>
+                            </View>
+
                             <View style={shoppingListStyle.popupButtons}>
-                                <Text style={{marginRight: 15}}
-                                      onPress={this.close}>
+                                <Text style={{marginRight: 15}} >
                                     {language("cancel")}
                                 </Text>
 
-                                <CustomButton title={title}
+                                <CustomButton title={language(title)}
                                               txtColor={"#fff"}/>
                             </View>
                         </View>
                     </View>
                 </View>
-            </Modal>
-        );
-    }
-
+            </TouchableWithoutFeedback>
+        </Modal>
+    )
 }

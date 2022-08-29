@@ -18,9 +18,9 @@ export default function CategoriesCard({
 {
     function renderElement(){
     if(showText)
-        return <Text>{title}</Text>;
+        return <Text style={styles.subHeading}>{title}</Text>;
     return null;
-}
+    }
 
     return (
         <View style={stylesRecipes.categoriesCard}>

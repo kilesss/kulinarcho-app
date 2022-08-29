@@ -42,7 +42,23 @@ export const styles = StyleSheet.create({
     color: "#4B4C4C",
     marginBottom: 10,
     marginTop: 5
+  },
+  subHeading: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#4B4C4C"
+  },
+  bigHeading: {
+    fontWeight: "bold",
+    fontSize: 22,
+    color: "#1B1B1B"
+  },
+  smallGreenText: {
+    fontWeight: "bold",
+    color: "#15A051",
+    fontSize: 13
   }
+
 });
 
 export default styles;
