@@ -4,12 +4,12 @@ const {Image, View, Text} = require("react-native");
 const React = require("react");
 
 
-export default function CookCard({name, numRecipes}){
+export default function CookCard({name, numRecipes, img}){
 
 
     return (
         <View style={stylesRecipes.cookCard}>
-            <Image source={require("../../../public/images/testimonial-2.jpg")} style={stylesRecipes.cookCardImage}/>
+            <Image source={require("../../../public/images/bob.jpg")} style={stylesRecipes.cookCardImage}/>
             <View style={{paddingLeft: 7}}>
                 <Text style={[styles.heading, {marginTop: 0}]}>{name}</Text>
                 <Text style={[styles.smallGreenText, {marginTop: -13,}]}>{numRecipes} recipes</Text>

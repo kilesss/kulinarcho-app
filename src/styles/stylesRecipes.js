@@ -110,8 +110,9 @@ export const stylesRecipes = StyleSheet.create({
         backgroundColor: "#fff",
         borderRadius: 45,
         flexDirection: "row",
-        marginVertical: 20,
+        marginVertical: 5,
         alignItems: "center",
+        alignSelf: "stretch"
     },
     switchMenu: {
         width: "100%"
@@ -168,6 +169,11 @@ export const stylesRecipes = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 12
     },
+    paragraph: {
+        textAlign: "justify",
+        lineHeight: 15,
+        fontWeight: "regular",
+        marginBottom: 20},
 
 
     banner: scrollA => ({

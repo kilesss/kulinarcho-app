@@ -74,9 +74,9 @@ export default function RecipeDetails({navigation}) {
                         <Text style={[styles.subHeading, {fontWeight: "regular"}]}>5 порции</Text>
                     </View>
 
-                    <Text style={[styles.subHeading, {textAlign: "justify", lineHeight: 15, fontWeight: "regular"}]}>Lorem ipsum iste laborum maxime minima natus nemo neque, nostrum odio omnis perferendis perspiciatis quam quia quo quod recusandae reiciendis repellat reprehenderit tempore unde ut voluptates voluptatum? Distinctio, soluta.</Text>
+                    <Text style={[styles.subHeading, stylesRecipes.paragraph]}>Lorem ipsum iste laborum maxime minima natus nemo neque, nostrum odio omnis perferendis perspiciatis quam quia quo quod recusandae reiciendis repellat reprehenderit tempore unde ut voluptates voluptatum? Distinctio, soluta.</Text>
 
-                    <CookCard name={"The name of the cook"} numRecipes={13}/>
+                    <CookCard name={"The name of the cook"} numRecipes={13} img={"../../../public/images/testimonial-2.jpg"}/>
 
                     <SwitchSelector
                         initial={0}
@@ -86,7 +86,7 @@ export default function RecipeDetails({navigation}) {
                         buttonColor={"#15A051"}
                         backgroundColor={"#e8e8e8"}
                         height={50}
-                        style={{marginBottom: 10}}
+                        style={{marginBottom: 10, marginTop: 20}}
                         textStyle={{fontSize: 18}}
                         selectedTextStyle={{fontSize: 18}}
                         bold={true}
