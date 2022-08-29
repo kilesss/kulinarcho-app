@@ -7,6 +7,7 @@ import {GestureHandlerRootView} from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import {rightSwipeActions} from "../../components/display/ShoppingListItem";
 import {RecipesCardSmall} from "../../components/display/RecipesCardSamll";
+import language from "../../language/language";
 
 export default function CookersPage({navigation}) {
     const cooks = [
@@ -27,11 +28,11 @@ export default function CookersPage({navigation}) {
     return (
         <ScrollView>
             <View style={[styles.container, {justifyContent: "flex-start", alignItems: "flex-start", paddingBottom: 20}]}>
-                <Text style={styles.heading}>Cooks</Text>
+                <Text style={styles.heading}>{language("cooks")}</Text>
 
                 {cooks.map((cook) => {
                     return (
-                        <CookCard name={cook.name} numRecipes={cook.recipes} onPress={() => navigation.navigate("Cooks Details")}></CookCard>
+                        <CookCard name={cook.name} numRecipes={cook.recipes} onPress={() => navigation.navigate("Cooks Details", {cook: cook})}></CookCard>
                     );
                 })}
             </View>

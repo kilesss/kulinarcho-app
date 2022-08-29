@@ -5,6 +5,7 @@ import styles from '../../styles/styles'
 import {stylesRecipes} from '../../styles/stylesRecipes'
 import CategoriesCard from "../../components/display/CategoriesCard";
 import {RecipesCardLarge} from "../../components/display/RecipesCardLarge";
+import language from "../../language/language";
 
 
 export const categories = [
@@ -34,7 +35,7 @@ export default function RecipesPage({ navigation }) {
         <View style={[styles.container, {alignItems:"flex-start", marginRight: 0}]}>
                 <View style={{flex: 1.3, minHeight: 150}}>
                     <View>
-                        <Text style={styles.heading}>Categories</Text>
+                        <Text style={styles.heading}>{language("categories")}</Text>
                     </View>
                     <FlatList data={categories}
                               horizontal={true}
@@ -50,7 +51,7 @@ export default function RecipesPage({ navigation }) {
                 </View>
 
                 <View style={{flex: 2, minHeight: 250}}>
-                    <Text style={styles.heading}>Popular Recipes</Text>
+                    <Text style={styles.heading}>{language("popularRecipes")}</Text>
                     <FlatList data={recipes}
                               horizontal={true}
                               renderItem={({item}) => (
@@ -64,7 +65,7 @@ export default function RecipesPage({ navigation }) {
                 </View>
 
                 <View style={{flex: 3, minHeight: 250}}>
-                    <Text style={styles.heading}>New Recipes</Text>
+                    <Text style={styles.heading}>{language("newRecipes")}</Text>
                     <FlatList data={recipes}
                               horizontal={true}
                               renderItem={({item}) => (

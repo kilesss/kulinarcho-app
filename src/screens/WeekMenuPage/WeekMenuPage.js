@@ -27,7 +27,7 @@ export default function WeekMenuPage({navigation}) {
 
                                       showDeleteOption={true}
                 />
-                <Text style={styles.heading}>Weekly Menus</Text>
+                <Text style={styles.heading}>{language("weeklyMenu")}</Text>
 
                 {menus.map((menu) => {
                     return (

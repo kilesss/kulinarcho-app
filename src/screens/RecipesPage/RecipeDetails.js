@@ -8,6 +8,7 @@ import {MaterialCommunityIcons} from "@expo/vector-icons";
 import SwitchSelector from "react-native-switch-selector";
 import {ConditionalCard} from "../../components/display/ConditionalCard";
 import CookCard from "../../components/display/CookCard";
+import language from "../../language/language";
 
 export default function RecipeDetails({navigation}) {
     const scrollA = useRef(new Animated.Value(0)).current;
@@ -92,8 +93,8 @@ export default function RecipeDetails({navigation}) {
                         bold={true}
                         animationDuration={180}
                         options={[
-                            { label: "Products", value: false, },
-                            { label: "Steps", value: true,}
+                            { label: language("products"), value: false, },
+                            { label: language("steps"), value: true,}
                         ]}
                         testID="gender-switch-selector"
                         accessibilityLabel="gender-switch-selector"
