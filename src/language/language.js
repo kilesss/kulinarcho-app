@@ -28,7 +28,15 @@ export default function language(key){
         change: "Промени",
         servings: "порции",
         min: "мин",
-
+        cooks: "Готвачи",
+        weeklyMenu: "Седмично Меню",
+        popularRecipes: "Популярни рецепти",
+        categories: "Категории",
+        newRecipes: "Нови Рецепти",
+        products: "Продукти",
+        steps: "Стъпки",
+        addToGroup: "Добави в група",
+        recipes: "рецепти"
 
     }
     return words[key];

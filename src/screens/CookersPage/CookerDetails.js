@@ -10,18 +10,20 @@ import Swipeable from "react-native-gesture-handler/Swipeable";
 import {rightSwipeActions} from "../../components/display/ShoppingListItem";
 import {RecipesCardSmall} from "../../components/display/RecipesCardSamll";
 import {RecipesCardLarge} from "../../components/display/RecipesCardLarge";
+import language from "../../language/language";
 
 
-export default function CookerDetails({navigation}) {
+export default function CookerDetails({route, navigation}) {
 
+    const { cook } = route.params;
 
     return (<ScrollView>
         <View>
             <View style={stylesCooks.profileDetails}>
                 <Image source={require("../../../public/images/bob.jpg")} style={stylesCooks.profileImage}/>
-                <Text style={[styles.heading, {fontSize: 24, marginTop: 0, textAlign: "center"}]}>Bob Marley</Text>
-                <Text style={{fontSize: 18, marginTop: -15, marginBottom: 10, color: "#15a051"}}>25 recipes</Text>
-                <CustomButton title={"add to group"} padding={8} txtColor={"#fff"}/>
+                <Text style={[styles.heading, {fontSize: 24, marginTop: 0, textAlign: "center"}]}>{cook.name}</Text>
+                <Text style={{fontSize: 18, marginTop: -15, marginBottom: 10, color: "#15a051"}}>{cook.recipes} {language("recipes")}</Text>
+                <CustomButton title={language("addToGroup")} padding={9} txtColor={"#fff"}/>
 
             </View>
 

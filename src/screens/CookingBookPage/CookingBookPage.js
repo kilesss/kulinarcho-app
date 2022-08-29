@@ -7,6 +7,7 @@ import {ProductCard} from "../../components/display/ProductCard";
 import {GestureHandlerRootView} from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import {rightSwipeActions} from "../../components/display/ShoppingListItem";
+import language from "../../language/language";
 
 export default function CookingBookPage({navigation}) {
 
@@ -44,7 +45,7 @@ export default function CookingBookPage({navigation}) {
             <View style={[styles.container, {alignItems: "flex-start", marginRight: 0}]}>
                 <View style={{minHeight: 150}}>
                     <View>
-                        <Text style={styles.heading}>Categories</Text>
+                        <Text style={styles.heading}>{language("categories")}</Text>
                     </View>
                     <FlatList data={categories}
                               horizontal={true}
@@ -60,7 +61,7 @@ export default function CookingBookPage({navigation}) {
 
 
                 <View style={{flex: 1, width: "100%", paddingRight: 20}}>
-                    <Text style={[styles.heading]}>Popular Recipes</Text>
+                    <Text style={[styles.heading]}>{language("popularRecipes")}</Text>
                     <SafeAreaView>
                         {recipes.map((recipe) => {
                             return (
