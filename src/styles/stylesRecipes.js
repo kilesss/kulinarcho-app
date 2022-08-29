@@ -137,6 +137,7 @@ export const stylesRecipes = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center"
     },
+
     recipesCardImageSmall: {
         height: "100%",
         width: 70,
