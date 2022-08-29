@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import styles from '../../styles/styles'
 import stylesShoppingList from "../../styles/stylesShoppingList";
 import language from '../../language/language';
-import {ShoppingListCard} from "../../components/display/ShoppingListCard";
+import {ListCard} from "../../components/display/ListCard";
 import {CustomButton} from "../../components/display/CustomButton";
 import AddShoppingListModal from "../../components/display/AddShoppingListModal";
 import randomColor from '../../components/HelpFunctions'
@@ -86,14 +86,15 @@ export default function ShoppingListsPage({navigation}) {
                   style={{alignSelf: "stretch"}}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({item, index}) => (
-                      <ShoppingListCard bgColor={randomColor(index)}
-                                        title={item.name}
-                                        numItems={item.count}
-                                        onPress={() => navigation.navigate('Shopping List Details', {
+                      <ListCard bgColor={randomColor(index)}
+                                title={item.name}
+                                iconName={"receipt"}
+                                numItems={item.count}
+                                onPress={() => navigation.navigate('Shopping List Details', {
                                             key: item.key,
                                             title: item.name,
                                         })}
-                                        onPressEdit={() => {
+                                onPressEdit={() => {
                                             showEditProduct(item)
                                         }}
                       />

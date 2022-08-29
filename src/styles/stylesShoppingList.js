@@ -147,12 +147,20 @@ export const shoppingListStyle = StyleSheet.create({
         borderRadius: 10,
         alignSelf: "stretch",
         padding: 30,
+        paddingTop: 20,
         alignItems: "center",
         shadowColor: "#999",
         elevation: 10,
     },
     addListModalText: {
 
+    },
+    modalDeleteButton: {
+        alignSelf: 'flex-end',
+        marginBottom: 20,
+        backgroundColor: "#D40000",
+        borderRadius: 8,
+        padding: 8,
     }
 });
 

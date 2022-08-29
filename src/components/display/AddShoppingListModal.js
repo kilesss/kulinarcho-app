@@ -12,14 +12,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 // Determines whether to show delete button or not
 function showDeleteIcon(show, onPress) {
     if (show) {
-        return (
-            <View style={{ width:'90%', alignItems:'flex-end'}}>
-            <TouchableOpacity onPress={onPress} style={{flexDirection:'row'}}>
-                <Text style={{marginTop:0, color:'red', fontWeight:'bold', fontSize:17}}>Изтрий</Text>
-                <MaterialIcons name={"delete"} size={23} color={"red"}/>
-            </TouchableOpacity>
-            </View>
-        )
+        return (<View style={shoppingListStyle.modalDeleteButton}>
+                <TouchableOpacity onPress={onPress} style={{flexDirection: 'row'}}>
+                    <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 17}}>Изтрий</Text>
+                    <MaterialIcons name={"delete"} size={23} color={"#fff"}/>
+                </TouchableOpacity>
+            </View>)
     } else {
         return <View></View>
     }
@@ -44,15 +42,12 @@ export default function AddShoppingListModal({
     async function submitNewShoppingList(text) {
 
         var requestBody = {
-            name: text,
-            isShared: true
+            name: text, isShared: true
         };
         if (modalId !== '') {
             requestBody.id = id
         }
-        await updateList(JSON.stringify(
-            requestBody
-        ), token).then()
+        await updateList(JSON.stringify(requestBody), token).then()
             .then(response => {
                 if (response.access_token) {
                     /** Set JWT  **/
@@ -77,13 +72,12 @@ export default function AddShoppingListModal({
         return text;
     }
 
-    return (
-        <Modal animationType="slide"
-               transparent={true}
-               visible={modalVisible}
-               onRequestClose={() => {
-                   setModalVisible(!modalVisible);
-               }}>
+    return (<Modal animationType="slide"
+                   transparent={true}
+                   visible={modalVisible}
+                   onRequestClose={() => {
+                       setModalVisible(!modalVisible);
+                   }}>
             <TouchableWithoutFeedback style={shoppingListStyle.outsideTouchable}
                                       onPress={() => {
                                           setModalVisible(!modalVisible)
@@ -92,11 +86,11 @@ export default function AddShoppingListModal({
                     <View style={stylesShoppingList.addListModal}>
                         {showDeleteIcon(showDeleteOption, deleteFunctionality)}
                         <View>
-                            <Text style={{...styles.heading, marginBottom:0}}>{modalTitle}</Text>
+                            <Text style={{...styles.heading, marginBottom: -5}}>{modalTitle}</Text>
                         </View>
 
                         <TextInput
-                            style={[{marginVertical: 30}, shoppingListStyle.popupInput, shoppingListStyle.popupProductName]}
+                            style={[{marginVertical: 25}, shoppingListStyle.popupInput, shoppingListStyle.popupProductName]}
                             defaultValue={defaultText()}
                             placeholder={"Име за списъка..."}
                             onChangeText={(changedText) => onInputChanged(changedText)}
@@ -116,6 +110,5 @@ export default function AddShoppingListModal({
                     </View>
                 </View>
             </TouchableWithoutFeedback>
-        </Modal>
-    )
+        </Modal>)
 }

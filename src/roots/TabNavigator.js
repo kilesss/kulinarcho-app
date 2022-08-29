@@ -4,7 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import ProfilePage from "../screens/ProfilePage/ProfilePage";
 import CookersPage from "../screens/CookersPage/CookersPage";
-import DetailsPage from "../screens/DetailsPage";
+import WeekMenuDetails from "../screens/WeekMenuPage/WeekMenuDetails";
 import ShoppingList from "../screens/ShoppingListPage/ShoppingLists";
 import RecipesPage from "../screens/RecipesPage/RecepiesPage";
 import CookingBookPage from "../screens/CookingBookPage/CookingBookPage";
@@ -100,7 +100,7 @@ function WeekMenuStack() {
     return (
         <WeekMenuNavigation.Navigator>
             <WeekMenuNavigation.Screen name="Week Menu" component={WeekMenuPage}/>
-            <WeekMenuNavigation.Screen name="Week Menu Details" component={DetailsPage}/>
+            <WeekMenuNavigation.Screen name="Week Menu Details" component={WeekMenuDetails}/>
         </WeekMenuNavigation.Navigator>
     );
 }

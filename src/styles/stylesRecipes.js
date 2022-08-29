@@ -151,7 +151,7 @@ export const stylesRecipes = StyleSheet.create({
         flexDirection: "row",
         borderRadius: 8,
         marginBottom: 7,
-        alignSelf: "stretch",
+        width: "100%",
         justifyContent: "space-between",
         // alignItems: "center"
     },
