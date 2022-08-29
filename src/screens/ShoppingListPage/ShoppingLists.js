@@ -22,46 +22,54 @@ export default function ShoppingListsPage({navigation}) {
     const [DemoToken, setDemoToken] = useState(true);
 
     useEffect(() => {
-        AsyncStorage.getItem('access_token').then((value) => {
-            setDemoToken(value);
-            if (value) {
-                getShopingList('GET', value).then(data => {
-                    if (data) {
-                        const result = Object.values(data);
-                        editShoppingLists(result)
-                        setShowLoader(false);
-                    }
+        console.log('sdfsdfsdf');
+        loadData();
 
-                }).catch((err) => {
-                    console.log(err);
-                });
-            }
-        }, []);
     }, []);
 
-    const remove = (i) => {
-        const arr = shoppingLists.filter((item) => item.key !== i);
-        editShoppingLists(arr);
-        setChangeModalVisible(!changeModalVisible)
-    };
     const showEditProduct = (item) => {
         setChangeModalVisible(true)
         setModalData(item)
     };
+ function setChangeModalVisible2(){
+     setChangeModalVisible(!changeModalVisible)
+     loadData();
+ }
+
+ function loadData(){
+     AsyncStorage.getItem('access_token').then((value) => {
+         setDemoToken(value);
+         if (value) {
+             getShopingList('GET', value).then(data => {
+                 if (data) {
+                     const result = Object.values(data);
+                     editShoppingLists(result)
+                     setShowLoader(false);
+                 }
+
+             }).catch((err) => {
+                 console.log(err);
+             });
+         }
+     }, []);
+ }
+    function setAddModalVisible2(){
+        setAddModalVisible(!addModalVisible)
+       loadData();
+    }
 
     return renderLoading(showLoader, <View style={styles.container}>
 
         <AddShoppingListModal modalVisible={addModalVisible}
-                              setModalVisible={setAddModalVisible}
+                              setModalVisible={setAddModalVisible2}
                               token = {DemoToken}
                               modalTitle={language("newShoppingList")}
                               buttonTitle={language("add")}
-
                               showDeleteOption={false}
 
         />
         <AddShoppingListModal modalVisible={changeModalVisible}
-                              setModalVisible={setChangeModalVisible}
+                              setModalVisible={setChangeModalVisible2}
                               token = {DemoToken}
                               modalTitle={language("editShoppingList")}
                               buttonTitle={language("change")}

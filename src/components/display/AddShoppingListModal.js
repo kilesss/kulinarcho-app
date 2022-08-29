@@ -6,22 +6,11 @@ import shoppingListStyle from "../../styles/stylesShoppingList";
 import {CustomButton} from "./CustomButton";
 import {MaterialIcons} from "@expo/vector-icons";
 import React, {useEffect, useState} from "react";
-import {updateList} from "../../RestRequests/generalRequest";
+import {deleteList, updateList} from "../../RestRequests/generalRequest";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import renderLoading from "../../components/loading/ShowLoader";
 
-// Determines whether to show delete button or not
-function showDeleteIcon(show, onPress) {
-    if (show) {
-        return (<View style={shoppingListStyle.modalDeleteButton}>
-                <TouchableOpacity onPress={onPress} style={{flexDirection: 'row'}}>
-                    <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 17}}>Изтрий</Text>
-                    <MaterialIcons name={"delete"} size={23} color={"#fff"}/>
-                </TouchableOpacity>
-            </View>)
-    } else {
-        return <View></View>
-    }
-}
+
 
 // Component for Modal on shopping lists page
 export default function AddShoppingListModal({
@@ -37,18 +26,54 @@ export default function AddShoppingListModal({
                                              }) {
     const [text, setText] = useState("")
     const [id] = useState("")
+    const [showLoader, setShowLoader] = useState(false);
+
+    async function  deleteShoppingList(){
+        setShowLoader(true);
+        await deleteList(JSON.stringify({id: modalId}), token).then()
+            .then(response => {
+                setShowLoader(false);
+                setModalVisible(!modalVisible)
+                if (response.access_token) {
+                    /** Set JWT  **/
+                    AsyncStorage.setItem('access_token', response.access_token);
+                }
+                if (response.errors) {
+                    const restErr = JSON.stringify(response.errors);
+                    //TODO: connect with error messages
+                    console.log(restErr);
+                }
+            })
+    }
 
 
+// Determines whether to show delete button or not
+    function showDeleteIcon(show, onPress) {
+        if (show) {
+            return (<View style={shoppingListStyle.modalDeleteButton}>
+                <TouchableOpacity onPress={deleteShoppingList} style={{flexDirection:'row'}}>
+                    <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 17}}>Изтрий</Text>
+                    <MaterialIcons name={"delete"} size={23} color={"#fff"}/>
+                </TouchableOpacity>
+            </View>)
+        } else {
+            return <View></View>
+        }
+    }
     async function submitNewShoppingList(text) {
+        setShowLoader(true);
 
         var requestBody = {
             name: text, isShared: true
         };
         if (modalId !== '') {
-            requestBody.id = id
+            requestBody.id = modalId
         }
+        console.log(requestBody)
         await updateList(JSON.stringify(requestBody), token).then()
             .then(response => {
+                setShowLoader(false);
+                setModalVisible(!modalVisible)
                 if (response.access_token) {
                     /** Set JWT  **/
                     AsyncStorage.setItem('access_token', response.access_token);
@@ -72,7 +97,7 @@ export default function AddShoppingListModal({
         return text;
     }
 
-    return (<Modal animationType="slide"
+    return renderLoading(showLoader,<Modal animationType="slide"
                    transparent={true}
                    visible={modalVisible}
                    onRequestClose={() => {

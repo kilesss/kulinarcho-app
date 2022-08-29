@@ -15,17 +15,7 @@ const login = async function (body, method) {
   return await res.json();
 }
 
-export const updateList = async function (body, token) {
-    const res = await fetch(endpoints.updateList, {
-        method: 'POST',
-        body: body,
-        headers: {
-            'Authorization': 'Bearer ' + token,
-            'Content-Type': 'application/json',
-        }
-    });
-    return await res.json();
-}
+
 
 
 const signup = async function (body, method) {
@@ -52,6 +42,28 @@ const forgotenPassword = async function (body, method) {
   return await res.json();
 }
 
+export const updateList = async function (body, token) {
+    const res = await fetch(endpoints.updateList, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+    return await res.json();
+}
+export const deleteList = async function (body, token) {
+    const res = await fetch(endpoints.deleteList, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+    return await res.json();
+}
 const getShopingList = async function (method, JWT) {
     const res = await fetch(endpoints.getShopingList, {
     method: method,
