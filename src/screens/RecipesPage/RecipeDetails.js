@@ -8,6 +8,7 @@ import {MaterialCommunityIcons} from "@expo/vector-icons";
 import SwitchSelector from "react-native-switch-selector";
 import {ConditionalCard} from "../../components/display/ConditionalCard";
 import CookCard from "../../components/display/CookCard";
+import language from "../../language/language";
 
 export default function RecipeDetails({navigation}) {
     const scrollA = useRef(new Animated.Value(0)).current;
@@ -74,9 +75,9 @@ export default function RecipeDetails({navigation}) {
                         <Text style={[styles.subHeading, {fontWeight: "regular"}]}>5 порции</Text>
                     </View>
 
-                    <Text style={[styles.subHeading, {textAlign: "justify", lineHeight: 15, fontWeight: "regular"}]}>Lorem ipsum iste laborum maxime minima natus nemo neque, nostrum odio omnis perferendis perspiciatis quam quia quo quod recusandae reiciendis repellat reprehenderit tempore unde ut voluptates voluptatum? Distinctio, soluta.</Text>
+                    <Text style={[styles.subHeading, stylesRecipes.paragraph]}>Lorem ipsum iste laborum maxime minima natus nemo neque, nostrum odio omnis perferendis perspiciatis quam quia quo quod recusandae reiciendis repellat reprehenderit tempore unde ut voluptates voluptatum? Distinctio, soluta.</Text>
 
-                    <CookCard name={"The name of the cook"} numRecipes={13}/>
+                    <CookCard name={"The name of the cook"} numRecipes={13} img={"../../../public/images/testimonial-2.jpg"}/>
 
                     <SwitchSelector
                         initial={0}
@@ -86,14 +87,14 @@ export default function RecipeDetails({navigation}) {
                         buttonColor={"#15A051"}
                         backgroundColor={"#e8e8e8"}
                         height={50}
-                        style={{marginBottom: 10}}
+                        style={{marginBottom: 10, marginTop: 20}}
                         textStyle={{fontSize: 18}}
                         selectedTextStyle={{fontSize: 18}}
                         bold={true}
                         animationDuration={180}
                         options={[
-                            { label: "Products", value: false, },
-                            { label: "Steps", value: true,}
+                            { label: language("products"), value: false, },
+                            { label: language("steps"), value: true,}
                         ]}
                         testID="gender-switch-selector"
                         accessibilityLabel="gender-switch-selector"

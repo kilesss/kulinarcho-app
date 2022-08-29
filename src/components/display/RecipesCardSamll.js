@@ -8,15 +8,15 @@ import styles from "../../styles/styles";
 
 
 export const RecipesCardSmall = ({onPress, title, time, servings, category, liked}) => (
-    <TouchableOpacity onPress={onPress}
-                      style={[stylesRecipes.recipesCardSmall]}
-    >
+    <View style={[stylesRecipes.recipesCardSmall]}>
 
         <Image source={require('../../../public/images/recipe.png')}
                style={stylesRecipes.recipesCardImageSmall}
         />
 
-        <View style={[stylesRecipes.recipesCardInfoSmall, {flex: 1}]}>
+        <TouchableOpacity style={[stylesRecipes.recipesCardInfoSmall, {flex: 1}]}
+                          onPress={onPress}
+        >
             <Text style={[styles.heading, {marginBottom: 5, fontSize: 15, lineHeight: 17}]}>{title}</Text>
             <View style={stylesRecipes.recipesCardInfoSmallInner}>
                 <View style={stylesRecipes.infoIconsWithText}>
@@ -38,12 +38,8 @@ export const RecipesCardSmall = ({onPress, title, time, servings, category, like
 
             </View>
 
-        </View>
-        <MaterialCommunityIcons style={{padding: 5}}
-            name={liked ? "heart" : "heart-outline"}
-            size={30}
-            color={"#15A051"}/>
+        </TouchableOpacity>
 
-    </TouchableOpacity>
+    </View>
 );
 

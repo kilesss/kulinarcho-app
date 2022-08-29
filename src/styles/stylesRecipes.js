@@ -30,7 +30,7 @@ export const stylesRecipes = StyleSheet.create({
         shadowRadius: 5,
         elevation: 5,
         height: 190,
-        width: 150
+        width: 150,
     },
     recipesCardImage: {
         height: 190,
@@ -110,8 +110,9 @@ export const stylesRecipes = StyleSheet.create({
         backgroundColor: "#fff",
         borderRadius: 45,
         flexDirection: "row",
-        marginVertical: 20,
+        marginVertical: 5,
         alignItems: "center",
+        alignSelf: "stretch"
     },
     switchMenu: {
         width: "100%"
@@ -140,7 +141,7 @@ export const stylesRecipes = StyleSheet.create({
 
     recipesCardImageSmall: {
         height: "100%",
-        width: 70,
+        width: 75,
         borderRadius: 8,
     },
     recipesCardSmall: {
@@ -150,7 +151,7 @@ export const stylesRecipes = StyleSheet.create({
         flexDirection: "row",
         borderRadius: 8,
         marginBottom: 7,
-        alignSelf: "stretch",
+        width: "100%",
         justifyContent: "space-between",
         // alignItems: "center"
     },
@@ -168,6 +169,11 @@ export const stylesRecipes = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 12
     },
+    paragraph: {
+        textAlign: "justify",
+        lineHeight: 15,
+        fontWeight: "regular",
+        marginBottom: 20},
 
 
     banner: scrollA => ({

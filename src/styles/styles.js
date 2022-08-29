@@ -20,9 +20,10 @@ export const styles = StyleSheet.create({
 
   customButton:{
     alignSelf: "stretch",
-    borderRadius: 6,
+    borderRadius: 8,
     shadowColor: "#999",
-    elevation: 5,
+    elevation: 3,
+    backgroundColor: "#fff",
     marginVertical: 5
   },
   customButtonText: {
