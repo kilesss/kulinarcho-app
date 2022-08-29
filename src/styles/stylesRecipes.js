@@ -137,6 +137,36 @@ export const stylesRecipes = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center"
     },
+    recipesCardImageSmall: {
+        height: "100%",
+        width: 70,
+        borderRadius: 8,
+    },
+    recipesCardSmall: {
+        backgroundColor: "#fff",
+        shadowColor: "#999",
+        elevation: 3,
+        flexDirection: "row",
+        borderRadius: 8,
+        marginBottom: 7,
+        alignSelf: "stretch",
+        justifyContent: "space-between",
+        // alignItems: "center"
+    },
+    recipesCardInfoSmall: {
+        paddingLeft: 7,
+    },
+    recipesCardInfoSmallInner: {
+        flexDirection: "row",
+        marginLeft: -10,
+        paddingBottom: 5,
+
+    },
+    recipesCardSmallText: {
+        color: "#4B4C4C",
+        fontWeight: "bold",
+        fontSize: 12
+    },
 
 
     banner: scrollA => ({
