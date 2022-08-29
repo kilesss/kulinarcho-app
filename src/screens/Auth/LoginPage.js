@@ -82,10 +82,10 @@ export default class LoginPage extends React.Component {
                     index: 0,
                     routes: [{ name: 'Shopping List' }],
                   });
-                
+
                 return;
               }
-        
+
               if (response.errors) {
                   this.setState({showLoader:false})
                 this.setState({showMessage:true})
@@ -93,7 +93,7 @@ export default class LoginPage extends React.Component {
                 this.setState({ restError: restErr.substring(2, restErr.length - 2) })
 
                 return;
-              }            
+              }
             }
           ).catch(error => {
                 this.setState({showLoader:false})
@@ -166,7 +166,7 @@ export default class LoginPage extends React.Component {
                 <CustomButton
                     title={language('signup')}
                     txtColor={"#15A051"}
-                    bgColor={"#fff"}
+                    bgColor={"#ffffff"}
                     onPress={() => this.props.navigation.navigate('Signup')}/>
 
             </View>

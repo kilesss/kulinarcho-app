@@ -6,27 +6,28 @@ import {stylesRecipes} from '../../styles/stylesRecipes'
 import CategoriesCard from "../../components/display/CategoriesCard";
 import {RecipesCardLarge} from "../../components/display/RecipesCardLarge";
 
+
+export const categories = [
+    {key: "1", title: "Риба", icon: "fish", color: "#0088C2"},
+    {key: "2", title: "Напитки", icon: "glass-cocktail", color: "#DC00E0" },
+    {key: "3", title: "С Месо", icon: "food-drumstick", color: "#842F00"},
+    {key: "4", title: "Салати", icon: "leaf", color: "#0fc45b"},
+    {key: "5", title: "Супи", icon: "bowl-outline", color: "#FF7410"},
+    {key: "6", title: "Десерти", icon: "cake-variant-outline", color: "#d70101"},
+]
+
+export const recipes = [
+    {key: "1", title: "Some Recipe with more text than usual", time: "30", servings: "5", category: categories[1]},
+    {key: "2", title: "Some Recipe", time: 20, servings: 4, category: categories[2]},
+    {key: "3", title: "Some Recipe", time: 40, servings: 5, category: categories[3]},
+    {key: "4", title: "Some Recipe", time: 50, servings: 6, category: categories[5]},
+    {key: "5", title: "Some Recipe", time: 40, servings: 5, category: categories[1]},
+    {key: "6", title: "Some Recipe", time: 30, servings: 5, category: categories[2]},
+    {key: "7", title: "Some Recipe", time: 30, servings: 5, category: categories[4]}
+]
+
+
 export default function RecipesPage({ navigation }) {
-
-    const [categories, setCategories] = useState([
-        {key: "1", title: "Риба", icon: "fish", color: "#0088C2"},
-        {key: "2", title: "Напитки", icon: "glass-cocktail", color: "#DC00E0" },
-        {key: "3", title: "С Месо", icon: "food-drumstick", color: "#842F00"},
-        {key: "4", title: "Салати", icon: "leaf", color: "#0fc45b"},
-        {key: "5", title: "Супи", icon: "bowl-outline", color: "#FF7410"},
-        {key: "6", title: "Десерти", icon: "cake-variant-outline", color: "#d70101"},
-    ])
-
-    const [recipes, setRecipes] = useState([
-        {key: "1", title: "Some Recipe with more text than usual", time: "30", servings: "5", category: categories[1]},
-        {key: "2", title: "Some Recipe", time: 20, servings: 4, category: categories[2]},
-        {key: "3", title: "Some Recipe", time: 40, servings: 5, category: categories[3]},
-        {key: "4", title: "Some Recipe", time: 50, servings: 6, category: categories[5]},
-        {key: "5", title: "Some Recipe", time: 40, servings: 5, category: categories[1]},
-        {key: "6", title: "Some Recipe", time: 30, servings: 5, category: categories[2]},
-        {key: "7", title: "Some Recipe", time: 30, servings: 5, category: categories[4]}
-    ])
-
 
     return (
         <ScrollView >

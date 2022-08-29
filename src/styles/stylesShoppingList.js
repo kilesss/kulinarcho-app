@@ -5,14 +5,14 @@ const deviceHeight = Dimensions.get("window").height
 export const shoppingListStyle = StyleSheet.create({
     cardText: {
         justifyContent: "space-between",
-        color: "red",
+        maxWidth: "90%",
     },
     card: {
         padding: 15,
         flexDirection: "row",
         justifyContent: "space-between",
         borderRadius: 8,
-        marginBottom: 10
+        marginBottom: 0,
     },
     cardSubHeading: {
         color: "#fff",
@@ -22,17 +22,17 @@ export const shoppingListStyle = StyleSheet.create({
         color: "#fff",
         fontSize: 22,
         fontWeight: "bold",
-        paddingTop: 40
+        paddingTop: 40,
+
     },
     editContainer: {
         flexDirection: "column",
-        alignItems: "flex-end"
+        alignItems: "flex-end",
     },
     receipt: {
         height: 100,
         width: 100,
-        marginLeft: 10,
-        position: "absolute"
+        position: "absolute",
     },
     editButton: {
         position: "relative",

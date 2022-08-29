@@ -30,7 +30,7 @@ export const stylesRecipes = StyleSheet.create({
         shadowRadius: 5,
         elevation: 5,
         height: 190,
-        width: 150
+        width: 150,
     },
     recipesCardImage: {
         height: 190,
@@ -141,7 +141,7 @@ export const stylesRecipes = StyleSheet.create({
 
     recipesCardImageSmall: {
         height: "100%",
-        width: 70,
+        width: 75,
         borderRadius: 8,
     },
     recipesCardSmall: {

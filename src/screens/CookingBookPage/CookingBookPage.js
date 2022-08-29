@@ -4,6 +4,9 @@ import styles from '../../styles/styles'
 import CategoriesCard from "../../components/display/CategoriesCard";
 import {RecipesCardSmall} from "../../components/display/RecipesCardSamll";
 import {ProductCard} from "../../components/display/ProductCard";
+import {GestureHandlerRootView} from "react-native-gesture-handler";
+import Swipeable from "react-native-gesture-handler/Swipeable";
+import {rightSwipeActions} from "../../components/display/ShoppingListItem";
 
 export default function CookingBookPage({navigation}) {
 
@@ -17,7 +20,14 @@ export default function CookingBookPage({navigation}) {
     ])
 
     const [recipes, setRecipes] = useState([
-        {key: "1", title: "Some Recipe with more text than", time: "30", servings: "5", category: categories[1], liked: true},
+        {
+            key: "1",
+            title: "Some Recipe with more text than",
+            time: "30",
+            servings: "5",
+            category: categories[1],
+            liked: true
+        },
         {key: "2", title: "Some Recipe", time: 20, servings: 4, category: categories[2], liked: true},
         {key: "3", title: "Some Recipe", time: 40, servings: 5, category: categories[3], liked: false},
         {key: "4", title: "Some Recipe", time: 50, servings: 6, category: categories[5], liked: true},
@@ -54,15 +64,22 @@ export default function CookingBookPage({navigation}) {
                     <SafeAreaView>
                         {recipes.map((recipe) => {
                             return (
-                                <RecipesCardSmall title={recipe.title}
-                                                  liked={recipe.liked}
-                                                  time={recipe.time}
-                                                  servings={recipe.servings}
-                                                  category={recipe.category}
-                                                  onPress={() => {
-                                                      navigation.push("Recipe Details")
-                                                  }}
-                                />
+                                <GestureHandlerRootView>
+                                    <Swipeable
+                                        renderRightActions={(progress, dragX) =>
+                                            rightSwipeActions(progress, dragX, () => console.log("Pressed Delete"), 74)}
+                                    >
+                                        <RecipesCardSmall title={recipe.title}
+                                                          liked={recipe.liked}
+                                                          time={recipe.time}
+                                                          servings={recipe.servings}
+                                                          category={recipe.category}
+                                                          onPress={() => {
+                                                              navigation.push("Recipe Details")
+                                                          }}
+                                        />
+                                    </Swipeable>
+                                </GestureHandlerRootView>
                             );
                         })}
                     </SafeAreaView>
