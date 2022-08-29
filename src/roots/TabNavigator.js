@@ -14,7 +14,7 @@ import CookerDetails from "../screens/CookersPage/CookerDetails";
 import ShoppingListDetails from "../screens/ShoppingListPage/ShoppingListDetails";
 import ProfileDetailsPage from "../screens/ProfilePage/ProfileDetailsPage"
 import {Image, TouchableOpacity, View} from 'react-native';
-import {MaterialCommunityIcons, MaterialIcons} from "@expo/vector-icons";
+import {Ionicons, MaterialCommunityIcons, MaterialIcons} from "@expo/vector-icons";
 
 import LoginPage from "../screens/Auth/LoginPage";
 import ForgottenPasswordPage from "../screens/Auth/ForgottenPasswordPage";
@@ -41,7 +41,12 @@ function ShoppingListStack() {
     return (
         <ShoppingListNavigator.Navigator>
             <ShoppingListNavigator.Screen name="Shopping List"
-                                          component={ShoppingList}/>
+                                          component={ShoppingList}
+                                          options={({ navigation }) => ({
+                                              headerTitle: () => (
+                                                  <LogoTitle onPress={() => navigation.navigate("Settings")}/>
+                                              )
+                                          })}/>
             <ShoppingListNavigator.Screen name="Shopping List Details"
                                           component={ShoppingListDetails}
                                           options={({route}) => ({title: route.params.title})}/>
@@ -59,7 +64,12 @@ const RecipesNavigator = createNativeStackNavigator();
 function RecipesStack() {
     return (
         <RecipesNavigator.Navigator>
-            <RecipesNavigator.Screen name="Recipes" component={RecipesPage}/>
+            <RecipesNavigator.Screen name="Recipes" component={RecipesPage}
+                                     options={({ navigation }) => ({
+                                         headerTitle: () => (
+                                             <LogoTitle onPress={() => navigation.navigate("Settings")}/>
+                                         )
+                                     })}/>
             <RecipesNavigator.Screen name="Recipe Details" component={RecipeDetails}
                                      options={{headerShown: false, tabBarVisible: false}}
 
@@ -78,7 +88,12 @@ const CookingBookNavigation = createNativeStackNavigator();
 function CookingBookStack() {
     return (
         <CookingBookNavigation.Navigator>
-            <CookingBookNavigation.Screen name="Cooking Book" component={CookingBookPage}/>
+            <CookingBookNavigation.Screen name="Cooking Book" component={CookingBookPage}
+                                          options={({ navigation }) => ({
+                                              headerTitle: () => (
+                                                  <LogoTitle onPress={() => navigation.navigate("Settings")}/>
+                                              )
+                                          })}/>
             <CookingBookNavigation.Screen name="Recipe Details" component={RecipeDetails}
                                           options={{headerShown: false, tabBarVisible: false}}
             />
@@ -96,7 +111,13 @@ const CookersNavigator = createNativeStackNavigator();
 function CookersStackScreen() {
     return (
         <CookersNavigator.Navigator>
-            <CookersNavigator.Screen name="Cooks" component={CookersPage}/>
+            <CookersNavigator.Screen name="Cooks" component={CookersPage}
+                                     options={({ navigation }) => ({
+                                         headerTitle: () => (
+                                             <LogoTitle onPress={() => navigation.navigate("Settings")}/>
+                                         )
+                                     })}
+            />
             <CookersNavigator.Screen name="Cooks Details" component={CookerDetails}/>
             <ProfileNavigation.Screen name="Settings"
                                       component={ProfileStack}
@@ -134,6 +155,7 @@ function LogoTitle({onPress}) {
             flex: 1,
             paddingRight: 35,
             paddingLeft: 5,
+            paddingBottom: 3,
             alignItems: "center"
         }}>
             <TouchableOpacity>
@@ -171,63 +193,28 @@ export default function TabNavigator(props) {
                 options={{
                     headerShown: false,
                     tabBarLabel: '',
-
-                    tabBarIcon: ({focused}) => {
-                        if (focused) {
-                            return <Image source={require('../../public/images/icons/shoppingList-selected.png')}/>
-                        } else {
-                            return <Image source={require('../../public/images/icons/shoppingList.png')}/>
-                        }
-                    },
-
+                    tabBarIcon: ({focused}) => {return <MaterialCommunityIcons name={"cart-outline"} size={35} color={focused ? "#15A051" : "#C0C0C0"}/>},
                 }}
             />
             <Tab.Screen name="RecipesStack" component={RecipesStack} options={{
                 headerShown: false,
                 tabBarLabel: '',
-                tabBarIcon: ({focused}) => {
-                    if (focused) {
-                        return <MaterialIcons name={"dinner-dining"} color={"#15A051"} size={35}/>
-                    } else {
-                        return <Image source={require('../../public/images/icons/recipes.png')}/>
-                    }
-                },
+                tabBarIcon: ({focused}) => {return <MaterialIcons name={"dinner-dining"} color={focused ? "#15A051" : "#c0c0c0"} size={36}/>},
             }}/>
             <Tab.Screen name="CookingBookStack" component={CookingBookStack} options={{
                 headerShown: false,
                 tabBarLabel: '',
-                tabBarIcon: ({focused}) => {
-
-                    if (focused) {
-                        return <Image source={require('../../public/images/icons/cookingBook-selected.png')}/>
-                    } else {
-                        return <Image source={require('../../public/images/icons/cookingBook.png')}/>
-                    }
-                },
+                tabBarIcon: ({focused}) => {return <MaterialCommunityIcons name={"book-open-page-variant-outline"} color={focused ? "#15A051" : "#C0C0C0"} size={34}/>},
             }}/>
             <Tab.Screen name="CookersStack" component={CookersStackScreen} options={{
                 headerShown: false,
                 tabBarLabel: '',
-                tabBarIcon: ({focused}) => {
-
-                    if (focused) {
-                        return <Image source={require('../../public/images/icons/cooker-selected.png')}/>
-                    } else {
-                        return <Image source={require('../../public/images/icons/cookers.png')}/>
-                    }
-                },
+                tabBarIcon: ({focused}) => {return <Ionicons name={"people-outline"} color={focused ? "#15A051" : "#C0C0C0"} size={35}/>},
             }}/>
             <Tab.Screen name="WeekMenuStack" component={WeekMenuStack} options={{
                 headerShown: false,
                 tabBarLabel: '',
-                tabBarIcon: ({focused}) => {
-
-                    if (focused) {
-                        return <Image source={require('../../public/images/icons/weekMenu-selected.png')}/>
-                    } else {
-                        return <Image source={require('../../public/images/icons/weekMenu.png')}/>
-                    }
-                },
+                tabBarIcon: ({focused}) => {return <Ionicons name={"calendar-outline"} color={focused ? "#15A051" : "#C0C0C0"} size={34}/>},
             }}/>
         </Tab.Navigator>
     );
