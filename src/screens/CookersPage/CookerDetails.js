@@ -17,12 +17,13 @@ export default function CookerDetails({route, navigation}) {
 
     const { cook } = route.params;
 
-    return (<ScrollView>
-        <View>
+    return (
+        <ScrollView>
+        <View style={styles.container}>
             <View style={stylesCooks.profileDetails}>
                 <Image source={require("../../../public/images/bob.jpg")} style={stylesCooks.profileImage}/>
                 <Text style={[styles.heading, {fontSize: 24, marginTop: 0, textAlign: "center"}]}>{cook.name}</Text>
-                <Text style={{fontSize: 18, marginTop: -15, marginBottom: 10, color: "#15a051"}}>{cook.recipes} {language("recipes")}</Text>
+                <Text style={{fontSize: 18, marginTop: -15, marginBottom: 5, color: "#15a051"}}>{cook.recipes} {language("recipes")}</Text>
                 <CustomButton title={language("addToGroup")} padding={9} txtColor={"#fff"}/>
 
             </View>

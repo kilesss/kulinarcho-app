@@ -19,7 +19,6 @@ export const stylesRecipes = StyleSheet.create({
     },
     recipesCard: {
         backgroundColor: "#fff",
-        marginRight: 10,
         borderRadius: 8,
         shadowColor: "#999",
         shadowOffset: {
