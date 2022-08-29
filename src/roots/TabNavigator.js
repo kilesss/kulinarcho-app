@@ -73,7 +73,9 @@ function CookingBookStack() {
     return (
         <CookingBookNavigation.Navigator>
             <CookingBookNavigation.Screen name="Cooking Book" component={CookingBookPage}/>
-            <CookingBookNavigation.Screen name="Recipe Details" component={RecipeDetails}/>
+            <CookingBookNavigation.Screen name="Recipe Details" component={RecipeDetails}
+                                          options={{headerShown: false, tabBarVisible: false}}
+            />
         </CookingBookNavigation.Navigator>
     );
 }
