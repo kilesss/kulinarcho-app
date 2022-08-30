@@ -36,7 +36,10 @@ export default function language(key){
         products: "Продукти",
         steps: "Стъпки",
         addToGroup: "Добави в група",
-        recipes: "рецепти"
+        recipes: "рецепти",
+        addCategory: "Добави нова категория",
+        edit: "Промени"
+
 
     }
     return words[key];
