@@ -19,23 +19,25 @@ import {Ionicons, MaterialCommunityIcons, MaterialIcons} from "@expo/vector-icon
 import LoginPage from "../screens/Auth/LoginPage";
 import ForgottenPasswordPage from "../screens/Auth/ForgottenPasswordPage";
 import SignupPage from "../screens/Auth/SignupPage";
+import {LogoTitle} from "../components/display/CustomHeader";
+import StackNavigator from "@react-navigation/stack/src/navigators/createStackNavigator";
+import ProductsAndCategoriesPage from "../screens/ProfilePage/ProductsAndCategoriesPage";
 
 
 const ProfileNavigation = createNativeStackNavigator();
-
 // Profile Page
 function ProfileStack() {
     return (
         <ProfileNavigation.Navigator>
             <ProfileNavigation.Screen name="Settings" component={ProfilePage}/>
             <ProfileNavigation.Screen name="Profile Details" component={ProfileDetailsPage}/>
+            <ProfileNavigation.Screen name="Products and Categories" component={ProductsAndCategoriesPage}/>
         </ProfileNavigation.Navigator>
     );
 }
 
 
 const ShoppingListNavigator = createNativeStackNavigator();
-
 // Shopping List Page
 function ShoppingListStack() {
     return (
@@ -59,7 +61,6 @@ function ShoppingListStack() {
 
 
 const RecipesNavigator = createNativeStackNavigator();
-
 // Recipes Page
 function RecipesStack() {
     return (
@@ -83,7 +84,6 @@ function RecipesStack() {
 
 
 const CookingBookNavigation = createNativeStackNavigator();
-
 // Cooking Book Page
 function CookingBookStack() {
     return (
@@ -106,7 +106,6 @@ function CookingBookStack() {
 
 
 const CookersNavigator = createNativeStackNavigator();
-
 // Cookers Page
 function CookersStackScreen() {
     return (
@@ -127,7 +126,6 @@ function CookersStackScreen() {
 }
 
 const WeekMenuNavigation = createNativeStackNavigator();
-
 // Week Menu Page
 function WeekMenuStack() {
     return (
@@ -146,35 +144,6 @@ function WeekMenuStack() {
         </WeekMenuNavigation.Navigator>
     );
 }
-
-function LogoTitle({onPress}) {
-    return (
-        <View style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            flex: 1,
-            paddingRight: 35,
-            paddingLeft: 5,
-            paddingBottom: 3,
-            alignItems: "center"
-        }}>
-            <TouchableOpacity>
-                <MaterialIcons name={"search"} size={33} color={"#4B4C4C"}/>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={onPress}>
-                <Image
-                    style={{
-                        width: 47,
-                        height: 47,
-                        borderRadius: 50,
-                    }}
-                    source={require('../../public/images/bob.jpg')}
-                />
-            </TouchableOpacity>
-        </View>
-    );
-}
-
 
 const Tab = createBottomTabNavigator();
 // Main Navigation

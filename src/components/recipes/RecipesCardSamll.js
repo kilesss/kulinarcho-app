@@ -3,7 +3,7 @@ import {MaterialCommunityIcons, MaterialIcons} from "@expo/vector-icons";
 import React from "react";
 import {stylesRecipes} from "../../styles/stylesRecipes";
 import language from "../../language/language";
-import CategoriesCard from "./CategoriesCard";
+import CategoriesCard from "../display/CategoriesCard";
 import styles from "../../styles/styles";
 
 

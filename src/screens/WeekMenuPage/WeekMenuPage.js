@@ -3,7 +3,7 @@ import {Button, ScrollView, Text, View} from "react-native";
 import {Ionicons} from "@expo/vector-icons";
 import styles from '../../styles/styles'
 import {ListCard} from "../../components/display/ListCard";
-import AddShoppingListModal from "../../components/display/AddShoppingListModal";
+import AddShoppingListModal from "../../components/shoppingList/AddShoppingListModal";
 import language from "../../language/language";
 import CookCard from "../../components/display/CookCard";
 

@@ -3,7 +3,7 @@ import styles from "../../styles/styles";
 import stylesShoppingList from "../../styles/stylesShoppingList";
 import language from "../../language/language";
 import shoppingListStyle from "../../styles/stylesShoppingList";
-import {CustomButton} from "./CustomButton";
+import {CustomButton} from "../display/CustomButton";
 import {MaterialIcons} from "@expo/vector-icons";
 import React, {useEffect, useState} from "react";
 import {LinearGradient} from "expo-linear-gradient";

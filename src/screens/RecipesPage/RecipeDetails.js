@@ -6,7 +6,7 @@ import {stylesRecipes} from "../../styles/stylesRecipes";
 import {styles} from "../../styles/styles";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import SwitchSelector from "react-native-switch-selector";
-import {ConditionalCard} from "../../components/display/ConditionalCard";
+import {ConditionalCard} from "../../components/recipes/ConditionalCard";
 import CookCard from "../../components/display/CookCard";
 import language from "../../language/language";
 

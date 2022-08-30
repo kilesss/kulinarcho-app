@@ -3,7 +3,7 @@ import styles from "../../styles/styles";
 import {recipes} from "../RecipesPage/RecepiesPage";
 import {ListCard} from "../../components/display/ListCard";
 import React from "react";
-import {RecipesCardSmall} from "../../components/display/RecipesCardSamll";
+import {RecipesCardSmall} from "../../components/recipes/RecipesCardSamll";
 
 export default function DetailsScreen({navigation}) {
     const menuDetails = [

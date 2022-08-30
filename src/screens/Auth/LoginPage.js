@@ -114,7 +114,7 @@ export default class LoginPage extends React.Component {
 
     render() {
         return renderLoading(this.state.showLoader,
-            <View style={styles.container}>
+            <View style={{...styles.container, alignItems: "center", justifyContent: "center"}}>
 
                 <Text style={{fontSize: 30, fontWeight: "bold", color: "#4B4C4C"}}>{language('enter')}</Text>
                 <Image
