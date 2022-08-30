@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Button, FlatList, ScrollView, Text, View} from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import {Ionicons} from "@expo/vector-icons";
 import styles from '../../styles/styles'
 import {stylesRecipes} from '../../styles/stylesRecipes'
 import CategoriesCard from "../../components/display/CategoriesCard";
@@ -10,7 +10,7 @@ import language from "../../language/language";
 
 export const categories = [
     {key: "1", title: "Риба", icon: "fish", color: "#0088C2"},
-    {key: "2", title: "Напитки", icon: "glass-cocktail", color: "#DC00E0" },
+    {key: "2", title: "Напитки", icon: "glass-cocktail", color: "#DC00E0"},
     {key: "3", title: "С Месо", icon: "food-drumstick", color: "#842F00"},
     {key: "4", title: "Салати", icon: "leaf", color: "#0fc45b"},
     {key: "5", title: "Супи", icon: "bowl-outline", color: "#FF7410"},
@@ -28,11 +28,11 @@ export const recipes = [
 ]
 
 
-export default function RecipesPage({ navigation }) {
+export default function RecipesPage({navigation}) {
 
     return (
-        <ScrollView >
-        <View style={[styles.container, {alignItems:"flex-start", marginRight: 0}]}>
+        <ScrollView>
+            <View style={[styles.container, {alignItems: "flex-start", marginRight: 0}]}>
                 <View style={{flex: 1.3, minHeight: 150}}>
                     <View>
                         <Text style={styles.heading}>{language("categories")}</Text>
@@ -40,13 +40,13 @@ export default function RecipesPage({ navigation }) {
                     <FlatList data={categories}
                               horizontal={true}
                               renderItem={({item}) => (
-                        <CategoriesCard title={item.title}
-                                        iconName={item.icon}
-                                        color={item.color}
-                                        size={75}
-                                        showText={true}
-                        />
-                    )}/>
+                                  <CategoriesCard title={item.title}
+                                                  iconName={item.icon}
+                                                  color={item.color}
+                                                  size={75}
+                                                  showText={true}
+                                  />
+                              )}/>
 
                 </View>
 
@@ -55,13 +55,17 @@ export default function RecipesPage({ navigation }) {
                     <FlatList data={recipes}
                               horizontal={true}
                               renderItem={({item}) => (
-                        <RecipesCardLarge title={item.title}
-                                          time={item.time}
-                                          servings={item.servings}
-                                          category={item.category}
-                                          onPress={() => {navigation.navigate("Recipe Details")}}
-                        />
-                    )}/>
+                                  <View style={{marginRight: 10}}>
+                                      <RecipesCardLarge title={item.title}
+                                                        time={item.time}
+                                                        servings={item.servings}
+                                                        category={item.category}
+                                                        onPress={() => {
+                                                            navigation.navigate("Recipe Details")
+                                                        }}
+                                      />
+                                  </View>
+                              )}/>
                 </View>
 
                 <View style={{flex: 3, minHeight: 250}}>
@@ -69,15 +73,19 @@ export default function RecipesPage({ navigation }) {
                     <FlatList data={recipes}
                               horizontal={true}
                               renderItem={({item}) => (
-                                  <RecipesCardLarge title={item.title}
-                                                    time={item.time}
-                                                    servings={item.servings}
-                                                    category={item.category}
-                                                    onPress={() => {navigation.push("Recipe Details")}}
-                                  />
+                                  <View style={{marginRight: 10}}>
+                                      <RecipesCardLarge title={item.title}
+                                                        time={item.time}
+                                                        servings={item.servings}
+                                                        category={item.category}
+                                                        onPress={() => {
+                                                            navigation.push("Recipe Details")
+                                                        }}
+                                      />
+                                  </View>
                               )}/>
                 </View>
-        </View>
+            </View>
         </ScrollView>
     );
 }
