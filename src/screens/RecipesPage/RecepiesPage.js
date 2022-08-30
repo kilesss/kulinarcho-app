@@ -4,7 +4,7 @@ import {Ionicons} from "@expo/vector-icons";
 import styles from '../../styles/styles'
 import {stylesRecipes} from '../../styles/stylesRecipes'
 import CategoriesCard from "../../components/display/CategoriesCard";
-import {RecipesCardLarge} from "../../components/display/RecipesCardLarge";
+import {RecipesCardLarge} from "../../components/recipes/RecipesCardLarge";
 import language from "../../language/language";
 
 

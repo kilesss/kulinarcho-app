@@ -2,11 +2,11 @@ import React, {useState} from "react";
 import {Button, FlatList, SafeAreaView, ScrollView, Text, View} from "react-native";
 import styles from '../../styles/styles'
 import CategoriesCard from "../../components/display/CategoriesCard";
-import {RecipesCardSmall} from "../../components/display/RecipesCardSamll";
+import {RecipesCardSmall} from "../../components/recipes/RecipesCardSamll";
 import {ProductCard} from "../../components/display/ProductCard";
 import {GestureHandlerRootView} from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import {rightSwipeActions} from "../../components/display/ShoppingListItem";
+import {rightSwipeActions} from "../../components/shoppingList/ShoppingListItem";
 import language from "../../language/language";
 
 export default function CookingBookPage({navigation}) {

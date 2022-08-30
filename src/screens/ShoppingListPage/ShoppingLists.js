@@ -7,7 +7,7 @@ import stylesShoppingList from "../../styles/stylesShoppingList";
 import language from '../../language/language';
 import {ListCard} from "../../components/display/ListCard";
 import {CustomButton} from "../../components/display/CustomButton";
-import AddShoppingListModal from "../../components/display/AddShoppingListModal";
+import AddShoppingListModal from "../../components/shoppingList/AddShoppingListModal";
 import randomColor from '../../components/HelpFunctions'
 import renderLoading from "../../components/loading/ShowLoader";
 import {getShopingList} from "../../RestRequests/generalRequest";

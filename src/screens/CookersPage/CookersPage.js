@@ -5,8 +5,8 @@ import styles from '../../styles/styles'
 import CookCard from "../../components/display/CookCard";
 import {GestureHandlerRootView} from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import {rightSwipeActions} from "../../components/display/ShoppingListItem";
-import {RecipesCardSmall} from "../../components/display/RecipesCardSamll";
+import {rightSwipeActions} from "../../components/shoppingList/ShoppingListItem";
+import {RecipesCardSmall} from "../../components/recipes/RecipesCardSamll";
 import language from "../../language/language";
 
 export default function CookersPage({navigation}) {

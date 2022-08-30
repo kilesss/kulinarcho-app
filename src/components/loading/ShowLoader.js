@@ -3,9 +3,9 @@ import styles from "../../styles/styles";
 import React from "react";
 
 export default function renderLoading(loading, render){
-    if (loading == true) {
+    if (loading) {
         return (
-            <View style={styles.container}>
+            <View style={{...styles.container, justifyContent: "center", alignItems: "center"}}>
                 <ActivityIndicator size="large" color="#00ff00" />
             </View>
         );

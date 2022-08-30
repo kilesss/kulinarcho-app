@@ -10,7 +10,6 @@ export const stylesCooks = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "#fff",
         alignSelf: "stretch",
-        flex: 1,
         paddingHorizontal: "22%",
         paddingVertical: 12,
         marginTop: 12,
@@ -26,6 +25,12 @@ export const stylesCooks = StyleSheet.create({
         flexWrap: 'wrap',
         justifyContent: "center",
         paddingVertical: 10,
+    },
+    numRecipesText: {
+        fontSize: 18,
+        marginTop: -15,
+        marginBottom: 5,
+        color: "#15a051"
     }
 
 

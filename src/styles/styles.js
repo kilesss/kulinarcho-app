@@ -3,11 +3,12 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
     marginLeft: 20,
     marginTop: 10,
     marginRight: 20,
+    marginBottom: 15,
   },
   centeredView: {
     flex: 1,
@@ -41,8 +42,7 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     color: "#4B4C4C",
-    marginBottom: 10,
-    marginTop: 5
+    marginVertical: 10,
   },
   subHeading: {
     fontSize: 14,

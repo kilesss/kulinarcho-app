@@ -2,7 +2,7 @@ import React from 'react'
 import {View, Text, FlatList, SafeAreaView} from 'react-native'
 import {stylesRecipes} from "../../styles/stylesRecipes";
 import styles from "../../styles/styles";
-import {ProductCard} from "./ProductCard";
+import {ProductCard} from "../display/ProductCard";
 
 
 export const ConditionalCard = ({ condition, steps, products }) => {

@@ -3,7 +3,7 @@ import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 
 export default function  loadingIndicator () {
 
-        return <View style={[styles.container, styles.horizontal]}>
+        return <View style={[styles.container, styles.horizontal, {justifyContent: "center", alignItems: "center"}]}>
             <ActivityIndicator size="large"/>
         </View>
 

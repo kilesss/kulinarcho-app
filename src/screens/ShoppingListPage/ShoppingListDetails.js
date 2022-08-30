@@ -1,13 +1,13 @@
 import {FlatList, Image, SafeAreaView, Text, View} from "react-native";
 import styles from "../../styles/styles";
 import {CustomButton} from "../../components/display/CustomButton";
-import {ShoppingListItem} from "../../components/display/ShoppingListItem";
+import {ShoppingListItem} from "../../components/shoppingList/ShoppingListItem";
 import language from "../../language/language";
 import * as React from "react";
 import shoppingListStyle from "../../styles/stylesShoppingList";
 import {useState} from "react";
 
-import BottomPopup from "../../components/display/BottomPopup";
+import BottomPopup from "../../components/shoppingList/BottomPopup";
 
 
 export default function ShoppingListDetails() {
