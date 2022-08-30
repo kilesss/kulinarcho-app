@@ -28,11 +28,6 @@ export default function TopNavigation({title, scrollA, onPressBack}) {
     return (
         <>
 
-            <StatusBar
-                barStyle={isTransparent ? "light-content" : "dark-content"}
-                backgroundColor="transparent"
-                translucent/>
-
             <View style={stylesRecipes.container(safeArea, isFloating, isTransparent)}>
 
                 <TouchableOpacity onPress={onPressBack}

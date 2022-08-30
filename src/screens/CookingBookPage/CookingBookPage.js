@@ -68,7 +68,7 @@ export default function CookingBookPage({navigation}) {
                                 <GestureHandlerRootView>
                                     <Swipeable
                                         renderRightActions={(progress, dragX) =>
-                                            rightSwipeActions(progress, dragX, () => console.log("Pressed Delete"), 74)}
+                                            rightSwipeActions(progress, dragX, () => console.log("Pressed Delete"), 79)}
                                     >
                                         <RecipesCardSmall title={recipe.title}
                                                           liked={recipe.liked}

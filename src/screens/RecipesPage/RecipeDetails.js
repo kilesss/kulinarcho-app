@@ -37,6 +37,8 @@ export default function RecipeDetails({navigation}) {
         {key: "9", title: "Rice", icon: "rice", amount: "100g", color: "#cec6c2"},
     ])
 
+    const cook = {key: 1, name: "Bob Marley", recipes: 420}
+
 
     return (
         <SafeAreaView>
@@ -77,7 +79,10 @@ export default function RecipeDetails({navigation}) {
 
                     <Text style={[styles.subHeading, stylesRecipes.paragraph]}>Lorem ipsum iste laborum maxime minima natus nemo neque, nostrum odio omnis perferendis perspiciatis quam quia quo quod recusandae reiciendis repellat reprehenderit tempore unde ut voluptates voluptatum? Distinctio, soluta.</Text>
 
-                    <CookCard name={"The name of the cook"} numRecipes={13} img={"../../../public/images/testimonial-2.jpg"}/>
+                    <CookCard name={"The name of the cook"}
+                              numRecipes={13}
+                              img={"../../../public/images/testimonial-2.jpg"}
+                              onPress={() => navigation.navigate("Cooks Details", {cook: cook})}/>
 
                     <SwitchSelector
                         initial={0}
