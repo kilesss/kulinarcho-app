@@ -8,10 +8,10 @@ export const LogoTitle = ({onPress}) => (
         flexDirection: "row",
         justifyContent: "space-between",
         flex: 1,
-        paddingRight: 35,
-        paddingLeft: 5,
         paddingBottom: 3,
-        alignItems: "center"
+        alignItems: "center",
+        width: "100%",
+
     }}>
         <TouchableOpacity>
             <MaterialIcons name={"search"} size={33} color={"#4B4C4C"}/>
