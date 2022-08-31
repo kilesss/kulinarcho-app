@@ -9,6 +9,7 @@ import SwitchSelector from "react-native-switch-selector";
 import {ConditionalCard} from "../../components/recipes/ConditionalCard";
 import CookCard from "../../components/display/CookCard";
 import language from "../../language/language";
+import {MenuProvider} from "react-native-popup-menu";
 
 export default function RecipeDetails({navigation}) {
     const scrollA = useRef(new Animated.Value(0)).current;
@@ -41,9 +42,11 @@ export default function RecipeDetails({navigation}) {
 
 
     return (
+        <MenuProvider>
         <SafeAreaView>
             <TopNavigation title="Home"
                            scrollA={scrollA}
+                           navigation={navigation}
                            onPressBack={() => navigation.goBack()}/>
 
             <Animated.ScrollView
@@ -112,5 +115,6 @@ export default function RecipeDetails({navigation}) {
 
             </Animated.ScrollView>
         </SafeAreaView>
+        </MenuProvider>
     );
 };

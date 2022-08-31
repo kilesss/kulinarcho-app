@@ -4,8 +4,11 @@ import {useSafeArea} from 'react-native-safe-area-context';
 import {TOPNAVI_H, BANNER_H} from '../constants';
 import {stylesRecipes} from "../../styles/stylesRecipes";
 import {MaterialCommunityIcons, MaterialIcons} from "@expo/vector-icons";
+import {Menu, MenuOption, MenuOptions, MenuTrigger} from "react-native-popup-menu";
+import { MenuProvider } from 'react-native-popup-menu';
+import styles from "../../styles/styles";
 
-export default function TopNavigation({title, scrollA, onPressBack}) {
+export default function TopNavigation({title, scrollA, onPressBack, navigation}) {
 
     const safeArea = useSafeArea();
 
@@ -26,7 +29,8 @@ export default function TopNavigation({title, scrollA, onPressBack}) {
 
 
     return (
-        <>
+
+            <>
 
             <View style={stylesRecipes.container(safeArea, isFloating, isTransparent)}>
 
@@ -36,11 +40,28 @@ export default function TopNavigation({title, scrollA, onPressBack}) {
                 </TouchableOpacity>
                 <View style={{flexDirection: "row"}}>
                     <MaterialCommunityIcons name={"heart"} size={28} color={"#fff"}/>
-                    <MaterialCommunityIcons name={"dots-vertical"} size={28} color={"#fff"}/>
+                    <Menu style={{marginTop: 35}}>
+                        <MenuTrigger style={{marginTop: -35, paddingHorizontal: 5}}>
+                            <MaterialCommunityIcons name={"dots-vertical"} size={28} color={"#fff"}/>
+                        </MenuTrigger>
+                        <MenuOptions>
+                            <MenuOption onSelect={() => navigation.navigate("Add Edit Recipe")}
+                                        style={stylesRecipes.popupMenu}>
+                                <MaterialCommunityIcons name={"pen"} size={25} color={"#4B4C4C"}/>
+                                <Text style={styles.subHeading}>Edit</Text>
+                            </MenuOption>
+                            <MenuOption onSelect={() => alert(`Delete`)}
+                                        style={stylesRecipes.popupMenu}>
+                                <MaterialCommunityIcons name={"delete"} size={25} color={"red"}/>
+                                <Text style={{...styles.subHeading, color: "red"}}>Delete</Text>
+                            </MenuOption>
+                        </MenuOptions>
+                    </Menu>
+
                 </View>
             </View>
+            </>
 
-        </>
     );
 };
 
