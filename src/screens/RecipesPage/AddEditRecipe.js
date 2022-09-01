@@ -3,17 +3,25 @@ import * as ImagePicker from 'expo-image-picker';
 import * as React from "react";
 
 import RBSheet from "react-native-raw-bottom-sheet";
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import styles from "../../styles/styles";
 import {CustomButton} from "../../components/display/CustomButton";
 import Checkbox from "expo-checkbox";
 import language from "../../language/language";
 import {stylesRecipes} from "../../styles/stylesRecipes";
 import {ProductCard} from "../../components/display/ProductCard";
+import shoppingListStyle from "../../styles/stylesShoppingList";
+import {AddProductPopup} from "./AddProductPopup";
+import DropDownPicker from 'react-native-dropdown-picker';
 
 export default function AddEditRecipe() {
 
-    const refRBSheet = useRef();
+    const [open, setOpen] = useState(false);
+    const [value, setValue] = useState(null);
+    const [items, setItems] = useState([
+        {label: 'Apple', value: 'apple'},
+        {label: 'Banana', value: 'banana'}
+    ]);
 
     const [image, setImage] = useState(null);
     const pickImage = async () => {
@@ -32,23 +40,58 @@ export default function AddEditRecipe() {
         }
     };
 
+    function onInputChanged(changedText, set, text) {
+        console.log(changedText)
+        set(text)
+    }
+
+    const [product, setProduct] = useState("");
+    const [amount, setAmount] = useState("");
+    const [size, setSize] = useState("");
+
+
+    const addProduct = useRef();
+    const openAddProduct = (item) => {
+        setProduct(item)
+        setAmount(item)
+        setSize(item)
+        addProduct.current.open()
+    };
+
+    const addStep = useRef();
+
+
     return (
         <ScrollView>
             <View style={{...styles.container, alignSelf: "stretch"}}>
-                {/*<Button title="OPEN BOTTOM SHEET" onPress={() => refRBSheet.current.open()}/>*/}
+
                 <RBSheet
-                    ref={refRBSheet}
+                    ref={addStep}
                     height={300}
                     openDuration={200}
                     customStyles={{
                         container: {
-                            justifyContent: "center",
-                            alignItems: "center"
+                            backgroundColor: "#f5f5f5",
+                            padding: 25,
+                            justifyContent: "flex-start",
                         }
                     }}
                 >
-                    <Text style={styles.heading}>Тук ще излизат нужните полета.</Text>
+                    <Text style={{...styles.heading, marginBottom: 0, marginTop: 5}}>Стъпка</Text>
+                    <TextInput multiline={true}
+                               style={{...styles.customButton, padding: 10, height: 140, textAlignVertical: "top"}}/>
+
+                    <View style={{...shoppingListStyle.popupButtons, marginRight: 0, marginTop: 15}}>
+                        <Text style={{marginRight: 15}} onPress={() => addStep.current.close()}>
+                            {language("cancel")}
+                        </Text>
+                        <CustomButton title={"Добави"}
+                                      padding={10}
+                                      txtColor={"#fff"}/>
+                    </View>
+
                 </RBSheet>
+
 
                 <View style={{alignSelf: "stretch", alignItems: "center"}}>
                     {image && <Image source={{uri: image}} style={{width: "100%", height: 220, borderRadius: 8}}/>}
@@ -74,9 +117,15 @@ export default function AddEditRecipe() {
                     <CustomButton title={language("add")}
                                   txtColor={"#fff"}
                                   padding={5}
-                                  onPress={() => refRBSheet.current.open()}/>
+                                  onPress={() => addProduct.current.open()}/>
                 </View>
-                <ProductCard title={"Test"} icon={"carrot"} iconColor={"#c5550f"}/>
+
+                <ProductCard title={product}
+                             icon={"carrot"}
+                             iconColor={"#c5550f"}
+                             textRight={amount}
+                             onPress={() => openAddProduct("hello")}
+                />
 
                 <View style={stylesRecipes.addRecipeProductsContainer}>
                     <Text style={{...styles.heading, marginBottom: 0, flex: 1}}>Стъпки<Text
@@ -84,7 +133,7 @@ export default function AddEditRecipe() {
                     <CustomButton title={language("add")}
                                   txtColor={"#fff"}
                                   padding={5}
-                                  onPress={() => refRBSheet.current.open()}
+                                  onPress={() => addStep.current.open()}
                     />
                 </View>
 
@@ -97,7 +146,22 @@ export default function AddEditRecipe() {
 
                 <Text style={{...styles.heading, marginBottom: 0, marginTop: 10}}>Категория<Text
                     style={{color: "#15A051"}}>*</Text></Text>
-                <TextInput style={{...styles.customButton, padding: 10}}/>
+                <View>
+                <DropDownPicker
+                    open={open}
+                    value={value}
+                    items={items}
+                    setOpen={setOpen}
+                    setValue={setValue}
+                    setItems={setItems}
+                    style={{...styles.customButton, padding: 10, borderWidth: 0}}
+                    dropDownContainerStyle={{
+                        borderWidth: 0,
+                        elevation: 3,
+                        shadowColor: "#888"
+                    }}
+                />
+                </View>
 
                 <View style={stylesRecipes.addRecipeWrapContainer}>
                     <View style={{width: "47%"}}>
@@ -124,7 +188,7 @@ export default function AddEditRecipe() {
 
                 <Text style={{...styles.heading, marginBottom: 0, marginTop: 5}}>Описание</Text>
                 <TextInput multiline={true}
-                           style={{...styles.customButton, padding: 10, height: 140, textAlignVertical: "top" }}/>
+                           style={{...styles.customButton, padding: 10, height: 140, textAlignVertical: "top"}}/>
 
 
                 <Text style={{...styles.heading, marginBottom: 0, marginTop: 5}}>Видео линк</Text>
@@ -132,6 +196,9 @@ export default function AddEditRecipe() {
 
                 <CustomButton title={language("add")} txtColor={"#fff"}/>
 
+
+
+                <AddProductPopup ref={addProduct} product={product} amount={amount} size={size}/>
 
             </View>
         </ScrollView>

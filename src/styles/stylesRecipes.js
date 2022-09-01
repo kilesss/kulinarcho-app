@@ -166,7 +166,7 @@ export const stylesRecipes = StyleSheet.create({
     },
     recipesCardSmallText: {
         color: "#4B4C4C",
-        fontWeight: "bold",
+        // fontWeight: "bold",
         fontSize: 12
     },
     paragraph: {
