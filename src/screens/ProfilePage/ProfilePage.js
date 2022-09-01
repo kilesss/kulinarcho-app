@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Image, ScrollView, Text, View} from "react-native";
+import {Button, Image, ScrollView, Text, TouchableOpacity, View} from "react-native";
 import {Ionicons, MaterialCommunityIcons, Octicons} from "@expo/vector-icons";
 import styles from '../../styles/styles'
 import {stylesCooks} from "../../styles/stylesCooks";
@@ -13,7 +13,8 @@ export default function RecipesPage({navigation}) {
     return (
         <ScrollView>
             <View style={{...styles.container, alignItems: "flex-start", justifyContent: "flex-start"}}>
-                <View style={stylesCooks.profileDetails}>
+                <TouchableOpacity style={stylesCooks.profileDetails}
+                                  onPress={() => navigation.navigate("Personal Info")}>
                     <Image source={require("../../../public/images/bob.jpg")} style={stylesCooks.profileImage}/>
                     <View style={{flexDirection: "row", alignItems: "center"}}>
                         <Text style={[styles.heading, {fontSize: 24, marginVertical: 2, marginRight: 5}]}>Боян
@@ -22,7 +23,7 @@ export default function RecipesPage({navigation}) {
                     </View>
 
 
-                </View>
+                </TouchableOpacity>
 
                 <Text style={styles.heading}>Настроики Групи</Text>
                 <View style={stylesProfile.largeSettingsSection}>
@@ -31,10 +32,14 @@ export default function RecipesPage({navigation}) {
                 </View>
 
                 <Text style={styles.heading}>Други Настроики</Text>
+                <SettingsCardSmall name={"Промяна на лична информация"} icon={"account-outline"}
+                                   onPress={() => navigation.navigate("Personal Info")}
+                />
                 <SettingsCardSmall name={"Продукти и категории"} icon={"carrot"}
                                    onPress={() => navigation.navigate("Products and Categories")}/>
-                <SettingsCardSmall name={"Моите рецепти"} icon={"book-open-page-variant-outline"}/>
-                <SettingsCardSmall name={"Промяна на паролата"} icon={"form-textbox-password"}/>
+                <SettingsCardSmall name={"Моите рецепти"} icon={"book-open-page-variant-outline"}
+                                   onPress={() => navigation.navigate("Cooking Book")}
+                />
 
             </View>
         </ScrollView>

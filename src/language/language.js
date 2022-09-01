@@ -38,7 +38,14 @@ export default function language(key){
         addToGroup: "Добави в група",
         recipes: "рецепти",
         addCategory: "Добави нова категория",
-        edit: "Промени"
+        edit: "Промени",
+        shortDescription: "Кратко Описание",
+        picture: "Снимка",
+        youtube: "YouTube",
+        instagram: "Instagram",
+        twitter: "Twitter",
+        pickPicture: "Избери снимка...",
+        pickOtherPicture: "Избери друга снимка"
 
 
     }
