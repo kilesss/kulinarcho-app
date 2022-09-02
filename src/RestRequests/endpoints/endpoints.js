@@ -4,7 +4,9 @@ const endpoints = {
   forgotenPassword: 'https://kulinarcho.com/api/forgotenPassword',
   getShopingList: 'https://kulinarcho.com/api/shoppingList',
   updateList:'https://kulinarcho.com/api/updateList',
-  deleteList:'https://kulinarcho.com/api/deleteList'
+  deleteList:'https://kulinarcho.com/api/deleteList',
+  getWeeklyMenus:'https://kulinarcho.com/api/weekMenu',
+  getSingleWeeklyMenu: 'https://kulinarcho.com/api/weekMenuID/?id='
 }
 
 export default endpoints;

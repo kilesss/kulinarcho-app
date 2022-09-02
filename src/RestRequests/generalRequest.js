@@ -38,7 +38,7 @@ const forgotenPassword = async function (body, method) {
       'Content-Type': 'application/json',
     }
     });
-  
+
   return await res.json();
 }
 
@@ -74,6 +74,27 @@ const getShopingList = async function (method, JWT) {
   return formatResponse(await res.json());
 }
 
+const getWeeklyMenus = async function (method, JWT) {
+    const res = await fetch(endpoints.getWeeklyMenus, {
+        method: method,
+        headers: {
+            'Authorization': 'Bearer ' + JWT
+        }
+    });
+    return formatResponse(await res.json());
+}
+
+const getSingleWeeklyMenu = async function (method, JWT, id) {
+    const res = await fetch(`https://kulinarcho.com/api/weekMenuID/?id=${id}`, {
+        method: method,
+        headers: {
+            'Authorization': 'Bearer ' + JWT
+        }
+    });
+    return formatResponse(await res.json());
+}
+
+
 function formatResponse(response) {
     if ('premium' in response){
         delete response.premium;
@@ -92,12 +113,10 @@ function formatResponse(response) {
 
     return response;
 
-
-
 }
 
 
-export { login, forgotenPassword, signup, getShopingList }
+export { login, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu}
 
 
 
