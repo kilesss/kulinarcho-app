@@ -7,10 +7,12 @@ import CategoriesCard from "../display/CategoriesCard";
 import styles from "../../styles/styles";
 
 
-export const RecipesCardSmall = ({onPress, title, time, servings, category, liked}) => (
+export const RecipesCardSmall = ({onPress, title, time, servings, category, photo}) => (
     <View style={[stylesRecipes.recipesCardSmall]}>
 
-        <Image source={require('../../../public/images/recipe.png')}
+        <Image source={{
+            uri: 'https://kulinarcho.com' + photo,
+        }}
                style={stylesRecipes.recipesCardImageSmall}
         />
 

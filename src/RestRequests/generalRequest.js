@@ -85,7 +85,17 @@ const getWeeklyMenus = async function (method, JWT) {
 }
 
 const getSingleWeeklyMenu = async function (method, JWT, id) {
-    const res = await fetch(`https://kulinarcho.com/api/weekMenuID/?id=${id}`, {
+    const res = await fetch(`${endpoints.getSingleWeeklyMenu}${id}`, {
+        method: method,
+        headers: {
+            'Authorization': 'Bearer ' + JWT
+        }
+    });
+    return formatResponse(await res.json());
+}
+
+const getSingleRecipe = async function (method, JWT, id) {
+    const res = await fetch(`${endpoints.getSingleRecipe}${id}`, {
         method: method,
         headers: {
             'Authorization': 'Bearer ' + JWT
@@ -116,7 +126,7 @@ function formatResponse(response) {
 }
 
 
-export { login, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu}
+export { login, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu, getSingleRecipe}
 
 
 
