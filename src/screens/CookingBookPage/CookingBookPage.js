@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Button, FlatList, SafeAreaView, ScrollView, Text, View} from "react-native";
 import styles from '../../styles/styles'
 import CategoriesCard from "../../components/display/CategoriesCard";
@@ -8,10 +8,14 @@ import {GestureHandlerRootView} from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import {rightSwipeActions} from "../../components/shoppingList/ShoppingListItem";
 import language from "../../language/language";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {getCategories} from "../../RestRequests/generalRequest";
+import {getIconInfo} from "../../components/HelpFunctions";
+import renderLoading from "../../components/loading/ShowLoader";
 
 export default function CookingBookPage({navigation}) {
 
-    const [categories, setCategories] = useState([
+    const [categories2, setCategories2] = useState([
         {key: "1", title: "Риба", icon: "fish", color: "#0088C2"},
         {key: "2", title: "Напитки", icon: "glass-cocktail", color: "#DC00E0"},
         {key: "3", title: "С Месо", icon: "food-drumstick", color: "#842F00"},
@@ -26,37 +30,65 @@ export default function CookingBookPage({navigation}) {
             title: "Some Recipe with more text than",
             time: "30",
             servings: "5",
-            category: categories[1],
             liked: true
         },
-        {key: "2", title: "Some Recipe", time: 20, servings: 4, category: categories[2], liked: true},
-        {key: "3", title: "Some Recipe", time: 40, servings: 5, category: categories[3], liked: false},
-        {key: "4", title: "Some Recipe", time: 50, servings: 6, category: categories[5], liked: true},
-        {key: "5", title: "Some Recipe", time: 40, servings: 5, category: categories[1], liked: true},
-        {key: "6", title: "Some Recipe", time: 30, servings: 5, category: categories[2], liked: true},
-        {key: "7", title: "Some Recipe", time: 30, servings: 5, category: categories[4], liked: true},
-        {key: "8", title: "Some Recipe", time: 30, servings: 5, category: categories[2], liked: true},
-        {key: "9", title: "Some Recipe", time: 30, servings: 5, category: categories[4], liked: true}
+        {key: "2", title: "Some Recipe", time: 20, servings: 4, },
+        {key: "3", title: "Some Recipe", time: 40, servings: 5,},
+        {key: "4", title: "Some Recipe", time: 50, servings: 6,  },
+        {key: "5", title: "Some Recipe", time: 40, servings: 5, },
+        {key: "6", title: "Some Recipe", time: 30, servings: 5, },
+        {key: "7", title: "Some Recipe", time: 30, servings: 5, },
+        {key: "8", title: "Some Recipe", time: 30, servings: 5, },
+        {key: "9", title: "Some Recipe", time: 30, servings: 5, }
     ])
+
+    const [categories, setCategories] = useState()
+    const [showLoader, setShowLoader] = useState(true);
+    const [DemoToken, setDemoToken] = useState(true);
+
+    function loadData() {
+        AsyncStorage.getItem('access_token').then((value) => {
+            setDemoToken(value);
+            if (value) {
+                getCategories('GET', value).then(data => {
+                    if (data) {
+                        const result = Object.values(data);
+                        setCategories(result)
+                        setShowLoader(false);
+                    }
+
+                }).catch((err) => {
+                    console.log(err);
+                });
+            }
+        }, []);
+    }
+
+    useEffect(() => {
+        loadData();
+
+    }, []);
 
 
     return (
-        <ScrollView>
+        renderLoading(showLoader, <ScrollView>
             <View style={[styles.container, {alignItems: "flex-start", marginRight: 0}]}>
                 <View style={{minHeight: 145}}>
                     <View>
                         <Text style={styles.heading}>{language("categories")}</Text>
                     </View>
-                    <FlatList data={categories}
-                              horizontal={true}
-                              renderItem={({item}) => (
-                                  <CategoriesCard title={item.title}
-                                                  iconName={item.icon}
-                                                  color={item.color}
-                                                  size={75}
-                                                  showText={true}
-                                  />
-                              )}/>
+                    <FlatList
+                        data={categories}
+                        horizontal={true}
+                        renderItem={({item}) => (
+                            <CategoriesCard
+                                title={getIconInfo(item.id).title}
+                                imageUrl={getIconInfo(item.id).image}
+                                color={getIconInfo(item.id).color}
+                                size={75}
+                                showText={true}
+                            />
+                        )}/>
                 </View>
 
 
@@ -74,7 +106,7 @@ export default function CookingBookPage({navigation}) {
                                                           liked={recipe.liked}
                                                           time={recipe.time}
                                                           servings={recipe.servings}
-                                                          category={recipe.category}
+                                                          category={getIconInfo(2)}
                                                           onPress={() => {
                                                               navigation.push("Recipe Details")
                                                           }}
@@ -86,6 +118,6 @@ export default function CookingBookPage({navigation}) {
                     </SafeAreaView>
                 </View>
             </View>
-        </ScrollView>
+        </ScrollView>)
     );
 }

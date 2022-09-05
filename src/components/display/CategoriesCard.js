@@ -10,7 +10,7 @@ import {stylesRecipes} from "../../styles/stylesRecipes";
 export default function CategoriesCard({
                                            onPress,
                                            title,
-                                           iconName,
+                                           imageUrl,
                                            color,
                                            buttonSize=65,
                                            iconSize=40,
@@ -33,10 +33,9 @@ export default function CategoriesCard({
                         height: buttonSize,
                         width: buttonSize,
                     }]}>
-                <MaterialCommunityIcons name={iconName}
-                                        size={iconSize}
-                                        color={color}
-                />
+                <Image
+                    source={imageUrl}
+                    style={{height: iconSize, width: iconSize}} />
             </TouchableOpacity>
             {renderElement()}
         </View>

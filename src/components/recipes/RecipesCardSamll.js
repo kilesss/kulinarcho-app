@@ -7,10 +7,12 @@ import CategoriesCard from "../display/CategoriesCard";
 import styles from "../../styles/styles";
 
 
-export const RecipesCardSmall = ({onPress, title, time, servings, category, liked}) => (
+export const RecipesCardSmall = ({onPress, title, time, servings, category, photo}) => (
     <View style={[stylesRecipes.recipesCardSmall]}>
 
-        <Image source={require('../../../public/images/recipe.png')}
+        <Image source={{
+            uri: 'https://kulinarcho.com' + photo,
+        }}
                style={stylesRecipes.recipesCardImageSmall}
         />
 
@@ -30,9 +32,7 @@ export const RecipesCardSmall = ({onPress, title, time, servings, category, like
                     <Text style={stylesRecipes.recipesCardSmallText}>{servings} {language("servings")}</Text>
                 </View>
                 <View style={stylesRecipes.infoIconsWithText}>
-                    <MaterialCommunityIcons name={category.icon}
-                                            color={category.color} size={27}
-                                            style={{marginTop: -3}}/>
+                    <Image source={category.image} style={{height: 27, width: 27}}/>
                     <Text style={stylesRecipes.recipesCardSmallText}>{category.title}</Text>
                 </View>
 

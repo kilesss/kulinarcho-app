@@ -1,45 +1,90 @@
 import {SafeAreaView, ScrollView, Text, View} from "react-native";
 import styles from "../../styles/styles";
-import {recipes} from "../RecipesPage/RecepiesPage";
+import {categories2, recipes} from "../RecipesPage/RecepiesPage";
 import {ListCard} from "../../components/display/ListCard";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {RecipesCardSmall} from "../../components/recipes/RecipesCardSamll";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {getCategories, getSingleWeeklyMenu} from "../../RestRequests/generalRequest";
+import renderLoading from "../../components/loading/ShowLoader";
+import {getIconInfo} from "../../components/HelpFunctions";
 
-export default function DetailsScreen({navigation}) {
-    const menuDetails = [
-        {date: "26/08/2022", recipes: recipes.slice(0, 1)},
-        {date: "27/08/2022", recipes: recipes.slice(0, 3)},
-        {date: "28/08/2022", recipes: recipes.slice(0, 2)},
-        {date: "29/08/2022", recipes: recipes.slice(0, 1)},
-        {date: "30/08/2022", recipes: recipes.slice(0, 1)},
-        {date: "31/08/2022", recipes: recipes.slice(0, 1)},
-    ]
+export default function DetailsScreen({route, navigation}) {
+
+    const {id} = route.params;
+
+    const [day, changeDay] = useState(0);
+    const [showLoader, setShowLoader] = useState(true);
+    const [DemoToken, setDemoToken] = useState(true);
+
+    const [menuDetails, setMenuDetails] = useState([]);
+    const [categories, setCategories] = useState()
+
+    function loadData() {
+        AsyncStorage.getItem('access_token').then((value) => {
+            setDemoToken(value);
+            if (value) {
+                getSingleWeeklyMenu('GET', value, id).then(data => {
+                    if (data) {
+                        const result = Object.values(data);
+                        setMenuDetails(result[1])
+                    }
+
+                }).catch((err) => {
+                    console.log(err);
+                });
+                getCategories('GET', value).then(data => {
+                    if (data) {
+                        const categories = Object.values(data);
+                        setCategories(categories)
+                        setShowLoader(false);
+                    }
+
+                }).catch((err) => {
+                    console.log(err);
+                });
+            }
+        }, []);
+    }
+
+    useEffect(() => {
+        loadData();
+
+    }, []);
+
+    let date = 0;
+
+    function renderDays(recipeDay) {
+
+        if (date !== recipeDay) {
+            date = recipeDay
+            return <Text style={styles.heading}>Ден {recipeDay}</Text>
+        }
+
+    }
+
     return (
-        <ScrollView>
+        renderLoading(showLoader, <ScrollView>
             <View style={{...styles.container, alignItems: "flex-start", justifyContent: "flex-start"}}>
 
-                {menuDetails.map((item) => {
+                {menuDetails.map((recipe) => { console.log(recipe.title + recipe.RecipeId)
                     return (
                         <View>
-                            <Text style={styles.heading}>{item.date}</Text>
-                            {item.recipes.map((recipe) => {
-                                return (
-                                    <RecipesCardSmall title={recipe.title}
-                                                      liked={recipe.liked}
-                                                      time={recipe.time}
-                                                      servings={recipe.servings}
-                                                      category={recipe.category}
-                                                      onPress={() => {
-                                                          navigation.push("Recipe Details")
-                                                      }}
-                                    />
-                                );
-                            })}
+
+                            {renderDays(recipe.day)}
+                            <RecipesCardSmall title={recipe.title}
+                                              category={getIconInfo(recipe.categories)}
+                                              time={recipe.all_time}
+                                              servings={recipe.portion}
+                                              photo={recipe.photo}
+                                              onPress={() => navigation.navigate("Recipe Details", {recipeId: recipe.RecipeId})}
+                            />
+
                         </View>
                     );
                 })}
 
             </View>
         </ScrollView>
-    );
+    ));
 }
