@@ -23,6 +23,7 @@ import {LogoTitle} from "../components/display/CustomHeader";
 import StackNavigator from "@react-navigation/stack/src/navigators/createStackNavigator";
 import ProductsAndCategoriesPage from "../screens/ProfilePage/ProductsAndCategoriesPage";
 import {createStackNavigator} from "@react-navigation/stack";
+import AddEditRecipe from "../screens/RecipesPage/AddEditRecipe";
 
 
 const ProfileNavigation = createNativeStackNavigator();
@@ -230,6 +231,8 @@ export default function TabNavigator(props) {
             <Stack.Screen name={"Cooks Details"} component={CookerDetails}/>
 
             <Stack.Screen name={"Week Menu Details"} component={WeekMenuDetails}/>
+
+            <Stack.Screen name={"Add Edit Recipe"} component={AddEditRecipe}/>
         </Stack.Navigator>
     )
 }

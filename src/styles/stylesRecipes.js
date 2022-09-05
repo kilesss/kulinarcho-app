@@ -127,6 +127,7 @@ export const stylesRecipes = StyleSheet.create({
         backgroundColor: "#fff",
         flexDirection: "row",
         alignItems: "center",
+        alignSelf: "stretch",
         justifyContent: "space-between",
         borderRadius: 8,
         paddingVertical: 6,
@@ -165,7 +166,7 @@ export const stylesRecipes = StyleSheet.create({
     },
     recipesCardSmallText: {
         color: "#4B4C4C",
-        fontWeight: "bold",
+        // fontWeight: "bold",
         fontSize: 12
     },
     paragraph: {
@@ -173,6 +174,22 @@ export const stylesRecipes = StyleSheet.create({
         lineHeight: 15,
         fontWeight: "regular",
         marginBottom: 20},
+    popupMenu: {
+        flexDirection: "row",
+        padding: 10,
+        alignItems: "center"
+    },
+    addRecipeProductsContainer: {
+        flexDirection: "row",
+        marginTop: 12,
+        alignItems: "flex-start",
+    },
+    addRecipeWrapContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignSelf: "stretch",
+        flexWrap: "wrap"
+    },
 
 
     banner: scrollA => ({

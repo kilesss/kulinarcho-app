@@ -43,7 +43,7 @@ export default function CookingBookPage({navigation}) {
     return (
         <ScrollView>
             <View style={[styles.container, {alignItems: "flex-start", marginRight: 0}]}>
-                <View style={{minHeight: 150}}>
+                <View style={{minHeight: 145}}>
                     <View>
                         <Text style={styles.heading}>{language("categories")}</Text>
                     </View>
