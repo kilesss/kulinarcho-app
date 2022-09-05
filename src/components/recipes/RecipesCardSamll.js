@@ -32,9 +32,7 @@ export const RecipesCardSmall = ({onPress, title, time, servings, category, phot
                     <Text style={stylesRecipes.recipesCardSmallText}>{servings} {language("servings")}</Text>
                 </View>
                 <View style={stylesRecipes.infoIconsWithText}>
-                    <MaterialCommunityIcons name={category.icon}
-                                            color={category.color} size={27}
-                                            style={{marginTop: -3}}/>
+                    <Image source={category.image} style={{height: 27, width: 27}}/>
                     <Text style={stylesRecipes.recipesCardSmallText}>{category.title}</Text>
                 </View>
 

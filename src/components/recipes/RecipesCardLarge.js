@@ -15,12 +15,12 @@ export const RecipesCardLarge = ({onPress, title, time, servings, category}) => 
                    style={stylesRecipes.recipesCardImage}
             />
             <View style={stylesRecipes.recipesCardCategory}>
-                <CategoriesCard title={"fish"}
-                                color={category.color}
-                                iconName={category.icon}
-                                buttonSize={40}
-                                iconSize={35}
-                                showText={false}
+                <CategoriesCard
+                    color={category.color}
+                    imageUrl={category.image}
+                    buttonSize={40}
+                    iconSize={33}
+                    showText={false}
                 />
             </View>
             <View style={stylesRecipes.recipesCardInfo}>

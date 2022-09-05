@@ -104,6 +104,17 @@ const getSingleRecipe = async function (method, JWT, id) {
     return formatResponse(await res.json());
 }
 
+const getCategories = async function (method, JWT) {
+    const res = await fetch(`${endpoints.getCategories}`, {
+        method: method,
+        headers: {
+            'Authorization': 'Bearer ' + JWT
+        }
+    });
+    return formatResponse(await res.json());
+}
+
+
 
 function formatResponse(response) {
     if ('premium' in response){
@@ -126,7 +137,7 @@ function formatResponse(response) {
 }
 
 
-export { login, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu, getSingleRecipe}
+export { login, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu, getSingleRecipe, getCategories}
 
 
 

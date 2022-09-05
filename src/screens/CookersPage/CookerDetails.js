@@ -4,7 +4,7 @@ import {stylesRecipes} from "../../styles/stylesRecipes";
 import React, {useState} from "react";
 import {stylesCooks} from "../../styles/stylesCooks";
 import {CustomButton} from "../../components/display/CustomButton";
-import {recipes, categories} from "../RecipesPage/RecepiesPage";
+import {recipes, categories2} from "../RecipesPage/RecepiesPage";
 import {GestureHandlerRootView} from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import {rightSwipeActions} from "../../components/shoppingList/ShoppingListItem";
