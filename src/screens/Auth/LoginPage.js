@@ -141,7 +141,6 @@ export default class LoginPage extends React.Component {
                         errorMessage={this.state.errors.password}
                         isPassword={true}
                         bgColor={"#fff"}
-                        color={'#15A051'}
                         callback={this.getResponsePassword.bind(this)}
                     />
                     <TouchableOpacity style={{marginTop:-20}}

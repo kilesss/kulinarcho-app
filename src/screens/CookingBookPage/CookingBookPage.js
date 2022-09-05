@@ -108,7 +108,7 @@ export default function CookingBookPage({navigation}) {
                                                           servings={recipe.servings}
                                                           category={getIconInfo(2)}
                                                           onPress={() => {
-                                                              navigation.push("Recipe Details")
+                                                              navigation.push("Recipe Details", {recipeId: 913})
                                                           }}
                                         />
                                     </Swipeable>

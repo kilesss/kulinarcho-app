@@ -3,6 +3,7 @@ import {View, Text, FlatList, SafeAreaView} from 'react-native'
 import {stylesRecipes} from "../../styles/stylesRecipes";
 import styles from "../../styles/styles";
 import {ProductCard} from "../display/ProductCard";
+import language from "../../language/language";
 
 
 export const ConditionalCard = ({condition, steps, products}) => {
@@ -14,7 +15,7 @@ export const ConditionalCard = ({condition, steps, products}) => {
             content.push(
                 <SafeAreaView>
                     <View style={[stylesRecipes.productCard, {flexDirection: "column", alignItems: "flex-start"}]}>
-                        <Text style={[styles.smallGreenText, {fontSize: 16, }]}>Стъпка {steps[i].stepId}</Text>
+                        <Text style={[styles.smallGreenText, {fontSize: 16, }]}>{language("step")} {steps[i].stepId}</Text>
                         <Text style={[styles.subHeading, {fontWeight: "regular"}]}>
                             {steps[i].step}
                         </Text>

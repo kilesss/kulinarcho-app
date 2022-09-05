@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StatusBar, TouchableOpacity} from 'react-native';
+import {View, Text, StatusBar, TouchableOpacity, Alert} from 'react-native';
 import {useSafeArea} from 'react-native-safe-area-context';
 import {TOPNAVI_H, BANNER_H} from '../constants';
 import {stylesRecipes} from "../../styles/stylesRecipes";
@@ -7,6 +7,7 @@ import {MaterialCommunityIcons, MaterialIcons} from "@expo/vector-icons";
 import {Menu, MenuOption, MenuOptions, MenuTrigger} from "react-native-popup-menu";
 import { MenuProvider } from 'react-native-popup-menu';
 import styles from "../../styles/styles";
+import language from "../../language/language";
 
 export default function TopNavigation({title, scrollA, onPressBack, navigation}) {
 
@@ -14,6 +15,29 @@ export default function TopNavigation({title, scrollA, onPressBack, navigation})
 
     const isFloating = !!scrollA;
     const [isTransparent, setTransparent] = useState(isFloating);
+
+
+    const [showBox, setShowBox] = useState(true);
+    const showConfirmDialog = () => {
+        return Alert.alert(
+            "Are your sure?",
+            "Are you sure you want to delete this beautiful box?",
+            [
+                // The "Yes" button
+                {
+                    text: "Yes",
+                    onPress: () => {
+                        console.log("Pressed Yes")
+                    },
+                },
+                // The "No" button
+                // Does nothing but dismiss the dialog when tapped
+                {
+                    text: "No",
+                },
+            ]
+        );
+    };
 
     useEffect(() => {
         if (!scrollA) {
@@ -50,10 +74,10 @@ export default function TopNavigation({title, scrollA, onPressBack, navigation})
                                 <MaterialCommunityIcons name={"pen"} size={25} color={"#4B4C4C"}/>
                                 <Text style={styles.subHeading}>Edit</Text>
                             </MenuOption>
-                            <MenuOption onSelect={() => alert(`Delete`)}
+                            <MenuOption onSelect={() => showConfirmDialog()}
                                         style={stylesRecipes.popupMenu}>
                                 <MaterialCommunityIcons name={"delete"} size={25} color={"red"}/>
-                                <Text style={{...styles.subHeading, color: "red"}}>Delete</Text>
+                                <Text style={{...styles.subHeading, color: "red"}}>{language("delete")}</Text>
                             </MenuOption>
                         </MenuOptions>
                     </Menu>

@@ -18,6 +18,8 @@ export default function language(key){
         send: 'Изпрати',
         add: "Добави",
         shoppingLists: "Списъци за пазар",
+        articula: "артикула",
+        lv: "лв",
         addProduct: "Добави продукт",
         amount: "Количество",
         price: "Цена",
@@ -45,7 +47,22 @@ export default function language(key){
         instagram: "Instagram",
         twitter: "Twitter",
         pickPicture: "Избери снимка...",
-        pickOtherPicture: "Избери друга снимка"
+        pickOtherPicture: "Избери друга снимка",
+        title: "Заглавие",
+        public: "Публична",
+        category: "Категория",
+        preparation: "Приготвяне",
+        cooking: "Готвене",
+        totalTime: "Общо време",
+        portions: "Порции",
+        description: "Описание",
+        videoLink: "Видео линк",
+        portionType: "Разфасовка",
+        delete: "Изтрий",
+        step: "Стъпка"
+
+
+
 
 
     }

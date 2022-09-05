@@ -136,7 +136,7 @@ export default class LoginPage extends React.Component {
                         errorMessage={this.state.errors.name}
                         bgColor={"#fff"}
                         isPassword={false}
-                        color={'#15A051'}
+
                         callback={this.getResponseName.bind(this)}
                     />
                     <Text>{language('email')}</Text>
@@ -146,7 +146,7 @@ export default class LoginPage extends React.Component {
                         errorMessage={this.state.errors.email}
                         bgColor={"#fff"}
                         isPassword={false}
-                        color={'#15A051'}
+
                         callback={this.getResponseEmail.bind(this)}
                     />
                     <Text >{language('password')}</Text>
@@ -156,7 +156,6 @@ export default class LoginPage extends React.Component {
                         errorMessage={this.state.errors.password}
                         bgColor={"#fff"}
                         isPassword={true}
-                        color={'#15A051'}
                         callback={this.getResponsePassword.bind(this)}
                     />
                     <Text>{language('confirmPassword')}</Text>
@@ -166,7 +165,6 @@ export default class LoginPage extends React.Component {
                         errorMessage={this.state.errors.confirmPassword}
                         bgColor={"#fff"}
                         isPassword={true}
-                        color={'#15A051'}
                         callback={this.getResponseConfirmPassword.bind(this)}
                     />
                 </View>

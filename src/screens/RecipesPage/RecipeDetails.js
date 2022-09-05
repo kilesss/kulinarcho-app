@@ -23,52 +23,6 @@ export default function RecipeDetails({route, navigation}) {
 
     const [toggle, setToggle] = useState(false)
 
-    // const [steps, setSteps] = useState([
-    //     {
-    //         key: "1",
-    //         title: "Step 1",
-    //         description: "Some text for the description part of the step with details blah blah"
-    //     },
-    //     {
-    //         key: "2",
-    //         title: "Step 2",
-    //         description: "Some text for the description part of the step with details blah blah. Some text for the description part of the step with details blah blah"
-    //     },
-    //     {
-    //         key: "3",
-    //         title: "Step 3",
-    //         description: "Some text for the description part of the step with details blah blah, Some text for the description part of the step with details blah blah, Some text for the description part of the step with details blah blah"
-    //     },
-    //     {
-    //         key: "4",
-    //         title: "Step 4",
-    //         description: "Some text for the description part of the step with details blah blah"
-    //     },
-    //     {
-    //         key: "5",
-    //         title: "Step 5",
-    //         description: "Some text for the description part of the step with details blah blah"
-    //     },
-    //     {
-    //         key: "6",
-    //         title: "Step 6",
-    //         description: "Some text for the description part of the step with details blah blah"
-    //     }
-    //
-    // ])
-
-    // const [products, setProducts] = useState([
-    //     {key: "1", title: "Carrot", icon: "carrot", amount: "100g", color: "#FF7410"},
-    //     {key: "2", title: "Apple", icon: "food-apple", amount: "100g", color: "#d91212"},
-    //     {key: "3", title: "Rice", icon: "rice", amount: "100g", color: "#cec6c2"},
-    //     {key: "4", title: "Carrot", icon: "food-drumstick", amount: "100g", color: "#693000"},
-    //     {key: "5", title: "Apple", icon: "food-apple", amount: "100g", color: "#e30000"},
-    //     {key: "6", title: "Rice", icon: "rice", amount: "100g", color: "#cec6c2"},
-    //     {key: "7", title: "Carrot", icon: "carrot", amount: "100g", color: "#FF7410"},
-    //     {key: "8", title: "Apple", icon: "food-apple", amount: "100g", color: "#e30000"},
-    //     {key: "9", title: "Rice", icon: "rice", amount: "100g", color: "#cec6c2"},
-    // ])
-
     const cook = {key: 1, name: "Bob Marley", recipes: 420}
 
     const {recipeId} = route.params;
@@ -110,6 +64,7 @@ export default function RecipeDetails({route, navigation}) {
             <SafeAreaView>
                 <TopNavigation title="Home"
                                scrollA={scrollA}
+                               navigation={navigation}
                                onPressBack={() => navigation.goBack()}/>
 
                 <Animated.ScrollView
@@ -137,13 +92,15 @@ export default function RecipeDetails({route, navigation}) {
                             <Text style={styles.bigHeading}>{recipeDetails.title}</Text>
                             <View style={stylesRecipes.timeSection}>
                                 <MaterialCommunityIcons name={"progress-clock"} size={25} color={"#4B4C4C"}/>
-                                <Text style={[styles.subHeading, {fontWeight: "regular"}]}>{recipeDetails.all_time} min</Text>
+                                <Text style={[styles.subHeading, {fontWeight: "regular"}]}>{recipeDetails.all_time} {language("min")}</Text>
                             </View>
                         </View>
+                        <Text style={{color:"#4B4C4C"}}>Категория: <Text style={{color: "#15A051", fontWeight: "bold"}}>{recipeDetails.categories}</Text>
+                        </Text>
 
                         <View style={stylesRecipes.portionsSection}>
                             <MaterialCommunityIcons name={"pot-mix-outline"} size={30} color={"#4B4C4C"}/>
-                            <Text style={[styles.subHeading, {fontWeight: "regular"}]}>{recipeDetails.portion} порции</Text>
+                            <Text style={[styles.subHeading, {fontWeight: "regular"}]}>{recipeDetails.portion} {language("servings")}</Text>
                         </View>
 
                         <Text style={[styles.subHeading, stylesRecipes.paragraph]}>{recipeDetails.description}</Text>

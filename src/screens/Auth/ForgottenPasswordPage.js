@@ -98,7 +98,6 @@ export default class ForgottenPassword extends React.Component {
                         errorMessage={this.state.errors.email}
                         isPassword={false}
                         bgColor={"#fff"}
-                        color={'#15A051'}
                         callback={this.getResponseEmail.bind(this)}
                     />
 				</View>

@@ -50,14 +50,14 @@ export default function ShoppingListDetails() {
                 <View style={shoppingListStyle.totalItems}>
                     <Image source={require('../../../public/images/icons/shoppingList-selected.png')}/>
                     <Text style={{fontSize:18, fontWeight:"500"}}>
-                        <Text style={{fontWeight: "600"}}>12</Text> артикула
+                        <Text style={{fontWeight: "600"}}>12</Text> {language("articula")}
                     </Text>
                 </View>
 
                 <View style={shoppingListStyle.totalPrice}>
                     <Image source={require('../../../public/images/icons/cash.png')} style={{width: 30, height: 25}}/>
                     <Text style={{fontSize:18, fontWeight:"500"}}>
-                        <Text style={{fontWeight: "600"}}>78</Text> лв
+                        <Text style={{fontWeight: "600"}}>78</Text> {language("lv")}
                     </Text>
                 </View>
             </View>

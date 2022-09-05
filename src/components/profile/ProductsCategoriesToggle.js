@@ -75,6 +75,8 @@ export const ProductsCategoriesToggle = ({condition, categories, products}) => {
 
     return (
         <View style={{alignSelf: "stretch"}}>
+
+            {content}
             <EditProductsCategoriesModal modalVisible={addModalVisible}
                                   setModalVisible={setAddModalVisible}
                                   modalTitle={add}
@@ -89,8 +91,6 @@ export const ProductsCategoriesToggle = ({condition, categories, products}) => {
                                          showDeleteOption={true}
                                          modalData={modalData.title}
             />
-
-            {content}
 
         </View>
     )
