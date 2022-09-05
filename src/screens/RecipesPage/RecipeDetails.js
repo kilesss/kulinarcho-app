@@ -9,11 +9,15 @@ import SwitchSelector from "react-native-switch-selector";
 import {ConditionalCard} from "../../components/recipes/ConditionalCard";
 import CookCard from "../../components/display/CookCard";
 import language from "../../language/language";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {getSingleRecipe} from "../../RestRequests/generalRequest";
 import renderLoading from "../../components/loading/ShowLoader";
 
 export default function RecipeDetails({route, navigation}) {
+
+import {MenuProvider} from "react-native-popup-menu";
+
 
     const scrollA = useRef(new Animated.Value(0)).current;
 
@@ -120,6 +124,7 @@ export default function RecipeDetails({route, navigation}) {
                                 uri: 'https://kulinarcho.com' + recipeDetails.photo,
                             }}
                         />
+
                     </View>
 
                     <SafeAreaView style={stylesRecipes.recipeDetails}>
@@ -175,4 +180,5 @@ export default function RecipeDetails({route, navigation}) {
                 </Animated.ScrollView>
             </SafeAreaView>
         ));
+
 };

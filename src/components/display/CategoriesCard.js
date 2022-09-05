@@ -12,8 +12,8 @@ export default function CategoriesCard({
                                            title,
                                            imageUrl,
                                            color,
-                                           buttonSize=75,
-                                           iconSize=45,
+                                           buttonSize=65,
+                                           iconSize=40,
                                            showText})
 {
     function renderElement(){

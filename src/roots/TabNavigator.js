@@ -12,7 +12,7 @@ import WeekMenuPage from "../screens/WeekMenuPage/WeekMenuPage";
 import RecipeDetails from "../screens/RecipesPage/RecipeDetails";
 import CookerDetails from "../screens/CookersPage/CookerDetails";
 import ShoppingListDetails from "../screens/ShoppingListPage/ShoppingListDetails";
-import ProfileDetailsPage from "../screens/ProfilePage/ProfileDetailsPage"
+import ProfilePersonalInfo from "../screens/ProfilePage/ProfilePersonalInfo"
 import {Image, TouchableOpacity, View} from 'react-native';
 import {Ionicons, MaterialCommunityIcons, MaterialIcons} from "@expo/vector-icons";
 
@@ -23,6 +23,7 @@ import {LogoTitle} from "../components/display/CustomHeader";
 import StackNavigator from "@react-navigation/stack/src/navigators/createStackNavigator";
 import ProductsAndCategoriesPage from "../screens/ProfilePage/ProductsAndCategoriesPage";
 import {createStackNavigator} from "@react-navigation/stack";
+import AddEditRecipe from "../screens/RecipesPage/AddEditRecipe";
 
 
 const ProfileNavigation = createNativeStackNavigator();
@@ -32,7 +33,7 @@ function ProfileStack() {
     return (
         <ProfileNavigation.Navigator>
             <ProfileNavigation.Screen name="Settings" component={ProfilePage}/>
-            <ProfileNavigation.Screen name="Profile Details" component={ProfileDetailsPage}/>
+            <ProfileNavigation.Screen name="Profile Details" component={ProfilePersonalInfo}/>
             <ProfileNavigation.Screen name="Products and Categories" component={ProductsAndCategoriesPage}/>
         </ProfileNavigation.Navigator>
     );
@@ -225,11 +226,14 @@ export default function TabNavigator(props) {
 
             <Stack.Screen name="Settings" component={ProfilePage}/>
             <Stack.Screen name="Products and Categories" component={ProductsAndCategoriesPage}/>
+            <Stack.Screen name={"Personal Info"} component={ProfilePersonalInfo}/>
 
             <Stack.Screen name={"Recipe Details"} component={RecipeDetails} options={{headerShown: false}}/>
             <Stack.Screen name={"Cooks Details"} component={CookerDetails}/>
 
             <Stack.Screen name={"Week Menu Details"} component={WeekMenuDetails}/>
+
+            <Stack.Screen name={"Add Edit Recipe"} component={AddEditRecipe}/>
         </Stack.Navigator>
     )
 }
