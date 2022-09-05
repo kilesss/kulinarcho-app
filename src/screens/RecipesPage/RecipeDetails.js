@@ -13,10 +13,10 @@ import language from "../../language/language";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {getSingleRecipe} from "../../RestRequests/generalRequest";
 import renderLoading from "../../components/loading/ShowLoader";
+import {MenuProvider} from "react-native-popup-menu";
 
 export default function RecipeDetails({route, navigation}) {
 
-import {MenuProvider} from "react-native-popup-menu";
 
 
     const scrollA = useRef(new Animated.Value(0)).current;
@@ -105,7 +105,9 @@ import {MenuProvider} from "react-native-popup-menu";
     }, []);
 
     return (
-        renderLoading(showLoader, <SafeAreaView>
+        renderLoading(showLoader,
+            <MenuProvider>
+            <SafeAreaView>
                 <TopNavigation title="Home"
                                scrollA={scrollA}
                                onPressBack={() => navigation.goBack()}/>
@@ -179,6 +181,6 @@ import {MenuProvider} from "react-native-popup-menu";
 
                 </Animated.ScrollView>
             </SafeAreaView>
+            </MenuProvider>
         ));
-
 };
