@@ -76,7 +76,6 @@ export default function RecipesPage({navigation}) {
                                   <CategoriesCard title={getIconInfo(item.id).title}
                                                   imageUrl={getIconInfo(item.id).image}
                                                   color={getIconInfo(item.id).color}
-                                                  size={75}
                                                   showText={true}
                                   />
                               )}/>
@@ -94,7 +93,7 @@ export default function RecipesPage({navigation}) {
                                                         servings={item.servings}
                                                         category={getIconInfo(2)}
                                                         onPress={() => {
-                                                            navigation.navigate("Recipe Details")
+                                                            navigation.navigate("Recipe Details", {recipeId: 913})
                                                         }}
                                       />
                                   </View>
@@ -112,7 +111,7 @@ export default function RecipesPage({navigation}) {
                                                         servings={item.servings}
                                                         category={getIconInfo(1)}
                                                         onPress={() => {
-                                                            navigation.push("Recipe Details")
+                                                            navigation.push("Recipe Details", {recipeId: 913})
                                                         }}
                                       />
                                   </View>

@@ -20,7 +20,12 @@ export default function AddEditRecipe() {
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
         {label: 'Apple', value: 'apple'},
-        {label: 'Banana', value: 'banana'}
+        {label: 'Banana', value: 'banana'},
+        {label: 'Apple', value: 'apple'},
+        {label: 'Banana', value: 'banana'},
+        {label: 'Apple', value: 'apple'},
+        {label: 'Banana', value: 'banana'},
+
     ]);
 
     const [image, setImage] = useState(null);
@@ -74,6 +79,8 @@ export default function AddEditRecipe() {
                             backgroundColor: "#f5f5f5",
                             padding: 25,
                             justifyContent: "flex-start",
+                            borderTopRightRadius: 25,
+                            borderTopLeftRadius: 25,
                         }
                     }}
                 >
@@ -101,18 +108,18 @@ export default function AddEditRecipe() {
                 <CustomButton title={"Pick image..."} onPress={pickImage} padding={12} txtColor={"#4B4C4C"}
                               bgColor={"#cccccc"}/>
 
-                <Text style={{...styles.heading, marginBottom: 0, marginTop: 5}}>Заглавие<Text
+                <Text style={{...styles.heading, marginBottom: 0, marginTop: 5}}>{language("title")}<Text
                     style={{color: "#15A051"}}>*</Text></Text>
                 <TextInput style={{...styles.customButton, padding: 10}}/>
 
                 <View style={stylesRecipes.addRecipeProductsContainer}>
                     <Checkbox color={"#15A051"}/>
-                    <Text style={{...styles.heading, marginBottom: 5, marginTop: -3, marginLeft: 5}}>Публична
+                    <Text style={{...styles.heading, marginBottom: 5, marginTop: -3, marginLeft: 5}}>{language("public")}
                         рецепта<Text style={{color: "#15A051"}}>*</Text></Text>
                 </View>
 
                 <View style={stylesRecipes.addRecipeProductsContainer}>
-                    <Text style={{...styles.heading, marginBottom: 0, flex: 1}}>Продукти<Text
+                    <Text style={{...styles.heading, marginBottom: 0, flex: 1}}>{language("products")}<Text
                         style={{color: "#15A051"}}>*</Text></Text>
                     <CustomButton title={language("add")}
                                   txtColor={"#fff"}
@@ -128,7 +135,7 @@ export default function AddEditRecipe() {
                 />
 
                 <View style={stylesRecipes.addRecipeProductsContainer}>
-                    <Text style={{...styles.heading, marginBottom: 0, flex: 1}}>Стъпки<Text
+                    <Text style={{...styles.heading, marginBottom: 0, flex: 1}}>{language("steps")}<Text
                         style={{color: "#15A051"}}>*</Text></Text>
                     <CustomButton title={language("add")}
                                   txtColor={"#fff"}
@@ -144,7 +151,7 @@ export default function AddEditRecipe() {
                     </Text>
                 </View>
 
-                <Text style={{...styles.heading, marginBottom: 0, marginTop: 10}}>Категория<Text
+                <Text style={{...styles.heading, marginBottom: 0, marginTop: 10}}>{language("category")}<Text
                     style={{color: "#15A051"}}>*</Text></Text>
                 <View>
                 <DropDownPicker
@@ -153,6 +160,10 @@ export default function AddEditRecipe() {
                     items={items}
                     setOpen={setOpen}
                     setValue={setValue}
+                    listMode={"SCROLLVIEW"}
+                    listItemLabelStyle={{
+                        color: "#4B4C4C",
+                    }}
                     setItems={setItems}
                     style={{...styles.customButton, padding: 10, borderWidth: 0}}
                     dropDownContainerStyle={{
@@ -165,33 +176,33 @@ export default function AddEditRecipe() {
 
                 <View style={stylesRecipes.addRecipeWrapContainer}>
                     <View style={{width: "47%"}}>
-                        <Text style={{...styles.heading, marginBottom: 0, marginTop: 10}}>Приготвяне<Text
+                        <Text style={{...styles.heading, marginBottom: 0, marginTop: 10}}>{language("preparation")}<Text
                             style={{color: "#15A051"}}>*</Text></Text>
                         <TextInput style={{...styles.customButton, padding: 10}}/>
                     </View>
                     <View style={{width: "47%"}}>
-                        <Text style={{...styles.heading, marginBottom: 0, marginTop: 10}}>Готвене<Text
+                        <Text style={{...styles.heading, marginBottom: 0, marginTop: 10}}>{language("cooking")}<Text
                             style={{color: "#15A051"}}>*</Text></Text>
                         <TextInput style={{...styles.customButton, padding: 10}}/>
                     </View>
                     <View style={{width: "47%"}}>
-                        <Text style={{...styles.heading, marginBottom: 0, marginTop: 10}}>Общо време<Text
+                        <Text style={{...styles.heading, marginBottom: 0, marginTop: 10}}>{language("totalTime")}<Text
                             style={{color: "#15A051"}}>*</Text></Text>
                         <TextInput style={{...styles.customButton, padding: 10}}/>
                     </View>
                     <View style={{width: "47%"}}>
-                        <Text style={{...styles.heading, marginBottom: 0, marginTop: 10}}>Порции<Text
+                        <Text style={{...styles.heading, marginBottom: 0, marginTop: 10}}>{language("portions")}<Text
                             style={{color: "#15A051"}}>*</Text></Text>
                         <TextInput style={{...styles.customButton, padding: 10}}/>
                     </View>
                 </View>
 
-                <Text style={{...styles.heading, marginBottom: 0, marginTop: 5}}>Описание</Text>
+                <Text style={{...styles.heading, marginBottom: 0, marginTop: 5}}>{language("description")}</Text>
                 <TextInput multiline={true}
                            style={{...styles.customButton, padding: 10, height: 140, textAlignVertical: "top"}}/>
 
 
-                <Text style={{...styles.heading, marginBottom: 0, marginTop: 5}}>Видео линк</Text>
+                <Text style={{...styles.heading, marginBottom: 0, marginTop: 5}}>{language("videoLink")}</Text>
                 <TextInput style={{...styles.customButton, padding: 10, marginBottom: 15}}/>
 
                 <CustomButton title={language("add")} txtColor={"#fff"}/>

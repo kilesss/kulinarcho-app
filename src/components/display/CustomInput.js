@@ -22,7 +22,7 @@ export default class CustomInout extends React.Component {
                         ...styles.customButton,
                         alignSelf: "stretch",
                         backgroundColor: this.props.bgColor,
-                        color: this.props.color,
+                        color: "#4B4C4C",
                         padding: 10,
                     }}
                     secureTextEntry={this.props.isPassword}

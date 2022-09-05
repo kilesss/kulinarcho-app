@@ -11,7 +11,7 @@ function showDeleteIcon(show, onPress) {
     if (show) {
         return (<View style={shoppingListStyle.modalDeleteButton}>
             <TouchableOpacity style={{flexDirection:'row'}}>
-                <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 17}}>Изтрий</Text>
+                <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 17}}>{language("delete")}</Text>
                 <MaterialIcons name={"delete"} size={23} color={"#fff"}/>
             </TouchableOpacity>
         </View>)
