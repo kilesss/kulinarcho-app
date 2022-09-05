@@ -12,7 +12,7 @@ import WeekMenuPage from "../screens/WeekMenuPage/WeekMenuPage";
 import RecipeDetails from "../screens/RecipesPage/RecipeDetails";
 import CookerDetails from "../screens/CookersPage/CookerDetails";
 import ShoppingListDetails from "../screens/ShoppingListPage/ShoppingListDetails";
-import ProfileDetailsPage from "../screens/ProfilePage/ProfileDetailsPage"
+import ProfilePersonalInfo from "../screens/ProfilePage/ProfilePersonalInfo"
 import {Image, TouchableOpacity, View} from 'react-native';
 import {Ionicons, MaterialCommunityIcons, MaterialIcons} from "@expo/vector-icons";
 
@@ -33,7 +33,7 @@ function ProfileStack() {
     return (
         <ProfileNavigation.Navigator>
             <ProfileNavigation.Screen name="Settings" component={ProfilePage}/>
-            <ProfileNavigation.Screen name="Profile Details" component={ProfileDetailsPage}/>
+            <ProfileNavigation.Screen name="Profile Details" component={ProfilePersonalInfo}/>
             <ProfileNavigation.Screen name="Products and Categories" component={ProductsAndCategoriesPage}/>
         </ProfileNavigation.Navigator>
     );
@@ -226,6 +226,7 @@ export default function TabNavigator(props) {
 
             <Stack.Screen name="Settings" component={ProfilePage}/>
             <Stack.Screen name="Products and Categories" component={ProductsAndCategoriesPage}/>
+            <Stack.Screen name={"Personal Info"} component={ProfilePersonalInfo}/>
 
             <Stack.Screen name={"Recipe Details"} component={RecipeDetails} options={{headerShown: false}}/>
             <Stack.Screen name={"Cooks Details"} component={CookerDetails}/>
