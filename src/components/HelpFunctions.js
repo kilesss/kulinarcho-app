@@ -1,8 +1,4 @@
 import Images from "../../public/images/index"
-import {Alert} from "react-native";
-import language from "../language/language";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import {getCategories} from "../RestRequests/generalRequest";
 
 export default function  getRandomColor(id) {
     if (id === 0){ return '#38b66a'}
@@ -42,6 +38,41 @@ export function getIconInfo(title){
             return {image: Images.icons.others, color: "#45D007", title: 'Други'}
     }
 }
+
+export function getProductTypeIcon(title){
+    switch (title) {
+        case "Бобени":
+            return Images.productCategory.beans
+        case "Брашно и тестени":
+            return Images.productCategory.beans
+        case "Десерти":
+            return Images.productCategory.beans
+        case "Домакински":
+            return Images.productCategory.beans
+        case "Кафе & чай":
+            return Images.productCategory.beans
+        case "Консерви & буркани & сосове":
+            return Images.productCategory.beans
+        case "Лекарства":
+            return Images.productCategory.beans
+        case "Лични":
+            return Images.productCategory.beans
+        case "Месо & риба":
+            return Images.productCategory.beans
+        case "Мляко & млечни продукти & яйца":
+            return Images.productCategory.beans
+        case "Напитки":
+            return Images.productCategory.beans
+        case "Плодове & зеленчуци":
+            return Images.productCategory.beans
+        case "Подправки":
+            return Images.productCategory.beans
+        case "Строителни":
+            return Images.productCategory.beans
+
+    }
+}
+
 
 export const showConfirmDialog = (onPress) => {
     return Alert.alert(
