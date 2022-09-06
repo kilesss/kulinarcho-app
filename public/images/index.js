@@ -30,13 +30,22 @@ const images = {
     },
     productCategory: {
         beans: require('./icons/product-category/icons8-beans-100.png'),
-        flour: require('./icons/product-category/icons8-beans-100.png'),
-        dessert: require('./icons/product-category/icons8-beans-100.png')
+        flour: require('./icons/product-category/icons8-bread-and-rye-100.png'),
+        dessert: require('./icons/icons8-confectionery-100.png'),
+        home: require('./icons/product-category/icons8-home-100.png'),
+        coffee: require('./icons/product-category/icons8-coffee-100.png'),
+        cans: require('./icons/product-category/icons8-can-soup-100.png'),
+        medicine: require('./icons/product-category/icons8-pills-100.png'),
+        personal: require('./icons/product-category/icons8-account-100.png'),
+        meatFish: require('./icons/icons8-bone-100.png'),
+        milkEggs: require('./icons/product-category/icons8-milk-carton-100.png'),
+        drinks: require('./icons/product-category/icons8-energy-sport-drink-100.png'),
+        fruitVeg: require('./icons/product-category/icons8-vegetables-100.png'),
+        seasoning: require('./icons/product-category/icons8-spice-100.png'),
+        construction: require('./icons/product-category/icons8-tools-100.png'),
 
     }
 
-
-    }
 
     // image1: require('./image1.jpg'),
     // image2: require('./image2.jpg'),

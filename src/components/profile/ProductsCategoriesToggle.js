@@ -40,7 +40,7 @@ export const ProductsCategoriesToggle = ({condition, categories, products}) => {
                 <SafeAreaView>
                     {products.map((product) => {
                         return (
-                            <ProductCard title={product.title}
+                            <ProductCard title={product.name}
                                          textRight={product.amount}
                                          icon={product.icon}
                                          iconColor={product.color}

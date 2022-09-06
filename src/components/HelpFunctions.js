@@ -49,31 +49,31 @@ export function getProductTypeIcon(title){
         case "Бобени":
             return Images.productCategory.beans
         case "Брашно и тестени":
-            return Images.productCategory.beans
+            return Images.productCategory.flour
         case "Десерти":
-            return Images.productCategory.beans
+            return Images.productCategory.dessert
         case "Домакински":
-            return Images.productCategory.beans
+            return Images.productCategory.home
         case "Кафе & чай":
-            return Images.productCategory.beans
+            return Images.productCategory.coffee
         case "Консерви & буркани & сосове":
-            return Images.productCategory.beans
+            return Images.productCategory.cans
         case "Лекарства":
-            return Images.productCategory.beans
+            return Images.productCategory.medicine
         case "Лични":
-            return Images.productCategory.beans
+            return Images.productCategory.personal
         case "Месо & риба":
-            return Images.productCategory.beans
+            return Images.productCategory.meatFish
         case "Мляко & млечни продукти & яйца":
-            return Images.productCategory.beans
+            return Images.productCategory.milkEggs
         case "Напитки":
-            return Images.productCategory.beans
+            return Images.productCategory.drinks
         case "Плодове & зеленчуци":
-            return Images.productCategory.beans
+            return Images.productCategory.fruitVeg
         case "Подправки":
-            return Images.productCategory.beans
+            return Images.productCategory.seasoning
         case "Строителни":
-            return Images.productCategory.beans
+            return Images.productCategory.construction
 
     }
 }
