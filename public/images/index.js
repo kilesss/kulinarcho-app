@@ -26,11 +26,15 @@ const images = {
         shoppingLists: require('./icons/bottom-nav/shopping-list.png'),
         shoppingListsActive: require('./icons/bottom-nav/shopping-list-active.png'),
 
+
     },
     productCategory: {
         beans: require('./icons/product-category/icons8-beans-100.png'),
         flour: require('./icons/product-category/icons8-beans-100.png'),
         dessert: require('./icons/product-category/icons8-beans-100.png')
+
+    }
+
 
     }
 

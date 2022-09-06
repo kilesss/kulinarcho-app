@@ -14,7 +14,7 @@ export const rightSwipeActions = (progress, dragX, onPressDelete, height) => {
         outputRange: [-20, 0, 0, 1],
     });
     return (
-
+        <TouchableOpacity onPress={onPressDelete}>
         <Animated.View
             style={{
                 backgroundColor: '#D40000',
@@ -24,13 +24,11 @@ export const rightSwipeActions = (progress, dragX, onPressDelete, height) => {
                 paddingHorizontal: 30,
                 height: height,
                 transform: [{ translateX: 0 }],
-
             }}
         >
-            <TouchableOpacity onPress={onPressDelete}>
-                <MaterialIcons name={"delete"} size={30} color={"#fff"} style={{padding: 5, paddingRight: 0}} />
-            </TouchableOpacity>
+                <MaterialIcons name={"delete"} size={30} color={"#fff"}/>
         </Animated.View>
+        </TouchableOpacity>
     );
 };
 
@@ -45,11 +43,12 @@ export const ShoppingListItem = ({ onPress, title, price, num, checked, onPressD
             // TODO: check both ways to see whats better
             activeOpacity={1}
             style={[shoppingListStyle.item,]}>
-            <Checkbox style={shoppingListStyle.checkBox}
-                      value={checked}
-                      color={"#15A051"}
-                      // TODO: I don't know how to make the checkbox change
-                      onValueChange={() => checked = !checked}
+            <Checkbox
+                style={shoppingListStyle.checkBox}
+                value={checked}
+                color={"#15A051"}
+                // TODO: I don't know how to make the checkbox change
+                onValueChange={() => checked = !checked}
             />
             <View>
                 <Text style={shoppingListStyle.itemTitle}>{title}</Text>

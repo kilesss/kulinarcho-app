@@ -13,7 +13,7 @@ import RecipeDetails from "../screens/RecipesPage/RecipeDetails";
 import CookerDetails from "../screens/CookersPage/CookerDetails";
 import ShoppingListDetails from "../screens/ShoppingListPage/ShoppingListDetails";
 import ProfilePersonalInfo from "../screens/ProfilePage/ProfilePersonalInfo"
-import {Image, TouchableOpacity, View} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {Ionicons, MaterialCommunityIcons, MaterialIcons} from "@expo/vector-icons";
 
 import LoginPage from "../screens/Auth/LoginPage";
@@ -24,6 +24,9 @@ import StackNavigator from "@react-navigation/stack/src/navigators/createStackNa
 import ProductsAndCategoriesPage from "../screens/ProfilePage/ProductsAndCategoriesPage";
 import {createStackNavigator} from "@react-navigation/stack";
 import AddEditRecipe from "../screens/RecipesPage/AddEditRecipe";
+import {LinearGradient} from "expo-linear-gradient";
+import TabNavBottomLine from "../components/display/TabNavBottomLine";
+import Images from "../../public/images/index";
 
 
 const ProfileNavigation = createNativeStackNavigator();
@@ -176,40 +179,75 @@ function MainTabs() {
                         options={{
                             tabBarLabel: "",
                             tabBarIcon: ({focused}) => {
-                                return <MaterialCommunityIcons name={"cart-outline"} size={35}
-                                                               color={focused ? "#15A051" : "#C0C0C0"}/>
-                            }
+                                return (
+                                    <View style={{alignItems: "center"}}>
+                                        <Image
+                                            source={focused ? Images.navIcons.shoppingListsActive : Images.navIcons.shoppingLists}
+                                            style={{height: 30, width: 30}}
+                                        />
+                                        {focused ? <TabNavBottomLine/> : ""}
+                                    </View>
+                                )
+                            },
                         }}/>
             <Tab.Screen name={"Recipes"} component={RecipesPage}
                         options={{
                             tabBarLabel: "",
                             tabBarIcon: ({focused}) => {
-                                return <MaterialIcons name={"dinner-dining"} color={focused ? "#15A051" : "#c0c0c0"}
-                                                      size={36}/>
+                                return (
+                                    <View style={{alignItems: "center"}}>
+                                        <Image
+                                            source={focused ? Images.navIcons.recipesActive : Images.navIcons.recipes}
+                                            style={{height: 30, width: 30}}
+                                        />
+                                        {focused ? <TabNavBottomLine/> : ""}
+                                    </View>
+                                )
                             },
                         }}/>
             <Tab.Screen name={"Cooking Book"} component={CookingBookPage}
                         options={{
                             tabBarLabel: "",
                             tabBarIcon: ({focused}) => {
-                                return <MaterialCommunityIcons name={"book-open-page-variant-outline"}
-                                                               color={focused ? "#15A051" : "#C0C0C0"} size={34}/>
+                                return (
+                                    <View style={{alignItems: "center"}}>
+                                        <Image
+                                            source={focused ? Images.navIcons.cookBookActive : Images.navIcons.cookBook}
+                                            style={{height: 30, width: 30}}
+                                        />
+                                        {focused ? <TabNavBottomLine/> : ""}
+                                    </View>
+                                )
                             },
                         }}/>
             <Tab.Screen name={"Cooks"} component={CookersPage}
                         options={{
                             tabBarLabel: "",
                             tabBarIcon: ({focused}) => {
-                                return <Ionicons name={"people-outline"} color={focused ? "#15A051" : "#C0C0C0"}
-                                                 size={35}/>
+                                return (
+                                    <View style={{alignItems: "center"}}>
+                                        <Image
+                                            source={focused ? Images.navIcons.cookActive : Images.navIcons.cook}
+                                            style={{height: 30, width: 25}}
+                                        />
+                                        {focused ? <TabNavBottomLine/> : ""}
+                                    </View>
+                                )
                             },
                         }}/>
             <Tab.Screen name={"Week Menu"} component={WeekMenuPage}
                         options={{
                             tabBarLabel: "",
                             tabBarIcon: ({focused}) => {
-                                return <Ionicons name={"calendar-outline"} color={focused ? "#15A051" : "#C0C0C0"}
-                                                 size={34}/>
+                                return (
+                                    <View style={{alignItems: "center"}}>
+                                        <Image
+                                            source={focused ? Images.navIcons.calendarActive : Images.navIcons.calendar}
+                                            style={{height: 30, width: 30}}
+                                        />
+                                        {focused ? <TabNavBottomLine/> : ""}
+                                    </View>
+                                )
                             },
                         }}/>
         </Tab.Navigator>

@@ -1,28 +1,18 @@
 import React, {useEffect, useState} from "react";
-import {Button, FlatList, SafeAreaView, ScrollView, Text, View} from "react-native";
+import {FlatList, SafeAreaView, ScrollView, Text, View} from "react-native";
 import styles from '../../styles/styles'
 import CategoriesCard from "../../components/display/CategoriesCard";
 import {RecipesCardSmall} from "../../components/recipes/RecipesCardSamll";
-import {ProductCard} from "../../components/display/ProductCard";
 import {GestureHandlerRootView} from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import {rightSwipeActions} from "../../components/shoppingList/ShoppingListItem";
 import language from "../../language/language";
+import {categories, getIconInfo, loadData, showConfirmDialog, showLoader} from "../../components/HelpFunctions";
+import renderLoading from "../../components/loading/ShowLoader";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {getCategories} from "../../RestRequests/generalRequest";
-import {getIconInfo} from "../../components/HelpFunctions";
-import renderLoading from "../../components/loading/ShowLoader";
 
 export default function CookingBookPage({navigation}) {
-
-    const [categories2, setCategories2] = useState([
-        {key: "1", title: "Риба", icon: "fish", color: "#0088C2"},
-        {key: "2", title: "Напитки", icon: "glass-cocktail", color: "#DC00E0"},
-        {key: "3", title: "С Месо", icon: "food-drumstick", color: "#842F00"},
-        {key: "4", title: "Салати", icon: "leaf", color: "#0fc45b"},
-        {key: "5", title: "Супи", icon: "bowl-outline", color: "#FF7410"},
-        {key: "6", title: "Десерти", icon: "cake-variant-outline", color: "#d70101"},
-    ])
 
     const [recipes, setRecipes] = useState([
         {
@@ -42,31 +32,14 @@ export default function CookingBookPage({navigation}) {
         {key: "9", title: "Some Recipe", time: 30, servings: 5, }
     ])
 
+
     const [categories, setCategories] = useState()
     const [showLoader, setShowLoader] = useState(true);
     const [DemoToken, setDemoToken] = useState(true);
 
-    function loadData() {
-        AsyncStorage.getItem('access_token').then((value) => {
-            setDemoToken(value);
-            if (value) {
-                getCategories('GET', value).then(data => {
-                    if (data) {
-                        const result = Object.values(data);
-                        setCategories(result)
-                        setShowLoader(false);
-                    }
-
-                }).catch((err) => {
-                    console.log(err);
-                });
-            }
-        }, []);
-    }
 
     useEffect(() => {
-        loadData();
-
+        loadData(setCategories, setShowLoader, setDemoToken);
     }, []);
 
 
@@ -100,7 +73,7 @@ export default function CookingBookPage({navigation}) {
                                 <GestureHandlerRootView>
                                     <Swipeable
                                         renderRightActions={(progress, dragX) =>
-                                            rightSwipeActions(progress, dragX, () => console.log("Pressed Delete"), 79)}
+                                            rightSwipeActions(progress, dragX, () => showConfirmDialog(() => console.log("Pressed Yes")), 79)}
                                     >
                                         <RecipesCardSmall title={recipe.title}
                                                           liked={recipe.liked}

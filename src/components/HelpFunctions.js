@@ -1,4 +1,8 @@
 import Images from "../../public/images/index"
+import {Alert} from "react-native";
+import language from "../language/language";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {getCategories} from "../RestRequests/generalRequest";
 
 export default function  getRandomColor(id) {
     if (id === 0){ return '#38b66a'}
@@ -39,6 +43,7 @@ export function getIconInfo(title){
     }
 }
 
+
 export function getProductTypeIcon(title){
     switch (title) {
         case "Бобени":
@@ -72,6 +77,7 @@ export function getProductTypeIcon(title){
 
     }
 }
+
 
 
 export const showConfirmDialog = (onPress) => {
