@@ -12,6 +12,7 @@ export const stylesProfile = StyleSheet.create({
         paddingVertical: 30,
         alignItems: "center",
         width: "48%",
+        textAlign: "center"
 
     },
     largeSettingsSection: {

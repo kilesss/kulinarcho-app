@@ -114,6 +114,26 @@ const getCategories = async function (method, JWT) {
     return formatResponse(await res.json());
 }
 
+const getProductTypes = async function (method, JWT) {
+    const res = await fetch(`${endpoints.getProductTypes}`, {
+        method: method,
+        headers: {
+            'Authorization': 'Bearer ' + JWT
+        }
+    });
+    return formatResponse(await res.json());
+}
+
+const getProducts = async function (method, JWT) {
+    const res = await fetch(`${endpoints.getProducts}`, {
+        method: method,
+        headers: {
+            'Authorization': 'Bearer ' + JWT
+        }
+    });
+    return formatResponse(await res.json());
+}
+
 
 
 function formatResponse(response) {
@@ -137,7 +157,9 @@ function formatResponse(response) {
 }
 
 
-export { login, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu, getSingleRecipe, getCategories}
+export {
+    login, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu,
+    getSingleRecipe, getCategories, getProducts, getProductTypes}
 
 
 
