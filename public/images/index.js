@@ -14,6 +14,26 @@ const images = {
         baby: require('./icons/icons8-baby-bottle-100.png'),
         others: require('./icons/icons8-diversity-100.png'),
     },
+    navIcons: {
+        calendar: require('./icons/bottom-nav/calendar.png'),
+        calendarActive: require('./icons/bottom-nav/calendar-active.png'),
+        cook: require('./icons/bottom-nav/cook.png'),
+        cookActive: require('./icons/bottom-nav/cook-active.png'),
+        cookBook: require('./icons/bottom-nav/cook-book.png'),
+        cookBookActive: require('./icons/bottom-nav/cook-book-active.png'),
+        recipes: require('./icons/bottom-nav/recipes.png'),
+        recipesActive: require('./icons/bottom-nav/recipes-active.png'),
+        shoppingLists: require('./icons/bottom-nav/shopping-list.png'),
+        shoppingListsActive: require('./icons/bottom-nav/shopping-list-active.png'),
+
+    },
+    productCategory: {
+        beans: require('./icons/product-category/icons8-beans-100.png'),
+        flour: require('./icons/product-category/icons8-beans-100.png'),
+        dessert: require('./icons/product-category/icons8-beans-100.png')
+
+    }
+
     // image1: require('./image1.jpg'),
     // image2: require('./image2.jpg'),
 };

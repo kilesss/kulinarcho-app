@@ -8,6 +8,7 @@ import {stylesProfile} from "../../styles/stylesProfile";
 import {CustomButton} from "../display/CustomButton";
 import language from "../../language/language";
 import EditProductsCategoriesModal from "./EditProductsCategoriesModal";
+import {getProductTypeIcon} from "../HelpFunctions";
 
 
 export const ProductsCategoriesToggle = ({condition, categories, products}) => {
@@ -61,9 +62,8 @@ export const ProductsCategoriesToggle = ({condition, categories, products}) => {
                 <SafeAreaView style={stylesProfile.largeSettingsSection}>
                     {categories.map((category) => {
                         return (
-                            <SettingsCardLarge name={category.title}
-                                               icon={category.icon}
-                                               iconColor={category.color}
+                            <SettingsCardLarge name={category.name}
+                                               image={getProductTypeIcon(category.name)}
                                                onPress={() => showEdit(category)}
                             />
                         );
