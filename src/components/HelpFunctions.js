@@ -1,4 +1,8 @@
 import Images from "../../public/images/index"
+import {Alert} from "react-native";
+import language from "../language/language";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {getCategories} from "../RestRequests/generalRequest";
 
 export default function  getRandomColor(id) {
     if (id === 0){ return '#38b66a'}
@@ -37,4 +41,39 @@ export function getIconInfo(title){
         case 13:
             return {image: Images.icons.others, color: "#45D007", title: 'Други'}
     }
+}
+
+export const showConfirmDialog = (onPress) => {
+    return Alert.alert(
+        language("confirmDelete"),
+        language("confirmRecipeDelete"),
+        [
+            {
+                text: language("no"),
+            },
+            {
+                text: language("yes"),
+                onPress: onPress,
+            },
+        ]
+    );
+};
+
+
+export function loadData(setCategories, setShowLoader, setDemoToken) {
+    AsyncStorage.getItem('access_token').then((value) => {
+        setDemoToken(value);
+        if (value) {
+            getCategories('GET', value).then(data => {
+                if (data) {
+                    const result = Object.values(data);
+                    setCategories(result)
+                    setShowLoader(false);
+                }
+
+            }).catch((err) => {
+                console.log(err);
+            });
+        }
+    }, []);
 }

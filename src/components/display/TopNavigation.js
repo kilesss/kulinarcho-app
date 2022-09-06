@@ -5,9 +5,10 @@ import {TOPNAVI_H, BANNER_H} from '../constants';
 import {stylesRecipes} from "../../styles/stylesRecipes";
 import {MaterialCommunityIcons, MaterialIcons} from "@expo/vector-icons";
 import {Menu, MenuOption, MenuOptions, MenuTrigger} from "react-native-popup-menu";
-import { MenuProvider } from 'react-native-popup-menu';
+import {MenuProvider} from 'react-native-popup-menu';
 import styles from "../../styles/styles";
 import language from "../../language/language";
+import {showConfirmDialog} from "../HelpFunctions";
 
 export default function TopNavigation({title, scrollA, onPressBack, navigation}) {
 
@@ -17,27 +18,6 @@ export default function TopNavigation({title, scrollA, onPressBack, navigation})
     const [isTransparent, setTransparent] = useState(isFloating);
 
 
-    const [showBox, setShowBox] = useState(true);
-    const showConfirmDialog = () => {
-        return Alert.alert(
-            "Are your sure?",
-            "Are you sure you want to delete this beautiful box?",
-            [
-                // The "Yes" button
-                {
-                    text: "Yes",
-                    onPress: () => {
-                        console.log("Pressed Yes")
-                    },
-                },
-                // The "No" button
-                // Does nothing but dismiss the dialog when tapped
-                {
-                    text: "No",
-                },
-            ]
-        );
-    };
 
     useEffect(() => {
         if (!scrollA) {
@@ -54,13 +34,17 @@ export default function TopNavigation({title, scrollA, onPressBack, navigation})
 
     return (
 
-            <>
+        <>
 
             <View style={stylesRecipes.container(safeArea, isFloating, isTransparent)}>
 
                 <TouchableOpacity onPress={onPressBack}
-                    style={{backgroundColor: isTransparent ? "rgba(0,0,0,0.1)" : "transparent", borderRadius: 45, height: 28}}>
-                    <MaterialIcons name={"arrow-back"} size={28} color={"#fff"} />
+                                  style={{
+                                      backgroundColor: isTransparent ? "rgba(0,0,0,0.1)" : "transparent",
+                                      borderRadius: 45,
+                                      height: 28
+                                  }}>
+                    <MaterialIcons name={"arrow-back"} size={28} color={"#fff"}/>
                 </TouchableOpacity>
                 <View style={{flexDirection: "row"}}>
                     <MaterialCommunityIcons name={"heart"} size={28} color={"#fff"}/>
@@ -74,7 +58,7 @@ export default function TopNavigation({title, scrollA, onPressBack, navigation})
                                 <MaterialCommunityIcons name={"pen"} size={25} color={"#4B4C4C"}/>
                                 <Text style={styles.subHeading}>Edit</Text>
                             </MenuOption>
-                            <MenuOption onSelect={() => showConfirmDialog()}
+                            <MenuOption onSelect={() => showConfirmDialog(() => console.log("Pressed Yes"))}
                                         style={stylesRecipes.popupMenu}>
                                 <MaterialCommunityIcons name={"delete"} size={25} color={"red"}/>
                                 <Text style={{...styles.subHeading, color: "red"}}>{language("delete")}</Text>
@@ -84,7 +68,7 @@ export default function TopNavigation({title, scrollA, onPressBack, navigation})
 
                 </View>
             </View>
-            </>
+        </>
 
     );
 };

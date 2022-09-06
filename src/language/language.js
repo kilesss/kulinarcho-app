@@ -36,6 +36,7 @@ export default function language(key){
         categories: "Категории",
         newRecipes: "Нови Рецепти",
         products: "Продукти",
+        product: "Продукт",
         steps: "Стъпки",
         addToGroup: "Добави в група",
         recipes: "рецепти",
@@ -59,7 +60,11 @@ export default function language(key){
         videoLink: "Видео линк",
         portionType: "Разфасовка",
         delete: "Изтрий",
-        step: "Стъпка"
+        step: "Стъпка",
+        yes: "Да",
+        no: "Не",
+        confirmDelete: "Сигурни ли сте?",
+        confirmRecipeDelete: "Сигурни ли сте че искате да изтрииете тази рецепта?"
 
 
 
