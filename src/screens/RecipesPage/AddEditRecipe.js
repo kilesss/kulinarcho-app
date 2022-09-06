@@ -13,18 +13,22 @@ import {ProductCard} from "../../components/display/ProductCard";
 import shoppingListStyle from "../../styles/stylesShoppingList";
 import {AddProductPopup} from "./AddProductPopup";
 import DropDownPicker from 'react-native-dropdown-picker';
+import {loadData} from "../../components/HelpFunctions";
+import renderLoading from "../../components/loading/ShowLoader";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {getCategories} from "../../RestRequests/generalRequest";
 
 export default function AddEditRecipe() {
 
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
-        {label: 'Apple', value: 'apple'},
-        {label: 'Banana', value: 'banana'},
-        {label: 'Apple', value: 'apple'},
-        {label: 'Banana', value: 'banana'},
-        {label: 'Apple', value: 'apple'},
-        {label: 'Banana', value: 'banana'},
+        {label: 'Apple', value: '1'},
+        {label: 'Banana', value: '2'},
+        {label: 'Apple', value: '3'},
+        {label: 'Banana', value: '4'},
+        {label: 'Apple', value: '5'},
+        {label: 'Banana', value: '6'},
 
     ]);
 
@@ -66,8 +70,42 @@ export default function AddEditRecipe() {
     const addStep = useRef();
 
 
+    const [categories, setCategories] = useState([])
+    const [showLoader, setShowLoader] = useState(true);
+    const [DemoToken, setDemoToken] = useState(true);
+
+    function loadData() {
+        AsyncStorage.getItem('access_token').then((value) => {
+            setDemoToken(value);
+            if (value) {
+                getCategories('GET', value).then(data => {
+                    if (data) {
+                        const result = Object.values(data);
+                        for(let i of result){
+                            console.log({label: i.title, value: i.id})
+                            setCategories(oldArray => [...oldArray, {label: i.title, value: i.id}] );
+                        }
+                        console.log(categories)
+                        console.log(items)
+                        setShowLoader(false);
+                    }
+
+                }).catch((err) => {
+                    console.log(err);
+                });
+            }
+        }, []);
+    }
+
+    useEffect(() => {
+        loadData(setCategories, setShowLoader, setDemoToken);
+    }, []);
+
+
+
     return (
-        <ScrollView>
+        renderLoading(showLoader, <ScrollView>
+
             <View style={{...styles.container, alignSelf: "stretch"}}>
 
                 <RBSheet
@@ -144,8 +182,9 @@ export default function AddEditRecipe() {
                     />
                 </View>
 
+                {/*Steps*/}
                 <View style={[stylesRecipes.productCard, {flexDirection: "column", alignItems: "flex-start"}]}>
-                    <Text style={[styles.smallGreenText, {fontSize: 16}]}>Тест</Text>
+                    <Text style={[styles.smallGreenText, {fontSize: 16}]}>Стъпка 1</Text>
                     <Text style={[styles.subHeading, {fontWeight: "regular"}]}>
                         Просто тест бе
                     </Text>
@@ -157,7 +196,7 @@ export default function AddEditRecipe() {
                 <DropDownPicker
                     open={open}
                     value={value}
-                    items={items}
+                    items={categories}
                     setOpen={setOpen}
                     setValue={setValue}
                     listMode={"SCROLLVIEW"}
@@ -178,22 +217,22 @@ export default function AddEditRecipe() {
                     <View style={{width: "47%"}}>
                         <Text style={{...styles.heading, marginBottom: 0, marginTop: 10}}>{language("preparation")}<Text
                             style={{color: "#15A051"}}>*</Text></Text>
-                        <TextInput style={{...styles.customButton, padding: 10}}/>
+                        <TextInput style={{...styles.customButton, padding: 10}} keyboardType={"numeric"}/>
                     </View>
                     <View style={{width: "47%"}}>
                         <Text style={{...styles.heading, marginBottom: 0, marginTop: 10}}>{language("cooking")}<Text
                             style={{color: "#15A051"}}>*</Text></Text>
-                        <TextInput style={{...styles.customButton, padding: 10}}/>
+                        <TextInput style={{...styles.customButton, padding: 10}} keyboardType={"numeric"}/>
                     </View>
                     <View style={{width: "47%"}}>
                         <Text style={{...styles.heading, marginBottom: 0, marginTop: 10}}>{language("totalTime")}<Text
                             style={{color: "#15A051"}}>*</Text></Text>
-                        <TextInput style={{...styles.customButton, padding: 10}}/>
+                        <TextInput style={{...styles.customButton, padding: 10}} keyboardType={"numeric"}/>
                     </View>
                     <View style={{width: "47%"}}>
                         <Text style={{...styles.heading, marginBottom: 0, marginTop: 10}}>{language("portions")}<Text
                             style={{color: "#15A051"}}>*</Text></Text>
-                        <TextInput style={{...styles.customButton, padding: 10}}/>
+                        <TextInput style={{...styles.customButton, padding: 10}} keyboardType={"numeric"}/>
                     </View>
                 </View>
 
@@ -213,5 +252,5 @@ export default function AddEditRecipe() {
 
             </View>
         </ScrollView>
-    );
+        ));
 }

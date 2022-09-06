@@ -60,6 +60,7 @@ export default function BottomPopup ({
                             <View style={shoppingListStyle.popupAmount}>
                                 <Text style={{fontSize:16}}>{language("amount")}</Text>
                                 <TextInput style={shoppingListStyle.popupInput}
+                                           keyboardType={"number-pad"}
                                            value={{txtAmount}}
                                            onChange={({changedText}) => onInputChanged(changedText, setAmount, txtAmount)}
                                            placeholder={"2"}
@@ -70,6 +71,7 @@ export default function BottomPopup ({
                                 <Text style={{fontSize:16}}>{language("price")}</Text>
                                 <TextInput style={shoppingListStyle.popupInput}
                                            value={{txtPrice}}
+                                           keyboardType={"number-pad"}
                                            onChange={({changedText}) => {onInputChanged(changedText, setPrice, txtPrice)}}
                                            placeholder={"e.g. 3лв"}/>
                             </View>
