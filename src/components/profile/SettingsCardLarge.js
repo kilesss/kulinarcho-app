@@ -9,7 +9,7 @@ export default function SettingsCardLarge({name, image, onPress}) {
         <TouchableOpacity style={[styles.customButton, stylesProfile.settingsCardLarge]}
                           onPress={onPress}
         >
-            <Image  source={image}/>
+            <Image  source={image} style={{height: 50, width: 50}}/>
             <Text style={{...styles.subHeading, fontSize: 16, textAlign: "center", paddingHorizontal: 10}}>{name}</Text>
         </TouchableOpacity>
     )

@@ -55,7 +55,6 @@ export default function ProductsAndCategoriesPage({navigation}) {
     }, []);
 
     return (
-        <ScrollView>
             <View style={styles.container}>
                 <SwitchSelector
                     initial={0}
@@ -65,7 +64,7 @@ export default function ProductsAndCategoriesPage({navigation}) {
                     buttonColor={"#15A051"}
                     backgroundColor={"#e8e8e8"}
                     height={50}
-                    style={{marginBottom: 10, marginTop: 15}}
+                    style={{marginBottom: 7, marginTop: 10}}
                     textStyle={{fontSize: 18}}
                     selectedTextStyle={{fontSize: 18}}
                     bold={true}
@@ -78,6 +77,5 @@ export default function ProductsAndCategoriesPage({navigation}) {
 
                 <ProductsCategoriesToggle condition={toggle} categories={productTypes} products={products}/>
             </View>
-        </ScrollView>
     );
 }

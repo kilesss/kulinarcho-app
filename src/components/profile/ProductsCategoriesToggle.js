@@ -9,6 +9,7 @@ import {CustomButton} from "../display/CustomButton";
 import language from "../../language/language";
 import EditProductsCategoriesModal from "./EditProductsCategoriesModal";
 import {getProductTypeIcon} from "../HelpFunctions";
+import Images from "../../../public/images";
 
 
 export const ProductsCategoriesToggle = ({condition, categories, products}) => {
@@ -27,27 +28,30 @@ export const ProductsCategoriesToggle = ({condition, categories, products}) => {
     };
 
 
-
     if (condition) {
         add = language("addProduct")
         change = language("edit")
         content = (
             <View style={{alignSelf: "stretch"}}>
-                <CustomButton title={add} txtColor={"#fff"}
-                              onPress={() => setAddModalVisible(!addModalVisible)}
+                <CustomButton
+                    title={add}
+                    txtColor={"#fff"}
+                    padding={12}
+                    onPress={() => setAddModalVisible(!addModalVisible)}
                 />
-
                 <SafeAreaView>
-                    {products.map((product) => {
-                        return (
-                            <ProductCard title={product.name}
-                                         textRight={product.amount}
-                                         icon={product.icon}
-                                         iconColor={product.color}
-                                         onPress={() => showEdit(product)}
+                    <FlatList
+                        data={products}
+                        style={{height: "89%"}}
+                        contentContainerStyle={{ paddingBottom: 20 }}
+                        renderItem={({item}) => (
+                            <ProductCard title={item.name}
+                                         textRight={item.amount}
+                                         image={getProductTypeIcon(item.types)}
+                                         iconColor={item.color}
+                                         onPress={() => showEdit(item)}
                             />
-                        )
-                    })}
+                        )}/>
                 </SafeAreaView>
             </View>
         )
@@ -56,19 +60,28 @@ export const ProductsCategoriesToggle = ({condition, categories, products}) => {
         change = language("edit")
         content = (
             <View style={{alignSelf: "stretch"}}>
-                <CustomButton title={add} txtColor={"#fff"}
-                              onPress={() => {setAddModalVisible(!addModalVisible)}}
+                <CustomButton
+                    title={add}
+                    txtColor={"#fff"}
+                    padding={12}
+                    onPress={() => {
+                        setAddModalVisible(!addModalVisible)
+                    }}
                 />
-                <SafeAreaView style={stylesProfile.largeSettingsSection}>
-                    {categories.map((category) => {
-                        return (
-                            <SettingsCardLarge name={category.name}
-                                               image={getProductTypeIcon(category.name)}
-                                               onPress={() => showEdit(category)}
-                            />
-                        );
-                    })}
-                </SafeAreaView>
+                <View>
+                <FlatList
+                    data={categories}
+                    numColumns={2}
+                    style={{height: "89%"}}
+                    contentContainerStyle={{ paddingBottom: 20 }}
+                    columnWrapperStyle={{justifyContent: "space-between"}}
+                    renderItem={({item}) => (
+                        <SettingsCardLarge name={item.name}
+                                           image={getProductTypeIcon(item.name)}
+                                           onPress={() => showEdit(item)}
+                        />
+                    )}/>
+                </View>
             </View>
         )
     }
@@ -78,10 +91,10 @@ export const ProductsCategoriesToggle = ({condition, categories, products}) => {
 
             {content}
             <EditProductsCategoriesModal modalVisible={addModalVisible}
-                                  setModalVisible={setAddModalVisible}
-                                  modalTitle={add}
-                                  buttonTitle={language("add")}
-                                  showDeleteOption={false}
+                                         setModalVisible={setAddModalVisible}
+                                         modalTitle={add}
+                                         buttonTitle={language("add")}
+                                         showDeleteOption={false}
             />
 
             <EditProductsCategoriesModal modalVisible={changeModalVisible}

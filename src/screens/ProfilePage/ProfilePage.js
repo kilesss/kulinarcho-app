@@ -8,6 +8,7 @@ import {CustomButton} from "../../components/display/CustomButton";
 import SettingsCardSmall from "../../components/profile/SettingsCardSmall";
 import SettingsCardLarge from "../../components/profile/SettingsCardLarge";
 import {stylesProfile} from "../../styles/stylesProfile";
+import Images from "../../../public/images";
 
 export default function RecipesPage({navigation}) {
     return (
@@ -27,8 +28,8 @@ export default function RecipesPage({navigation}) {
 
                 <Text style={styles.heading}>Настроики Групи</Text>
                 <View style={stylesProfile.largeSettingsSection}>
-                    <SettingsCardLarge name={"Моите Групи"} icon={"account-group-outline"}/>
-                    <SettingsCardLarge name={"Покани"} icon={"tray-plus"}/>
+                    <SettingsCardLarge name={"Моите Групи"} image={Images.icons.groups}/>
+                    <SettingsCardLarge name={"Покани"} image={Images.icons.invite}/>
                 </View>
 
                 <Text style={styles.heading}>Други Настроики</Text>
