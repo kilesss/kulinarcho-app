@@ -60,6 +60,9 @@ export default function CookingBookPage({navigation}) {
                                 color={getIconInfo(item.id).color}
                                 size={75}
                                 showText={true}
+                                onPress={() => {
+                                    navigation.navigate("All Recipes", {categoryID: item.id, ownRecipe: 1})
+                                }}
                             />
                         )}/>
                 </View>

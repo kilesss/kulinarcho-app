@@ -81,12 +81,7 @@ export default function AddEditRecipe() {
                 getCategories('GET', value).then(data => {
                     if (data) {
                         const result = Object.values(data);
-                        for(let i of result){
-                            console.log({label: i.title, value: i.id})
-                            setCategories(oldArray => [...oldArray, {label: i.title, value: i.id}] );
-                        }
-                        console.log(categories)
-                        console.log(items)
+
                         setShowLoader(false);
                     }
 

@@ -48,6 +48,7 @@ const images = {
 
     },
     defaultProfile: require('./defaultProfile.png'),
+    bob: require("./rsz_plate.png")
     // image2: require('./image2.jpg'),
 };
 

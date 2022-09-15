@@ -9,7 +9,7 @@ import language from "../../language/language";
 import Images from '../../../public/images/index';
 import {getIconInfo} from "../../components/HelpFunctions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {getCategories, getSingleRecipe} from "../../RestRequests/generalRequest";
+import {getCategories, getLatestRecipes, getSingleRecipe} from "../../RestRequests/generalRequest";
 import renderLoading from "../../components/loading/ShowLoader";
 
 export const categories2 = [
@@ -32,11 +32,12 @@ export const recipes = [
 ]
 
 
-
-
 export default function RecipesPage({navigation}) {
 
     const [categories, setCategories] = useState()
+    const [recipesNew, setRecipesNew] = useState()
+    const [recipesRandom, setRecipesRandom] = useState()
+    const [recipesPopular, setRecipesPopular] = useState()
     const [showLoader, setShowLoader] = useState(true);
     const [DemoToken, setDemoToken] = useState(true);
 
@@ -48,6 +49,19 @@ export default function RecipesPage({navigation}) {
                     if (data) {
                         const result = Object.values(data);
                         setCategories(result)
+                    }
+
+                }).catch((err) => {
+                    console.log(err);
+                });
+
+                getLatestRecipes('GET', value).then(data => {
+                    if (data) {
+                        const result = Object.values(data);
+                        setRecipesNew(result[0])
+                        setRecipesRandom(result[1])
+                        setRecipesPopular(result[2])
+
                         setShowLoader(false);
                     }
 
@@ -77,6 +91,9 @@ export default function RecipesPage({navigation}) {
                                                   imageUrl={getIconInfo(item.id).image}
                                                   color={getIconInfo(item.id).color}
                                                   showText={true}
+                                                  onPress={() => {
+                                                      navigation.navigate("All Recipes", {categoryID: item.id})
+                                                  }}
                                   />
                               )}/>
 
@@ -84,16 +101,17 @@ export default function RecipesPage({navigation}) {
 
                 <View style={{flex: 2, minHeight: 250}}>
                     <Text style={styles.heading}>{language("popularRecipes")}</Text>
-                    <FlatList data={recipes}
+                    <FlatList data={recipesPopular}
                               horizontal={true}
                               renderItem={({item}) => (
                                   <View style={{marginRight: 10}}>
                                       <RecipesCardLarge title={item.title}
-                                                        time={item.time}
-                                                        servings={item.servings}
+                                                        photo={item.photo}
+                                                        time={item.all_time}
+                                                        servings={item.portion}
                                                         category={getIconInfo(2)}
                                                         onPress={() => {
-                                                            navigation.navigate("Recipe Details", {recipeId: 913})
+                                                            navigation.navigate("Recipe Details", {recipeId: item.id})
                                                         }}
                                       />
                                   </View>
@@ -102,21 +120,42 @@ export default function RecipesPage({navigation}) {
 
                 <View style={{flex: 3, minHeight: 250}}>
                     <Text style={styles.heading}>{language("newRecipes")}</Text>
-                    <FlatList data={recipes}
+                    <FlatList data={recipesNew}
                               horizontal={true}
                               renderItem={({item}) => (
                                   <View style={{marginRight: 10}}>
                                       <RecipesCardLarge title={item.title}
-                                                        time={item.time}
-                                                        servings={item.servings}
+                                                        photo={item.photo}
+                                                        time={item.all_time}
+                                                        servings={item.portion}
                                                         category={getIconInfo(1)}
                                                         onPress={() => {
-                                                            navigation.push("Recipe Details", {recipeId: 913})
+                                                            navigation.push("Recipe Details", {recipeId: item.id})
                                                         }}
                                       />
                                   </View>
                               )}/>
                 </View>
+
+                <View style={{flex: 3, minHeight: 250}}>
+                    <Text style={styles.heading}>{language("randomRecipes")}</Text>
+                    <FlatList data={recipesRandom}
+                              horizontal={true}
+                              renderItem={({item}) => (
+                                  <View style={{marginRight: 10}}>
+                                      <RecipesCardLarge title={item.title}
+                                                        photo={item.photo}
+                                                        time={item.all_time}
+                                                        servings={item.portion}
+                                                        category={getIconInfo(1)}
+                                                        onPress={() => {
+                                                            navigation.push("Recipe Details", {recipeId: item.id})
+                                                        }}
+                                      />
+                                  </View>
+                              )}/>
+                </View>
+
             </View>
         </ScrollView>)
     );

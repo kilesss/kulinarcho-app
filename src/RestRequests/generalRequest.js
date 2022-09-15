@@ -158,6 +158,29 @@ const getPublicProfiles = async function (method, JWT) {
     return formatResponse(await res.json());
 }
 
+const getLatestRecipes = async function (method, JWT) {
+    const res = await fetch(`${endpoints.getLatestRecipes}`, {
+        method: method,
+        headers: {
+            'Authorization': 'Bearer ' + JWT
+        }
+    });
+    return formatResponse(await res.json());
+}
+
+
+const getPublicRecipes = async function (method, JWT, page = "", title="", category = 0, ownRecipe = 0) {
+    let a = endpoints.getPublicRecipes + "?category="+ category +"&page=" + page
+    console.log(a)
+    const res = await fetch(`${endpoints.getPublicRecipes}?category=${category}&page=${page}&ownRecipe=${ownRecipe}`, {
+        method: method,
+        headers: {
+            'Authorization': 'Bearer ' + JWT
+        }
+    });
+    return formatResponse(await res.json());
+}
+
 
 function formatResponse(response) {
     if ('premium' in response){
@@ -190,7 +213,9 @@ const getShoppingListProducts = async function (listId, JWT) {
 
 export {
     login, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu,
-    getSingleRecipe, getCategories, getProducts, getProductTypes, getSingleProfile, getPublicProfiles,getShoppingListProducts
+    getSingleRecipe, getCategories, getProducts, getProductTypes, getSingleProfile,
+    getPublicProfiles, getLatestRecipes, getPublicRecipes, getShoppingListProducts
+
 }
 
 

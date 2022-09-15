@@ -31,7 +31,6 @@ export default function CookerDetails({route, navigation}) {
                 getSingleProfile('GET', value, cookId).then(data => {
                     if (data) {
                         const result = Object.values(data);
-                        console.log(result[0])
                         setCook(result[0])
                         setRecipes(result[1])
                         setShowLoader(false);

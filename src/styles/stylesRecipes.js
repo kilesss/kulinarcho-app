@@ -45,8 +45,9 @@ export const stylesRecipes = StyleSheet.create({
         backgroundColor: "rgba(42,42,42,0.5)"
     },
     infoIconsWithText: {
+        flexDirection: "row",
         alignItems: "center",
-        width: 75
+
     },
     cardInfoInsideContainer: {
         flexDirection: "row",
@@ -58,9 +59,10 @@ export const stylesRecipes = StyleSheet.create({
     },
     recipesCardTitle: {
         color: "#fff",
+        textTransform: "capitalize",
         textAlign:"center",
         fontWeight: "bold",
-        height: 30,
+        height: 45,
         lineHeight: 14,
     },
     recipesCardCategory: {
@@ -156,13 +158,12 @@ export const stylesRecipes = StyleSheet.create({
         // alignItems: "center"
     },
     recipesCardInfoSmall: {
-        paddingLeft: 7,
+        paddingLeft: 10,
     },
     recipesCardInfoSmallInner: {
         flexDirection: "row",
-        marginLeft: -10,
         paddingBottom: 5,
-
+        marginLeft: -7,
     },
     recipesCardSmallText: {
         color: "#4B4C4C",
@@ -173,7 +174,8 @@ export const stylesRecipes = StyleSheet.create({
         textAlign: "justify",
         lineHeight: 15,
         fontWeight: "regular",
-        marginBottom: 20},
+        marginBottom: 20
+    },
     popupMenu: {
         flexDirection: "row",
         padding: 10,
@@ -189,6 +191,12 @@ export const stylesRecipes = StyleSheet.create({
         justifyContent: "space-between",
         alignSelf: "stretch",
         flexWrap: "wrap"
+    },
+    infoIconsWithTextSmall: {
+        width: 60,
+        marginRight: 10,
+        justifyContent: "center",
+        alignItems: "center"
     },
 
 

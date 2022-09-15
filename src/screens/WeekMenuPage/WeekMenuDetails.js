@@ -67,7 +67,7 @@ export default function DetailsScreen({route, navigation}) {
         renderLoading(showLoader, <ScrollView>
             <View style={{...styles.container, alignItems: "flex-start", justifyContent: "flex-start"}}>
 
-                {menuDetails.map((recipe) => { console.log(recipe.title + recipe.RecipeId)
+                {menuDetails.map((recipe) => {
                     return (
                         <View>
 
