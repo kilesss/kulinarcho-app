@@ -1,5 +1,5 @@
-import React from "react";
-import {Button, SafeAreaView, ScrollView, Text, View} from "react-native";
+import React, {useEffect, useState} from "react";
+import {Button, FlatList, SafeAreaView, ScrollView, Text, View} from "react-native";
 import {Ionicons} from "@expo/vector-icons";
 import styles from '../../styles/styles'
 import CookCard from "../../components/display/CookCard";
@@ -8,34 +8,59 @@ import Swipeable from "react-native-gesture-handler/Swipeable";
 import {rightSwipeActions} from "../../components/shoppingList/ShoppingListItem";
 import {RecipesCardSmall} from "../../components/recipes/RecipesCardSamll";
 import language from "../../language/language";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {getProducts, getProductTypes, getPublicProfiles} from "../../RestRequests/generalRequest";
+import {getProductTypeIcon} from "../../components/HelpFunctions";
+import {stylesCooks} from "../../styles/stylesCooks";
 
 export default function CookersPage({navigation}) {
-    const cooks = [
-        {key: 1, name: "Bob Marley", recipes: 420},
-        {key: 2, name: "Bob Marley", recipes: 420},
-        {key: 3, name: "Bob Marley", recipes: 420},
-        {key: 4, name: "Bob Marley", recipes: 420},
-        {key: 5, name: "Bob Marley", recipes: 420},
-        {key: 6, name: "Bob Marley", recipes: 420},
-        {key: 7, name: "Bob Marley", recipes: 420},
-        {key: 8, name: "Bob Marley", recipes: 420},
-        {key: 9, name: "Bob Marley", recipes: 420},
-        {key: 10, name: "Bob Marley", recipes: 420},
-        {key: 11, name: "Bob Marley", recipes: 420},
-        {key: 12, name: "Bob Marley", recipes: 420},
-        {key: 13, name: "Bob Marley", recipes: 420},
-    ]
+    const [showLoader, setShowLoader] = useState(true);
+    const [DemoToken, setDemoToken] = useState(true);
+    const [cooks, setCooks] = useState([]);
+
+    function loadData() {
+        AsyncStorage.getItem('access_token').then((value) => {
+            setDemoToken(value);
+            if (value) {
+                getPublicProfiles('GET', value).then(data => {
+                    if (data) {
+                        const result = Object.values(data);
+                        console.log(result)
+                        setCooks(result)
+                        setShowLoader(false);
+                    }
+                }).catch((err) => {
+                    console.log(err);
+                });
+            }
+        }, []);
+    }
+
+    useEffect(() => {
+        loadData();
+
+    }, []);
+
     return (
-        <ScrollView>
-            <View style={[styles.container, {justifyContent: "flex-start", alignItems: "flex-start", paddingBottom: 20}]}>
+            <View style={styles.container}>
                 <Text style={styles.heading}>{language("cooks")}</Text>
 
-                {cooks.map((cook) => {
-                    return (
-                        <CookCard name={cook.name} numRecipes={cook.recipes} onPress={() => navigation.navigate("Cooks Details", {cook: cook})}></CookCard>
-                    );
-                })}
+                {/*{cooks.map((cook) => {*/}
+                {/*    return (*/}
+                {/*        <CookCard name={cook.name} numRecipes={cook.recipes} onPress={() => navigation.navigate("Cooks Details", {cook: cook})}></CookCard>*/}
+                {/*    );*/}
+                {/*})}*/}
+
+                <FlatList
+                    data={cooks}
+                    style={{alignSelf: "stretch"}}
+                    renderItem={({item}) => (
+                        <CookCard
+                            name={item.name}
+                            image={item.profilePicture}
+                            numRecipes={item.recipes}
+                            onPress={() => navigation.navigate("Cooks Details", {cookId: item.id})}/>
+                )}/>
             </View>
-        </ScrollView>
     );
 }

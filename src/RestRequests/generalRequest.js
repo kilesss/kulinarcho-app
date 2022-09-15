@@ -135,6 +135,26 @@ const getProducts = async function (method, JWT) {
 }
 
 
+const getSingleProfile = async function (method, JWT, id) {
+    const res = await fetch(`${endpoints.getPublicProfile}${id}`, {
+        method: method,
+        headers: {
+            'Authorization': 'Bearer ' + JWT
+        }
+    });
+    return formatResponse(await res.json());
+}
+
+const getPublicProfiles = async function (method, JWT) {
+    const res = await fetch(`${endpoints.getPublicProfiles}`, {
+        method: method,
+        headers: {
+            'Authorization': 'Bearer ' + JWT
+        }
+    });
+    return formatResponse(await res.json());
+}
+
 
 function formatResponse(response) {
     if ('premium' in response){
@@ -159,7 +179,8 @@ function formatResponse(response) {
 
 export {
     login, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu,
-    getSingleRecipe, getCategories, getProducts, getProductTypes}
+    getSingleRecipe, getCategories, getProducts, getProductTypes, getSingleProfile, getPublicProfiles,
+}
 
 
 

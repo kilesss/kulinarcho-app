@@ -10,7 +10,9 @@ const endpoints = {
   getSingleRecipe: 'https://kulinarcho.com/api/showRecipe/?id=',
   getCategories: 'https://kulinarcho.com/api/getCategories',
   getProductTypes: 'https://kulinarcho.com/api/getTypes',
-  getProducts: 'https://kulinarcho.com/api/getProducts'
+  getProducts: 'https://kulinarcho.com/api/getProducts',
+  getPublicProfiles: 'https://kulinarcho.com/api/getPublicProfiles',
+  getPublicProfile: 'https://kulinarcho.com/api/getPublicProfile/',
 }
 
 export default endpoints;
