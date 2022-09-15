@@ -44,10 +44,8 @@ const images = {
         seasoning: require('./icons/product-category/icons8-spice-100.png'),
         construction: require('./icons/product-category/icons8-tools-100.png'),
 
-    }
-
-
-    // image1: require('./image1.jpg'),
+    },
+    defaultProfile: require('./defaultProfile.png'),
     // image2: require('./image2.jpg'),
 };
 
