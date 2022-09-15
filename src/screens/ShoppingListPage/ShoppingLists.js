@@ -22,9 +22,7 @@ export default function ShoppingListsPage({navigation}) {
     const [DemoToken, setDemoToken] = useState(true);
 
     useEffect(() => {
-        console.log('sdfsdfsdf');
         loadData();
-
     }, []);
 
     const showEditProduct = (item) => {
@@ -36,23 +34,24 @@ export default function ShoppingListsPage({navigation}) {
      loadData();
  }
 
- function loadData(){
-     AsyncStorage.getItem('access_token').then((value) => {
-         setDemoToken(value);
-         if (value) {
-             getShopingList('GET', value).then(data => {
-                 if (data) {
-                     const result = Object.values(data);
-                     editShoppingLists(result)
-                     setShowLoader(false);
-                 }
+    function loadData(){
+        AsyncStorage.getItem('access_token').then((value) => {
+            if (value) {
+                setDemoToken(value);
+                getShopingList('GET', value).then(data => {
+                    if (data) {
+                        const result = Object.values(data);
+                        editShoppingLists(result)
+                        setShowLoader(false);
+                    }
 
-             }).catch((err) => {
-                 console.log(err);
-             });
-         }
-     }, []);
- }
+                }).catch((err) => {
+                    console.log(err);
+                });
+            }
+        }, []);
+    }
+
     function setAddModalVisible2(){
         setAddModalVisible(!addModalVisible)
        loadData();
@@ -99,7 +98,7 @@ export default function ShoppingListsPage({navigation}) {
                                 iconName={"receipt"}
                                 numItems={item.count}
                                 onPress={() => navigation.navigate('Shopping List Details', {
-                                            key: item.key,
+                                            key: item.id,
                                             title: item.name,
                                         })}
                                 onPressEdit={() => {

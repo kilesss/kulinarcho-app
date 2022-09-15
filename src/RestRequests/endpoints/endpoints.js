@@ -13,6 +13,8 @@ const endpoints = {
   getProducts: 'https://kulinarcho.com/api/getProducts',
   getPublicProfiles: 'https://kulinarcho.com/api/getPublicProfiles',
   getPublicProfile: 'https://kulinarcho.com/api/getPublicProfile/',
+  getShoppingListProducts: 'https://kulinarcho.com/api/getShoppingListProducts/',
+  addProductShoppingList: 'https://kulinarcho.com/api/AddProductShoppingList'
 }
 
 export default endpoints;
