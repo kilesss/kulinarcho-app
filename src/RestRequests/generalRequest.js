@@ -131,6 +131,9 @@ const getProducts = async function (method, JWT) {
             'Authorization': 'Bearer ' + JWT
         }
     });
+    console.log('await res.json()');
+    console.log(await res);
+
     return formatResponse(await res.json());
 }
 
@@ -175,11 +178,19 @@ function formatResponse(response) {
     return response;
 
 }
-
+const getShoppingListProducts = async function (listId, JWT) {
+    const res = await fetch(endpoints.getShoppingListProducts+'?listId='+listId, {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + JWT
+        }
+    });
+    return formatResponse(await res.json());
+}
 
 export {
     login, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu,
-    getSingleRecipe, getCategories, getProducts, getProductTypes, getSingleProfile, getPublicProfiles,
+    getSingleRecipe, getCategories, getProducts, getProductTypes, getSingleProfile, getPublicProfiles,getShoppingListProducts
 }
 
 
