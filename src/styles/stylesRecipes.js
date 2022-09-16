@@ -193,8 +193,8 @@ export const stylesRecipes = StyleSheet.create({
         flexWrap: "wrap"
     },
     infoIconsWithTextSmall: {
-        width: 60,
-        marginRight: 10,
+        width: 70,
+        marginRight: 5,
         justifyContent: "center",
         alignItems: "center"
     },

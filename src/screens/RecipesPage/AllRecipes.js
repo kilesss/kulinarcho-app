@@ -69,7 +69,7 @@ export default function AllRecipes({route, navigation}) {
                                       time={item.all_time}
                                       servings={item.portion}
                                       photo={item.photo}
-                                      onPress={() => navigation.navigate("Recipe Details", {recipeId: item.RecipeId})}
+                                      onPress={() => navigation.navigate("Recipe Details", {recipeId: item.id})}
                     />
                 )}/>
             </SafeAreaView>
