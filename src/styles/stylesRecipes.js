@@ -38,7 +38,7 @@ export const stylesRecipes = StyleSheet.create({
     },
     recipesCardInfo: {
         position: "relative",
-        marginTop: -74,
+        marginTop: -71,
         borderRadius: 8,
         padding: 5,
         paddingVertical: 3,

@@ -14,6 +14,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {getSingleRecipe} from "../../RestRequests/generalRequest";
 import renderLoading from "../../components/loading/ShowLoader";
 import {MenuProvider} from "react-native-popup-menu";
+import Images from "../../../public/images";
+import {getIconInfo} from "../../components/HelpFunctions";
 
 export default function RecipeDetails({route, navigation}) {
 
@@ -29,6 +31,7 @@ export default function RecipeDetails({route, navigation}) {
     const [recipeDetails, setRecipeDetails] = useState([])
     const [steps, setSteps] = useState([])
     const [products, setProducts] = useState([])
+    const [userData, setUserData] = useState([])
     const [showLoader, setShowLoader] = useState(true);
     const [DemoToken, setDemoToken] = useState(true);
 
@@ -42,6 +45,8 @@ export default function RecipeDetails({route, navigation}) {
                         setRecipeDetails(result[0])
                         setProducts(result[1])
                         setSteps(Object.values(result[2]))
+                        setUserData(result[4])
+                        // console.log(result[0].categories)
                         setShowLoader(false);
                     }
 
@@ -54,7 +59,6 @@ export default function RecipeDetails({route, navigation}) {
 
     useEffect(() => {
         loadData();
-
     }, []);
 
     return (
@@ -76,9 +80,11 @@ export default function RecipeDetails({route, navigation}) {
                     <View style={stylesRecipes.recipeDetailsBanner}>
                         <Animated.Image
                             style={stylesRecipes.banner(scrollA)}
-                            source={{
-                                uri: 'https://kulinarcho.com' + recipeDetails.photo,
-                            }}
+                            source={
+                                recipeDetails.photo ?
+                                    {uri: 'https://kulinarcho.com' + recipeDetails.photo,}
+                                    : Images.defaultRecipe
+                        }
                         />
 
                     </View>
@@ -94,6 +100,7 @@ export default function RecipeDetails({route, navigation}) {
                                 <Text style={[styles.subHeading, {fontWeight: "regular"}]}>{recipeDetails.all_time} {language("min")}</Text>
                             </View>
                         </View>
+                        {/*TODO: Fix the category not showing up correctly*/}
                         <Text style={{color:"#4B4C4C"}}>Категория: <Text style={{color: "#15A051", fontWeight: "bold"}}>{recipeDetails.categories}</Text>
                         </Text>
 
@@ -104,10 +111,10 @@ export default function RecipeDetails({route, navigation}) {
 
                         <Text style={[styles.subHeading, stylesRecipes.paragraph]}>{recipeDetails.description}</Text>
 
-                        <CookCard name={"The name of the cook"}
-                                  numRecipes={13}
-                                  img={"../../../public/images/testimonial-2.jpg"}
-                                  onPress={() => navigation.navigate("Cooks Details", {cook: cook})}/>
+                        <CookCard name={userData.name}
+                                  numRecipes={0}
+                                  image={userData.picture}
+                                  onPress={() => navigation.navigate("Cooks Details", {cookId: userData.id})}/>
 
                         <SwitchSelector
                             initial={0}

@@ -12,7 +12,7 @@ export const RecipesCardSmall = ({onPress, title, time, servings, category, phot
     <View style={[stylesRecipes.recipesCardSmall]}>
 
         <Image source={
-            photo ? {uri: 'https://kulinarcho.com' + photo} : Images.bob}
+            photo ? {uri: 'https://kulinarcho.com' + photo} : Images.defaultRecipe}
                style={stylesRecipes.recipesCardImageSmall}
         />
 

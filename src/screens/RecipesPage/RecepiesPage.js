@@ -109,7 +109,7 @@ export default function RecipesPage({navigation}) {
                                                         photo={item.photo}
                                                         time={item.all_time}
                                                         servings={item.portion}
-                                                        category={getIconInfo(2)}
+                                                        category={getIconInfo(item.categories)}
                                                         onPress={() => {
                                                             navigation.navigate("Recipe Details", {recipeId: item.id})
                                                         }}
@@ -128,7 +128,7 @@ export default function RecipesPage({navigation}) {
                                                         photo={item.photo}
                                                         time={item.all_time}
                                                         servings={item.portion}
-                                                        category={getIconInfo(1)}
+                                                        category={getIconInfo(item.categories)}
                                                         onPress={() => {
                                                             navigation.push("Recipe Details", {recipeId: item.id})
                                                         }}
@@ -147,7 +147,7 @@ export default function RecipesPage({navigation}) {
                                                         photo={item.photo}
                                                         time={item.all_time}
                                                         servings={item.portion}
-                                                        category={getIconInfo(1)}
+                                                        category={getIconInfo(item.categories)}
                                                         onPress={() => {
                                                             navigation.push("Recipe Details", {recipeId: item.id})
                                                         }}

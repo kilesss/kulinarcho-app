@@ -93,11 +93,6 @@ export default function CookingBookPage({navigation}) {
                         onEndReachedThreshold={0.4}
                         ListFooterComponent={renderLoading(showLoader2)}
                         renderItem={({item}) => (
-                        // <GestureHandlerRootView>
-                        //     <Swipeable
-                        //         renderRightActions={(progress, dragX) =>
-                        //             rightSwipeActions(progress, dragX, () => showConfirmDialog(() => console.log("Pressed Yes")), 79)}
-                        //     >
                                 <RecipesCardSmall title={item.title}
                                                   photo={item.photo}
                                                   time={item.all_time}
@@ -107,8 +102,6 @@ export default function CookingBookPage({navigation}) {
                                                       navigation.push("Recipe Details", {recipeId: 913})
                                                   }}
                                 />
-                        //     </Swipeable>
-                        // </GestureHandlerRootView>
                     )
                     }/>
                 </View>

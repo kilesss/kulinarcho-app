@@ -7,9 +7,9 @@ import CategoriesCard from "../display/CategoriesCard";
 import Images from "../../../public/images";
 
 
-export const RecipesCardLarge = ({onPress, title, time, servings, category, photo}) => (
+export const RecipesCardLarge = ({onPress, title, time, servings, category, photo, margin = 0}) => (
         <TouchableOpacity onPress={onPress}
-            style={[stylesRecipes.recipesCard]}
+            style={{...stylesRecipes.recipesCard, marginHorizontal: margin}}
         >
 
             <Image source={
