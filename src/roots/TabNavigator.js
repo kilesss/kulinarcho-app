@@ -27,6 +27,7 @@ import AddEditRecipe from "../screens/RecipesPage/AddEditRecipe";
 import {LinearGradient} from "expo-linear-gradient";
 import TabNavBottomLine from "../components/display/TabNavBottomLine";
 import Images from "../../public/images/index";
+import AllRecipes from "../screens/RecipesPage/AllRecipes";
 
 
 const ProfileNavigation = createNativeStackNavigator();
@@ -272,6 +273,8 @@ export default function TabNavigator(props) {
             <Stack.Screen name={"Week Menu Details"} component={WeekMenuDetails}/>
 
             <Stack.Screen name={"Add Edit Recipe"} component={AddEditRecipe}/>
+
+            <Stack.Screen name={"All Recipes"} component={AllRecipes}/>
         </Stack.Navigator>
     )
 }

@@ -10,41 +10,57 @@ import language from "../../language/language";
 import {categories, getIconInfo, loadData, showConfirmDialog, showLoader} from "../../components/HelpFunctions";
 import renderLoading from "../../components/loading/ShowLoader";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {getCategories} from "../../RestRequests/generalRequest";
+import {getCategories, getPublicRecipes} from "../../RestRequests/generalRequest";
 
 export default function CookingBookPage({navigation}) {
 
-    const [recipes, setRecipes] = useState([
-        {
-            key: "1",
-            title: "Some Recipe with more text than",
-            time: "30",
-            servings: "5",
-            liked: true
-        },
-        {key: "2", title: "Some Recipe", time: 20, servings: 4, },
-        {key: "3", title: "Some Recipe", time: 40, servings: 5,},
-        {key: "4", title: "Some Recipe", time: 50, servings: 6,  },
-        {key: "5", title: "Some Recipe", time: 40, servings: 5, },
-        {key: "6", title: "Some Recipe", time: 30, servings: 5, },
-        {key: "7", title: "Some Recipe", time: 30, servings: 5, },
-        {key: "8", title: "Some Recipe", time: 30, servings: 5, },
-        {key: "9", title: "Some Recipe", time: 30, servings: 5, }
-    ])
+
+    const [recipes, setRecipes] = useState([])
+    const [showLoader, setShowLoader] = useState(true);
+    const [showLoader2, setShowLoader2] = useState(false);
+    const [DemoToken, setDemoToken] = useState(true);
+    const [lastPage, setLastPage] = useState()
+    const [page, setPage] = useState(1)
+
+    function loadRecipes() {
+        setShowLoader2(true)
+        AsyncStorage.getItem('access_token').then((value) => {
+            setDemoToken(value);
+            if (value) {
+                getPublicRecipes('GET', value, page, "", 0, 1).then(data => {
+                    if (data) {
+                        const result = Object.values(data);
+                        setRecipes([...recipes, ...result[0]])
+                        setLastPage(result[2])
+                        setShowLoader2(false)
+                    }
+
+                }).catch((err) => {
+                    console.log(err);
+                });
+            }
+        }, []);
+    }
+
+    const fetchMore = () => {
+        if(page !== lastPage){
+            setPage(page + 1)
+        }
+    }
 
 
     const [categories, setCategories] = useState()
-    const [showLoader, setShowLoader] = useState(true);
-    const [DemoToken, setDemoToken] = useState(true);
-
 
     useEffect(() => {
         loadData(setCategories, setShowLoader, setDemoToken);
     }, []);
 
+    useEffect(() => {
+        loadRecipes()
+    }, [page]);
 
     return (
-        renderLoading(showLoader, <ScrollView>
+        renderLoading(showLoader,
             <View style={[styles.container, {alignItems: "flex-start", marginRight: 0}]}>
                 <View style={{minHeight: 145}}>
                     <View>
@@ -60,6 +76,9 @@ export default function CookingBookPage({navigation}) {
                                 color={getIconInfo(item.id).color}
                                 size={75}
                                 showText={true}
+                                onPress={() => {
+                                    navigation.navigate("All Recipes", {categoryID: item.id, ownRecipe: 1})
+                                }}
                             />
                         )}/>
                 </View>
@@ -67,30 +86,25 @@ export default function CookingBookPage({navigation}) {
 
                 <View style={{flex: 1, width: "100%", paddingRight: 20}}>
                     <Text style={[styles.heading]}>{language("popularRecipes")}</Text>
-                    <SafeAreaView>
-                        {recipes.map((recipe) => {
-                            return (
-                                <GestureHandlerRootView>
-                                    <Swipeable
-                                        renderRightActions={(progress, dragX) =>
-                                            rightSwipeActions(progress, dragX, () => showConfirmDialog(() => console.log("Pressed Yes")), 79)}
-                                    >
-                                        <RecipesCardSmall title={recipe.title}
-                                                          liked={recipe.liked}
-                                                          time={recipe.time}
-                                                          servings={recipe.servings}
-                                                          category={getIconInfo(2)}
-                                                          onPress={() => {
-                                                              navigation.push("Recipe Details", {recipeId: 913})
-                                                          }}
-                                        />
-                                    </Swipeable>
-                                </GestureHandlerRootView>
-                            );
-                        })}
-                    </SafeAreaView>
+                    <FlatList
+                        data={recipes}
+                        keyExtractor={item => item.id}
+                        onEndReached={fetchMore}
+                        onEndReachedThreshold={0.4}
+                        ListFooterComponent={renderLoading(showLoader2)}
+                        renderItem={({item}) => (
+                                <RecipesCardSmall title={item.title}
+                                                  photo={item.photo}
+                                                  time={item.all_time}
+                                                  servings={item.portion}
+                                                  category={getIconInfo(2)}
+                                                  onPress={() => {
+                                                      navigation.push("Recipe Details", {recipeId: 913})
+                                                  }}
+                                />
+                    )
+                    }/>
                 </View>
-            </View>
-        </ScrollView>)
+            </View>)
     );
 }

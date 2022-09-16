@@ -19,7 +19,6 @@ export const stylesCooks = StyleSheet.create({
 
     },
     profileRecipes: {
-        flex: 1,
         width: "100%",
         flexDirection: 'row',
         flexWrap: 'wrap',

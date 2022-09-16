@@ -4,6 +4,7 @@ import {stylesRecipes} from "../../styles/stylesRecipes";
 import styles from "../../styles/styles";
 import {ProductCard} from "../display/ProductCard";
 import language from "../../language/language";
+import {getProductTypeIcon} from "../HelpFunctions";
 
 
 export const ConditionalCard = ({condition, steps, products}) => {
@@ -31,8 +32,7 @@ export const ConditionalCard = ({condition, steps, products}) => {
                     return (
                         <ProductCard title={product.productName}
                                      textRight={`${product.volume}${product.unitsName}`}
-                                     icon={"carrot"}
-                                     iconColor={"blue"}/>
+                                     image={getProductTypeIcon(product.catName)}/>
                     );
                 })}
             </SafeAreaView>

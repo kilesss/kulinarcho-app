@@ -29,7 +29,6 @@ export default function ProductsAndCategoriesPage({navigation}) {
                 getProductTypes('GET', value).then(data => {
                     if (data) {
                         const result = Object.values(data);
-                        console.log(getProductTypeIcon(result[0].name).color)
                         setProductTypes(result)
                         setShowLoader(false);
                     }

@@ -31,7 +31,6 @@ export default function CookerDetails({route, navigation}) {
                 getSingleProfile('GET', value, cookId).then(data => {
                     if (data) {
                         const result = Object.values(data);
-                        console.log(result[0])
                         setCook(result[0])
                         setRecipes(result[1])
                         setShowLoader(false);
@@ -49,36 +48,36 @@ export default function CookerDetails({route, navigation}) {
     }, []);
 
     return (
-        <ScrollView>
             <View style={styles.container}>
-            <View style={stylesCooks.profileDetails}>
-                <Image source={require("../../../public/images/bob.jpg")} style={stylesCooks.profileImage}/>
-                <Text style={[styles.heading, {fontSize: 22, marginTop: 0, textAlign: "center"}]}>{cook.name}</Text>
-                <Text style={stylesCooks.numRecipesText}>{cook.recipes} {language("recipes")}</Text>
-                <CustomButton title={language("addToGroup")} padding={9} txtColor={"#fff"}/>
+                <View style={{alignSelf: "stretch"}}>
 
-            </View>
-
-            <SafeAreaView style={stylesCooks.profileRecipes}>
                 <FlatList
                     data={recipes}
-                    scrollEnabled={false}
+                    scrollEnabled={true}
                     numColumns={2}
-                    ListHeaderComponent={<Text>Opa</Text>}
+                    ListHeaderComponent={
+                    <View style={stylesCooks.profileDetails}>
+                        <Image source={require("../../../public/images/bob.jpg")} style={stylesCooks.profileImage}/>
+                        <Text style={[styles.heading, {fontSize: 22, marginTop: 0, textAlign: "center"}]}>{cook.name}</Text>
+                        <Text style={stylesCooks.numRecipesText}>{cook.recipes} {language("recipes")}</Text>
+                        <CustomButton title={language("addToGroup")} padding={9} txtColor={"#fff"}/>
+
+                    </View>
+                }
                     columnWrapperStyle={{justifyContent: "center", margin: 5}}
                     renderItem={({item}) => (
                         // <View>
                         //     <Image source={getIconInfo(item.cat_id).image}/>
                         // <Text>{item.title} - {item.portion} - {item.all_time} - {item.id} - {item.cat}</Text>
                         // </View>
-                        <View style={{marginHorizontal: 5}}>
                             <RecipesCardLarge
                                 title={item.title}
+                                photo={item.photo}
+                                margin={5}
                                 time={item.all_time}
                                 servings={item.servings}
                                 category={getIconInfo(item.cat_id)}
                             />
-                        </View>
                 )}/>
                 {/*{recipes.map((recipe,i) => {*/}
                 {/*    return (*/}
@@ -95,7 +94,7 @@ export default function CookerDetails({route, navigation}) {
                 {/*        </View>*/}
                 {/*    );*/}
                 {/*})}*/}
-            </SafeAreaView>
             </View>
-    </ScrollView>);
+            </View>
+    );
 }
