@@ -22,6 +22,7 @@ export default function ShoppingListsPage({navigation}) {
     const [DemoToken, setDemoToken] = useState(true);
 
     useEffect(() => {
+        console.log('ssssssssssss');
         loadData();
     }, []);
 

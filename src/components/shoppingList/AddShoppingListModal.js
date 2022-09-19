@@ -69,7 +69,6 @@ export default function AddShoppingListModal({
         if (modalId !== '') {
             requestBody.id = modalId
         }
-        console.log(requestBody)
         await updateList(JSON.stringify(requestBody), token).then()
             .then(response => {
                 setShowLoader(false);

@@ -210,11 +210,34 @@ const getShoppingListProducts = async function (listId, JWT) {
     });
     return formatResponse(await res.json());
 }
+const AddEditProductShoppingList = async function (body, token) {
+    const res = await fetch(endpoints.AddEditProductShoppingList, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+    return '';
+}
+const deleteProductFromList = async function (body, token) {
+    const res = await fetch(endpoints.deleteProductFromList, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+    return '';
+}
 
 export {
     login, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu,
     getSingleRecipe, getCategories, getProducts, getProductTypes, getSingleProfile,
-    getPublicProfiles, getLatestRecipes, getPublicRecipes, getShoppingListProducts
+    getPublicProfiles, getLatestRecipes, getPublicRecipes, getShoppingListProducts,
+    AddEditProductShoppingList,deleteProductFromList
 
 }
 

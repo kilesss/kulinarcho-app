@@ -32,13 +32,13 @@ export default function BottomPopup({
 
     useEffect(() => {
 
-        if (txtAmount === " "){
+        if (txtAmount === ""){
             setAmount(amount);
         }
-        if (txtPrice === " ") {
+        if (txtPrice === "") {
             setPrice(price);
         }
-        if (txtFinalPrice === " ") {
+        if (txtFinalPrice === "") {
             setFinalPrice(finalPrice)
         }
         loadProducts();
@@ -54,8 +54,6 @@ export default function BottomPopup({
         }else if (set === 'price'){
             setPrice(changedText)
             final = (parseFloat(changedText)*parseFloat(txtAmount)).toFixed(2)
-            console.log(changedText)
-            console.log(amount)
         }
         if (isNaN(final)){
             final = '0.00';
@@ -72,12 +70,8 @@ export default function BottomPopup({
                     getProducts('GET',value).then(data => {
                         var arr = [];
                         if (data) {
-                            var count = 1;
                             Object.keys(data).map(function (key) {
-                                count = count + 1;
-                                if (count <= 20) {
                                     arr.push({id: data[key].id.toString(), title: data[key].name},)
-                                }
                             })
                             setItem(arr);
                         }
@@ -112,6 +106,8 @@ export default function BottomPopup({
                 containerStyle={{width: '100%', zIndex: 10}}
                 clearOnFocus={false}
                 closeOnBlur={true}
+
+                onChangeText={(data) => {console.log(data)}}
                 closeOnSubmit={false}
                 initialValue={{}} // or just '2'
                 onSelectItem={setSelectedItem}

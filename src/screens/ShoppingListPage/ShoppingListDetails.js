@@ -9,7 +9,10 @@ import {useEffect, useState} from "react";
 
 import BottomPopup from "../../components/shoppingList/BottomPopup";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {getShoppingListProducts} from "../../RestRequests/generalRequest";
+import {getShoppingListProducts,
+    AddEditProductShoppingList,
+    updateList,
+    deleteProductFromList} from "../../RestRequests/generalRequest";
 import {useRoute} from "@react-navigation/native";
 import {finalize} from "@babel/core/lib/config/helpers/deep-array";
 
@@ -40,12 +43,16 @@ export default function ShoppingListDetails(props) {
                 getShoppingListProducts(props.route.params.key, value).then(data => {
                     if (data) {
                         const result = Object.values(data);
+
                         editItems(result)
                         setarticleCount(result.length);
-                        calculateFinalPrice();
-                        // editShoppingLists(result)
-                        // setShowLoader(false);
+                        calculateFinalPrice(result);
                     }
+
+                }).then(data=>{
+                    console.log(data);
+                    console.log('eeeeeeeeeeeee');
+
 
                 }).catch((err) => {
                     console.log(err);
@@ -55,8 +62,16 @@ export default function ShoppingListDetails(props) {
     }
 
     const remove = (i) => {
-        const arr = items.filter((item) => item.key !== i);
-        editItems(arr);
+        let newItemsList = [];
+        Object.keys(items).forEach(function (key) {
+            if (items[key].id !== i.id) {
+                newItemsList.push(items[key])
+            }
+        })
+        editItems(newItemsList);
+        setarticleCount(newItemsList.length);
+        calculateFinalPrice()
+        deleteProductFromListRequest(i.id).then(r => {})
     };
 
 
@@ -70,24 +85,62 @@ export default function ShoppingListDetails(props) {
         }
     };
     const checkStatus = (item) => {
-        if (item === '0') {
+        if (item === 0) {
             return false;
         }
         return true;
     }
 
-    function calculateFinalPrice() {
+    function calculateFinalPrice(result = null) {
         var finalPriceTemp = 0;
-        Object.keys(items).forEach(function (key) {
-            if (items[key].status === 1) {
-                finalPriceTemp = items[key].finalPrice;
+        if (result === null){
+            result = items;
+        }
+
+        Object.keys(result).forEach(function (key) {
+
+            if (result[key].status === 1) {
+
+                if (isNaN(result[key].finalPrice)){
+                    result[key].finalPrice = 0
+                }
+                finalPriceTemp = finalPriceTemp + parseFloat(result[key].finalPrice);
             }
         })
         setfinalPriceList(parseFloat(finalPriceTemp).toFixed(2))
     }
 
+    async function deleteProductFromListRequest(id){
+        await deleteProductFromList(JSON.stringify({id: id}), DemoToken).then()
+            .then(response => {
+                if (response.errors) {
+                    const restErr = JSON.stringify(response.errors);
+                    //TODO: connect with error messages
+                }
+            })
+
+    }
+    async function AddEditProductShoppingListRequest(data) {
+
+
+        var requestBody = {
+            listId: props.route.params.key,
+            ...data
+        };
+         await AddEditProductShoppingList(JSON.stringify(requestBody), DemoToken).then()
+            .then(response => {
+                if (response.errors) {
+                    const restErr = JSON.stringify(response.errors);
+                    //TODO: connect with error messages
+                    console.log(restErr);
+                }
+            })
+
+    }
+
     function returnData(data) {
-        if (data.newProductId.id !== undefined) {
+        console.log(data);
+        if (data.newProductId  !== null) {
             items.push({
                 "description": '',
                 "finalPrice": data.finalPrice,
@@ -100,9 +153,12 @@ export default function ShoppingListDetails(props) {
                 "type": "",
                 "value": data.amount,
             })
+            AddEditProductShoppingListRequest(data).then(r =>{} )
         } else {
+            let keyData = '';
             Object.keys(items).forEach(function (key) {
                 if (items[key].id === data.productId) {
+                    keyData = key;
                     if (items[key].status === 1){
                         items[key].status = 0;
                     }else {
@@ -113,6 +169,7 @@ export default function ShoppingListDetails(props) {
                     items[key].finalPrice = data.finalPrice
                 }
             });
+            AddEditProductShoppingListRequest(items[keyData]).then(r =>{} )
 
         }
         //TODO send request
@@ -158,14 +215,14 @@ export default function ShoppingListDetails(props) {
                               showEditProduct(item, 'edit')
                           }}
                                             title={item.name}
-                                            finalPrice={item.finalPrice}
+                                            finalPrice={item.finalPrice === ''?0:item.finalPrice}
                                             description={item.description}
                                             productId={item.productId}
-                                            price={item.price}
-                                            num={item.value}
+                                            price={item.price === ''?0:item.price}
+                                            num={item.value === ''?0:item.value}
                                             checked={checkStatus(item.status)}
                                             onPressDelete={() => {
-                                                remove(item.key)
+                                                remove(item)
                                             }}
                           />
                       )}/>
