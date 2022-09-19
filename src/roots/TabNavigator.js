@@ -19,7 +19,7 @@ import {Ionicons, MaterialCommunityIcons, MaterialIcons} from "@expo/vector-icon
 import LoginPage from "../screens/Auth/LoginPage";
 import ForgottenPasswordPage from "../screens/Auth/ForgottenPasswordPage";
 import SignupPage from "../screens/Auth/SignupPage";
-import {LogoTitle} from "../components/display/CustomHeader";
+import LogoTitle from "../components/display/CustomHeader";
 import StackNavigator from "@react-navigation/stack/src/navigators/createStackNavigator";
 import ProductsAndCategoriesPage from "../screens/ProfilePage/ProductsAndCategoriesPage";
 import {createStackNavigator} from "@react-navigation/stack";
@@ -165,6 +165,7 @@ const Stack = createStackNavigator();
 function MainTabs() {
     return (
         <Tab.Navigator screenOptions={({navigation}) => ({
+            tabBarHideOnKeyboard: true,
             tabBarStyle: {paddingVertical: 10, height: 60},
             headerStyle: {
                 backgroundColor: '#fff',
@@ -172,7 +173,7 @@ function MainTabs() {
                 shadowColor: "#999",
             },
             headerTitle: () => (
-                <LogoTitle onPress={() => navigation.push("Settings")}/>
+                <LogoTitle navigation={navigation}/>
             )
 
         })}>
@@ -192,6 +193,7 @@ function MainTabs() {
                             },
                         }}/>
             <Tab.Screen name={"Recipes"} component={RecipesPage}
+                        initialParams={{ search: "" }}
                         options={{
                             tabBarLabel: "",
                             tabBarIcon: ({focused}) => {
@@ -279,47 +281,4 @@ export default function TabNavigator(props) {
     )
 }
 
-
-// Main Navigation
-// export default function TabNavigator(props) {
-//
-//     return (
-//         <Tab.Navigator
-//             screenOptions={{
-//
-//                 unmountOnBlur: true,
-//                 tabBarStyle: {padding: 10, height: 60},
-//             }}>
-//             <Tab.Screen
-//                 name="ShoppingListStack"
-//                 component={ShoppingListStack}
-//                 options={{
-//                     headerShown: false,
-//                     tabBarLabel: '',
-//                     tabBarIcon: ({focused}) => {return <MaterialCommunityIcons name={"cart-outline"} size={35} color={focused ? "#15A051" : "#C0C0C0"}/>},
-//                 }}
-//             />
-//             <Tab.Screen name="RecipesStack" component={RecipesStack} options={{
-//                 headerShown: false,
-//                 tabBarLabel: '',
-//                 tabBarIcon: ({focused}) => {return <MaterialIcons name={"dinner-dining"} color={focused ? "#15A051" : "#c0c0c0"} size={36}/>},
-//             }}/>
-//             <Tab.Screen name="CookingBookStack" component={CookingBookStack} options={{
-//                 headerShown: false,
-//                 tabBarLabel: '',
-//                 tabBarIcon: ({focused}) => {return <MaterialCommunityIcons name={"book-open-page-variant-outline"} color={focused ? "#15A051" : "#C0C0C0"} size={34}/>},
-//             }}/>
-//             <Tab.Screen name="CookersStack" component={CookersStackScreen} options={{
-//                 headerShown: false,
-//                 tabBarLabel: '',
-//                 tabBarIcon: ({focused}) => {return <Ionicons name={"people-outline"} color={focused ? "#15A051" : "#C0C0C0"} size={35}/>},
-//             }}/>
-//             <Tab.Screen name="WeekMenuStack" component={WeekMenuStack} options={{
-//                 headerShown: false,
-//                 tabBarLabel: '',
-//                 tabBarIcon: ({focused}) => {return <Ionicons name={"calendar-outline"} color={focused ? "#15A051" : "#C0C0C0"} size={34}/>},
-//             }}/>
-//         </Tab.Navigator>
-//     );
-// }
 

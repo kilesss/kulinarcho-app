@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Button, FlatList, ScrollView, Text, View} from "react-native";
+import {Button, FlatList, SafeAreaView, ScrollView, Text, View} from "react-native";
 import {Ionicons} from "@expo/vector-icons";
 import styles from '../../styles/styles'
 import {stylesRecipes} from '../../styles/stylesRecipes'
@@ -9,37 +9,30 @@ import language from "../../language/language";
 import Images from '../../../public/images/index';
 import {getIconInfo} from "../../components/HelpFunctions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {getCategories, getLatestRecipes, getSingleRecipe} from "../../RestRequests/generalRequest";
+import {getCategories, getLatestRecipes, getPublicRecipes, getSingleRecipe} from "../../RestRequests/generalRequest";
 import renderLoading from "../../components/loading/ShowLoader";
+import LatestRecipesSection from "../../components/recipes/LatestRecipesSection";
+import {RecipesCardSmall} from "../../components/recipes/RecipesCardSamll";
 
-export const categories2 = [
-    {key: "1", title: "Риба", icon: "fish", color: "#0088C2"},
-    {key: "2", title: "Напитки", icon: "glass-cocktail", color: "#DC00E0"},
-    {key: "3", title: "С Месо", icon: "food-drumstick", color: "#842F00"},
-    {key: "4", title: "Салати", icon: "leaf", color: "#0fc45b"},
-    {key: "5", title: "Супи", icon: "bowl-outline", color: "#FF7410"},
-    {key: "6", title: "Десерти", icon: "cake-variant-outline", color: "#d70101"},
-]
+export default function RecipesPage({route, navigation}) {
 
-export const recipes = [
-    {key: "1", title: "Some Recipe with more text than usual", time: "30", servings: "5", category: categories2[1]},
-    {key: "2", title: "Some Recipe", time: 20, servings: 4, category: categories2[2]},
-    {key: "3", title: "Some Recipe", time: 40, servings: 5, category: categories2[3]},
-    {key: "4", title: "Some Recipe", time: 50, servings: 6, category: categories2[5]},
-    {key: "5", title: "Some Recipe", time: 40, servings: 5, category: categories2[1]},
-    {key: "6", title: "Some Recipe", time: 30, servings: 5, category: categories2[2]},
-    {key: "7", title: "Some Recipe", time: 30, servings: 5, category: categories2[4]}
-]
-
-
-export default function RecipesPage({navigation}) {
-
+    const {search} = route.params;
     const [categories, setCategories] = useState()
     const [recipesNew, setRecipesNew] = useState()
     const [recipesRandom, setRecipesRandom] = useState()
     const [recipesPopular, setRecipesPopular] = useState()
     const [showLoader, setShowLoader] = useState(true);
+    const [showLoader2, setShowLoader2] = useState(false);
+    const [recipesResult, setRecipesResult] = useState([]);
     const [DemoToken, setDemoToken] = useState(true);
+
+    const [lastPage, setLastPage] = useState()
+    const [page, setPage] = useState(1)
+    const fetchMore = () => {
+        if (page !== lastPage) {
+            setPage(page + 1)
+        }
+    }
 
     function loadData() {
         AsyncStorage.getItem('access_token').then((value) => {
@@ -50,7 +43,6 @@ export default function RecipesPage({navigation}) {
                         const result = Object.values(data);
                         setCategories(result)
                     }
-
                 }).catch((err) => {
                     console.log(err);
                 });
@@ -61,26 +53,47 @@ export default function RecipesPage({navigation}) {
                         setRecipesNew(result[0])
                         setRecipesRandom(result[1])
                         setRecipesPopular(result[2])
-
                         setShowLoader(false);
                     }
-
                 }).catch((err) => {
                     console.log(err);
                 });
+                if (search) {
+                    getPublicRecipes('GET', value, page, search).then(data => {
+                        if (data) {
+                            const result = Object.values(data);
+                            setRecipesResult([...recipesResult, ...result[0]])
+                            setLastPage(result[2])
+                            setShowLoader2(false)
+                        }
+
+                    }).catch((err) => {
+                        console.log(err);
+                    });
+                }
             }
         }, []);
     }
 
+
     useEffect(() => {
         loadData();
+    }, [page]);
 
-    }, []);
+    useEffect(() => {
+        setShowLoader(true)
+        setRecipesResult([])
+        console.log(recipesResult)
+        loadData();
+        console.log(recipesResult)
+    }, [route]);
+
+
 
     return (
-        renderLoading(showLoader, <ScrollView>
+        renderLoading(showLoader,
             <View style={[styles.container, {alignItems: "flex-start", marginRight: 0}]}>
-                <View style={{flex: 1.3, minHeight: 145}}>
+                <View style={{minHeight: 145}}>
                     <View>
                         <Text style={styles.heading}>{language("categories")}</Text>
                     </View>
@@ -99,64 +112,33 @@ export default function RecipesPage({navigation}) {
 
                 </View>
 
-                <View style={{flex: 2, minHeight: 250}}>
-                    <Text style={styles.heading}>{language("popularRecipes")}</Text>
-                    <FlatList data={recipesPopular}
-                              horizontal={true}
-                              renderItem={({item}) => (
-                                  <View style={{marginRight: 10}}>
-                                      <RecipesCardLarge title={item.title}
-                                                        photo={item.photo}
-                                                        time={item.all_time}
-                                                        servings={item.portion}
-                                                        category={getIconInfo(item.categories)}
-                                                        onPress={() => {
-                                                            navigation.navigate("Recipe Details", {recipeId: item.id})
-                                                        }}
-                                      />
-                                  </View>
-                              )}/>
-                </View>
+                {search ?
+                    <View style={{flex: 1, width: "100%", paddingRight: 20}}>
+                        <Text style={styles.heading}>Всички Рецепти</Text>
+                        <FlatList
+                            data={recipesResult}
+                            keyExtractor={(item, index) => item.id}
+                            onEndReached={fetchMore}
+                            onEndReachedThreshold={0.4}
+                            ListFooterComponent={renderLoading(showLoader2)}
+                            renderItem={({item}) => (
+                                <RecipesCardSmall title={item.title}
+                                                  category={getIconInfo(item.categories)}
+                                                  time={item.all_time}
+                                                  servings={item.portion}
+                                                  photo={item.photo}
+                                                  onPress={() => navigation.navigate("Recipe Details", {recipeId: item.id})}
+                                />
+                            )}/>
+                    </View>
+                    :
+                    <LatestRecipesSection
+                        navigation={navigation}
+                        recipesPopular={recipesPopular}
+                        recipesNew={recipesNew}
+                        recipesRandom={recipesRandom}
+                    />}
 
-                <View style={{flex: 3, minHeight: 250}}>
-                    <Text style={styles.heading}>{language("newRecipes")}</Text>
-                    <FlatList data={recipesNew}
-                              horizontal={true}
-                              renderItem={({item}) => (
-                                  <View style={{marginRight: 10}}>
-                                      <RecipesCardLarge title={item.title}
-                                                        photo={item.photo}
-                                                        time={item.all_time}
-                                                        servings={item.portion}
-                                                        category={getIconInfo(item.categories)}
-                                                        onPress={() => {
-                                                            navigation.push("Recipe Details", {recipeId: item.id})
-                                                        }}
-                                      />
-                                  </View>
-                              )}/>
-                </View>
-
-                <View style={{flex: 3, minHeight: 250}}>
-                    <Text style={styles.heading}>{language("randomRecipes")}</Text>
-                    <FlatList data={recipesRandom}
-                              horizontal={true}
-                              renderItem={({item}) => (
-                                  <View style={{marginRight: 10}}>
-                                      <RecipesCardLarge title={item.title}
-                                                        photo={item.photo}
-                                                        time={item.all_time}
-                                                        servings={item.portion}
-                                                        category={getIconInfo(item.categories)}
-                                                        onPress={() => {
-                                                            navigation.push("Recipe Details", {recipeId: item.id})
-                                                        }}
-                                      />
-                                  </View>
-                              )}/>
-                </View>
-
-            </View>
-        </ScrollView>)
+            </View>)
     );
 }

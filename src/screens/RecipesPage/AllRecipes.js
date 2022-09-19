@@ -26,8 +26,6 @@ export default function AllRecipes({route, navigation}) {
                 getPublicRecipes('GET', value, page, "", categoryID, ownRecipe).then(data => {
                     if (data) {
                         const result = Object.values(data);
-
-
                         setRecipes([...recipes, ...result[0]])
                         console.log(categoryID);
                         setLastPage(result[2])
@@ -47,7 +45,7 @@ export default function AllRecipes({route, navigation}) {
 
 
     const fetchMore = () => {
-        if(page !== lastPage){
+        if (page !== lastPage) {
             setPage(page + 1)
         }
     }
@@ -56,22 +54,22 @@ export default function AllRecipes({route, navigation}) {
     return (
         <View style={styles.container}>
             <Text style={styles.heading}>Всички Рецепти</Text>
-            <SafeAreaView style={{ alignSelf: "stretch"}}>
-            <FlatList
-                data={recipes}
-                keyExtractor={(item, index) => item.id}
-                onEndReached={fetchMore}
-                onEndReachedThreshold={0.4}
-                ListFooterComponent={renderLoading(showLoader2)}
-                renderItem={({item}) => (
-                    <RecipesCardSmall title={item.title}
-                                      category={getIconInfo(item.categories)}
-                                      time={item.all_time}
-                                      servings={item.portion}
-                                      photo={item.photo}
-                                      onPress={() => navigation.navigate("Recipe Details", {recipeId: item.id})}
-                    />
-                )}/>
+            <SafeAreaView style={{alignSelf: "stretch"}}>
+                <FlatList
+                    data={recipes}
+                    keyExtractor={(item, index) => item.id}
+                    onEndReached={fetchMore}
+                    onEndReachedThreshold={0.4}
+                    ListFooterComponent={renderLoading(showLoader2)}
+                    renderItem={({item}) => (
+                        <RecipesCardSmall title={item.title}
+                                          category={getIconInfo(item.categories)}
+                                          time={item.all_time}
+                                          servings={item.portion}
+                                          photo={item.photo}
+                                          onPress={() => navigation.navigate("Recipe Details", {recipeId: item.id})}
+                        />
+                    )}/>
             </SafeAreaView>
         </View>
     )
