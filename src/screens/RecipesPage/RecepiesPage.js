@@ -13,6 +13,7 @@ import {getCategories, getLatestRecipes, getPublicRecipes, getSingleRecipe} from
 import renderLoading from "../../components/loading/ShowLoader";
 import LatestRecipesSection from "../../components/recipes/LatestRecipesSection";
 import {RecipesCardSmall} from "../../components/recipes/RecipesCardSamll";
+import {useFocusEffect} from "@react-navigation/native";
 
 export default function RecipesPage({route, navigation}) {
 
@@ -75,17 +76,18 @@ export default function RecipesPage({route, navigation}) {
         }, []);
     }
 
+    useFocusEffect(()=> {
+            setShowLoader(true)
+            setRecipesResult([])
+            console.log(recipesResult)
+            loadData();
+            console.log(recipesResult)
+    });
 
-    useEffect(() => {
-        loadData();
-    }, [page]);
 
     useEffect(() => {
         setShowLoader(true)
-        setRecipesResult([])
-        console.log(recipesResult)
         loadData();
-        console.log(recipesResult)
     }, [route]);
 
 
