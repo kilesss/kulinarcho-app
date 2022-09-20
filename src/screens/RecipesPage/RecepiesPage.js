@@ -12,25 +12,26 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {getCategories, getLatestRecipes, getPublicRecipes, getSingleRecipe} from "../../RestRequests/generalRequest";
 import renderLoading from "../../components/loading/ShowLoader";
 import LatestRecipesSection from "../../components/recipes/LatestRecipesSection";
-import {RecipesCardSmall} from "../../components/recipes/RecipesCardSamll";
+import RecipesCardSmall from "../../components/recipes/RecipesCardSamll";
 import {useFocusEffect} from "@react-navigation/native";
+import RecipesSearchResult from "../../components/recipes/RecipesSearchResult";
 
 export default function RecipesPage({route, navigation}) {
 
-    const {search} = route.params;
+    let {search} = route.params;
     const [categories, setCategories] = useState()
     const [recipesNew, setRecipesNew] = useState()
     const [recipesRandom, setRecipesRandom] = useState()
     const [recipesPopular, setRecipesPopular] = useState()
     const [showLoader, setShowLoader] = useState(true);
     const [showLoader2, setShowLoader2] = useState(false);
-    const [recipesResult, setRecipesResult] = useState([]);
+    let [recipesResult, setRecipesResult] = useState([]);
     const [DemoToken, setDemoToken] = useState(true);
 
     const [lastPage, setLastPage] = useState()
-    const [page, setPage] = useState(1)
-    const fetchMore = () => {
-        if (page !== lastPage) {
+    let [page, setPage] = useState(1)
+    function fetchMore(){
+        if (page < lastPage) {
             setPage(page + 1)
         }
     }
@@ -76,18 +77,28 @@ export default function RecipesPage({route, navigation}) {
         }, []);
     }
 
-    useFocusEffect(()=> {
-            setShowLoader(true)
-            setRecipesResult([])
-            console.log(recipesResult)
-            loadData();
-            console.log(recipesResult)
-    });
+    // useFocusEffect(()=> {
+    //     setShowLoader(true)
+    //     setRecipesResult([])
+    //     console.log(recipesResult)
+    //     loadData();
+    //     console.log(recipesResult)
+    // });
 
 
     useEffect(() => {
-        setShowLoader(true)
+        setShowLoader2(true)
+        console.log("current: " + page)
         loadData();
+    }, [page]);
+
+
+    useEffect(() => {
+        setPage(1)
+        setShowLoader(true)
+        recipesResult = []
+        loadData();
+        return () => search =""
     }, [route]);
 
 
@@ -115,24 +126,12 @@ export default function RecipesPage({route, navigation}) {
                 </View>
 
                 {search ?
-                    <View style={{flex: 1, width: "100%", paddingRight: 20}}>
-                        <Text style={styles.heading}>Всички Рецепти</Text>
-                        <FlatList
-                            data={recipesResult}
-                            keyExtractor={(item, index) => item.id}
-                            onEndReached={fetchMore}
-                            onEndReachedThreshold={0.4}
-                            ListFooterComponent={renderLoading(showLoader2)}
-                            renderItem={({item}) => (
-                                <RecipesCardSmall title={item.title}
-                                                  category={getIconInfo(item.categories)}
-                                                  time={item.all_time}
-                                                  servings={item.portion}
-                                                  photo={item.photo}
-                                                  onPress={() => navigation.navigate("Recipe Details", {recipeId: item.id})}
-                                />
-                            )}/>
-                    </View>
+                    <RecipesSearchResult
+                        navigation={navigation}
+                        recipesResult={recipesResult}
+                        fetchMore={() => fetchMore()}
+                        showLoader2={showLoader2}
+                    />
                     :
                     <LatestRecipesSection
                         navigation={navigation}

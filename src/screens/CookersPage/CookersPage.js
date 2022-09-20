@@ -6,7 +6,7 @@ import CookCard from "../../components/display/CookCard";
 import {GestureHandlerRootView} from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import {rightSwipeActions} from "../../components/shoppingList/ShoppingListItem";
-import {RecipesCardSmall} from "../../components/recipes/RecipesCardSamll";
+import RecipesCardSmall from "../../components/recipes/RecipesCardSamll";
 import language from "../../language/language";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {getProducts, getProductTypes, getPublicProfiles} from "../../RestRequests/generalRequest";

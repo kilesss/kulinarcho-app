@@ -1,6 +1,6 @@
 import {TouchableOpacity, Text, Image, View} from "react-native";
 import {MaterialCommunityIcons, MaterialIcons} from "@expo/vector-icons";
-import React from "react";
+import React, {memo} from "react";
 import {stylesRecipes} from "../../styles/stylesRecipes";
 import language from "../../language/language";
 import CategoriesCard from "../display/CategoriesCard";
@@ -8,7 +8,7 @@ import styles from "../../styles/styles";
 import Images from "../../../public/images";
 
 
-export const RecipesCardSmall = ({onPress, title, time, servings, category, photo}) => (
+const RecipesCardSmall = ({onPress, title, time, servings, category, photo}) => (
     <View style={[stylesRecipes.recipesCardSmall]}>
 
         <Image source={
@@ -43,3 +43,4 @@ export const RecipesCardSmall = ({onPress, title, time, servings, category, phot
     </View>
 );
 
+export default memo(RecipesCardSmall)

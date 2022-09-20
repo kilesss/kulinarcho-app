@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {FlatList, SafeAreaView, ScrollView, Text, View} from "react-native";
 import styles from '../../styles/styles'
 import CategoriesCard from "../../components/display/CategoriesCard";
-import {RecipesCardSmall} from "../../components/recipes/RecipesCardSamll";
+import RecipesCardSmall from "../../components/recipes/RecipesCardSamll";
 import {GestureHandlerRootView} from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import {rightSwipeActions} from "../../components/shoppingList/ShoppingListItem";
@@ -43,7 +43,7 @@ export default function CookingBookPage({navigation}) {
     }
 
     const fetchMore = () => {
-        if(page !== lastPage){
+        if(page < lastPage){
             setPage(page + 1)
         }
     }

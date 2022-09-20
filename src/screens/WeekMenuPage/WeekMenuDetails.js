@@ -3,7 +3,7 @@ import styles from "../../styles/styles";
 import {categories2, recipes} from "../RecipesPage/RecepiesPage";
 import {ListCard} from "../../components/display/ListCard";
 import React, {useEffect, useState} from "react";
-import {RecipesCardSmall} from "../../components/recipes/RecipesCardSamll";
+import RecipesCardSmall from "../../components/recipes/RecipesCardSamll";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {getCategories, getSingleWeeklyMenu} from "../../RestRequests/generalRequest";
 import renderLoading from "../../components/loading/ShowLoader";
