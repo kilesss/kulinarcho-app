@@ -233,12 +233,61 @@ const deleteProductFromList = async function (body, token) {
     return '';
 }
 
+const AddEditProductType = async function (body, token) {
+    const res = await fetch(endpoints.addEditProductTypes, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+    return '';
+}
+
+const deleteProductTypes = async function (body, token) {
+    const res = await fetch(endpoints.deleteProductType, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+    return await res.json();
+}
+
+const addEditProduct = async function (body, token) {
+    const res = await fetch(endpoints.addEditProduct, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+    return '';
+}
+
+const deleteProduct = async function (body, token) {
+    const res = await fetch(endpoints.deleteProduct, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+    return await res.json();
+}
+
+
 export {
     login, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu,
     getSingleRecipe, getCategories, getProducts, getProductTypes, getSingleProfile,
     getPublicProfiles, getLatestRecipes, getPublicRecipes, getShoppingListProducts,
-    AddEditProductShoppingList,deleteProductFromList
-
+    AddEditProductShoppingList,deleteProductFromList, AddEditProductType, deleteProductTypes,
+    addEditProduct, deleteProduct
 }
 
 

@@ -11,8 +11,10 @@ import AddShoppingListModal from "../../components/shoppingList/AddShoppingListM
 import randomColor from '../../components/HelpFunctions'
 import renderLoading from "../../components/loading/ShowLoader";
 import {getShopingList} from "../../RestRequests/generalRequest";
+import { useIsFocused } from '@react-navigation/native'
 
 export default function ShoppingListsPage({navigation}) {
+    const isFocused = useIsFocused()
 
     const [shoppingLists, editShoppingLists] = useState([]);
     const [modalData, setModalData] = useState([]);
@@ -22,9 +24,10 @@ export default function ShoppingListsPage({navigation}) {
     const [DemoToken, setDemoToken] = useState(true);
 
     useEffect(() => {
+        setShowLoader(true)
         console.log('ssssssssssss');
         loadData();
-    }, []);
+    }, [isFocused]);
 
     const showEditProduct = (item) => {
         setChangeModalVisible(true)

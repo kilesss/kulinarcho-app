@@ -70,7 +70,7 @@ export default function AddEditRecipe() {
     const addStep = useRef();
 
 
-    const [categories, setCategories] = useState([])
+    const [categories, setCategories] = useState()
     const [showLoader, setShowLoader] = useState(true);
     const [DemoToken, setDemoToken] = useState(true);
 
@@ -81,7 +81,11 @@ export default function AddEditRecipe() {
                 getCategories('GET', value).then(data => {
                     if (data) {
                         const result = Object.values(data);
+                        let arr = []
+                        result.forEach(item =>
+                            arr.push({label: item.title, value: item.id}))
 
+                        setCategories(arr)
                         setShowLoader(false);
                     }
 
@@ -93,7 +97,7 @@ export default function AddEditRecipe() {
     }
 
     useEffect(() => {
-        loadData(setCategories, setShowLoader, setDemoToken);
+        loadData();
     }, []);
 
 
@@ -198,7 +202,6 @@ export default function AddEditRecipe() {
                     listItemLabelStyle={{
                         color: "#4B4C4C",
                     }}
-                    setItems={setItems}
                     style={{...styles.customButton, padding: 10, borderWidth: 0}}
                     dropDownContainerStyle={{
                         borderWidth: 0,
