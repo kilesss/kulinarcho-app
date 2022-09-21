@@ -11,6 +11,8 @@ import {categories, getIconInfo, loadData, showConfirmDialog, showLoader} from "
 import renderLoading from "../../components/loading/ShowLoader";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {getCategories, getPublicRecipes} from "../../RestRequests/generalRequest";
+import {FloatingAction} from "react-native-floating-action";
+import {actions} from "../RecipesPage/RecepiesPage";
 
 export default function CookingBookPage({navigation}) {
 
@@ -105,6 +107,19 @@ export default function CookingBookPage({navigation}) {
                     )
                     }/>
                 </View>
+                <FloatingAction
+                    actions={actions}
+                    buttonSize={60}
+                    distanceToEdge={25}
+                    color={'#15A051'}
+                    onPressItem={name => {
+                        if(name === "addList") {
+                            navigation.navigate("Shopping List");
+                        }else{
+                            navigation.navigate("Add Edit Recipe")
+                        }
+                    }}
+                />
             </View>)
     );
 }

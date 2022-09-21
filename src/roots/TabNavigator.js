@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import ProfilePage from "../screens/ProfilePage/ProfilePage";
 import CookersPage from "../screens/CookersPage/CookersPage";
 import WeekMenuDetails from "../screens/WeekMenuPage/WeekMenuDetails";
@@ -13,153 +11,20 @@ import RecipeDetails from "../screens/RecipesPage/RecipeDetails";
 import CookerDetails from "../screens/CookersPage/CookerDetails";
 import ShoppingListDetails from "../screens/ShoppingListPage/ShoppingListDetails";
 import ProfilePersonalInfo from "../screens/ProfilePage/ProfilePersonalInfo"
-import {Image, Text, TouchableOpacity, View} from 'react-native';
-import {Ionicons, MaterialCommunityIcons, MaterialIcons} from "@expo/vector-icons";
+import {Image, View} from 'react-native';
 
-import LoginPage from "../screens/Auth/LoginPage";
-import ForgottenPasswordPage from "../screens/Auth/ForgottenPasswordPage";
-import SignupPage from "../screens/Auth/SignupPage";
 import {LogoTitle} from "../components/display/CustomHeader";
-import StackNavigator from "@react-navigation/stack/src/navigators/createStackNavigator";
 import ProductsAndCategoriesPage from "../screens/ProfilePage/ProductsAndCategoriesPage";
 import {createStackNavigator} from "@react-navigation/stack";
 import AddEditRecipe from "../screens/RecipesPage/AddEditRecipe";
-import {LinearGradient} from "expo-linear-gradient";
 import TabNavBottomLine from "../components/display/TabNavBottomLine";
 import Images from "../../public/images/index";
 import AllRecipes from "../screens/RecipesPage/AllRecipes";
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 
 
-const ProfileNavigation = createNativeStackNavigator();
-
-// Profile Page
-function ProfileStack() {
-    return (
-        <ProfileNavigation.Navigator>
-            <ProfileNavigation.Screen name="Settings" component={ProfilePage}/>
-            <ProfileNavigation.Screen name="Profile Details" component={ProfilePersonalInfo}/>
-            <ProfileNavigation.Screen name="Products and Categories" component={ProductsAndCategoriesPage}/>
-        </ProfileNavigation.Navigator>
-    );
-}
-
-
-const ShoppingListNavigator = createNativeStackNavigator();
-
-// Shopping List Page
-function ShoppingListStack() {
-    return (
-        <ShoppingListNavigator.Navigator>
-            <ShoppingListNavigator.Screen name="Shopping List"
-                                          component={ShoppingList}
-                                          options={({navigation}) => ({
-                                              headerTitle: () => (
-                                                  <LogoTitle onPress={() => navigation.navigate("Settings")}/>
-                                              )
-                                          })}/>
-            <ShoppingListNavigator.Screen name="Shopping List Details"
-                                          component={ShoppingListDetails}
-                                          options={({route}) => ({title: route.params.title})}/>
-            <ProfileNavigation.Screen name="Settings"
-                                      component={ProfileStack}
-                                      options={{headerShown: false}}/>
-        </ShoppingListNavigator.Navigator>
-    );
-}
-
-
-const RecipesNavigator = createNativeStackNavigator();
-
-// Recipes Page
-function RecipesStack() {
-    return (
-        <RecipesNavigator.Navigator>
-            <RecipesNavigator.Screen name="Recipes" component={RecipesPage}
-                                     options={({navigation}) => ({
-                                         headerTitle: () => (
-                                             <LogoTitle onPress={() => navigation.navigate("Settings")}/>
-                                         )
-                                     })}/>
-            <RecipesNavigator.Screen name="Recipe Details" component={RecipeDetails}
-                                     options={{headerShown: false, tabBarVisible: false}}
-
-            />
-            <ProfileNavigation.Screen name="Settings"
-                                      component={ProfileStack}
-                                      options={{headerShown: false}}/>
-        </RecipesNavigator.Navigator>
-    );
-}
-
-
-const CookingBookNavigation = createNativeStackNavigator();
-
-// Cooking Book Page
-function CookingBookStack() {
-    return (
-        <CookingBookNavigation.Navigator>
-            <CookingBookNavigation.Screen name="Cooking Book" component={CookingBookPage}
-                                          options={({navigation}) => ({
-                                              headerTitle: () => (
-                                                  <LogoTitle onPress={() => navigation.navigate("Settings")}/>
-                                              )
-                                          })}/>
-            <CookingBookNavigation.Screen name="Recipe Details" component={RecipeDetails}
-                                          options={{headerShown: false, tabBarVisible: false}}
-            />
-            <ProfileNavigation.Screen name="Settings"
-                                      component={ProfileStack}
-                                      options={{headerShown: false}}/>
-        </CookingBookNavigation.Navigator>
-    );
-}
-
-
-const CookersNavigator = createNativeStackNavigator();
-
-// Cookers Page
-function CookersStackScreen() {
-    return (
-        <CookersNavigator.Navigator>
-            <CookersNavigator.Screen name="Cooks" component={CookersPage}
-                                     options={({navigation}) => ({
-                                         headerTitle: () => (
-                                             <LogoTitle onPress={() => navigation.navigate("Settings")}/>
-                                         )
-                                     })}
-            />
-            <CookersNavigator.Screen name="Cooks Details" component={CookerDetails}/>
-            <ProfileNavigation.Screen name="Settings"
-                                      component={ProfileStack}
-                                      options={{headerShown: false}}/>
-        </CookersNavigator.Navigator>
-    );
-}
-
-const WeekMenuNavigation = createNativeStackNavigator();
-
-// Week Menu Page
-function WeekMenuStack() {
-    return (
-        <WeekMenuNavigation.Navigator>
-            <WeekMenuNavigation.Screen name="Week Menu" component={WeekMenuPage}
-                                       options={({navigation}) => ({
-                                           headerTitle: () => (
-                                               <LogoTitle onPress={() => navigation.navigate("Settings")}/>
-                                           )
-                                       })}
-            />
-            <WeekMenuNavigation.Screen name="Week Menu Details" component={WeekMenuDetails}/>
-            <ProfileNavigation.Screen name="Settings"
-                                      component={ProfileStack}
-                                      options={{headerShown: false}}/>
-        </WeekMenuNavigation.Navigator>
-    );
-}
 
 const Tab = createBottomTabNavigator();
-
-
 const Stack = createStackNavigator();
 
 function MainTabs() {
@@ -176,7 +41,9 @@ function MainTabs() {
             )
 
         })}>
-            <Tab.Screen name={"Shopping List"} component={ShoppingList}
+            <Tab.Screen name={"Shopping List"}
+                        component={ShoppingList}
+                        initialParams={{ openModal: false }}
                         options={{
                             tabBarLabel: "",
                             tabBarIcon: ({focused}) => {
