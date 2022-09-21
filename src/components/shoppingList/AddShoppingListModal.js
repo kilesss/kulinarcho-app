@@ -82,6 +82,7 @@ export default function AddShoppingListModal({
                     //TODO: connect with error messages
                     console.log(restErr);
                 }
+                setText('')
             })
     }
 

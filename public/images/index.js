@@ -45,6 +45,7 @@ const images = {
         fruitVeg: require('./icons/product-category/icons8-vegetables-100.png'),
         seasoning: require('./icons/product-category/icons8-spice-100.png'),
         construction: require('./icons/product-category/icons8-tools-100.png'),
+        custom: require('./icons/product-category/icons8-custom-100.png')
 
     },
     defaultProfile: require('./defaultProfile.png'),

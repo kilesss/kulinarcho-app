@@ -74,6 +74,8 @@ export function getProductTypeIcon(title){
             return Images.productCategory.seasoning
         case "Строителни":
             return Images.productCategory.construction
+        default:
+            return Images.productCategory.custom
 
     }
 }

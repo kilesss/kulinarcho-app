@@ -14,44 +14,6 @@ export default function ProductsAndCategoriesPage({navigation}) {
 
     const [toggle, setToggle] = useState(false)
 
-    const [products, setProducts] = useState([
-        // {key: "1", title: "Carrot", icon: "carrot", amount: "100g", color: "#FF7410"},
-    ])
-
-    const [showLoader, setShowLoader] = useState(true);
-    const [DemoToken, setDemoToken] = useState(true);
-    const [productTypes, setProductTypes] = useState([]);
-
-    function loadData() {
-        AsyncStorage.getItem('access_token').then((value) => {
-            setDemoToken(value);
-            if (value) {
-                getProductTypes('GET', value).then(data => {
-                    if (data) {
-                        const result = Object.values(data);
-                        setProductTypes(result)
-                        setShowLoader(false);
-                    }
-                }).catch((err) => {
-                    console.log(err);
-                });
-                getProducts('GET', value).then(data => {
-                    if (data) {
-                        const result = Object.values(data);
-                        setProducts(result)
-                        setShowLoader(false);
-                    }
-                }).catch((err) => {
-                    console.log(err);
-                });
-            }
-        }, []);
-    }
-
-    useEffect(() => {
-        loadData();
-
-    }, []);
 
     return (
             <View style={styles.container}>
@@ -74,7 +36,9 @@ export default function ProductsAndCategoriesPage({navigation}) {
                     ]}
                 />
 
-                <ProductsCategoriesToggle condition={toggle} categories={productTypes} products={products}/>
+                <ProductsCategoriesToggle
+                    condition={toggle}
+                />
             </View>
     );
 }

@@ -9,8 +9,14 @@ const endpoints = {
   getSingleWeeklyMenu: 'https://kulinarcho.com/api/weekMenuID/?id=',
   getSingleRecipe: 'https://kulinarcho.com/api/showRecipe/?id=',
   getCategories: 'https://kulinarcho.com/api/getCategories',
+
   getProductTypes: 'https://kulinarcho.com/api/getTypes',
   getProducts: 'https://kulinarcho.com/api/getProducts',
+  addEditProductTypes: 'https:///kulinarcho.com/api/addProductType',
+  deleteProductType: 'https:///kulinarcho.com/api/deleteProductType',
+  addEditProduct: 'https:///kulinarcho.com/api/createProducts',
+  deleteProduct: 'https:///kulinarcho.com/api/deleteProducts',
+
   getPublicProfiles: 'https://kulinarcho.com/api/getPublicProfiles',
   getPublicProfile: 'https://kulinarcho.com/api/getPublicProfile/',
 
