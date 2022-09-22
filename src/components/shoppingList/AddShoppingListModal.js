@@ -5,7 +5,7 @@ import language from "../../language/language";
 import shoppingListStyle from "../../styles/stylesShoppingList";
 import {CustomButton} from "../display/CustomButton";
 import {MaterialIcons} from "@expo/vector-icons";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {deleteList, updateList} from "../../RestRequests/generalRequest";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import renderLoading from "../loading/ShowLoader";
@@ -23,6 +23,7 @@ export default function AddShoppingListModal({
                                                  modalId,
                                                  deleteFunctionality,
                                                  showDeleteOption,
+                                                 goBack,
                                              }) {
     const [text, setText] = useState("")
     const [id] = useState("")
@@ -72,6 +73,7 @@ export default function AddShoppingListModal({
         await updateList(JSON.stringify(requestBody), token).then()
             .then(response => {
                 setShowLoader(false);
+                if(goBack){goBack()}
                 setModalVisible(!modalVisible)
                 if (response.access_token) {
                     /** Set JWT  **/

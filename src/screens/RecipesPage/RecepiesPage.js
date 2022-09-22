@@ -12,6 +12,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {getCategories, getLatestRecipes, getSingleRecipe} from "../../RestRequests/generalRequest";
 import renderLoading from "../../components/loading/ShowLoader";
 import { FloatingAction } from "react-native-floating-action";
+import AddShoppingListModal from "../../components/shoppingList/AddShoppingListModal";
+import FloatingActionButton from "../../components/display/FloatingActionButton";
 
 export const actions = [
     {
@@ -97,6 +99,8 @@ export default function RecipesPage({navigation}) {
 
     }, []);
 
+    const [addModalVisible, setAddModalVisible] = useState(false);
+
     return (
         renderLoading(showLoader, <View><ScrollView>
             <View style={[styles.container, {alignItems: "flex-start", marginRight: 0}]}>
@@ -178,18 +182,14 @@ export default function RecipesPage({navigation}) {
 
             </View>
         </ScrollView>
-            <FloatingAction
-                actions={actions}
-                buttonSize={60}
-                distanceToEdge={25}
-                color={'#15A051'}
-                onPressItem={name => {
-                    if(name === "addList") {
-                        navigation.navigate("Shopping List");
-                    }else{
-                        navigation.navigate("Add Edit Recipe")
-                    }
-                }}
+            <FloatingActionButton navigation={navigation} addModalVisible={addModalVisible} setAddModalVisible={setAddModalVisible}/>
+            <AddShoppingListModal modalVisible={addModalVisible}
+                                  setModalVisible={setAddModalVisible}
+                                  token = {DemoToken}
+                                  modalTitle={language("newShoppingList")}
+                                  buttonTitle={language("add")}
+                                  showDeleteOption={false}
+                                  goBack={() => navigation.navigate("Shopping List")}
             />
         </View>)
     );

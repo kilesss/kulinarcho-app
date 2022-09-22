@@ -12,11 +12,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {getProducts, getProductTypes, getPublicProfiles} from "../../RestRequests/generalRequest";
 import {getProductTypeIcon} from "../../components/HelpFunctions";
 import {stylesCooks} from "../../styles/stylesCooks";
+import FloatingActionButton from "../../components/display/FloatingActionButton";
+import AddShoppingListModal from "../../components/shoppingList/AddShoppingListModal";
 
 export default function CookersPage({navigation}) {
     const [showLoader, setShowLoader] = useState(true);
     const [DemoToken, setDemoToken] = useState(true);
     const [cooks, setCooks] = useState([]);
+    const [addModalVisible, setAddModalVisible] = useState(false);
 
     function loadData() {
         AsyncStorage.getItem('access_token').then((value) => {
@@ -41,7 +44,8 @@ export default function CookersPage({navigation}) {
     }, []);
 
     return (
-            <View style={styles.container}>
+            <View style={{flex: 1}}>
+                <View style={styles.container}>
                 <Text style={styles.heading}>{language("cooks")}</Text>
 
                 {/*{cooks.map((cook) => {*/}
@@ -60,6 +64,16 @@ export default function CookersPage({navigation}) {
                             numRecipes={item.recipes}
                             onPress={() => navigation.navigate("Cooks Details", {cookId: item.id})}/>
                 )}/>
+                </View>
+                <FloatingActionButton navigation={navigation} addModalVisible={addModalVisible} setAddModalVisible={setAddModalVisible}/>
+                <AddShoppingListModal modalVisible={addModalVisible}
+                                      setModalVisible={setAddModalVisible}
+                                      token = {DemoToken}
+                                      modalTitle={language("newShoppingList")}
+                                      buttonTitle={language("add")}
+                                      showDeleteOption={false}
+                                      goBack={() => navigation.navigate("Shopping List")}
+                />
             </View>
     );
 }

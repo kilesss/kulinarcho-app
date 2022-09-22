@@ -11,6 +11,7 @@ import AddShoppingListModal from "../../components/shoppingList/AddShoppingListM
 import randomColor from '../../components/HelpFunctions'
 import renderLoading from "../../components/loading/ShowLoader";
 import {getShopingList} from "../../RestRequests/generalRequest";
+import FloatingActionButton from "../../components/display/FloatingActionButton";
 
 export default function ShoppingListsPage({navigation}) {
 
@@ -58,7 +59,8 @@ export default function ShoppingListsPage({navigation}) {
        loadData();
     }
 
-    return renderLoading(showLoader, <View style={styles.container}>
+    return renderLoading(showLoader, <View style={{flex: 1}}>
+        <View style={styles.container}>
 
         <AddShoppingListModal modalVisible={addModalVisible}
                               setModalVisible={setAddModalVisible2}
@@ -66,7 +68,6 @@ export default function ShoppingListsPage({navigation}) {
                               modalTitle={language("newShoppingList")}
                               buttonTitle={language("add")}
                               showDeleteOption={false}
-
         />
         <AddShoppingListModal modalVisible={changeModalVisible}
                               setModalVisible={setChangeModalVisible2}
@@ -108,6 +109,8 @@ export default function ShoppingListsPage({navigation}) {
                       />
                   )}/>
 
+    </View>
+        <FloatingActionButton navigation={navigation} addModalVisible={addModalVisible} setAddModalVisible={setAddModalVisible}/>
     </View>)
 }
 
