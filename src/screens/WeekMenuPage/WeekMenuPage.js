@@ -10,12 +10,14 @@ import renderLoading from "../../components/loading/ShowLoader";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {getWeeklyMenus} from "../../RestRequests/generalRequest";
 import getRandomColor from "../../components/HelpFunctions";
+import FloatingActionButton from "../../components/display/FloatingActionButton";
 
 export default function WeekMenuPage({navigation}) {
     const [changeModalVisible, setChangeModalVisible] = useState(false);
 
     const [showLoader, setShowLoader] = useState(true);
     const [DemoToken, setDemoToken] = useState(true);
+    const [addModalVisible, setAddModalVisible] = useState(false);
 
     const [menus, setMenus] = useState([]);
 
@@ -44,7 +46,7 @@ export default function WeekMenuPage({navigation}) {
 
 
     return (
-        renderLoading(showLoader, <ScrollView>
+        renderLoading(showLoader, <View><ScrollView>
             <View style={{...styles.container, alignItems: "flex-start", justifyContent: "flex-start"}}>
                 <AddShoppingListModal modalVisible={changeModalVisible}
                                       setModalVisible={setChangeModalVisible}
@@ -79,6 +81,16 @@ export default function WeekMenuPage({navigation}) {
                     );
                 })}
             </View>
-        </ScrollView>)
+        </ScrollView>
+            <FloatingActionButton navigation={navigation} addModalVisible={addModalVisible} setAddModalVisible={setAddModalVisible}/>
+            <AddShoppingListModal modalVisible={addModalVisible}
+                                  setModalVisible={setAddModalVisible}
+                                  token = {DemoToken}
+                                  modalTitle={language("newShoppingList")}
+                                  buttonTitle={language("add")}
+                                  showDeleteOption={false}
+                                  goBack={() => navigation.navigate("Shopping List")}
+            />
+        </View>)
     );
 }

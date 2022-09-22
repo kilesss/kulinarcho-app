@@ -11,6 +11,10 @@ import {categories, getIconInfo, loadData, showConfirmDialog, showLoader} from "
 import renderLoading from "../../components/loading/ShowLoader";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {getCategories, getPublicRecipes} from "../../RestRequests/generalRequest";
+import {FloatingAction} from "react-native-floating-action";
+import {actions} from "../RecipesPage/RecepiesPage";
+import FloatingActionButton from "../../components/display/FloatingActionButton";
+import AddShoppingListModal from "../../components/shoppingList/AddShoppingListModal";
 
 export default function CookingBookPage({navigation}) {
 
@@ -21,6 +25,7 @@ export default function CookingBookPage({navigation}) {
     const [DemoToken, setDemoToken] = useState(true);
     const [lastPage, setLastPage] = useState()
     const [page, setPage] = useState(1)
+    const [addModalVisible, setAddModalVisible] = useState(false);
 
     function loadRecipes() {
         setShowLoader2(true)
@@ -61,8 +66,8 @@ export default function CookingBookPage({navigation}) {
 
     return (
         renderLoading(showLoader,
-            <View style={[styles.container, {alignItems: "flex-start", marginRight: 0}]}>
-                <View style={{minHeight: 145}}>
+            <View style={{flex: 1, justifyContent: "flex-start", alignItems: "flex-start", margin: 0}}>
+                <View style={{marginLeft: 20, marginTop: 10, minHeight: 145}}>
                     <View>
                         <Text style={styles.heading}>{language("categories")}</Text>
                     </View>
@@ -84,10 +89,11 @@ export default function CookingBookPage({navigation}) {
                 </View>
 
 
-                <View style={{flex: 1, width: "100%", paddingRight: 20}}>
+                <View style={{flex: 1, width: "100%", paddingRight: 20, marginHorizontal: 20}}>
                     <Text style={[styles.heading]}>{language("popularRecipes")}</Text>
                     <FlatList
                         data={recipes}
+                        contentContainerStyle={{paddingRight: 20}}
                         keyExtractor={item => item.id}
                         onEndReached={fetchMore}
                         onEndReachedThreshold={0.4}
@@ -105,6 +111,15 @@ export default function CookingBookPage({navigation}) {
                     )
                     }/>
                 </View>
+                <FloatingActionButton navigation={navigation} addModalVisible={addModalVisible} setAddModalVisible={setAddModalVisible}/>
+                <AddShoppingListModal modalVisible={addModalVisible}
+                                      setModalVisible={setAddModalVisible}
+                                      token = {DemoToken}
+                                      modalTitle={language("newShoppingList")}
+                                      buttonTitle={language("add")}
+                                      showDeleteOption={false}
+                                      goBack={() => navigation.navigate("Shopping List")}
+                />
             </View>)
     );
 }

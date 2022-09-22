@@ -11,10 +11,9 @@ import AddShoppingListModal from "../../components/shoppingList/AddShoppingListM
 import randomColor from '../../components/HelpFunctions'
 import renderLoading from "../../components/loading/ShowLoader";
 import {getShopingList} from "../../RestRequests/generalRequest";
-import { useIsFocused } from '@react-navigation/native'
+import FloatingActionButton from "../../components/display/FloatingActionButton";
 
 export default function ShoppingListsPage({navigation}) {
-    const isFocused = useIsFocused()
 
     const [shoppingLists, editShoppingLists] = useState([]);
     const [modalData, setModalData] = useState([]);
@@ -24,10 +23,9 @@ export default function ShoppingListsPage({navigation}) {
     const [DemoToken, setDemoToken] = useState(true);
 
     useEffect(() => {
-        setShowLoader(true)
         console.log('ssssssssssss');
         loadData();
-    }, [isFocused]);
+    }, []);
 
     const showEditProduct = (item) => {
         setChangeModalVisible(true)
@@ -61,7 +59,8 @@ export default function ShoppingListsPage({navigation}) {
        loadData();
     }
 
-    return renderLoading(showLoader, <View style={styles.container}>
+    return renderLoading(showLoader, <View style={{flex: 1}}>
+        <View style={styles.container}>
 
         <AddShoppingListModal modalVisible={addModalVisible}
                               setModalVisible={setAddModalVisible2}
@@ -69,7 +68,6 @@ export default function ShoppingListsPage({navigation}) {
                               modalTitle={language("newShoppingList")}
                               buttonTitle={language("add")}
                               showDeleteOption={false}
-
         />
         <AddShoppingListModal modalVisible={changeModalVisible}
                               setModalVisible={setChangeModalVisible2}
@@ -111,6 +109,8 @@ export default function ShoppingListsPage({navigation}) {
                       />
                   )}/>
 
+    </View>
+        <FloatingActionButton navigation={navigation} addModalVisible={addModalVisible} setAddModalVisible={setAddModalVisible}/>
     </View>)
 }
 

@@ -11,6 +11,28 @@ import {getIconInfo} from "../../components/HelpFunctions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {getCategories, getLatestRecipes, getSingleRecipe} from "../../RestRequests/generalRequest";
 import renderLoading from "../../components/loading/ShowLoader";
+import { FloatingAction } from "react-native-floating-action";
+import AddShoppingListModal from "../../components/shoppingList/AddShoppingListModal";
+import FloatingActionButton from "../../components/display/FloatingActionButton";
+
+export const actions = [
+    {
+        text: "Добави Списък за Пазар",
+        icon: Images.navIcons.shoppingLists,
+        name: "addList",
+        position: 2,
+        color: "#15a051",
+        buttonSize: 43,
+    },
+    {
+        text: "Добави Рецепта",
+        icon: Images.navIcons.recipes,
+        name: "bt_accessibility",
+        position: 1,
+        color: "#15a051",
+        buttonSize: 43,
+    },
+];
 
 export const categories2 = [
     {key: "1", title: "Риба", icon: "fish", color: "#0088C2"},
@@ -77,8 +99,10 @@ export default function RecipesPage({navigation}) {
 
     }, []);
 
+    const [addModalVisible, setAddModalVisible] = useState(false);
+
     return (
-        renderLoading(showLoader, <ScrollView>
+        renderLoading(showLoader, <View><ScrollView>
             <View style={[styles.container, {alignItems: "flex-start", marginRight: 0}]}>
                 <View style={{flex: 1.3, minHeight: 145}}>
                     <View>
@@ -157,6 +181,16 @@ export default function RecipesPage({navigation}) {
                 </View>
 
             </View>
-        </ScrollView>)
+        </ScrollView>
+            <FloatingActionButton navigation={navigation} addModalVisible={addModalVisible} setAddModalVisible={setAddModalVisible}/>
+            <AddShoppingListModal modalVisible={addModalVisible}
+                                  setModalVisible={setAddModalVisible}
+                                  token = {DemoToken}
+                                  modalTitle={language("newShoppingList")}
+                                  buttonTitle={language("add")}
+                                  showDeleteOption={false}
+                                  goBack={() => navigation.navigate("Shopping List")}
+            />
+        </View>)
     );
 }

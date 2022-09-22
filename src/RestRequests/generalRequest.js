@@ -187,7 +187,7 @@ function formatResponse(response) {
         delete response.premium;
     }
     if ('first_login' in response){
-        delete response.first_login;
+        console.log(response.first_login);
     }
     if ('user_requests' in response){
         delete response.user_requests;
