@@ -23,15 +23,13 @@ export const styles = StyleSheet.create({
     alignSelf: "stretch",
     borderRadius: 8,
     shadowColor: "#999",
-    elevation: 3,
+    elevation: 1,
     backgroundColor: "#fff",
     marginVertical: 5
   },
   customButtonText: {
     paddingLeft: 15,
     paddingRight: 15,
-    fontSize: 18,
-    fontWeight: "bold"
   },
   boldTextButton: {
     color: "#15A051",
@@ -39,10 +37,11 @@ export const styles = StyleSheet.create({
     marginBottom: 30
   },
   heading: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "bold",
     color: "#4B4C4C",
-    marginVertical: 10,
+    marginTop: 10,
+    marginBottom: 5
   },
   subHeading: {
     fontSize: 14,

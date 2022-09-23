@@ -6,6 +6,7 @@ import SignupPage from "../screens/Auth/SignupPage";
 import ForgottenPasswordPage from "../screens/Auth/ForgottenPasswordPage";
 import {NavigationContainer} from "@react-navigation/native";
 import TabNavigator from "./TabNavigator";
+import FirstLoginNavigation from "./FirstLoginNavigation";
 
 const AuthNavigation = createNativeStackNavigator();
 // Shopping List Page
@@ -17,6 +18,7 @@ export default function AuthStack() {
             <AuthNavigation.Screen name="Forgotten Password" component={ForgottenPasswordPage} options={{headerShown: false}} />
             <AuthNavigation.Screen name="Signup" component={SignupPage} options={{headerShown: false}} />
             <AuthNavigation.Screen name="Shopping List" component={TabNavigator} options={{headerShown: false}}/>
+            <AuthNavigation.Screen name="First Login" component={FirstLoginNavigation} options={{headerShown: false}}/>
         </AuthNavigation.Navigator>
         </NavigationContainer>
     );

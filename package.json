@@ -30,6 +30,7 @@
     "react-native-duo-toggle-switch": "^1.1.0",
     "react-native-floating-action": "^1.22.0",
     "react-native-gesture-handler": "~2.5.0",
+    "react-native-onboarding-swiper": "^1.2.0",
     "react-native-raw-bottom-sheet": "^2.2.0",
     "react-native-switch-selector": "^2.2.1"
   },
