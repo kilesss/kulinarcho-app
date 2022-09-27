@@ -14,7 +14,7 @@ export const ProductCard = ({ title, textRight, image, onPress}) => (
             <Text style={{fontSize: 16, fontWeight:"bold", color:"#4B4C4C", paddingLeft: 7}}>{title}</Text>
         </View>
 
-        <Text style={{fontWeight:"bold", color:"#4B4C4C"}}>{textRight}</Text>
+        <Text style={{color:"#4B4C4C"}}>{textRight}</Text>
         </View>
 
     </TouchableWithoutFeedback>

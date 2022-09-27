@@ -8,7 +8,7 @@ import {GestureHandlerRootView, RectButton} from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 
-export const rightSwipeActions = (progress, dragX, onPressDelete, height) => {
+export const rightSwipeActions = (progress, dragX, onPressDelete, height, marginTop = 0) => {
     const trans = dragX.interpolate({
         inputRange: [0, 50, 100, 101],
         outputRange: [-20, 0, 0, 1],
@@ -22,6 +22,7 @@ export const rightSwipeActions = (progress, dragX, onPressDelete, height) => {
                 alignItems: 'flex-end',
                 marginLeft: -7,
                 paddingHorizontal: 30,
+                marginTop: marginTop,
                 height: height,
                 transform: [{ translateX: 0 }],
 

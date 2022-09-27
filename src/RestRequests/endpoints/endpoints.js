@@ -28,7 +28,9 @@ const endpoints = {
   AddEditProductShoppingList: 'https://kulinarcho.com/api/AddEditProductShoppingList',
   deleteProductFromList: 'https://kulinarcho.com/api/deleteProductFromList',
 
-  firstLogin: 'https://kulinarcho.com/api/firstLogin'
+  firstLogin: 'https://kulinarcho.com/api/firstLogin',
+
+  addEditRecipe: 'https://kulinarcho.com/api/recipesAdd'
 
 }
 

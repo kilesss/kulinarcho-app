@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
     marginBottom: 30
   },
   heading: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: "bold",
     color: "#4B4C4C",
     marginTop: 10,

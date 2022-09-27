@@ -184,7 +184,7 @@ export const stylesRecipes = StyleSheet.create({
     addRecipeProductsContainer: {
         flexDirection: "row",
         marginTop: 12,
-        alignItems: "flex-start",
+        alignItems: "center",
     },
     addRecipeWrapContainer: {
         flexDirection: "row",

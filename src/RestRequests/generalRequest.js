@@ -309,12 +309,26 @@ const firstLogin = async function (token) {
 }
 
 
+const addEditRecipe = async function (body, token) {
+    const res = await fetch(endpoints.addEditRecipe, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+    console.log(body)
+    console.log(res)
+    return await res.json();
+}
+
 export {
     login, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu,
     getSingleRecipe, getCategories, getProducts, getProductTypes, getSingleProfile,
     getPublicProfiles, getLatestRecipes, getPublicRecipes, getShoppingListProducts,
     AddEditProductShoppingList,deleteProductFromList, AddEditProductType, deleteProductTypes,
-    addEditProduct, deleteProduct, firstLogin
+    addEditProduct, deleteProduct, firstLogin, addEditRecipe
 }
 
 
