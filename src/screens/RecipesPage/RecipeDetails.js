@@ -65,10 +65,14 @@ export default function RecipeDetails({route, navigation}) {
         renderLoading(showLoader,
             <MenuProvider>
             <SafeAreaView>
-                <TopNavigation title="Home"
-                               scrollA={scrollA}
-                               navigation={navigation}
-                               onPressBack={() => navigation.goBack()}/>
+                <TopNavigation
+                    recipeDetails={recipeDetails}
+                    products={products}
+                    steps={steps}
+                    scrollA={scrollA}
+                    navigation={navigation}
+                    onPressBack={() => navigation.goBack()}
+                />
 
                 <Animated.ScrollView
                     onScroll={Animated.event(

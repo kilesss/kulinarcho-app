@@ -32,7 +32,8 @@
     "react-native-gesture-handler": "~2.5.0",
     "react-native-onboarding-swiper": "^1.2.0",
     "react-native-raw-bottom-sheet": "^2.2.0",
-    "react-native-switch-selector": "^2.2.1"
+    "react-native-switch-selector": "^2.2.1",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

@@ -105,7 +105,7 @@ export default function CookingBookPage({navigation}) {
                                                   servings={item.portion}
                                                   category={getIconInfo(2)}
                                                   onPress={() => {
-                                                      navigation.push("Recipe Details", {recipeId: 913})
+                                                      navigation.push("Recipe Details", {recipeId: item.id})
                                                   }}
                                 />
                     )

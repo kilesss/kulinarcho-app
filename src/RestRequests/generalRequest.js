@@ -131,8 +131,6 @@ const getProducts = async function (method, JWT) {
             'Authorization': 'Bearer ' + JWT
         }
     });
-    console.log('await res.json()');
-    console.log(await res);
 
     return formatResponse(await res.json());
 }
@@ -309,8 +307,8 @@ const firstLogin = async function (token) {
 }
 
 
-const addEditRecipe = async function (body, token) {
-    const res = await fetch(endpoints.addEditRecipe, {
+const addRecipe = async function (body, token) {
+    const res = await fetch(endpoints.addRecipe, {
         method: 'POST',
         body: body,
         headers: {
@@ -318,17 +316,41 @@ const addEditRecipe = async function (body, token) {
             'Content-Type': 'application/json',
         }
     });
-    console.log(body)
-    console.log(res)
+
     return await res.json();
 }
+
+const editRecipe = async function (body, token) {
+    const res = await fetch(endpoints.editRecipe, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+
+    return await res.json();
+}
+
+
+const getUnits = async function (method, JWT) {
+    const res = await fetch(`${endpoints.getUnits}`, {
+        method: method,
+        headers: {
+            'Authorization': 'Bearer ' + JWT
+        }
+    });
+    return formatResponse(await res.json());
+}
+
 
 export {
     login, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu,
     getSingleRecipe, getCategories, getProducts, getProductTypes, getSingleProfile,
     getPublicProfiles, getLatestRecipes, getPublicRecipes, getShoppingListProducts,
     AddEditProductShoppingList,deleteProductFromList, AddEditProductType, deleteProductTypes,
-    addEditProduct, deleteProduct, firstLogin, addEditRecipe
+    addEditProduct, deleteProduct, firstLogin, addRecipe, getUnits, editRecipe
 }
 
 

@@ -57,7 +57,6 @@ export default function language(key){
         cooking: "Готвене",
         totalTime: "Общо време",
         portions: "Порции",
-        description: "Описание",
         videoLink: "Видео линк",
         portionType: "Разфасовка",
         delete: "Изтрий",
@@ -65,8 +64,8 @@ export default function language(key){
         yes: "Да",
         no: "Не",
         confirmDelete: "Сигурни ли сте?",
-        confirmRecipeDelete: "Сигурни ли сте че искате да изтрииете тази рецепта?"
-
+        confirmRecipeDelete: "Сигурни ли сте че искате да изтрииете тази рецепта?",
+        hint: "Пояснение"
 
 
 
