@@ -3,12 +3,13 @@ import {View, Text, StatusBar, TouchableOpacity, Alert} from 'react-native';
 import {useSafeArea} from 'react-native-safe-area-context';
 import {TOPNAVI_H, BANNER_H} from '../constants';
 import {stylesRecipes} from "../../styles/stylesRecipes";
-import {MaterialCommunityIcons, MaterialIcons} from "@expo/vector-icons";
+import {Ionicons, MaterialCommunityIcons, MaterialIcons, Octicons} from "@expo/vector-icons";
 import {Menu, MenuOption, MenuOptions, MenuTrigger} from "react-native-popup-menu";
 import {MenuProvider} from 'react-native-popup-menu';
 import styles from "../../styles/styles";
 import language from "../../language/language";
 import {showConfirmDialog} from "../HelpFunctions";
+import ShareButton from "./ShareButton";
 
 export default function TopNavigation({recipeDetails, products, steps, scrollA, onPressBack, navigation}) {
 
@@ -16,7 +17,6 @@ export default function TopNavigation({recipeDetails, products, steps, scrollA, 
 
     const isFloating = !!scrollA;
     const [isTransparent, setTransparent] = useState(isFloating);
-
 
 
     useEffect(() => {
@@ -47,17 +47,31 @@ export default function TopNavigation({recipeDetails, products, steps, scrollA, 
                     <MaterialIcons name={"arrow-back"} size={28} color={"#fff"}/>
                 </TouchableOpacity>
                 <View style={{flexDirection: "row"}}>
-                    <MaterialCommunityIcons name={"heart"} size={28} color={"#fff"}/>
+                    <MaterialCommunityIcons name={"heart-outline"} size={32} color={"#fff"} style={{marginHorizontal: 10}}/>
+                    <ShareButton/>
                     <Menu style={{marginTop: 35}}>
-                        <MenuTrigger style={{marginTop: -35, paddingHorizontal: 5}}>
-                            <MaterialCommunityIcons name={"dots-vertical"} size={28} color={"#fff"}/>
+                        <MenuTrigger style={{marginTop: -35, paddingLeft: 10}}>
+                            <MaterialCommunityIcons name={"dots-vertical"} size={32} color={"#fff"}/>
                         </MenuTrigger>
                         <MenuOptions>
-                            <MenuOption onSelect={() => navigation.navigate("Add Edit Recipe", {recipeDetails: recipeDetails, productList: products, stepList: steps, edit: true })}
+                            <MenuOption onSelect={() => navigation.navigate("Add Edit Recipe", {
+                                recipeDetails: recipeDetails,
+                                productList: products,
+                                stepList: steps,
+                                edit: true
+                            })}
                                         style={stylesRecipes.popupMenu}>
                                 <MaterialCommunityIcons name={"pen"} size={25} color={"#4B4C4C"}/>
                                 <Text style={styles.subHeading}>Edit</Text>
                             </MenuOption>
+                            {recipeDetails.public === 0 ?
+                                <MenuOption onSelect={() => showConfirmDialog(() => console.log("Pressed Yes"))}
+                                            style={stylesRecipes.popupMenu}>
+                                    <Octicons name={"people"} size={25} color={"#15A051"}/>
+                                    <Text style={styles.subHeading}>{language("makePublic")}</Text>
+                                </MenuOption> : ''
+                            }
+
                             <MenuOption onSelect={() => showConfirmDialog(() => console.log("Pressed Yes"))}
                                         style={stylesRecipes.popupMenu}>
                                 <MaterialCommunityIcons name={"delete"} size={25} color={"red"}/>

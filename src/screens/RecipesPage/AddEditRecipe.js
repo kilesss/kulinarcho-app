@@ -255,7 +255,7 @@ export default function AddEditRecipe({route}) {
                 <Formik
                     initialValues={{
                         title: recipeDetails ? recipeDetails.title : '',
-                        public: recipeDetails ? recipeDetails.public : true,
+                        public: recipeDetails.public !== 0,
                         preparation: recipeDetails.prep_time ? String(recipeDetails.prep_time) : '',
                         cooking: recipeDetails.cook_time ? String(recipeDetails.cook_time) : '',
                         total_time: recipeDetails.all_time ? String(recipeDetails.all_time) : '',
@@ -286,19 +286,20 @@ export default function AddEditRecipe({route}) {
                         value ? setValueError('') : setValueError('Изберете категория')
 
 
-                        // if (products && steps) {
-                        //     if (edit) {
-                        //         editExistingRecipe(obj).then(r => {
-                        //             actions.resetForm()
-                        //             resetOtherFields()
-                        //         })
-                        //     } else {
-                        //         submitRecipe(obj).then(r => {
-                        //             actions.resetForm()
-                        //             resetOtherFields()
-                        //         })
-                        //     }
-                        // }
+                        if (products && steps) {
+                            if (edit) {
+                                editExistingRecipe(obj).then(r => {
+                                    // actions.resetForm()
+                                    // resetOtherFields()
+                                    console.log("changes")
+                                })
+                            } else {
+                                submitRecipe(obj).then(r => {
+                                    actions.resetForm()
+                                    resetOtherFields()
+                                })
+                            }
+                        }
 
                     }}>
                     {(props) => (

@@ -65,7 +65,8 @@ export default function language(key){
         no: "Не",
         confirmDelete: "Сигурни ли сте?",
         confirmRecipeDelete: "Сигурни ли сте че искате да изтрииете тази рецепта?",
-        hint: "Пояснение"
+        hint: "Пояснение",
+        makePublic: "Направи Публична"
 
 
 

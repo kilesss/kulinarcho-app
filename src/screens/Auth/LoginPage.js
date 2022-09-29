@@ -75,13 +75,8 @@ export default class LoginPage extends React.Component {
         await login(loginPayload, 'POST', this.props.navigation).then()
           .then(response => {
               if(response.first_login === 0){
-                  console.log("------")
                   this.setState({showLoader:false})
                   AsyncStorage.setItem('access_token', response.access_token);
-                  this.props.navigation.reset({
-                      index: 0,
-                      routes: [{ name: 'First Login' }],
-                  });
               }
               if (response.access_token) {
                   this.setState({showLoader:false})

@@ -56,7 +56,7 @@ export default function AllRecipes({route, navigation}) {
     return (
         <View style={styles.container}>
             <Text style={styles.heading}>Всички Рецепти</Text>
-            <SafeAreaView style={{ alignSelf: "stretch"}}>
+            <SafeAreaView style={{ alignSelf: "stretch", paddingBottom: 40}}>
             <FlatList
                 data={recipes}
                 keyExtractor={(item, index) => item.id}
