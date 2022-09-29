@@ -16,10 +16,11 @@ import renderLoading from "../../components/loading/ShowLoader";
 import {MenuProvider} from "react-native-popup-menu";
 import Images from "../../../public/images";
 import {getIconInfo} from "../../components/HelpFunctions";
+import {useIsFocused} from "@react-navigation/native";
 
 export default function RecipeDetails({route, navigation}) {
 
-
+    const isFocused = useIsFocused()
 
     const scrollA = useRef(new Animated.Value(0)).current;
 
@@ -60,7 +61,8 @@ export default function RecipeDetails({route, navigation}) {
 
     useEffect(() => {
         loadData();
-    }, []);
+    }, [isFocused]);
+
 
     return (
         renderLoading(showLoader,
@@ -72,6 +74,7 @@ export default function RecipeDetails({route, navigation}) {
                     steps={steps}
                     scrollA={scrollA}
                     navigation={navigation}
+                    token={DemoToken}
                     onPressBack={() => navigation.goBack()}
                 />
 

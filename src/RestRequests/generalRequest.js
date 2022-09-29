@@ -344,13 +344,51 @@ const getUnits = async function (method, JWT) {
     return formatResponse(await res.json());
 }
 
+const deleteRecipe = async function (body, token) {
+    const res = await fetch(endpoints.deleteRecipe, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+    return await res.json();
+}
+
+
+const transferRecipe = async function (body, token) {
+    const res = await fetch(endpoints.transferRecipe, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+    return await res.json();
+}
+
+const setPublicRecipe = async function (body, token) {
+    const res = await fetch(endpoints.setPublicRecipe, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+    return await res.json();
+}
+
 
 export {
     login, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu,
     getSingleRecipe, getCategories, getProducts, getProductTypes, getSingleProfile,
     getPublicProfiles, getLatestRecipes, getPublicRecipes, getShoppingListProducts,
     AddEditProductShoppingList,deleteProductFromList, AddEditProductType, deleteProductTypes,
-    addEditProduct, deleteProduct, firstLogin, addRecipe, getUnits, editRecipe
+    addEditProduct, deleteProduct, firstLogin, addRecipe, getUnits, editRecipe, deleteRecipe,
+    transferRecipe, setPublicRecipe
 }
 
 
