@@ -48,6 +48,10 @@ const images = {
         custom: require('./icons/product-category/icons8-custom-100.png')
 
     },
+    onBoarding:{
+        recipes: require('./onBoarding/onBoarding_1.png'),
+        multiple: require('./onBoarding/onBoarding_0.png')
+    },
     defaultProfile: require('./defaultProfile.png'),
     defaultRecipe: require("./rsz_plate.png")
     // image2: require('./image2.jpg'),

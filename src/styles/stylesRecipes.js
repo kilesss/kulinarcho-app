@@ -27,7 +27,7 @@ export const stylesRecipes = StyleSheet.create({
         },
         shadowOpacity: 0.35,
         shadowRadius: 5,
-        elevation: 5,
+        elevation: 3,
         height: 190,
         width: 150,
     },
@@ -107,7 +107,7 @@ export const stylesRecipes = StyleSheet.create({
     },
     cookCard: {
         shadowColor: "#999",
-        elevation: 3,
+        elevation: 2,
         backgroundColor: "#fff",
         borderRadius: 45,
         flexDirection: "row",
@@ -124,7 +124,7 @@ export const stylesRecipes = StyleSheet.create({
         width: 55
     },
     productCard: {
-        elevation: 3,
+        elevation: 1,
         shadowColor: "#999",
         backgroundColor: "#fff",
         flexDirection: "row",
@@ -134,7 +134,7 @@ export const stylesRecipes = StyleSheet.create({
         borderRadius: 8,
         paddingVertical: 6,
         paddingHorizontal: 10,
-        marginVertical: 4
+        marginVertical: 3
     },
     productCardIconTitle: {
         flexDirection: "row",
@@ -149,7 +149,7 @@ export const stylesRecipes = StyleSheet.create({
     recipesCardSmall: {
         backgroundColor: "#fff",
         shadowColor: "#999",
-        elevation: 3,
+        elevation: 2,
         flexDirection: "row",
         borderRadius: 8,
         marginBottom: 7,

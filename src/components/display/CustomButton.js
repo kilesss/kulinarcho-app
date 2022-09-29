@@ -2,7 +2,16 @@ import {TouchableOpacity, Text} from "react-native";
 import styles from "../../styles/styles";
 import {LinearGradient} from "expo-linear-gradient";
 
-export const CustomButton = ({onPress, title, txtColor, bgColor = "#15A051", padding = 15}) => (
+export const CustomButton = (
+    {
+        onPress,
+        title,
+        txtColor,
+        bgColor = "#15A051",
+        padding = 15,
+        fontSize = 18,
+        fontWeight = "bold"
+    }) => (
     <TouchableOpacity
         onPress={onPress}
         style={styles.customButton}>
@@ -20,7 +29,9 @@ export const CustomButton = ({onPress, title, txtColor, bgColor = "#15A051", pad
                 style={[
                     styles.customButtonText,
                     {
-                        color: txtColor
+                        color: txtColor,
+                        fontSize: fontSize,
+                        fontWeight: fontWeight
                     }
                 ]}>{title}</Text>
         </LinearGradient>

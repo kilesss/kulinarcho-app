@@ -72,8 +72,17 @@ export default class LoginPage extends React.Component {
           email: this.state.email,
           password: this.state.password
         });
-        await login(loginPayload, 'POST').then()
+        await login(loginPayload, 'POST', this.props.navigation).then()
           .then(response => {
+              if(response.first_login === 0){
+                  console.log("------")
+                  this.setState({showLoader:false})
+                  AsyncStorage.setItem('access_token', response.access_token);
+                  this.props.navigation.reset({
+                      index: 0,
+                      routes: [{ name: 'First Login' }],
+                  });
+              }
               if (response.access_token) {
                   this.setState({showLoader:false})
                   /** Set JWT  **/
@@ -153,6 +162,7 @@ export default class LoginPage extends React.Component {
                     txtColor={"#fff"}
                     bgColor={"#15A051"}
                     onPress={() => this._onPressButton(this.state)}
+                    // onPress={() => this.props.navigation.navigate('First Login')}
                 />
 
                 <Text style={{fontSize: 16}}>{language('or')}</Text>

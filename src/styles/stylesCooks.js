@@ -13,7 +13,7 @@ export const stylesCooks = StyleSheet.create({
         paddingHorizontal: "20%",
         paddingVertical: 12,
         marginTop: 12,
-        elevation: 5,
+        elevation: 2,
         borderRadius: 8,
         shadowColor: "#999",
 

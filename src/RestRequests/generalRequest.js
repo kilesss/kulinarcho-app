@@ -71,7 +71,7 @@ const getShopingList = async function (method, JWT) {
       'Authorization': 'Bearer ' + JWT
     }
     });
-  return formatResponse(await res.json());
+  return formatResponse2(await res.json());
 }
 
 const getWeeklyMenus = async function (method, JWT) {
@@ -181,13 +181,29 @@ const getPublicRecipes = async function (method, JWT, page = "", title="", categ
     return formatResponse(await res.json());
 }
 
+function formatResponse2(response) {
+    if ('premium' in response){
+        delete response.premium;
+    }
+    if ('user_requests' in response){
+        delete response.user_requests;
+    }
+    if ('new_token' in response){
+        AsyncStorage.setItem('access_token', response.new_token);
+        delete response.new_token;
+        delete response['new_token'];
+    }
+
+    return response;
+
+}
 
 function formatResponse(response) {
     if ('premium' in response){
         delete response.premium;
     }
     if ('first_login' in response){
-        console.log(response.first_login);
+        delete response.first_login
     }
     if ('user_requests' in response){
         delete response.user_requests;
@@ -281,13 +297,24 @@ const deleteProduct = async function (body, token) {
     return await res.json();
 }
 
+const firstLogin = async function (token) {
+    const res = await fetch(endpoints.firstLogin, {
+        method: 'POST',
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+    return await res.json();
+}
+
 
 export {
     login, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu,
     getSingleRecipe, getCategories, getProducts, getProductTypes, getSingleProfile,
     getPublicProfiles, getLatestRecipes, getPublicRecipes, getShoppingListProducts,
     AddEditProductShoppingList,deleteProductFromList, AddEditProductType, deleteProductTypes,
-    addEditProduct, deleteProduct
+    addEditProduct, deleteProduct, firstLogin
 }
 
 
