@@ -10,7 +10,7 @@ import styles from "../../styles/styles";
 import language from "../../language/language";
 import {showConfirmDialog} from "../HelpFunctions";
 
-export default function TopNavigation({title, scrollA, onPressBack, navigation}) {
+export default function TopNavigation({recipeDetails, products, steps, scrollA, onPressBack, navigation}) {
 
     const safeArea = useSafeArea();
 
@@ -53,7 +53,7 @@ export default function TopNavigation({title, scrollA, onPressBack, navigation})
                             <MaterialCommunityIcons name={"dots-vertical"} size={28} color={"#fff"}/>
                         </MenuTrigger>
                         <MenuOptions>
-                            <MenuOption onSelect={() => navigation.navigate("Add Edit Recipe")}
+                            <MenuOption onSelect={() => navigation.navigate("Add Edit Recipe", {recipeDetails: recipeDetails, productList: products, stepList: steps, edit: true })}
                                         style={stylesRecipes.popupMenu}>
                                 <MaterialCommunityIcons name={"pen"} size={25} color={"#4B4C4C"}/>
                                 <Text style={styles.subHeading}>Edit</Text>

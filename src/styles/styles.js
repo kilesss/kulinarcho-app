@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
     marginBottom: 30
   },
   heading: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: "bold",
     color: "#4B4C4C",
     marginTop: 10,
@@ -57,6 +57,12 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#15A051",
     fontSize: 13
+  },
+  errorMessage: {
+    fontSize: 13,
+    color: "#15A051",
+    marginTop: -5,
+    marginBottom: 0
   }
 
 });

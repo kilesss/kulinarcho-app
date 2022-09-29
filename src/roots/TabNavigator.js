@@ -139,7 +139,7 @@ export default function TabNavigator(props) {
 
             <Stack.Screen name={"Week Menu Details"} component={WeekMenuDetails}/>
 
-            <Stack.Screen name={"Add Edit Recipe"} component={AddEditRecipe}/>
+            <Stack.Screen name={"Add Edit Recipe"} component={AddEditRecipe} initialParams={{recipeDetails: '', productList: '', stepList: '', edit: false } }/>
 
             <Stack.Screen name={"All Recipes"} component={AllRecipes}/>
         </Stack.Navigator>
