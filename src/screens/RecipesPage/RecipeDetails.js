@@ -33,6 +33,7 @@ export default function RecipeDetails({route, navigation}) {
     const [products, setProducts] = useState([])
     const [userData, setUserData] = useState([])
     const [showLoader, setShowLoader] = useState(true);
+    const [iconInfo, setIconInfo] = useState('');
     const [DemoToken, setDemoToken] = useState(true);
 
     function loadData() {
@@ -48,6 +49,7 @@ export default function RecipeDetails({route, navigation}) {
                         setUserData(result[4])
                         // console.log(result[0].categories)
                         setShowLoader(false);
+                        setIconInfo(getIconInfo(result[0].categories))
                     }
 
                 }).catch((err) => {
@@ -105,7 +107,7 @@ export default function RecipeDetails({route, navigation}) {
                             </View>
                         </View>
                         {/*TODO: Fix the category not showing up correctly*/}
-                        <Text style={{color:"#4B4C4C"}}>Категория: <Text style={{color: "#15A051", fontWeight: "bold"}}>{recipeDetails.categories}</Text>
+                        <Text style={{color:"#4B4C4C"}}>Категория: <Text style={{color: "#15A051", fontWeight: "bold"}}>{iconInfo.title}</Text>
                         </Text>
 
                         <View style={stylesRecipes.portionsSection}>
@@ -116,7 +118,8 @@ export default function RecipeDetails({route, navigation}) {
                         <Text style={[styles.subHeading, stylesRecipes.paragraph]}>{recipeDetails.description}</Text>
 
                         <CookCard name={userData.name}
-                                  numRecipes={0}
+                                  hideNumRecipes={true}
+                                  numRecipes={userData.count}
                                   image={userData.picture}
                                   onPress={() => navigation.navigate("Cooks Details", {cookId: userData.id})}/>
 

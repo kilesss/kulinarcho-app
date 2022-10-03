@@ -14,7 +14,7 @@ export const ConditionalCard = ({condition, steps, products}) => {
     if (condition) {
         for (let i = 0; i < steps.length; i++) {
             content.push(
-                <SafeAreaView>
+                <SafeAreaView key={steps[i].stepId}>
                     <View style={[stylesRecipes.productCard, {flexDirection: "column", alignItems: "flex-start"}]}>
                         <Text style={[styles.smallGreenText, {fontSize: 16, }]}>{language("step")} {steps[i].stepId}</Text>
                         <Text style={[styles.subHeading, {fontWeight: "regular"}]}>
@@ -28,9 +28,11 @@ export const ConditionalCard = ({condition, steps, products}) => {
     } else {
         content = (
             <SafeAreaView>
-                {products.map((product) => {
+                {products.map((product, index) => {
                     return (
-                        <ProductCard title={product.productName}
+                        <ProductCard
+                            key={index}
+                            title={product.productName}
                                      textRight={`${product.volume}${product.unitsName}`}
                                      image={getProductTypeIcon(product.catName)}/>
                     );

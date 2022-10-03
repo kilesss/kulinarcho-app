@@ -51,6 +51,7 @@ export default function ShoppingListsPage({navigation}) {
                             setOnBoardingModal(true)
                         }
                         const result = Object.values(data);
+                        console.log(result)
                         editShoppingLists(result)
                         setShowLoader(false);
                     }
@@ -115,6 +116,7 @@ export default function ShoppingListsPage({navigation}) {
                       style={{alignSelf: "stretch"}}
                       keyExtractor={(item, index) => index.toString()}
                       renderItem={({item, index}) => (
+                          item !== 0 ?
                           <ListCard bgColor={randomColor(index)}
                                     title={item.name}
                                     iconName={"receipt"}
@@ -127,6 +129,7 @@ export default function ShoppingListsPage({navigation}) {
                                         showEditProduct(item)
                                     }}
                           />
+                        : ''
                       )}/>
 
         </View>

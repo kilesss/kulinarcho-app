@@ -198,7 +198,12 @@ export const stylesRecipes = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     },
-
+    categoryIcon: {
+        height: 35,
+        width: 35,
+        marginLeft: 3,
+        marginTop: 1
+    },
 
     banner: scrollA => ({
         height: BANNER_H,

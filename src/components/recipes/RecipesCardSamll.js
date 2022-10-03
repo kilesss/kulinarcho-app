@@ -33,7 +33,7 @@ export const RecipesCardSmall = ({onPress, title, time, servings, category, phot
                 </View>
                 <View style={stylesRecipes.infoIconsWithTextSmall}>
                     <Image source={category ? category.image : Images.icons.groups} style={{height: 27, width: 27}}/>
-                    <Text style={stylesRecipes.recipesCardSmallText}>{category ? category.title : "ne"}</Text>
+                    <Text style={stylesRecipes.recipesCardSmallText}>{category ? category.title : ""}</Text>
                 </View>
 
             </View>

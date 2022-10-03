@@ -7,7 +7,7 @@ const {Image, View, Text} = require("react-native");
 const React = require("react");
 
 
-export default function CookCard({name, image, numRecipes, onPress}){
+export default function CookCard({name, image, numRecipes, onPress, hideNumRecipes}){
 
 
     return (
@@ -21,8 +21,10 @@ export default function CookCard({name, image, numRecipes, onPress}){
                 }
             />
             <View style={{paddingLeft: 7}}>
-                <Text style={[styles.heading, {marginTop: 0}]}>{name}</Text>
-                <Text style={[styles.smallGreenText, {marginTop: -13,}]}>{numRecipes} {language("recipes")}</Text>
+                <Text style={[styles.heading, {marginTop: hideNumRecipes ? 4 : 0}]}>{name}</Text>
+                {hideNumRecipes ?
+                    '' : <Text style={[styles.smallGreenText, {marginTop: -10,}]}>{numRecipes} {language("recipes")}</Text>
+                }
             </View>
         </TouchableOpacity>
     )
