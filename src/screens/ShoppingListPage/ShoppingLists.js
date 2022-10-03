@@ -28,8 +28,8 @@ export default function ShoppingListsPage({navigation}) {
     }, []);
 
     const showEditProduct = (item) => {
-        setChangeModalVisible(true)
         setModalData(item)
+        setChangeModalVisible(true)
     };
 
     function setChangeModalVisible2() {

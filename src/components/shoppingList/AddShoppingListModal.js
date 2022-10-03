@@ -94,7 +94,7 @@ export default function AddShoppingListModal({
     }
 
     function defaultText() {
-        if (text === '') {
+        if (modalData) {
             return modalData
         }
         return text;
@@ -119,7 +119,7 @@ export default function AddShoppingListModal({
 
                         <TextInput
                             style={[{marginVertical: 25}, shoppingListStyle.popupInput, shoppingListStyle.popupProductName]}
-                            defaultValue={defaultText()}
+                            defaultValue={modalData ? modalData : text}
                             placeholder={"Име за списъка..."}
                             onChangeText={(changedText) => onInputChanged(changedText)}
                         />
