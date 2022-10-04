@@ -344,13 +344,24 @@ const getUnits = async function (method, JWT) {
     return formatResponse(await res.json());
 }
 
+const getGroupInfo = async function (method, JWT) {
+    const res = await fetch(`${endpoints.getGroupInfo}`, {
+        method: method,
+        headers: {
+            'Authorization': 'Bearer ' + JWT
+        }
+    });
+    return formatResponse(await res.json());
+}
+
+
 
 export {
     login, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu,
     getSingleRecipe, getCategories, getProducts, getProductTypes, getSingleProfile,
     getPublicProfiles, getLatestRecipes, getPublicRecipes, getShoppingListProducts,
     AddEditProductShoppingList,deleteProductFromList, AddEditProductType, deleteProductTypes,
-    addEditProduct, deleteProduct, firstLogin, addRecipe, getUnits, editRecipe
+    addEditProduct, deleteProduct, firstLogin, addRecipe, getUnits, editRecipe, getGroupInfo
 }
 
 

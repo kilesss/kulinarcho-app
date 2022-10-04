@@ -5,12 +5,13 @@ export const stylesCooks = StyleSheet.create({
         borderRadius: 100,
         height: 160,
         width: 160,
+        alignSelf: "center"
     },
     profileDetails: {
-        alignItems: "center",
+
         backgroundColor: "#fff",
         alignSelf: "stretch",
-        paddingHorizontal: "20%",
+        paddingHorizontal: 12,
         paddingVertical: 12,
         marginTop: 12,
         elevation: 2,
@@ -29,6 +30,7 @@ export const stylesCooks = StyleSheet.create({
         fontSize: 16,
         marginTop: -15,
         marginBottom: 5,
+        alignSelf: "center",
         color: "#15a051"
     },
 

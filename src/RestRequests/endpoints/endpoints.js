@@ -32,7 +32,10 @@ const endpoints = {
 
   addRecipe: 'https://kulinarcho.com/api/recipesAdd',
   editRecipe: 'https://kulinarcho.com/api/recipesEdit',
-  getUnits: 'https://kulinarcho.com/api/getUnits'
+  getUnits: 'https://kulinarcho.com/api/getUnits',
+
+  getGroupInfo: 'https://kulinarcho.com/api/profile',
+
 
 }
 

@@ -17,7 +17,7 @@ export default function RecipesPage({navigation}) {
                 <TouchableOpacity style={stylesCooks.profileDetails}
                                   onPress={() => navigation.navigate("Personal Info")}>
                     <Image source={require("../../../public/images/bob.jpg")} style={stylesCooks.profileImage}/>
-                    <View style={{flexDirection: "row", alignItems: "center"}}>
+                    <View style={{flexDirection: "row", alignItems: "center", alignSelf:"center"}}>
                         <Text style={[styles.heading, {fontSize: 24, marginVertical: 2, marginRight: 5}]}>Боян
                             Йонков</Text>
                         <Octicons name={"pencil"} size={27} color={"#4B4C4C"}/>
@@ -28,8 +28,8 @@ export default function RecipesPage({navigation}) {
 
                 <Text style={styles.heading}>Настроики Групи</Text>
                 <View style={stylesProfile.largeSettingsSection}>
-                    <SettingsCardLarge name={"Моите Групи"} image={Images.icons.groups}/>
-                    <SettingsCardLarge name={"Покани"} image={Images.icons.invite}/>
+                    <SettingsCardLarge name={"Моите Групи"} image={Images.icons.groups} onPress={() => navigation.navigate('My Group')}/>
+                    <SettingsCardLarge name={"Покани"} image={Images.icons.invite} onPress={() => navigation.navigate('Group Requests')}/>
                 </View>
 
                 <Text style={styles.heading}>Други Настроики</Text>
