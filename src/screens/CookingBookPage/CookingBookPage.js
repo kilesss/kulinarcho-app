@@ -93,6 +93,7 @@ export default function CookingBookPage({navigation}) {
                     <Text style={[styles.heading]}>{language("popularRecipes")}</Text>
                     <FlatList
                         data={recipes}
+                        showsVerticalScrollIndicator={false}
                         contentContainerStyle={{paddingRight: 20}}
                         keyExtractor={item => item.id}
                         onEndReached={fetchMore}

@@ -65,7 +65,11 @@ export default function language(key){
         no: "Не",
         confirmDelete: "Сигурни ли сте?",
         confirmRecipeDelete: "Сигурни ли сте че искате да изтрииете тази рецепта?",
-        hint: "Пояснение"
+        hint: "Пояснение",
+        settings: 'Настройки',
+        productsAndCategories: 'Продукти и категории',
+        personalInfo: 'Лична информация'
+
 
 
 

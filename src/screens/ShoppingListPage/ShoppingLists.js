@@ -77,7 +77,7 @@ export default function ShoppingListsPage({navigation}) {
 
 
     return renderLoading(showLoader, <View style={{flex: 1}}>
-        <View style={styles.container}>
+        <View style={{...styles.container, marginBottom: 5}}>
 
             <Modal visible={onBoardingModal}>
                 <OnBoarding closeOnBoardingModal={closeOnBoardingModal}/>

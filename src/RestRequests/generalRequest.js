@@ -303,6 +303,8 @@ const firstLogin = async function (token) {
             'Content-Type': 'application/json',
         }
     });
+    console.log(body)
+    console.log(res.text())
     return await res.json();
 }
 
