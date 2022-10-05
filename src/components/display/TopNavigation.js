@@ -52,7 +52,7 @@ export default function TopNavigation({recipeDetails, products, steps, scrollA, 
     async function makeRecipePublic(id){
         AsyncStorage.getItem('access_token').then((value) => {
             if (value) {
-                setPublicRecipe(JSON.stringify({id: id}), value).then().catch((err) => {
+                setPublicRecipe(JSON.stringify({recipe_id: id}), value).then().catch((err) => {
                     console.log(err);
                 });
             }
@@ -62,7 +62,7 @@ export default function TopNavigation({recipeDetails, products, steps, scrollA, 
     async function saveRecipe(id){
         console.log(JSON.stringify({id: id}))
         console.log(token)
-        await transferRecipe(JSON.stringify({id: id}), token).then()
+        await transferRecipe(JSON.stringify({recipe_id: id}), token).then()
             .then(response => {
                 console.log(response)
                 if (response.access_token) {

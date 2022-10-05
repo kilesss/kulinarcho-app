@@ -366,6 +366,8 @@ const transferRecipe = async function (body, token) {
             'Content-Type': 'application/json',
         }
     });
+    console.log(body)
+    console.log(token)
     return await res.json();
 }
 
