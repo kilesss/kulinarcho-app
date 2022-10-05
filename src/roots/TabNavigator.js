@@ -23,6 +23,7 @@ import AllRecipes from "../screens/RecipesPage/AllRecipes";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import MyGroup from "../screens/ProfilePage/MyGroup";
 import GroupRequests from "../screens/ProfilePage/GroupRequests";
+import SentRequests from "../screens/ProfilePage/SentRequests";
 
 
 
@@ -137,6 +138,7 @@ export default function TabNavigator(props) {
             <Stack.Screen name={"Personal Info"} component={ProfilePersonalInfo}/>
             <Stack.Screen name={"My Group"} component={MyGroup} options={{title: 'Моята Група'}}/>
             <Stack.Screen name={"Group Requests"} component={GroupRequests} options={{title: 'Покани за Групи'}}/>
+            <Stack.Screen name={"Sent Requests"} component={SentRequests} options={{title: 'Изпратени Покани'}}/>
 
             <Stack.Screen name={"Recipe Details"} component={RecipeDetails} options={{headerShown: false}}/>
             <Stack.Screen name={"Cooks Details"} component={CookerDetails}/>

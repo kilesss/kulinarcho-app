@@ -354,6 +354,55 @@ const getGroupInfo = async function (method, JWT) {
     return formatResponse(await res.json());
 }
 
+const newRequest = async function (body, token) {
+    const res = await fetch(endpoints.newRequest, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+
+    return await res.json();
+}
+
+const deleteUserRequest = async function (body, token) {
+    const res = await fetch(endpoints.deleteUserRequest, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+    return await res.json();
+}
+
+const acceptUserRequest = async function (body, token) {
+    const res = await fetch(endpoints.acceptUserRequest, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+    return await res.json();
+}
+
+const deleteUserFromGroup = async function (body, token) {
+    const res = await fetch(endpoints.deleteUserFromGroup, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+    return await res.json();
+}
+
 
 
 export {
@@ -361,7 +410,8 @@ export {
     getSingleRecipe, getCategories, getProducts, getProductTypes, getSingleProfile,
     getPublicProfiles, getLatestRecipes, getPublicRecipes, getShoppingListProducts,
     AddEditProductShoppingList,deleteProductFromList, AddEditProductType, deleteProductTypes,
-    addEditProduct, deleteProduct, firstLogin, addRecipe, getUnits, editRecipe, getGroupInfo
+    addEditProduct, deleteProduct, firstLogin, addRecipe, getUnits, editRecipe, getGroupInfo, newRequest,
+    deleteUserRequest, acceptUserRequest, deleteUserFromGroup
 }
 
 

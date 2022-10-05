@@ -67,6 +67,7 @@ export default function language(key){
         confirmRecipeDelete: "Сигурни ли сте че искате да изтрииете тази рецепта?",
         hint: "Пояснение",
         myGroup: "Моята Група",
+        confirmUserRemove: "Сигурни ли сте че искате да премахнете този член от групата?"
 
 
 

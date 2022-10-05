@@ -35,7 +35,10 @@ const endpoints = {
   getUnits: 'https://kulinarcho.com/api/getUnits',
 
   getGroupInfo: 'https://kulinarcho.com/api/profile',
-
+  newRequest: 'https://kulinarcho.com/api/newRequest',
+  deleteUserRequest: 'https://kulinarcho.com/api/deleteRequestUser',
+  acceptUserRequest: 'https://kulinarcho.com/api/acceptRequestUser',
+  deleteUserFromGroup: 'https://kulinarcho.com/api/deleteUser',
 
 }
 

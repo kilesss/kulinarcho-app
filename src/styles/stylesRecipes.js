@@ -113,7 +113,7 @@ export const stylesRecipes = StyleSheet.create({
         flexDirection: "row",
         marginVertical: 5,
         alignItems: "center",
-        alignSelf: "stretch"
+        alignSelf: "stretch",
     },
     switchMenu: {
         width: "100%"
