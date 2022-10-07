@@ -38,6 +38,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@iconify/react": "^3.2.2",
+    "react-native-alert-notification": "^0.3.4",
     "react-native-linear-gradient": "^2.6.2",
     "react-native-popup-menu": "^0.16.0",
     "react-native-portalize": "^1.0.7",
