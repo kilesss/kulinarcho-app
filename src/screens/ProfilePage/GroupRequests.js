@@ -6,7 +6,8 @@ import {stylesProfile} from "../../styles/stylesProfile";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {acceptUserRequest, deleteUserRequest, getGroupInfo, newRequest} from "../../RestRequests/generalRequest";
 import RequestCard from "../../components/profile/RequestCard";
-import {ALERT_TYPE, Dialog} from "react-native-alert-notification";
+import {ALERT_TYPE, AlertNotificationRoot, Dialog} from "react-native-alert-notification";
+import renderLoading from "../../components/loading/ShowLoader";
 
 function GroupRequests() {
 
@@ -31,55 +32,67 @@ function GroupRequests() {
         }, []);
     }
 
-    async function acceptRequest(id, email) {
-        await acceptUserRequest(JSON.stringify({requesterId: id}), DemoToken).then()
+    async function acceptRequest(invite) {
+        await acceptUserRequest(JSON.stringify({requesterId: invite.id}), DemoToken).then()
             .then(response => {
                 console.log(response)
                 if (response.errors) {
                     console.log(response.errors)
                 }else{
+                    removeInviteCard(invite)
                     Dialog.show({
                         type: ALERT_TYPE.SUCCESS,
                         title: 'Успех!',
-                        textBody: 'Успешно се присъединихте към групата на: ' + email,
+                        textBody: 'Успешно се присъединихте към групата на: ' + invite.email,
                         button: 'Затвори',
                     })
                 }
             })
     }
 
-    async function rejectRequest(id) {
-        await deleteUserRequest(JSON.stringify({requesterId: id}), DemoToken).then()
+    async function rejectRequest(invite) {
+        await deleteUserRequest(JSON.stringify({requesterId: invite.id}), DemoToken).then()
             .then(response => {
-                console.log(JSON.stringify({requesterId: id}))
+                console.log(JSON.stringify({requesterId: invite.id}))
                 console.log(response)
                 if (response.errors) {
                     console.log(response.errors)
-                }
+                }else {removeInviteCard(invite)}
             })
+    }
+
+    function removeInviteCard(invite){
+        let filteredArray = incomingRequests.filter(item => item !== invite)
+        setIncomingRequests(filteredArray)
     }
 
     useEffect(() => {
         loadData()
     }, []);
 
-    return (
+    const IColors = {
+        card: "#fff",
+        success: "#15A051"
+    };
+
+    return (renderLoading(showLoader,
+        <AlertNotificationRoot colors={[IColors, IColors]}>
         <View style={styles.container}>
-            <Text style={styles.heading}>Моите Покани</Text>
             <FlatList
                 data={incomingRequests}
                 style={{alignSelf: 'stretch'}}
                 renderItem={({item}) => (
                     <RequestCard
                         text={item.email}
-                        onAcceptRequest={() => acceptRequest(item.id, item.email)}
-                        onDeleteRequest={() => rejectRequest(item.id)}
+                        onAcceptRequest={() => acceptRequest(item)}
+                        onDeleteRequest={() => rejectRequest(item)}
                     />
                     )
             }/>
 
         </View>
-    );
+        </AlertNotificationRoot>
+    ));
 }
 
 export default GroupRequests;

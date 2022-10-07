@@ -2,13 +2,13 @@ import {StyleSheet} from "react-native";
 
 export const stylesProfile = StyleSheet.create({
 
-    settingsCardSmall:{
+    settingsCardSmall: {
         flexDirection: "row",
         padding: 7,
         alignItems: "center",
 
     },
-    settingsCardLarge:{
+    settingsCardLarge: {
         paddingVertical: 30,
         alignItems: "center",
         width: "48%",
@@ -41,6 +41,19 @@ export const stylesProfile = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         marginHorizontal: 3
+    },
+    requestComponent: {
+        padding: 10,
+        flexDirection: "row",
+        alignItems: "center",
+        minHeight: 70
+    },
+    pendingTag: {
+        backgroundColor: "#EA9838",
+        paddingVertical: 6,
+        paddingHorizontal: 9,
+        borderRadius: 8,
+        elevation: 1
     }
 
 

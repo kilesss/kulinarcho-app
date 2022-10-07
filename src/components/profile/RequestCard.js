@@ -6,7 +6,7 @@ import {MaterialCommunityIcons, MaterialIcons} from "@expo/vector-icons";
 
 function RequestCard({text, onAcceptRequest, onDeleteRequest}) {
     return (
-        <View style={{...styles.customButton, padding: 10, flexDirection: "row", alignItems: "center", minHeight: 65}}>
+        <View style={{...styles.customButton, ...stylesProfile.requestComponent}}>
             <View style={{flex: 1}}>
                 <Text style={{...styles.subHeading, fontWeight: "regular", marginTop: 0, marginBottom: 0}}>Покана от:
                 </Text>

@@ -21,8 +21,11 @@ import DropDownPicker from "react-native-dropdown-picker";
 import shoppingListStyle from "../../styles/stylesShoppingList";
 import {CustomButton} from "../../components/display/CustomButton";
 import {ALERT_TYPE, Dialog, AlertNotificationRoot, Toast} from 'react-native-alert-notification';
+import {useIsFocused} from '@react-navigation/native'
 
 function MyGroup({navigation}) {
+
+    const isFocused = useIsFocused()
 
     const [DemoToken, setDemoToken] = useState(true);
     const [groupInfo, setGroupInfo] = useState([]);
@@ -32,7 +35,6 @@ function MyGroup({navigation}) {
     const [text, setText] = useState('');
     const [sentRequests, setSentRequests] = useState([]);
     const [requestError, setRequestError] = useState('');
-    const [master, setMaster] = useState(false);
 
     function onInputChanged(changedText) {
         setText(changedText)
@@ -49,11 +51,6 @@ function MyGroup({navigation}) {
                         setGroupInfo(data)
                         setMembers(Object.values(data["groupUsers"]))
                         setSentRequests(data["requests"])
-                        if (groupInfo["master"] === 1) {
-                            setMaster(true)
-                        } else {
-                            setMaster(false)
-                        }
                         console.log(data)
                         setShowLoader(false)
                     }
@@ -86,18 +83,26 @@ function MyGroup({navigation}) {
     }
 
     async function removeUserFromGroup(id) {
-        await deleteUserFromGroup(JSON.stringify({id: id}), DemoToken).then()
+        await deleteUserFromGroup(JSON.stringify({userID: id}), DemoToken).then()
             .then(response => {
                 console.log(response)
                 if (response.errors) {
                     console.log(response.errors)
                 }
             })
+        refreshPage()
+        loadData()
+    }
+
+    function refreshPage(){
+        setMembers([])
+        setGroupInfo([])
+        setSentRequests([])
     }
 
     useEffect(() => {
         loadData()
-    }, []);
+    }, [isFocused]);
 
     const IColors = {
         card: "#fff",
@@ -129,7 +134,7 @@ function MyGroup({navigation}) {
                                 name={item.name}
                                 image={item.profilePicture}
                                 showDelete={groupInfo["master"] === 1}
-                                handleDelete={() => console.log("Delete: " + item.id)}
+                                handleDelete={() => removeUserFromGroup(item.id)}
                                 onPress={() => navigation.navigate("Cooks Details", {cookId: item.id})}
                             />
                         )
@@ -137,7 +142,7 @@ function MyGroup({navigation}) {
                 </View>
                 <Text style={styles.heading}>Управление на Групата</Text>
                 {groupInfo["master"] === 1 ?
-                    <View>
+                    <View style={{alignSelf: "stretch"}}>
                         <TouchableOpacity style={[styles.customButton, stylesProfile.settingsCardSmall]}
                                           onPress={() => setModalVisible(true)}>
                             <MaterialCommunityIcons name={"plus"} color={"#15A051"} size={32}/>
@@ -155,7 +160,8 @@ function MyGroup({navigation}) {
                 }
                 {groupInfo["master"] === 0 ?
                     <TouchableOpacity
-                        style={[styles.customButton, stylesProfile.settingsCardSmall, {paddingVertical: 9}]}>
+                        style={[styles.customButton, stylesProfile.settingsCardSmall, {paddingVertical: 9}]}
+                        onPress={() => console.log("--\nNo way of getting id: so can't remove yourself from group\n--")}>
                         <FontAwesome5 name={"door-open"} color={"#D40000"} size={25}/>
                         <Text style={{...styles.subHeading, flex: 1, paddingLeft: 5, fontSize: 16}}>Напусни
                             Групата</Text>
