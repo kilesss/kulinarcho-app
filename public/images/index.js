@@ -13,7 +13,7 @@ const images = {
         winter: require('./icons/icons8-mason-jar-100.png'),
         baby: require('./icons/icons8-baby-bottle-100.png'),
         others: require('./icons/icons8-diversity-100.png'),
-        groups: require('./icons/icons8-people-100.png'),
+        groups: require('./icons/Group.png'),
         invite: require('./icons/icons8-invite-100.png'),
     },
     navIcons: {

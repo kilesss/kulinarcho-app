@@ -113,7 +113,7 @@ export const stylesRecipes = StyleSheet.create({
         flexDirection: "row",
         marginVertical: 5,
         alignItems: "center",
-        alignSelf: "stretch"
+        alignSelf: "stretch",
     },
     switchMenu: {
         width: "100%"
@@ -199,7 +199,12 @@ export const stylesRecipes = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     },
-
+    categoryIcon: {
+        height: 35,
+        width: 35,
+        marginLeft: 3,
+        marginTop: 1
+    },
 
     banner: scrollA => ({
         height: BANNER_H,

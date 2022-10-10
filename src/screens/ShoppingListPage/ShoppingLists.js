@@ -13,6 +13,7 @@ import renderLoading from "../../components/loading/ShowLoader";
 import {firstLogin, getShopingList} from "../../RestRequests/generalRequest";
 import FloatingActionButton from "../../components/display/FloatingActionButton";
 import OnBoarding from "../../components/display/OnBoarding";
+import {useIsFocused} from '@react-navigation/native'
 
 export default function ShoppingListsPage({navigation}) {
 
@@ -23,9 +24,11 @@ export default function ShoppingListsPage({navigation}) {
     const [showLoader, setShowLoader] = useState(true);
     const [DemoToken, setDemoToken] = useState(true);
 
+    const isFocused = useIsFocused()
+
     useEffect(() => {
         loadData();
-    }, []);
+    }, [isFocused]);
 
     const showEditProduct = (item) => {
         setModalData(item)
@@ -47,11 +50,16 @@ export default function ShoppingListsPage({navigation}) {
                     if (data) {
                         if (data.first_login === 1) {
                             setOnBoardingModal(true)
+
                         }
+                        delete data.first_login;
+
                         const result = Object.values(data);
+                        console.log(result)
                         editShoppingLists(result)
                         setShowLoader(false);
                     }
+
                 }).catch((err) => {
                     console.log(err);
                 });
@@ -74,7 +82,7 @@ export default function ShoppingListsPage({navigation}) {
 
 
     return renderLoading(showLoader, <View style={{flex: 1}}>
-        <View style={styles.container}>
+        <View style={{...styles.container, marginBottom: 5}}>
 
             <Modal visible={onBoardingModal}>
                 <OnBoarding closeOnBoardingModal={closeOnBoardingModal}/>
@@ -113,6 +121,7 @@ export default function ShoppingListsPage({navigation}) {
                       style={{alignSelf: "stretch"}}
                       keyExtractor={(item, index) => index.toString()}
                       renderItem={({item, index}) => (
+                          item !== 0 ?
                           <ListCard bgColor={randomColor(index)}
                                     title={item.name}
                                     iconName={"receipt"}
@@ -125,11 +134,11 @@ export default function ShoppingListsPage({navigation}) {
                                         showEditProduct(item)
                                     }}
                           />
+                        : ''
                       )}/>
 
         </View>
-        <FloatingActionButton navigation={navigation} addModalVisible={addModalVisible}
-                              setAddModalVisible={setAddModalVisible}/>
+
     </View>)
 }
 

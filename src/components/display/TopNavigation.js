@@ -106,6 +106,7 @@ export default function TopNavigation({recipeDetails, products, steps, scrollA, 
                                 <MaterialCommunityIcons name={"pen"} size={25} color={"#4B4C4C"}/>
                                 <Text style={{...styles.subHeading, marginLeft: 5}}>Edit</Text>
                             </MenuOption>
+
                             {recipeDetails.public === 0 ?
                                 <MenuOption onSelect={() => makeRecipePublic(recipeDetails.id)}
                                             style={stylesRecipes.popupMenu}>

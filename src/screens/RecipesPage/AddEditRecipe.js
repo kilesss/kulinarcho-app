@@ -22,7 +22,12 @@ import {rightSwipeActions} from "../../components/shoppingList/ShoppingListItem"
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import * as yup from 'yup';
 import {useIsFocused} from '@react-navigation/native'
+
 import { ALERT_TYPE, Dialog, AlertNotificationRoot, Toast } from 'react-native-alert-notification';
+
+import * as FileSystem from 'expo-file-system';
+import * as ImageManipulator from 'expo-image-manipulator';
+
 
 export default function AddEditRecipe({route, navigation}) {
     const isFocused = useIsFocused()
@@ -58,12 +63,20 @@ export default function AddEditRecipe({route, navigation}) {
             aspect: [4, 3],
             quality: 1,
         });
+        const manipResult = await ImageManipulator.manipulateAsync(
+            result.localUri || result.uri,
+            [],
+            { format: 'jpeg' }
+        );
+        const base64 = await FileSystem.readAsStringAsync(manipResult.uri, { encoding: 'base64' });
 
-        console.log(result)
+        console.log(base64)
+        console.log('asdasdasdasdasdasd')
         if (!result.cancelled) {
             setImage(result.uri);
         }
     };
+    
 
     function onInputChanged(changedText, set) {
         set(changedText)
@@ -144,6 +157,8 @@ export default function AddEditRecipe({route, navigation}) {
         AsyncStorage.getItem('access_token').then((value) => {
             setDemoToken(value);
             if (value) {
+                console.log(body);
+                console.log(value);
                 addRecipe(JSON.stringify(body), value).then()
                     .then(response => {
                         if (response.errors) {
@@ -270,7 +285,7 @@ export default function AddEditRecipe({route, navigation}) {
                         video_link: ''
                     }}
                     validationSchema={schema}
-                    onSubmit={(values, actions) => {
+                    onSubmit={async (values, actions) => {
                         let stepsValues = steps.map(a => a.value);
                         let obj = {
                             id: recipeDetails.id,
@@ -290,6 +305,7 @@ export default function AddEditRecipe({route, navigation}) {
                         products.length !== 0 ? setProductsError('') : setProductsError('Добавете продукти')
                         steps.length !== 0 ? setStepsError('') : setStepsError('Добавете стъпки')
                         value ? setValueError('') : setValueError('Изберете категория')
+
 
                         Dialog.show({
                             type: ALERT_TYPE.SUCCESS,

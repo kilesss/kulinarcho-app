@@ -21,6 +21,10 @@ import TabNavBottomLine from "../components/display/TabNavBottomLine";
 import Images from "../../public/images/index";
 import AllRecipes from "../screens/RecipesPage/AllRecipes";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import language from "../language/language";
+import MyGroup from "../screens/ProfilePage/MyGroup";
+import GroupRequests from "../screens/ProfilePage/GroupRequests";
+import SentRequests from "../screens/ProfilePage/SentRequests";
 
 
 
@@ -37,7 +41,7 @@ function MainTabs() {
                 shadowColor: "#999",
             },
             headerTitle: () => (
-                <LogoTitle onPress={() => navigation.push("Settings")}/>
+                <LogoTitle onPress={() => navigation.push("Settings")} navigation={navigation}  />
             )
 
         })}>
@@ -130,9 +134,14 @@ export default function TabNavigator(props) {
 
             <Stack.Screen name="Shopping List Details" component={ShoppingListDetails}/>
 
-            <Stack.Screen name="Settings" component={ProfilePage}/>
-            <Stack.Screen name="Products and Categories" component={ProductsAndCategoriesPage}/>
-            <Stack.Screen name={"Personal Info"} component={ProfilePersonalInfo}/>
+
+            <Stack.Screen name="Settings" component={ProfilePage} options={{ title: language('settings')}}/>
+            <Stack.Screen name="Products and Categories" component={ProductsAndCategoriesPage} options={{ title: language('productsAndCategories') }}/>
+            <Stack.Screen name={"Personal Info"} component={ProfilePersonalInfo} options={{ title: language('personalInfo') }}/>
+            <Stack.Screen name={"My Group"} component={MyGroup} options={{title: 'Моята Група'}}/>
+            <Stack.Screen name={"Group Requests"} component={GroupRequests} options={{title: 'Покани за Групи'}}/>
+            <Stack.Screen name={"Sent Requests"} component={SentRequests} options={{title: 'Изпратени Покани'}}/>
+
 
             <Stack.Screen name={"Recipe Details"} component={RecipeDetails} options={{headerShown: false}}/>
             <Stack.Screen name={"Cooks Details"} component={CookerDetails}/>
@@ -141,7 +150,7 @@ export default function TabNavigator(props) {
 
             <Stack.Screen name={"Add Edit Recipe"} component={AddEditRecipe} initialParams={{recipeDetails: '', productList: '', stepList: '', edit: false } }/>
 
-            <Stack.Screen name={"All Recipes"} component={AllRecipes}/>
+            <Stack.Screen name={"All Recipes"} component={AllRecipes} options={{title: "Рецепти"}}/>
         </Stack.Navigator>
     )
 }

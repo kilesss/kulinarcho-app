@@ -21,12 +21,27 @@ export default function AllRecipes({route, navigation}) {
     const [page, setPage] = useState(1)
 
     function loadData() {
+        setShowLoader2(true)
+
         AsyncStorage.getItem('access_token').then((value) => {
             setDemoToken(value);
             if (value) {
-                getPublicRecipes('GET', value, page, "", categoryID, ownRecipe).then(data => {
+                let ownRecipeLocal = ownRecipe;
+                let title = '';
+                if(route.params.searchString !== undefined){
+                    title = route.params.searchString;
+                }
+                if(route.params.ownRecipe !== undefined){
+                    if (route.params.ownRecipe === 1){
+                        ownRecipeLocal = 1;
+                    }else {
+                        ownRecipeLocal = 0;
+                    }
+                }
+                getPublicRecipes('GET', value, page, title, categoryID, ownRecipeLocal).then(data => {
                     if (data) {
                         const result = Object.values(data);
+
                         setRecipes(result[0])
                     }
                 }).catch((err) => {console.log(err)});
@@ -42,8 +57,8 @@ export default function AllRecipes({route, navigation}) {
                 getPublicRecipes('GET', value, page, "", categoryID, ownRecipe).then(data => {
                     if (data) {
                         const result = Object.values(data);
+
                         setRecipes([...recipes, ...result[0]])
-                        console.log(categoryID);
                         setLastPage(result[2])
                         setShowLoader2(false)
                     }
@@ -75,6 +90,7 @@ export default function AllRecipes({route, navigation}) {
         <View style={styles.container}>
             <Text style={styles.heading}>Всички Рецепти</Text>
             <SafeAreaView style={{ alignSelf: "stretch", paddingBottom: 40}}>
+
             <FlatList
                 data={recipes}
                 keyExtractor={(item, index) => item.id}

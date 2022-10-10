@@ -46,8 +46,8 @@ export default function WeekMenuPage({navigation}) {
 
 
     return (
-        renderLoading(showLoader, <View><ScrollView>
-            <View style={{...styles.container, alignItems: "flex-start", justifyContent: "flex-start"}}>
+        renderLoading(showLoader, <>
+            <View style={{...styles.container, marginBottom: 5}}>
                 <AddShoppingListModal modalVisible={changeModalVisible}
                                       setModalVisible={setChangeModalVisible}
 
@@ -58,39 +58,29 @@ export default function WeekMenuPage({navigation}) {
                 />
                 <Text style={styles.heading}>{language("weeklyMenu")}</Text>
 
-                {/*<FlatList data={menus} renderItem={({menu}) => (*/}
-
-                {/*    <ListCard period={`${menu.beginDate} - ${menu.endDate}`}*/}
-                {/*              iconName={"calendar"}*/}
-                {/*              title={menu.title}*/}
-                {/*              bgColor={"#cccccc"}*/}
-                {/*              onPress={() => navigation.navigate('Week Menu Details', {id: menu.id})}*/}
-                {/*              onPressEdit={() => setChangeModalVisible(!changeModalVisible)}*/}
-                {/*    />*/}
-                {/*)}/>*/}
-                {menus.map((menu, index) => {
-                    return (
-                        <ListCard key={index}
-                                  period={`${menu.beginDate} - ${menu.endDate}`}
+                <FlatList
+                    data={menus}
+                    style={{alignSelf: 'stretch'}}
+                    renderItem={({item, index}) => (
+                        <ListCard period={`${item.beginDate} - ${item.endDate}`}
                                   iconName={"calendar"}
-                                  title={menu.title}
+                                  title={item.title}
                                   bgColor={getRandomColor(index)}
-                                  onPress={() => navigation.navigate('Week Menu Details', {id: menu.id})}
+                                  onPress={() => navigation.navigate('Week Menu Details', {id: item.id})}
                                   onPressEdit={() => setChangeModalVisible(!changeModalVisible)}
                         />
-                    );
-                })}
-            </View>
-        </ScrollView>
-            <FloatingActionButton navigation={navigation} addModalVisible={addModalVisible} setAddModalVisible={setAddModalVisible}/>
+                    )}/>
+        </View>
+            <FloatingActionButton navigation={navigation} addModalVisible={addModalVisible}
+                                  setAddModalVisible={setAddModalVisible}/>
             <AddShoppingListModal modalVisible={addModalVisible}
                                   setModalVisible={setAddModalVisible}
-                                  token = {DemoToken}
+                                  token={DemoToken}
                                   modalTitle={language("newShoppingList")}
                                   buttonTitle={language("add")}
                                   showDeleteOption={false}
                                   goBack={() => navigation.navigate("Shopping List")}
             />
-        </View>)
+        </>)
     );
 }
