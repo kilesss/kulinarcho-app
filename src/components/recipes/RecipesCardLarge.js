@@ -18,27 +18,21 @@ export const RecipesCardLarge = ({onPress, title, time, servings, category, phot
                    style={stylesRecipes.recipesCardImage}
             />
             <View style={stylesRecipes.recipesCardCategory}>
-                <CategoriesCard
-                    color={category.color}
-                    imageUrl={category.image}
-                    buttonSize={40}
-                    iconSize={33}
-                    showText={false}
-                />
+                <Image source={category ? category.image : Images.icons.groups} style={stylesRecipes.categoryIcon}/>
             </View>
             <View style={stylesRecipes.recipesCardInfo}>
                 <Text style={stylesRecipes.recipesCardTitle}>{title}</Text>
                 <View style={stylesRecipes.cardInfoInsideContainer}>
                     <View style={stylesRecipes.infoIconsWithText}>
                         <MaterialCommunityIcons name={"progress-clock"} color={"#fff"} size={20}/>
-                        <Text style={stylesRecipes.infoSmallText}>{time} {language("min")} </Text>
+                        <Text style={stylesRecipes.infoSmallText}>{time ? time : '∅'} {language("min")} </Text>
                     </View>
                     <View style={stylesRecipes.infoIconsWithText}>
 
                         <MaterialCommunityIcons name={"pot-mix-outline"}
                                                 color={"#fff"} size={21}
                                                 style={{marginTop: -3}}/>
-                        <Text style={stylesRecipes.infoSmallText}>{servings} {language("servings")}</Text>
+                        <Text style={stylesRecipes.infoSmallText}>{servings ? servings : '∅'} {language("servings")}</Text>
                     </View>
                 </View>
             </View>

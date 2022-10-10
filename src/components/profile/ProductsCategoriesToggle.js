@@ -8,6 +8,7 @@ import EditProductTypesModal from "./EditProductTypesModal";
 import {getProductTypeIcon} from "../HelpFunctions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {getProducts, getProductTypes} from "../../RestRequests/generalRequest";
+import renderLoading from "../loading/ShowLoader";
 
 
 export const ProductsCategoriesToggle = ({condition}) => {
@@ -143,7 +144,7 @@ export const ProductsCategoriesToggle = ({condition}) => {
         )
     }
 
-    return (
+    return (renderLoading(showLoader,
         <View style={{alignSelf: "stretch"}}>
 
             {content}
@@ -171,7 +172,6 @@ export const ProductsCategoriesToggle = ({condition}) => {
                                    refresh={() => setDismiss(true)}
                                    categories={categories}
             />
-
         </View>
-    )
+    ));
 }

@@ -29,7 +29,7 @@ export default function CategoriesCard({
                     stylesRecipes.card,
                     stylesRecipes.categoriesCardIcon,
                     {
-                        backgroundColor: `${color}4C`,
+                        backgroundColor: `${color}4c`,
                         height: buttonSize,
                         width: buttonSize,
                     }]}>

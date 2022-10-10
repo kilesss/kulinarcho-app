@@ -15,44 +15,6 @@ import { FloatingAction } from "react-native-floating-action";
 import AddShoppingListModal from "../../components/shoppingList/AddShoppingListModal";
 import FloatingActionButton from "../../components/display/FloatingActionButton";
 
-export const actions = [
-    {
-        text: "Добави Списък за Пазар",
-        icon: Images.navIcons.shoppingLists,
-        name: "addList",
-        position: 2,
-        color: "#15a051",
-        buttonSize: 43,
-    },
-    {
-        text: "Добави Рецепта",
-        icon: Images.navIcons.recipes,
-        name: "bt_accessibility",
-        position: 1,
-        color: "#15a051",
-        buttonSize: 43,
-    },
-];
-
-export const categories2 = [
-    {key: "1", title: "Риба", icon: "fish", color: "#0088C2"},
-    {key: "2", title: "Напитки", icon: "glass-cocktail", color: "#DC00E0"},
-    {key: "3", title: "С Месо", icon: "food-drumstick", color: "#842F00"},
-    {key: "4", title: "Салати", icon: "leaf", color: "#0fc45b"},
-    {key: "5", title: "Супи", icon: "bowl-outline", color: "#FF7410"},
-    {key: "6", title: "Десерти", icon: "cake-variant-outline", color: "#d70101"},
-]
-
-export const recipes = [
-    {key: "1", title: "Some Recipe with more text than usual", time: "30", servings: "5", category: categories2[1]},
-    {key: "2", title: "Some Recipe", time: 20, servings: 4, category: categories2[2]},
-    {key: "3", title: "Some Recipe", time: 40, servings: 5, category: categories2[3]},
-    {key: "4", title: "Some Recipe", time: 50, servings: 6, category: categories2[5]},
-    {key: "5", title: "Some Recipe", time: 40, servings: 5, category: categories2[1]},
-    {key: "6", title: "Some Recipe", time: 30, servings: 5, category: categories2[2]},
-    {key: "7", title: "Some Recipe", time: 30, servings: 5, category: categories2[4]}
-]
-
 
 export default function RecipesPage( {route,navigation}) {
 

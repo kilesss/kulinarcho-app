@@ -39,8 +39,6 @@ export default function AllRecipes({route, navigation}) {
                 getPublicRecipes('GET', value, page, title, categoryID, ownRecipeLocal).then(data => {
                     if (data) {
                         const result = Object.values(data);
-
-
                         setRecipes([...recipes, ...result[0]])
                         setLastPage(result[2])
                         setShowLoader2(false)
@@ -70,6 +68,7 @@ export default function AllRecipes({route, navigation}) {
             <Text style={styles.heading}>Всички Рецепти</Text>
             <SafeAreaView style={{ alignSelf: "stretch"}}>
             <FlatList
+                style={{marginBottom: 30}}
                 data={recipes}
                 keyExtractor={(item, index) => item.id}
                 onEndReached={fetchMore}

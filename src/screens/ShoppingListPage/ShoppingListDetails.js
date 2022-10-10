@@ -5,7 +5,7 @@ import {ShoppingListItem} from "../../components/shoppingList/ShoppingListItem";
 import language from "../../language/language";
 import * as React from "react";
 import shoppingListStyle from "../../styles/stylesShoppingList";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
 import BottomPopup from "../../components/shoppingList/BottomPopup";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -75,8 +75,7 @@ export default function ShoppingListDetails(props) {
 
 
     const showEditProduct = (item, type) => {
-        console.log(item)
-        setBuyModalVisible(true)
+        buyProduct.current.open()
         if (type === 'edit') {
             setModalData(item)
         } else {
@@ -182,6 +181,8 @@ export default function ShoppingListDetails(props) {
         editItems(items);
 
     }
+    const buyProduct = useRef();
+
 
     return (
 
@@ -230,6 +231,7 @@ export default function ShoppingListDetails(props) {
                                             }}
                           />
                       )}/>
+
             <BottomPopup modalVisible={buyModalVisible}
                          setModalVisible={setBuyModalVisible}
                          returnData={(data) => returnData(data)}
@@ -240,6 +242,7 @@ export default function ShoppingListDetails(props) {
                          product={modalData.name}
                          description={modalData.description}
                          finalPrice={modalData.finalPrice}
+                         buyProductRef={buyProduct}
             />
 
         </SafeAreaView>

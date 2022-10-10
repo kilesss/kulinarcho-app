@@ -54,6 +54,7 @@ export default function ShoppingListsPage({navigation}) {
                         delete data.first_login;
 
                         const result = Object.values(data);
+                        console.log(result)
                         editShoppingLists(result)
                         setShowLoader(false);
                     }
@@ -80,7 +81,7 @@ export default function ShoppingListsPage({navigation}) {
 
 
     return renderLoading(showLoader, <View style={{flex: 1}}>
-        <View style={styles.container}>
+        <View style={{...styles.container, marginBottom: 5}}>
 
             <Modal visible={onBoardingModal}>
                 <OnBoarding closeOnBoardingModal={closeOnBoardingModal}/>
@@ -119,6 +120,7 @@ export default function ShoppingListsPage({navigation}) {
                       style={{alignSelf: "stretch"}}
                       keyExtractor={(item, index) => index.toString()}
                       renderItem={({item, index}) => (
+                          item !== 0 ?
                           <ListCard bgColor={randomColor(index)}
                                     title={item.name}
                                     iconName={"receipt"}
@@ -131,6 +133,7 @@ export default function ShoppingListsPage({navigation}) {
                                         showEditProduct(item)
                                     }}
                           />
+                        : ''
                       )}/>
 
         </View>

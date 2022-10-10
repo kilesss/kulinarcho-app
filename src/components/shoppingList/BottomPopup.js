@@ -10,6 +10,8 @@ import {LinearGradient} from "expo-linear-gradient";
 import {AutocompleteDropdown} from 'react-native-autocomplete-dropdown';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {getProducts} from "../../RestRequests/generalRequest";
+import RBSheet from "react-native-raw-bottom-sheet";
+
 // Component for Modal on shopping lists page
 export default function BottomPopup({
                                         modalVisible,
@@ -96,6 +98,7 @@ export default function BottomPopup({
             newProductId: selectedItem,
             description: txtDescription        })
 
+
         setPrice('');
         setSelectedItem(null);
         setAmount('');
@@ -105,6 +108,7 @@ export default function BottomPopup({
         setDescription('');
         setModalVisible(!modalVisible);
     }
+
 
     function showDifferentButtonText() {
         if (newProduct === undefined) {
@@ -224,7 +228,8 @@ function closeModal(){
                         </View>
                     </View>
                 </View>
-            </TouchableWithoutFeedback>
-        </Modal>
+            </View>
+
+        </RBSheet>
     )
 }

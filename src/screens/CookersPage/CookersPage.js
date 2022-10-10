@@ -31,6 +31,7 @@ export default function CookersPage({navigation}) {
                         console.log(result)
                         setCooks(result)
                         setShowLoader(false);
+                        console.log(result)
                     }
                 }).catch((err) => {
                     console.log(err);
@@ -48,12 +49,6 @@ export default function CookersPage({navigation}) {
             <View style={{flex: 1}}>
                 <View style={styles.container}>
                 <Text style={styles.heading}>{language("cooks")}</Text>
-
-                {/*{cooks.map((cook) => {*/}
-                {/*    return (*/}
-                {/*        <CookCard name={cook.name} numRecipes={cook.recipes} onPress={() => navigation.navigate("Cooks Details", {cook: cook})}></CookCard>*/}
-                {/*    );*/}
-                {/*})}*/}
 
                 <FlatList
                     data={cooks}
