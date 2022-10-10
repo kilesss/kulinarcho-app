@@ -28,6 +28,7 @@ export default function CookersPage({navigation}) {
                 getPublicProfiles('GET', value).then(data => {
                     if (data) {
                         const result = Object.values(data);
+                        console.log(result)
                         setCooks(result)
                         setShowLoader(false);
                         console.log(result)

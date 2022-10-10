@@ -9,10 +9,12 @@ import {useEffect, useRef, useState} from "react";
 
 import BottomPopup from "../../components/shoppingList/BottomPopup";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {getShoppingListProducts,
+import {
+    getShoppingListProducts,
     AddEditProductShoppingList,
     updateList,
-    deleteProductFromList} from "../../RestRequests/generalRequest";
+    deleteProductFromList
+} from "../../RestRequests/generalRequest";
 import {useRoute} from "@react-navigation/native";
 import {finalize} from "@babel/core/lib/config/helpers/deep-array";
 
@@ -43,17 +45,13 @@ export default function ShoppingListDetails(props) {
                 getShoppingListProducts(props.route.params.key, value).then(data => {
                     if (data) {
                         const result = Object.values(data);
-
+                        console.log(result);
                         editItems(result)
                         setarticleCount(result.length);
                         calculateFinalPrice(result);
                     }
 
-                }).then(data=>{
-                    console.log(data);
-                    console.log('eeeeeeeeeeeee');
-
-
+                }).then(data => {
                 }).catch((err) => {
                     console.log(err);
                 });
@@ -71,7 +69,8 @@ export default function ShoppingListDetails(props) {
         editItems(newItemsList);
         setarticleCount(newItemsList.length);
         calculateFinalPrice()
-        deleteProductFromListRequest(i.id).then(r => {})
+        deleteProductFromListRequest(i.id).then(r => {
+        })
     };
 
 
@@ -93,7 +92,7 @@ export default function ShoppingListDetails(props) {
 
     function calculateFinalPrice(result = null) {
         var finalPriceTemp = 0;
-        if (result === null){
+        if (result === null) {
             result = items;
         }
 
@@ -101,7 +100,7 @@ export default function ShoppingListDetails(props) {
 
             if (result[key].status === 1) {
 
-                if (isNaN(result[key].finalPrice)){
+                if (isNaN(result[key].finalPrice)) {
                     result[key].finalPrice = 0
                 }
                 finalPriceTemp = finalPriceTemp + parseFloat(result[key].finalPrice);
@@ -110,7 +109,7 @@ export default function ShoppingListDetails(props) {
         setfinalPriceList(parseFloat(finalPriceTemp).toFixed(2))
     }
 
-    async function deleteProductFromListRequest(id){
+    async function deleteProductFromListRequest(id) {
         await deleteProductFromList(JSON.stringify({id: id}), DemoToken).then()
             .then(response => {
                 if (response.errors) {
@@ -120,6 +119,7 @@ export default function ShoppingListDetails(props) {
             })
 
     }
+
     async function AddEditProductShoppingListRequest(data) {
 
 
@@ -127,7 +127,7 @@ export default function ShoppingListDetails(props) {
             listId: props.route.params.key,
             ...data
         };
-         await AddEditProductShoppingList(JSON.stringify(requestBody), DemoToken).then()
+        await AddEditProductShoppingList(JSON.stringify(requestBody), DemoToken).then()
             .then(response => {
                 if (response.errors) {
                     const restErr = JSON.stringify(response.errors);
@@ -140,9 +140,9 @@ export default function ShoppingListDetails(props) {
 
     function returnData(data) {
         console.log(data);
-        if (data.newProductId  !== null) {
+        if (data.newProductId !== null) {
             items.push({
-                "description": '',
+                "description": data.description,
                 "finalPrice": data.finalPrice,
                 "id": '',
                 "name": data.newProductId.title,
@@ -153,23 +153,26 @@ export default function ShoppingListDetails(props) {
                 "type": "",
                 "value": data.amount,
             })
-            AddEditProductShoppingListRequest(data).then(r =>{} )
+            AddEditProductShoppingListRequest(data).then(r => {
+            })
         } else {
             let keyData = '';
             Object.keys(items).forEach(function (key) {
                 if (items[key].id === data.productId) {
                     keyData = key;
-                    if (items[key].status === 1){
+                    if (items[key].status === 1) {
                         items[key].status = 0;
-                    }else {
+                    } else {
                         items[key].status = 1;
                     }
                     items[key].price = data.price
                     items[key].value = data.amount
                     items[key].finalPrice = data.finalPrice
+                    items[key].description = data.description
                 }
             });
-            AddEditProductShoppingListRequest(items[keyData]).then(r =>{} )
+            AddEditProductShoppingListRequest(items[keyData]).then(r => {
+            })
 
         }
         //TODO send request
@@ -217,18 +220,17 @@ export default function ShoppingListDetails(props) {
                               showEditProduct(item, 'edit')
                           }}
                                             title={item.name}
-                                            finalPrice={item.finalPrice === ''?0:item.finalPrice}
+                                            finalPrice={item.finalPrice === '' ? 0 : item.finalPrice}
                                             description={item.description}
                                             productId={item.productId}
-                                            price={item.price === ''?0:item.price}
-                                            num={item.value === ''?0:item.value}
+                                            price={item.price === '' ? 0 : item.price}
+                                            num={item.value === '' ? 0 : item.value}
                                             checked={checkStatus(item.status)}
                                             onPressDelete={() => {
                                                 remove(item)
                                             }}
                           />
                       )}/>
-
 
             <BottomPopup modalVisible={buyModalVisible}
                          setModalVisible={setBuyModalVisible}
@@ -238,6 +240,7 @@ export default function ShoppingListDetails(props) {
                          price={modalData.price}
                          amount={modalData.value}
                          product={modalData.name}
+                         description={modalData.description}
                          finalPrice={modalData.finalPrice}
                          buyProductRef={buyProduct}
             />

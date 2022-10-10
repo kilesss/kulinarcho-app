@@ -36,30 +36,39 @@ export const rightSwipeActions = (progress, dragX, onPressDelete, height, margin
 };
 
 
+export const ShoppingListItem = ({ onPress, title, price,finalPrice,description,productId, num, checked, onPressDelete}) => {
 
-export const ShoppingListItem = ({ onPress, title, price,finalPrice,description,productId, num, checked, onPressDelete}) => (
-    <GestureHandlerRootView>
-    <Swipeable
-        renderRightActions={(progress, dragX) => rightSwipeActions(progress, dragX, onPressDelete, 46)}
-        >
-        <TouchableOpacity
-            onPress={onPress}
-            // TODO: check both ways to see whats better
-            activeOpacity={1}
-            style={[shoppingListStyle.item,]}>
-            <Checkbox style={shoppingListStyle.checkBox}
-                      value={checked}
-                      color={"#15A051"}
-                      // TODO: I don't know how to make the checkbox change
-                      onValueChange={() => checked = !checked}
-            />
-            <View>
-                <Text style={shoppingListStyle.itemTitle}>{title} ({description})</Text>
-                <Text style={shoppingListStyle.itemSubHeading}>{price}лв x {num} = {finalPrice}лв</Text>
-            </View>
+    function showHintBreaslets (description) {
+        if (description === '' || description === null) {
+            return '';
+        } else {
+            return '(' + description + ')';
+        }
+    }
+    return (
+        <GestureHandlerRootView>
+            <Swipeable
+                renderRightActions={(progress, dragX) => rightSwipeActions(progress, dragX, onPressDelete, 46)}
+            >
+                <TouchableOpacity
+                    onPress={onPress}
+                    // TODO: check both ways to see whats better
+                    activeOpacity={1}
+                    style={[shoppingListStyle.item,]}>
+                    <Checkbox style={shoppingListStyle.checkBox}
+                              value={checked}
+                              color={"#15A051"}
+                        // TODO: I don't know how to make the checkbox change
+                              onValueChange={() => checked = !checked}
+                    />
+                    <View>
+                        <Text style={shoppingListStyle.itemTitle}>{title} {showHintBreaslets(description)}</Text>
+                        <Text style={shoppingListStyle.itemSubHeading}>{price}лв x {num} = {finalPrice}лв</Text>
+                    </View>
 
-        </TouchableOpacity>
-    </Swipeable>
-    </GestureHandlerRootView>
-);
+                </TouchableOpacity>
+            </Swipeable>
+        </GestureHandlerRootView>
+    );
+};
 

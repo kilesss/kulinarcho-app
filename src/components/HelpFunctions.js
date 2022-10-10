@@ -82,10 +82,10 @@ export function getProductTypeIcon(title){
 
 
 
-export const showConfirmDialog = (onPress) => {
+export const showConfirmDialog = (onPress, confirmText) => {
     return Alert.alert(
         language("confirmDelete"),
-        language("confirmRecipeDelete"),
+        language(confirmText),
         [
             {
                 text: language("no"),

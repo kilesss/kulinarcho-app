@@ -69,7 +69,11 @@ export default function language(key){
         settings: 'Настройки',
         productsAndCategories: 'Продукти и категории',
         personalInfo: 'Лична информация'
-
+        myGroup: "Моята Група",
+        confirmUserRemove: "Сигурни ли сте че искате да премахнете този член от групата?",
+        pending: "Чакащ удобрение",
+        saveProduct: "Запази",
+        description:"Описание",
 
 
 

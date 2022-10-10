@@ -36,9 +36,11 @@ export default function RecipeDetails({route, navigation}) {
     const [iconInfo, setIconInfo] = useState('');
     const [DemoToken, setDemoToken] = useState(true);
 
+
     function loadData() {
         AsyncStorage.getItem('access_token').then((value) => {
-            setDemoToken(value);
+            console.log(value)
+            console.log(recipeId)
             if (value) {
                 getSingleRecipe('GET', value, recipeId).then(data => {
                     if (data) {
@@ -107,7 +109,9 @@ export default function RecipeDetails({route, navigation}) {
                             </View>
                         </View>
                         {/*TODO: Fix the category not showing up correctly*/}
+
                         <Text style={{color:"#4B4C4C"}}>Категория: <Text style={{color: "#15A051", fontWeight: "bold"}}>{iconInfo.title}</Text>
+
                         </Text>
 
                         <View style={stylesRecipes.portionsSection}>

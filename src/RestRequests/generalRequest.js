@@ -168,9 +168,7 @@ const getLatestRecipes = async function (method, JWT) {
 
 
 const getPublicRecipes = async function (method, JWT, page = "", title="", category = 0, ownRecipe = 0) {
-    let a = endpoints.getPublicRecipes + "?category="+ category +"&page=" + page
-    console.log(a)
-    const res = await fetch(`${endpoints.getPublicRecipes}?category=${category}&page=${page}&ownRecipe=${ownRecipe}`, {
+    const res = await fetch(`${endpoints.getPublicRecipes}?category=${category}&page=${page}&ownRecipe=${ownRecipe}&title=${title}`, {
         method: method,
         headers: {
             'Authorization': 'Bearer ' + JWT
@@ -180,9 +178,11 @@ const getPublicRecipes = async function (method, JWT, page = "", title="", categ
 }
 
 function formatResponse2(response) {
+    console.log(response)
     if ('premium' in response){
         delete response.premium;
     }
+
     if ('user_requests' in response){
         delete response.user_requests;
     }
@@ -346,13 +346,74 @@ const getUnits = async function (method, JWT) {
     return formatResponse(await res.json());
 }
 
+const getGroupInfo = async function (method, JWT) {
+    const res = await fetch(`${endpoints.getGroupInfo}`, {
+        method: method,
+        headers: {
+            'Authorization': 'Bearer ' + JWT
+        }
+    });
+    return formatResponse(await res.json());
+}
+
+const newRequest = async function (body, token) {
+    const res = await fetch(endpoints.newRequest, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+
+    return await res.json();
+}
+
+const deleteUserRequest = async function (body, token) {
+    const res = await fetch(endpoints.deleteUserRequest, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+    return await res.json();
+}
+
+const acceptUserRequest = async function (body, token) {
+    const res = await fetch(endpoints.acceptUserRequest, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+    return await res.json();
+}
+
+const deleteUserFromGroup = async function (body, token) {
+    const res = await fetch(endpoints.deleteUserFromGroup, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+    return await res.json();
+}
+
+
 
 export {
     login, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu,
     getSingleRecipe, getCategories, getProducts, getProductTypes, getSingleProfile,
     getPublicProfiles, getLatestRecipes, getPublicRecipes, getShoppingListProducts,
     AddEditProductShoppingList,deleteProductFromList, AddEditProductType, deleteProductTypes,
-    addEditProduct, deleteProduct, firstLogin, addRecipe, getUnits, editRecipe
+    addEditProduct, deleteProduct, firstLogin, addRecipe, getUnits, editRecipe, getGroupInfo, newRequest,
+    deleteUserRequest, acceptUserRequest, deleteUserFromGroup
 }
 
 

@@ -19,9 +19,9 @@ export default function BottomPopup({
                                         price,
                                         newProduct,
                                         amount,
-                                        buyProductRef,
                                         returnData,
                                         product,
+                                        description,
                                         finalPrice,
                                         title
                                     }) {
@@ -29,17 +29,20 @@ export default function BottomPopup({
     const [txtProduct, setProduct] = useState("")
     let [txtAmount, setAmount] = useState("")
     let [txtPrice, setPrice] = useState("")
+    let [txtDescription, setDescription] = useState("")
     const [txtFinalPrice, setFinalPrice] = useState("")
     const [selectedItem, setSelectedItem] = useState(null);
     const [item, setItem] = useState([]);
 
     useEffect(() => {
-
         if (txtAmount === "") {
             setAmount(amount);
         }
         if (txtPrice === "") {
             setPrice(price);
+        }
+        if (txtDescription === "") {
+            setDescription(description);
         }
         if (txtFinalPrice === "") {
             setFinalPrice(finalPrice)
@@ -92,8 +95,9 @@ export default function BottomPopup({
             finalPrice: txtFinalPrice,
             amount: txtAmount,
             productId: newProduct,
-            newProductId: selectedItem
-        })
+            newProductId: selectedItem,
+            description: txtDescription        })
+
 
         setPrice('');
         setSelectedItem(null);
@@ -101,7 +105,18 @@ export default function BottomPopup({
         setProduct('');
         setFinalPrice('');
         setItem('');
+        setDescription('');
         setModalVisible(!modalVisible);
+    }
+
+
+    function showDifferentButtonText() {
+        if (newProduct === undefined) {
+            return 'saveProduct';
+        } else {
+            return 'buyProduct';
+
+        }
     }
 
     function showDifferentFields() {
@@ -122,76 +137,94 @@ export default function BottomPopup({
         }
         return <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center', width: '100%'}}>{product}</Text>
     }
+function closeModal(){
+    setPrice('');
+    setSelectedItem(null);
+    setAmount('');
+    setProduct('');
+    setFinalPrice('');
+    setItem('');
+    setDescription('');
 
+}
     return (
-        <RBSheet
-            ref={buyProductRef}
-            height={400}
-            openDuration={200}
-            closeOnDragDown={true}
-            // onClose={() => {handleOnClose()}}
-            customStyles={{
-                container: {
-                    borderTopRightRadius: 20,
-                    borderTopLeftRadius: 20,
-                    backgroundColor: "#f5f5f5",
-                    paddingHorizontal: 30,
-                    paddingTop: 10,
-                    justifyContent: "flex-start",
-                }
-            }}
+        <Modal animationType="slide"
+               transparent={true}
+               visible={modalVisible}
         >
-            <View>
-                <Text style={shoppingListStyle.popupTitle}>{language(title)}</Text>
+            <TouchableWithoutFeedback style={shoppingListStyle.outsideTouchable}
+                                      onPressOut={() => { closeModal()}}
+                                      onPress={() => {
+                                          setModalVisible(!modalVisible)
+                                      }}>
+                <View style={{backgroundColor: "rgba(74,74,74,0.4)", flex: 1, justifyContent: "flex-end"}}>
+                    <View style={shoppingListStyle.popup}>
+                        <Text style={shoppingListStyle.popupTitle}>{language(title)}</Text>
 
-                <View>
-                    <View style={{...shoppingListStyle.popupPrice}}>
-                        {showDifferentFields()}
-                    </View>
-                    <View style={{zIndex: 5}}>
-                        <View style={shoppingListStyle.popupAmount}>
-                            <Text style={{fontSize: 16}}>{language("amount")}</Text>
-                            <TextInput style={shoppingListStyle.popupInput}
-                                       value={txtAmount}
-                                       onChangeText={changedText => onInputChanged(changedText, 'amount')}
+                        <View>
+                            <View style={{...shoppingListStyle.popupPrice}}>
+                                {showDifferentFields()}
+                            </View>
+                            <View style={{...shoppingListStyle.popupPrice}}>
+                                <View>
+                                    <Text style={{fontSize: 16}}>{language("description")}: </Text>
+                                </View>
 
-                                       placeholder={"2"}
-                            />
-                        </View>
+                                <View>
+                                    <TextInput style={{...shoppingListStyle.popupInput, flex: 1}}
+                                               value={txtDescription}
+                                               onChangeText={changedText => setDescription(changedText)}
 
-                        <View style={shoppingListStyle.popupPrice}>
-                            <Text style={{fontSize: 16}}>{language("price")}</Text>
-                            <TextInput style={shoppingListStyle.popupInput}
-                                       value={txtPrice}
+                                               placeholder={""}
+                                    />
+                                </View>
+                            </View>
+                            <View style={{zIndex: 5}}>
+                                <View style={shoppingListStyle.popupAmount}>
+                                    <Text style={{fontSize: 16}}>{language("amount")}</Text>
+                                    <TextInput style={shoppingListStyle.popupInput}
+                                               value={txtAmount}
+                                               onChangeText={changedText => onInputChanged(changedText, 'amount')}
 
-                                       onChangeText={changedText => onInputChanged(changedText, 'price')}
+                                               placeholder={"2"}
+                                    />
+                                </View>
 
-                                       placeholder={"e.g. 3лв"}/>
-                        </View>
+                                <View style={shoppingListStyle.popupPrice}>
+                                    <Text style={{fontSize: 16}}>{language("price")}</Text>
+                                    <TextInput style={shoppingListStyle.popupInput}
+                                               value={txtPrice}
 
-                        <LinearGradient
-                            // Background Linear Gradient
-                            colors={['#15A051', 'rgba(21,160,81,0.35)']}
-                            start={{x: 0, y: 0}}
-                            end={{x: 1, y: 1}}
+                                               onChangeText={changedText => onInputChanged(changedText, 'price')}
 
-                            style={{height: 2, margin: 10, marginBottom: -5}}
-                        />
+                                               placeholder={"e.g. 3лв"}/>
+                                </View>
 
-                        <View style={shoppingListStyle.popupPrice}>
-                            <Text style={{fontSize: 16, fontWeight: "bold"}}>{language("price")}</Text>
-                            <Text style={{fontSize: 16, fontWeight: "bold"}}>{txtFinalPrice} лв</Text>
-                        </View>
+                                <LinearGradient
+                                    // Background Linear Gradient
+                                    colors={['#15A051', 'rgba(21,160,81,0.35)']}
+                                    start={{x: 0, y: 0}}
+                                    end={{x: 1, y: 1}}
 
-                        <View style={shoppingListStyle.popupButtons}>
-                            <Text style={{marginRight: 15}}>
-                                {language("cancel")}
-                            </Text>
+                                    style={{height: 2, margin: 10, marginBottom: -5}}
+                                />
 
-                            <CustomButton title={language(title)}
-                                          txtColor={"#fff"}
-                                          onPress={submitProduct}
-                            />
+                                <View style={shoppingListStyle.popupPrice}>
+                                    <Text style={{fontSize: 16, fontWeight: "bold"}}>{language("price")}</Text>
+                                    <Text style={{fontSize: 16, fontWeight: "bold"}}>{txtFinalPrice} лв</Text>
+                                </View>
+
+                                <View style={shoppingListStyle.popupButtons}>
+                                    <Text style={{marginRight: 15}}>
+                                        {language("cancel")}
+                                    </Text>
+
+                                    <CustomButton title={language(showDifferentButtonText())}
+                                                  txtColor={"#fff"}
+                                                  onPress={submitProduct}
+                                    />
+                                </View>
+                            </View>
                         </View>
                     </View>
                 </View>

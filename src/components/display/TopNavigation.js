@@ -58,7 +58,7 @@ export default function TopNavigation({recipeDetails, products, steps, scrollA, 
                                 <MaterialCommunityIcons name={"pen"} size={25} color={"#4B4C4C"}/>
                                 <Text style={styles.subHeading}>Edit</Text>
                             </MenuOption>
-                            <MenuOption onSelect={() => showConfirmDialog(() => console.log("Pressed Yes"))}
+                            <MenuOption onSelect={() => showConfirmDialog(() => console.log("Pressed Yes"), "confirmRecipeDelete")}
                                         style={stylesRecipes.popupMenu}>
                                 <MaterialCommunityIcons name={"delete"} size={25} color={"red"}/>
                                 <Text style={{...styles.subHeading, color: "red"}}>{language("delete")}</Text>

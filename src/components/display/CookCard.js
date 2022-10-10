@@ -2,12 +2,17 @@ import styles from "../../styles/styles";
 import {TouchableOpacity} from "react-native";
 import language from "../../language/language";
 import Images from "../../../public/images";
+import {stylesProfile} from "../../styles/stylesProfile";
+import {MaterialIcons} from "@expo/vector-icons";
+import {showConfirmDialog} from "../HelpFunctions";
+
 const {stylesRecipes} = require("../../styles/stylesRecipes");
 const {Image, View, Text} = require("react-native");
 const React = require("react");
 
 
-export default function CookCard({name, image, numRecipes, onPress, hideNumRecipes}){
+
+export default function CookCard({name, image, numRecipes, onPress, hideNumRecipes, showDelete, handleDelete}) {
 
 
     return (
@@ -26,6 +31,13 @@ export default function CookCard({name, image, numRecipes, onPress, hideNumRecip
                     '' : <Text style={[styles.smallGreenText, {marginTop: -10,}]}>{numRecipes} {language("recipes")}</Text>
                 }
             </View>
+            {showDelete ?
+                <TouchableOpacity style={{...stylesProfile.requestButton, backgroundColor: "#D40000", marginRight: 8}}
+                                  onPress={() => showConfirmDialog(handleDelete, "confirmUserRemove")}>
+                    <MaterialIcons name={"delete"} size={25} color={"#fff"}/>
+                </TouchableOpacity>
+                : ''}
+
         </TouchableOpacity>
     )
 }

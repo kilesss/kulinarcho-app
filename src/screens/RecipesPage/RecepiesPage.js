@@ -16,7 +16,7 @@ import AddShoppingListModal from "../../components/shoppingList/AddShoppingListM
 import FloatingActionButton from "../../components/display/FloatingActionButton";
 
 
-export default function RecipesPage({navigation}) {
+export default function RecipesPage( {route,navigation}) {
 
     const [categories, setCategories] = useState()
     const [recipesNew, setRecipesNew] = useState()
@@ -57,6 +57,7 @@ export default function RecipesPage({navigation}) {
     }
 
     useEffect(() => {
+
         loadData();
 
     }, []);
