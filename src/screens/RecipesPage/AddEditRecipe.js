@@ -22,10 +22,14 @@ import {rightSwipeActions} from "../../components/shoppingList/ShoppingListItem"
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import * as yup from 'yup';
 import {useIsFocused} from '@react-navigation/native'
+
+import { ALERT_TYPE, Dialog, AlertNotificationRoot, Toast } from 'react-native-alert-notification';
+
 import * as FileSystem from 'expo-file-system';
 import * as ImageManipulator from 'expo-image-manipulator';
 
-export default function AddEditRecipe({route}) {
+
+export default function AddEditRecipe({route, navigation}) {
     const isFocused = useIsFocused()
 
     const {recipeDetails, productList, stepList, edit} = route.params
@@ -216,8 +220,13 @@ export default function AddEditRecipe({route}) {
         portions: yup.number().required('Задължително поле').positive().integer(),
     });
 
+    const IColors = {
+        card: "#fff",
+        success: "#15A051"
+    };
 
     return (renderLoading(showLoader,
+        <AlertNotificationRoot colors={[IColors, IColors]}>
         <ScrollView keyboardShouldPersistTaps='handled'>
             <View
                 style={{...styles.container, alignSelf: "stretch"}}>
@@ -267,7 +276,7 @@ export default function AddEditRecipe({route}) {
                 <Formik
                     initialValues={{
                         title: recipeDetails ? recipeDetails.title : '',
-                        public: recipeDetails ? recipeDetails.public : true,
+                        public: recipeDetails.public !== 0,
                         preparation: recipeDetails.prep_time ? String(recipeDetails.prep_time) : '',
                         cooking: recipeDetails.cook_time ? String(recipeDetails.cook_time) : '',
                         total_time: recipeDetails.all_time ? String(recipeDetails.all_time) : '',
@@ -298,17 +307,22 @@ export default function AddEditRecipe({route}) {
                         value ? setValueError('') : setValueError('Изберете категория')
 
 
+                        Dialog.show({
+                            type: ALERT_TYPE.SUCCESS,
+                            title: 'Успех!',
+                            textBody: edit ? 'Промените бяха запазени успешно' : 'Рецептата беше създадена успешно',
+                            button: 'затвори',
+                            onHide: () => {
+                                actions.resetForm()
+                                resetOtherFields()
+                                navigation.goBack()
+                            }
+                        })
                         if (products && steps) {
                             if (edit) {
-                                editExistingRecipe(obj).then(r => {
-                                    actions.resetForm()
-                                    resetOtherFields()
-                                })
+                                editExistingRecipe(obj).then(r => {})
                             } else {
-                                submitRecipe(obj).then(r => {
-                                    actions.resetForm()
-                                    resetOtherFields()
-                                })
+                                submitRecipe(obj).then(r => {})
                             }
                         }
 
@@ -364,7 +378,7 @@ export default function AddEditRecipe({route}) {
                                             containerStyle={{paddingTop: 0}}
                                             renderRightActions={
                                                 (progress, dragX) =>
-                                                    rightSwipeActions(progress, dragX, () => onPressDeleteProduct(product), 42, 3)}
+                                                    rightSwipeActions(progress, dragX, () => onPressDeleteProduct(product), "88%", 3)}
                                         >
                                             <ProductCard title={product.productName}
                                                          textRight={`${product.amount} ${product.unitsName}`}
@@ -538,7 +552,7 @@ export default function AddEditRecipe({route}) {
                             </View>
 
                             <CustomButton
-                                title={language("add")}
+                                title={ edit ? language("edit") : language("add")}
                                 txtColor={"#fff"}
                                 onPress={props.handleSubmit}
                             />
@@ -556,5 +570,6 @@ export default function AddEditRecipe({route}) {
                 getSelectedProduct={getSelectedProduct}
             />
         </ScrollView>
+        </AlertNotificationRoot>
     ));
 }

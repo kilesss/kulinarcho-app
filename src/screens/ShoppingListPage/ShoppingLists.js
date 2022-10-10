@@ -12,8 +12,6 @@ import randomColor from '../../components/HelpFunctions'
 import renderLoading from "../../components/loading/ShowLoader";
 import {firstLogin, getShopingList} from "../../RestRequests/generalRequest";
 import FloatingActionButton from "../../components/display/FloatingActionButton";
-import Onboarding from "react-native-onboarding-swiper";
-import Images from "../../../public/images";
 import OnBoarding from "../../components/display/OnBoarding";
 import {useIsFocused} from '@react-navigation/native'
 
@@ -33,8 +31,8 @@ export default function ShoppingListsPage({navigation}) {
     }, [isFocused]);
 
     const showEditProduct = (item) => {
-        setChangeModalVisible(true)
         setModalData(item)
+        setChangeModalVisible(true)
     };
 
     function setChangeModalVisible2() {

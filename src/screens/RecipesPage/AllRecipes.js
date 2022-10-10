@@ -6,8 +6,10 @@ import React, {useEffect, useState} from "react";
 import {getIconInfo} from "../../components/HelpFunctions";
 import {RecipesCardSmall} from "../../components/recipes/RecipesCardSamll";
 import renderLoading from "../../components/loading/ShowLoader";
+import {useIsFocused} from "@react-navigation/native";
 
 export default function AllRecipes({route, navigation}) {
+    const isFocused = useIsFocused()
 
     const {categoryID, ownRecipe} = route.params;
 
@@ -19,8 +21,8 @@ export default function AllRecipes({route, navigation}) {
     const [page, setPage] = useState(1)
 
     function loadData() {
-
         setShowLoader2(true)
+
         AsyncStorage.getItem('access_token').then((value) => {
             setDemoToken(value);
             if (value) {
@@ -39,11 +41,27 @@ export default function AllRecipes({route, navigation}) {
                 getPublicRecipes('GET', value, page, title, categoryID, ownRecipeLocal).then(data => {
                     if (data) {
                         const result = Object.values(data);
+
+                        setRecipes(result[0])
+                    }
+                }).catch((err) => {console.log(err)});
+            }
+        }, []);
+    }
+
+    function loadMore() {
+        setShowLoader2(true)
+        AsyncStorage.getItem('access_token').then((value) => {
+            setDemoToken(value);
+            if (value) {
+                getPublicRecipes('GET', value, page, "", categoryID, ownRecipe).then(data => {
+                    if (data) {
+                        const result = Object.values(data);
+
                         setRecipes([...recipes, ...result[0]])
                         setLastPage(result[2])
                         setShowLoader2(false)
                     }
-
                 }).catch((err) => {
                     console.log(err);
                 });
@@ -52,9 +70,14 @@ export default function AllRecipes({route, navigation}) {
     }
 
     useEffect(() => {
-        loadData();
+        loadMore();
     }, [page]);
 
+    useEffect(() => {
+        setRecipes([])
+        setPage(1)
+        loadData();
+    }, [isFocused]);
 
     const fetchMore = () => {
         if(page !== lastPage){
@@ -65,7 +88,9 @@ export default function AllRecipes({route, navigation}) {
 
     return (
         <View style={styles.container}>
-            <SafeAreaView style={{ alignSelf: "stretch"}}>
+            <Text style={styles.heading}>Всички Рецепти</Text>
+            <SafeAreaView style={{ alignSelf: "stretch", paddingBottom: 40}}>
+
             <FlatList
                 data={recipes}
                 keyExtractor={(item, index) => item.id}

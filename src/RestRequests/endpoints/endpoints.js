@@ -34,11 +34,17 @@ const endpoints = {
   editRecipe: 'https://kulinarcho.com/api/recipesEdit',
   getUnits: 'https://kulinarcho.com/api/getUnits',
 
+  deleteRecipe: 'https://kulinarcho.com/api/recipesDelete',
+  transferRecipe: 'https:///kulinarcho.com/api/transferRecipe',
+  setPublicRecipe: 'https:///kulinarcho.com/api/setPublicRecipe'
+
+
   getGroupInfo: 'https://kulinarcho.com/api/profile',
   newRequest: 'https://kulinarcho.com/api/newRequest',
   deleteUserRequest: 'https://kulinarcho.com/api/deleteRequestUser',
   acceptUserRequest: 'https://kulinarcho.com/api/acceptRequestUser',
   deleteUserFromGroup: 'https://kulinarcho.com/api/deleteUser',
+
 
 }
 

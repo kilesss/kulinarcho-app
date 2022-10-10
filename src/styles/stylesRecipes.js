@@ -178,7 +178,8 @@ export const stylesRecipes = StyleSheet.create({
     },
     popupMenu: {
         flexDirection: "row",
-        padding: 10,
+        paddingHorizontal: 10,
+        paddingVertical: 7,
         alignItems: "center"
     },
     addRecipeProductsContainer: {

@@ -74,6 +74,8 @@ export default function language(key){
         pending: "Чакащ удобрение",
         saveProduct: "Запази",
         description:"Описание",
+        makePublic: "Направи Публична"
+
 
 
 

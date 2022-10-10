@@ -346,8 +346,8 @@ const getUnits = async function (method, JWT) {
     return formatResponse(await res.json());
 }
 
-const getGroupInfo = async function (method, JWT) {
-    const res = await fetch(`${endpoints.getGroupInfo}`, {
+const deleteRecipe = async function (body, token) {
+    const res = await fetch(endpoints.deleteRecipe, {
         method: method,
         headers: {
             'Authorization': 'Bearer ' + JWT
@@ -365,7 +365,19 @@ const newRequest = async function (body, token) {
             'Content-Type': 'application/json',
         }
     });
+    return await res.json();
+}
 
+
+const transferRecipe = async function (body, token) {
+    const res = await fetch(endpoints.transferRecipe, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
     return await res.json();
 }
 
@@ -390,6 +402,20 @@ const acceptUserRequest = async function (body, token) {
             'Content-Type': 'application/json',
         }
     });
+    console.log(body)
+    console.log(token)
+    return await res.json();
+}
+
+const setPublicRecipe = async function (body, token) {
+    const res = await fetch(endpoints.setPublicRecipe, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
     return await res.json();
 }
 
@@ -406,14 +432,14 @@ const deleteUserFromGroup = async function (body, token) {
 }
 
 
-
 export {
     login, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu,
     getSingleRecipe, getCategories, getProducts, getProductTypes, getSingleProfile,
     getPublicProfiles, getLatestRecipes, getPublicRecipes, getShoppingListProducts,
     AddEditProductShoppingList,deleteProductFromList, AddEditProductType, deleteProductTypes,
     addEditProduct, deleteProduct, firstLogin, addRecipe, getUnits, editRecipe, getGroupInfo, newRequest,
-    deleteUserRequest, acceptUserRequest, deleteUserFromGroup
+    deleteUserRequest, acceptUserRequest, deleteUserFromGroup, deleteRecipe,
+    transferRecipe, setPublicRecipe
 }
 
 
