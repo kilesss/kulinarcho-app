@@ -75,7 +75,7 @@ export default function ShoppingListDetails(props) {
 
 
     const showEditProduct = (item, type) => {
-        buyProduct.current.open()
+        setBuyModalVisible(true)
         if (type === 'edit') {
             setModalData(item)
         } else {
@@ -181,7 +181,6 @@ export default function ShoppingListDetails(props) {
         editItems(items);
 
     }
-    const buyProduct = useRef();
 
 
     return (
@@ -242,7 +241,6 @@ export default function ShoppingListDetails(props) {
                          product={modalData.name}
                          description={modalData.description}
                          finalPrice={modalData.finalPrice}
-                         buyProductRef={buyProduct}
             />
 
         </SafeAreaView>

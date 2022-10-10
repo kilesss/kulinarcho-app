@@ -150,7 +150,7 @@ export default function TabNavigator(props) {
 
             <Stack.Screen name={"Add Edit Recipe"} component={AddEditRecipe} initialParams={{recipeDetails: '', productList: '', stepList: '', edit: false } }/>
 
-            <Stack.Screen name={"All Recipes"} component={AllRecipes}/>
+            <Stack.Screen name={"All Recipes"} component={AllRecipes} options={{title: "Рецепти"}}/>
         </Stack.Navigator>
     )
 }

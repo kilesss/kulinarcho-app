@@ -15,6 +15,7 @@ import FloatingActionButton from "../../components/display/FloatingActionButton"
 import Onboarding from "react-native-onboarding-swiper";
 import Images from "../../../public/images";
 import OnBoarding from "../../components/display/OnBoarding";
+import {useIsFocused} from '@react-navigation/native'
 
 export default function ShoppingListsPage({navigation}) {
 
@@ -25,9 +26,11 @@ export default function ShoppingListsPage({navigation}) {
     const [showLoader, setShowLoader] = useState(true);
     const [DemoToken, setDemoToken] = useState(true);
 
+    const isFocused = useIsFocused()
+
     useEffect(() => {
         loadData();
-    }, []);
+    }, [isFocused]);
 
     const showEditProduct = (item) => {
         setChangeModalVisible(true)
