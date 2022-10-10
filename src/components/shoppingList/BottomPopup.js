@@ -228,8 +228,8 @@ function closeModal(){
                         </View>
                     </View>
                 </View>
-            </View>
+            </TouchableWithoutFeedback>
 
-        </RBSheet>
+        </Modal>
     )
 }

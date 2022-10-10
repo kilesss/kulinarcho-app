@@ -68,7 +68,7 @@ export default function language(key){
         hint: "Пояснение",
         settings: 'Настройки',
         productsAndCategories: 'Продукти и категории',
-        personalInfo: 'Лична информация'
+        personalInfo: 'Лична информация',
         myGroup: "Моята Група",
         confirmUserRemove: "Сигурни ли сте че искате да премахнете този член от групата?",
         pending: "Чакащ удобрение",

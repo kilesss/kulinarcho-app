@@ -86,7 +86,7 @@ export default function CookerDetails({route, navigation}) {
                             />
                 )}/>
             </View>
-            </View>
+
         </View>
     ));
 }
