@@ -49,7 +49,6 @@ export default function EditProductTypesModal(
         );
 
     async function submitNewProductType(text) {
-        setShowLoader(true);
         setModalVisible(!modalVisible)
 
         let requestBody = {
@@ -60,7 +59,6 @@ export default function EditProductTypesModal(
         }
         await AddEditProductType(JSON.stringify(requestBody), token).then()
             .then(response => {
-                setShowLoader(false);
                 console.log(response)
                 if (response.access_token) {
                     /** Set JWT  **/

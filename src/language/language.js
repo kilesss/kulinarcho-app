@@ -68,7 +68,9 @@ export default function language(key){
         hint: "Пояснение",
         myGroup: "Моята Група",
         confirmUserRemove: "Сигурни ли сте че искате да премахнете този член от групата?",
-        pending: "Висящ"
+        pending: "Чакащ удобрение",
+        saveProduct: "Запази",
+        description:"Описание",
 
 
 

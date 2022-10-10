@@ -28,6 +28,7 @@ export default function CookersPage({navigation}) {
                 getPublicProfiles('GET', value).then(data => {
                     if (data) {
                         const result = Object.values(data);
+                        console.log(result)
                         setCooks(result)
                         setShowLoader(false);
                     }
@@ -61,7 +62,7 @@ export default function CookersPage({navigation}) {
                         <CookCard
                             name={item.name}
                             image={item.profilePicture}
-                            numRecipes={item.recipes}
+                            numRecipes={item.count}
                             onPress={() => navigation.navigate("Cooks Details", {cookId: item.id})}/>
                 )}/>
                 </View>

@@ -49,11 +49,15 @@ export default function ShoppingListsPage({navigation}) {
                     if (data) {
                         if (data.first_login === 1) {
                             setOnBoardingModal(true)
+
                         }
+                        delete data.first_login;
+
                         const result = Object.values(data);
                         editShoppingLists(result)
                         setShowLoader(false);
                     }
+
                 }).catch((err) => {
                     console.log(err);
                 });
@@ -130,8 +134,7 @@ export default function ShoppingListsPage({navigation}) {
                       )}/>
 
         </View>
-        <FloatingActionButton navigation={navigation} addModalVisible={addModalVisible}
-                              setAddModalVisible={setAddModalVisible}/>
+
     </View>)
 }
 

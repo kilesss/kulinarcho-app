@@ -54,7 +54,7 @@ export const recipes = [
 ]
 
 
-export default function RecipesPage({navigation}) {
+export default function RecipesPage( {route,navigation}) {
 
     const [categories, setCategories] = useState()
     const [recipesNew, setRecipesNew] = useState()
@@ -95,6 +95,7 @@ export default function RecipesPage({navigation}) {
     }
 
     useEffect(() => {
+
         loadData();
 
     }, []);

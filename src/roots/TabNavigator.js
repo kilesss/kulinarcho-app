@@ -40,7 +40,7 @@ function MainTabs() {
                 shadowColor: "#999",
             },
             headerTitle: () => (
-                <LogoTitle onPress={() => navigation.push("Settings")}/>
+                <LogoTitle onPress={() => navigation.push("Settings")} navigation={navigation}  />
             )
 
         })}>

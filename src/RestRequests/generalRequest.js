@@ -168,9 +168,7 @@ const getLatestRecipes = async function (method, JWT) {
 
 
 const getPublicRecipes = async function (method, JWT, page = "", title="", category = 0, ownRecipe = 0) {
-    let a = endpoints.getPublicRecipes + "?category="+ category +"&page=" + page
-    console.log(a)
-    const res = await fetch(`${endpoints.getPublicRecipes}?category=${category}&page=${page}&ownRecipe=${ownRecipe}`, {
+    const res = await fetch(`${endpoints.getPublicRecipes}?category=${category}&page=${page}&ownRecipe=${ownRecipe}&title=${title}`, {
         method: method,
         headers: {
             'Authorization': 'Bearer ' + JWT
@@ -180,9 +178,11 @@ const getPublicRecipes = async function (method, JWT, page = "", title="", categ
 }
 
 function formatResponse2(response) {
+    console.log(response)
     if ('premium' in response){
         delete response.premium;
     }
+
     if ('user_requests' in response){
         delete response.user_requests;
     }

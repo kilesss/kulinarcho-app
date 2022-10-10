@@ -14,6 +14,7 @@ import language from "../../language/language";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {getCategories, getPublicProfiles, getSingleProfile} from "../../RestRequests/generalRequest";
 import {getIconInfo, getProductTypeIcon} from "../../components/HelpFunctions";
+import Images from "../../../public/images";
 
 
 export default function CookerDetails({route, navigation}) {
@@ -30,6 +31,7 @@ export default function CookerDetails({route, navigation}) {
             if (value) {
                 getSingleProfile('GET', value, cookId).then(data => {
                     if (data) {
+                        console.log(data.user)
                         const result = Object.values(data);
                         setCook(result[0])
                         setRecipes(result[1])
@@ -57,7 +59,9 @@ export default function CookerDetails({route, navigation}) {
                     numColumns={2}
                     ListHeaderComponent={
                     <View style={stylesCooks.profileDetails}>
-                        <Image source={require("../../../public/images/bob.jpg")} style={stylesCooks.profileImage}/>
+                        <Image source={ cook.profilePicture ?
+                            {uri: 'https://kulinarcho.com' + cook.profilePicture}
+                            : Images.defaultProfile} style={stylesCooks.profileImage}/>
                         <Text style={[styles.heading, {fontSize: 22, marginTop: 0, textAlign: "center"}]}>{cook.name}</Text>
                         <Text style={stylesCooks.numRecipesText}>{cook.recipes} {language("recipes")}</Text>
                         <CustomButton title={language("addToGroup")} padding={9} txtColor={"#fff"}/>
@@ -71,7 +75,10 @@ export default function CookerDetails({route, navigation}) {
                         // <Text>{item.title} - {item.portion} - {item.all_time} - {item.id} - {item.cat}</Text>
                         // </View>
                             <RecipesCardLarge
-                                title={item.title}
+
+                                onPress={() => {
+                                    navigation.push("Recipe Details", {recipeId: item.id})
+                                }}                                title={item.title}
                                 photo={item.photo}
                                 margin={5}
                                 time={item.all_time}

@@ -17,26 +17,30 @@ export default function BottomPopup({
                                         price,
                                         newProduct,
                                         amount,
-    returnData,
-        product,
-        finalPrice,
-        title
-}) {
+                                        returnData,
+                                        product,
+                                        description,
+                                        finalPrice,
+                                        title
+                                    }) {
 
     const [txtProduct, setProduct] = useState("")
     let [txtAmount, setAmount] = useState("")
     let [txtPrice, setPrice] = useState("")
+    let [txtDescription, setDescription] = useState("")
     const [txtFinalPrice, setFinalPrice] = useState("")
     const [selectedItem, setSelectedItem] = useState(null);
     const [item, setItem] = useState([]);
 
     useEffect(() => {
-
-        if (txtAmount === ""){
+        if (txtAmount === "") {
             setAmount(amount);
         }
         if (txtPrice === "") {
             setPrice(price);
+        }
+        if (txtDescription === "") {
+            setDescription(description);
         }
         if (txtFinalPrice === "") {
             setFinalPrice(finalPrice)
@@ -44,18 +48,18 @@ export default function BottomPopup({
         loadProducts();
 
     });
-    const onInputChanged =  function(changedText, set)  {
+    const onInputChanged = function (changedText, set) {
 
         changedText = changedText.replace(',', '.')
         var final = '';
-        if (set === 'amount'){
+        if (set === 'amount') {
             setAmount(changedText)
-            final = (parseFloat(changedText)*parseFloat(txtPrice)).toFixed(2)
-        }else if (set === 'price'){
+            final = (parseFloat(changedText) * parseFloat(txtPrice)).toFixed(2)
+        } else if (set === 'price') {
             setPrice(changedText)
-            final = (parseFloat(changedText)*parseFloat(txtAmount)).toFixed(2)
+            final = (parseFloat(changedText) * parseFloat(txtAmount)).toFixed(2)
         }
-        if (isNaN(final)){
+        if (isNaN(final)) {
             final = '0.00';
         }
         setFinalPrice(final);
@@ -67,11 +71,11 @@ export default function BottomPopup({
         if (item.length === undefined || item.length === 0) {
             AsyncStorage.getItem('access_token').then((value) => {
                 if (value) {
-                    getProducts('GET',value).then(data => {
+                    getProducts('GET', value).then(data => {
                         var arr = [];
                         if (data) {
                             Object.keys(data).map(function (key) {
-                                    arr.push({id: data[key].id.toString(), title: data[key].name},)
+                                arr.push({id: data[key].id.toString(), title: data[key].name},)
                             })
                             setItem(arr);
                         }
@@ -82,14 +86,15 @@ export default function BottomPopup({
             }, []);
         }
     }
-    function submitProduct(){
+
+    function submitProduct() {
         returnData({
             price: txtPrice,
             finalPrice: txtFinalPrice,
             amount: txtAmount,
             productId: newProduct,
-            newProductId:selectedItem
-        })
+            newProductId: selectedItem,
+            description: txtDescription        })
 
         setPrice('');
         setSelectedItem(null);
@@ -97,34 +102,54 @@ export default function BottomPopup({
         setProduct('');
         setFinalPrice('');
         setItem('');
+        setDescription('');
         setModalVisible(!modalVisible);
     }
 
-    function showDifferentFields(){
-        if (newProduct === undefined){
+    function showDifferentButtonText() {
+        if (newProduct === undefined) {
+            return 'saveProduct';
+        } else {
+            return 'buyProduct';
+
+        }
+    }
+
+    function showDifferentFields() {
+        if (newProduct === undefined) {
             return <AutocompleteDropdown
                 containerStyle={{width: '100%', zIndex: 10}}
                 clearOnFocus={false}
                 closeOnBlur={true}
 
-                onChangeText={(data) => {console.log(data)}}
+                onChangeText={(data) => {
+                    console.log(data)
+                }}
                 closeOnSubmit={false}
                 initialValue={{}} // or just '2'
                 onSelectItem={setSelectedItem}
                 dataSet={item}
             />
         }
-        return <Text style={{fontSize:20, fontWeight:'bold', textAlign:'center', width:'100%'}}>{product}</Text>
+        return <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center', width: '100%'}}>{product}</Text>
     }
+function closeModal(){
+    setPrice('');
+    setSelectedItem(null);
+    setAmount('');
+    setProduct('');
+    setFinalPrice('');
+    setItem('');
+    setDescription('');
 
+}
     return (
         <Modal animationType="slide"
                transparent={true}
                visible={modalVisible}
-               onRequestClose={() => {
-                   setModalVisible(!modalVisible);
-               }}>
+        >
             <TouchableWithoutFeedback style={shoppingListStyle.outsideTouchable}
+                                      onPressOut={() => { closeModal()}}
                                       onPress={() => {
                                           setModalVisible(!modalVisible)
                                       }}>
@@ -136,12 +161,26 @@ export default function BottomPopup({
                             <View style={{...shoppingListStyle.popupPrice}}>
                                 {showDifferentFields()}
                             </View>
+                            <View style={{...shoppingListStyle.popupPrice}}>
+                                <View>
+                                    <Text style={{fontSize: 16}}>{language("description")}: </Text>
+                                </View>
+
+                                <View>
+                                    <TextInput style={{...shoppingListStyle.popupInput, flex: 1}}
+                                               value={txtDescription}
+                                               onChangeText={changedText => setDescription(changedText)}
+
+                                               placeholder={""}
+                                    />
+                                </View>
+                            </View>
                             <View style={{zIndex: 5}}>
                                 <View style={shoppingListStyle.popupAmount}>
                                     <Text style={{fontSize: 16}}>{language("amount")}</Text>
                                     <TextInput style={shoppingListStyle.popupInput}
                                                value={txtAmount}
-                                               onChangeText={changedText =>onInputChanged(changedText, 'amount')}
+                                               onChangeText={changedText => onInputChanged(changedText, 'amount')}
 
                                                placeholder={"2"}
                                     />
@@ -152,7 +191,7 @@ export default function BottomPopup({
                                     <TextInput style={shoppingListStyle.popupInput}
                                                value={txtPrice}
 
-                                               onChangeText={changedText =>onInputChanged(changedText, 'price')}
+                                               onChangeText={changedText => onInputChanged(changedText, 'price')}
 
                                                placeholder={"e.g. 3лв"}/>
                                 </View>
@@ -176,7 +215,7 @@ export default function BottomPopup({
                                         {language("cancel")}
                                     </Text>
 
-                                    <CustomButton title={language(title)}
+                                    <CustomButton title={language(showDifferentButtonText())}
                                                   txtColor={"#fff"}
                                                   onPress={submitProduct}
                                     />
