@@ -28,7 +28,7 @@ export const ConditionalCard = ({condition, steps, products}) => {
     } else {
         content = (
             <SafeAreaView>
-                {products.map((product, index) => {
+                { products ? products.map((product, index) => {
                     return (
                         <ProductCard
                             key={index}
@@ -36,7 +36,7 @@ export const ConditionalCard = ({condition, steps, products}) => {
                                      textRight={`${product.volume}${product.unitsName}`}
                                      image={getProductTypeIcon(product.catName)}/>
                     );
-                })}
+                }) : ''}
             </SafeAreaView>
         )
     }

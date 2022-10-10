@@ -94,11 +94,12 @@ export const shoppingListStyle = StyleSheet.create({
     },
     popup: {
         padding: 30,
-        backgroundColor: "#fff",
+        paddingTop: 20,
+        backgroundColor: "#f5f5f5",
         width: "100%",
         borderTopRightRadius: 20,
         borderTopLeftRadius: 20,
-        maxHeight: deviceHeight * 0.47,
+        maxHeight: 450,
     },
     outsideTouchable: {
         flex: 1,
@@ -108,24 +109,23 @@ export const shoppingListStyle = StyleSheet.create({
     popupTitle: {
         textAlign: "center",
         fontWeight: "bold",
-        fontSize: 20,
-        marginBottom: 30
+        color: "#4B4C4C",
+        fontSize: 16,
+        marginBottom: 15
     },
     popupProductName: {
         textAlign: "left",
         width: "100%",
     },
     popupAmount: {
-        flexDirection: "row",
         justifyContent: "space-between",
-        margin: 10,
-        alignItems: "center"
+        flex: 1,
+        marginRight: 10
     },
     popupPrice: {
-        flexDirection: "row",
         justifyContent: "space-between",
-        margin: 10,
-        alignItems: "center"
+        flex: 1,
+        marginLeft: 10
     },
     popupInput:{
         borderBottomWidth: 2,
@@ -161,6 +161,9 @@ export const shoppingListStyle = StyleSheet.create({
         backgroundColor: "#D40000",
         borderRadius: 8,
         padding: 8,
+    },
+    popupDescription: {
+
     }
 });
 

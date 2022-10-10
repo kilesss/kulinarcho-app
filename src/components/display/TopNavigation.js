@@ -45,6 +45,7 @@ export default function TopNavigation({recipeDetails, products, steps, scrollA, 
                 deleteRecipe(JSON.stringify({id: id}), value).then().catch((err) => {
                     console.log(err);
                 });
+                navigation.goBack()
             }
         }, []);
     }
@@ -60,11 +61,9 @@ export default function TopNavigation({recipeDetails, products, steps, scrollA, 
     }
 
     async function saveRecipe(id){
-        console.log(JSON.stringify({id: id}))
-        console.log(token)
+        console.log(JSON.stringify({recipe_id: id}))
         await transferRecipe(JSON.stringify({recipe_id: id}), token).then()
             .then(response => {
-                console.log(response)
                 if (response.access_token) {
                     AsyncStorage.setItem('access_token', response.access_token);
                 }
@@ -115,7 +114,7 @@ export default function TopNavigation({recipeDetails, products, steps, scrollA, 
                                 </MenuOption> : ''
                             }
 
-                            <MenuOption onSelect={() => showConfirmDialog(() => deleteARecipe(recipeDetails.id))}
+                            <MenuOption onSelect={() => showConfirmDialog(() => {deleteARecipe(recipeDetails.id)})}
                                         style={stylesRecipes.popupMenu}>
                                 <MaterialCommunityIcons name={"delete"} size={25} color={"red"}/>
                                 <Text style={{...styles.subHeading, color: "#4B4C4C", marginLeft: 5}}>{language("delete")}</Text>

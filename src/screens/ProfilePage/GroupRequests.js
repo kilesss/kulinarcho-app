@@ -8,6 +8,7 @@ import {acceptUserRequest, deleteUserRequest, getGroupInfo, newRequest} from "..
 import RequestCard from "../../components/profile/RequestCard";
 import {ALERT_TYPE, AlertNotificationRoot, Dialog} from "react-native-alert-notification";
 import renderLoading from "../../components/loading/ShowLoader";
+import language from "../../language/language";
 
 function GroupRequests() {
 
@@ -78,9 +79,11 @@ function GroupRequests() {
     return (renderLoading(showLoader,
         <AlertNotificationRoot colors={[IColors, IColors]}>
         <View style={styles.container}>
+
             <FlatList
                 data={incomingRequests}
                 style={{alignSelf: 'stretch'}}
+                ListEmptyComponent={<Text style={styles.heading}>{language("noInvites")}</Text>}
                 renderItem={({item}) => (
                     <RequestCard
                         text={item.email}

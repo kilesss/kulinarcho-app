@@ -138,6 +138,7 @@ export default function ShoppingListsPage({navigation}) {
                       )}/>
 
         </View>
+        <FloatingActionButton navigation={navigation} addModalVisible={addModalVisible} setAddModalVisible={setAddModalVisible}/>
 
     </View>)
 }

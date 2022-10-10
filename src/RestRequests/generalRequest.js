@@ -348,9 +348,11 @@ const getUnits = async function (method, JWT) {
 
 const deleteRecipe = async function (body, token) {
     const res = await fetch(endpoints.deleteRecipe, {
-        method: method,
+        method: "POST",
+        body: body,
         headers: {
-            'Authorization': 'Bearer ' + JWT
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
         }
     });
     return formatResponse(await res.json());
@@ -379,6 +381,16 @@ const transferRecipe = async function (body, token) {
         }
     });
     return await res.json();
+}
+
+const getGroupInfo = async function (method, JWT) {
+    const res = await fetch(`${endpoints.getGroupInfo}`, {
+        method: method,
+        headers: {
+            'Authorization': 'Bearer ' + JWT
+        }
+    });
+    return formatResponse(await res.json());
 }
 
 const deleteUserRequest = async function (body, token) {

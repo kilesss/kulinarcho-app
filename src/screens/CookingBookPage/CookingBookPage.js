@@ -15,10 +15,11 @@ import {FloatingAction} from "react-native-floating-action";
 import {actions} from "../RecipesPage/RecepiesPage";
 import FloatingActionButton from "../../components/display/FloatingActionButton";
 import AddShoppingListModal from "../../components/shoppingList/AddShoppingListModal";
+import {useIsFocused} from "@react-navigation/native";
 
 export default function CookingBookPage({navigation}) {
 
-
+    const isFocused = useIsFocused()
     const [recipes, setRecipes] = useState([])
     const [showLoader, setShowLoader] = useState(true);
     const [showLoader2, setShowLoader2] = useState(false);
@@ -36,6 +37,7 @@ export default function CookingBookPage({navigation}) {
                     if (data) {
                         const result = Object.values(data);
                         setRecipes([...recipes, ...result[0]])
+                        console.log(result)
                         setLastPage(result[2])
                         setShowLoader2(false)
                     }
@@ -63,6 +65,8 @@ export default function CookingBookPage({navigation}) {
     useEffect(() => {
         loadRecipes()
     }, [page]);
+
+
 
     return (
         renderLoading(showLoader,
@@ -105,6 +109,7 @@ export default function CookingBookPage({navigation}) {
                                                   time={item.all_time}
                                                   servings={item.portion}
                                                   category={getIconInfo(2)}
+                                                  publicStatus={item.public}
                                                   onPress={() => {
                                                       navigation.push("Recipe Details", {recipeId: item.id})
                                                   }}

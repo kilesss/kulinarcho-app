@@ -96,7 +96,8 @@ export default function BottomPopup({
             amount: txtAmount,
             productId: newProduct,
             newProductId: selectedItem,
-            description: txtDescription        })
+            description: txtDescription
+        })
 
 
         setPrice('');
@@ -137,41 +138,40 @@ export default function BottomPopup({
         }
         return <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center', width: '100%'}}>{product}</Text>
     }
-function closeModal(){
-    setPrice('');
-    setSelectedItem(null);
-    setAmount('');
-    setProduct('');
-    setFinalPrice('');
-    setItem('');
-    setDescription('');
 
-}
+    function closeModal() {
+        setPrice('');
+        setSelectedItem(null);
+        setAmount('');
+        setProduct('');
+        setFinalPrice('');
+        setItem('');
+        setDescription('');
+        setModalVisible(false)
+    }
+
     return (
         <Modal animationType="slide"
                transparent={true}
                visible={modalVisible}
         >
-            <TouchableWithoutFeedback style={shoppingListStyle.outsideTouchable}
-                                      onPressOut={() => { closeModal()}}
-                                      onPress={() => {
-                                          setModalVisible(!modalVisible)
-                                      }}>
+            <TouchableWithoutFeedback style={shoppingListStyle.outsideTouchable}>
                 <View style={{backgroundColor: "rgba(74,74,74,0.4)", flex: 1, justifyContent: "flex-end"}}>
                     <View style={shoppingListStyle.popup}>
                         <Text style={shoppingListStyle.popupTitle}>{language(title)}</Text>
 
                         <View>
-                            <View style={{...shoppingListStyle.popupPrice}}>
+                            <View style={{marginBottom: 10}}>
                                 {showDifferentFields()}
                             </View>
-                            <View style={{...shoppingListStyle.popupPrice}}>
+
+                            <View style={{...shoppingListStyle.popupDescription}}>
                                 <View>
-                                    <Text style={{fontSize: 16}}>{language("description")}: </Text>
+                                    <Text style={styles.subHeading}>{language("description")}: </Text>
                                 </View>
 
                                 <View>
-                                    <TextInput style={{...shoppingListStyle.popupInput, flex: 1}}
+                                    <TextInput style={{...styles.customButton, padding: 8, alignSelf: "stretch"}}
                                                value={txtDescription}
                                                onChangeText={changedText => setDescription(changedText)}
 
@@ -179,25 +179,29 @@ function closeModal(){
                                     />
                                 </View>
                             </View>
+
+
                             <View style={{zIndex: 5}}>
-                                <View style={shoppingListStyle.popupAmount}>
-                                    <Text style={{fontSize: 16}}>{language("amount")}</Text>
-                                    <TextInput style={shoppingListStyle.popupInput}
-                                               value={txtAmount}
-                                               onChangeText={changedText => onInputChanged(changedText, 'amount')}
+                                <View style={{flexDirection: "row"}}>
+                                    <View style={shoppingListStyle.popupAmount}>
+                                        <Text style={styles.subHeading}>{language("amount")}</Text>
+                                        <TextInput style={{...styles.customButton, padding: 8, alignSelf: "stretch"}}
+                                                   value={txtAmount}
+                                                   onChangeText={changedText => onInputChanged(changedText, 'amount')}
 
-                                               placeholder={"2"}
-                                    />
-                                </View>
+                                                   placeholder={"2"}
+                                        />
+                                    </View>
 
-                                <View style={shoppingListStyle.popupPrice}>
-                                    <Text style={{fontSize: 16}}>{language("price")}</Text>
-                                    <TextInput style={shoppingListStyle.popupInput}
-                                               value={txtPrice}
+                                    <View style={shoppingListStyle.popupPrice}>
+                                        <Text style={styles.subHeading}>{language("price")}</Text>
+                                        <TextInput style={{...styles.customButton, padding: 8, alignSelf: "stretch"}}
+                                                   value={txtPrice}
 
-                                               onChangeText={changedText => onInputChanged(changedText, 'price')}
+                                                   onChangeText={changedText => onInputChanged(changedText, 'price')}
 
-                                               placeholder={"e.g. 3лв"}/>
+                                                   placeholder={"e.g. 3лв"}/>
+                                    </View>
                                 </View>
 
                                 <LinearGradient
@@ -206,22 +210,23 @@ function closeModal(){
                                     start={{x: 0, y: 0}}
                                     end={{x: 1, y: 1}}
 
-                                    style={{height: 2, margin: 10, marginBottom: -5}}
+                                    style={{height: 3, marginVertical: 15, marginBottom: -5}}
                                 />
 
-                                <View style={shoppingListStyle.popupPrice}>
-                                    <Text style={{fontSize: 16, fontWeight: "bold"}}>{language("price")}</Text>
-                                    <Text style={{fontSize: 16, fontWeight: "bold"}}>{txtFinalPrice} лв</Text>
+                                <View style={{flexDirection: "row", alignSelf: "flex-end", paddingBottom: 7}}>
+                                    <Text style={styles.heading}>{language("price")}</Text>
+                                    <Text style={{...styles.heading, color: "#15A051"}}>{txtFinalPrice} лв</Text>
                                 </View>
 
-                                <View style={shoppingListStyle.popupButtons}>
-                                    <Text style={{marginRight: 15}}>
+                                <View style={{flexDirection: "row", alignSelf: "flex-end", alignItems: "center"}}>
+                                    <Text style={{marginRight: 15}} onPress={() => closeModal()}>
                                         {language("cancel")}
                                     </Text>
 
                                     <CustomButton title={language(showDifferentButtonText())}
                                                   txtColor={"#fff"}
                                                   onPress={submitProduct}
+                                                  padding={10}
                                     />
                                 </View>
                             </View>

@@ -22,7 +22,7 @@ export default function language(key){
         lv: "лв",
         addProduct: "Добави продукт",
         amount: "Количество",
-        price: "Цена",
+        price: "Цена: ",
         cancel: "Отмени",
         buyProduct: "Купи Продукт",
         newShoppingList: "Нов списък за пазар",
@@ -74,7 +74,9 @@ export default function language(key){
         pending: "Чакащ удобрение",
         saveProduct: "Запази",
         description:"Описание",
-        makePublic: "Направи Публична"
+        makePublic: "Направи Публична",
+        noInvites: "В момента нямате покани...",
+        noRecipes: "Няма намерни рецепти..."
 
 
 

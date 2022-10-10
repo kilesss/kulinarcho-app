@@ -45,7 +45,7 @@ const images = {
         fruitVeg: require('./icons/product-category/icons8-vegetables-100.png'),
         seasoning: require('./icons/product-category/icons8-spice-100.png'),
         construction: require('./icons/product-category/icons8-tools-100.png'),
-        custom: require('./icons/product-category/icons8-custom-100.png')
+        custom: require('./icons/product-category/icons8-four-squares-100.png')
 
     },
     onBoarding:{
@@ -53,8 +53,11 @@ const images = {
         multiple: require('./onBoarding/onBoarding_0.png')
     },
     defaultProfile: require('./defaultProfile.png'),
-    defaultRecipe: require("./rsz_plate.png")
-    // image2: require('./image2.jpg'),
+    defaultRecipe: require("./rsz_plate.png"),
+    privateRecipe: require('./icons/private.png'),
+    publicRecipe: require('./icons/icons8-globe-100.png'),
+    publicPendingRecipe: require('./icons/icons8-globe-100-pending.png'),
+
 };
 
 export default images;

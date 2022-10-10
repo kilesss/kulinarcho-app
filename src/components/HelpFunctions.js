@@ -116,3 +116,15 @@ export function loadData(setCategories, setShowLoader, setDemoToken) {
         }
     }, []);
 }
+
+export function getPublicIcon(title){
+    switch (title) {
+        case 1:
+            return Images.publicRecipe
+        case 2:
+            return Images.publicPendingRecipe
+        case 0:
+            return Images.privateRecipe
+
+    }
+}

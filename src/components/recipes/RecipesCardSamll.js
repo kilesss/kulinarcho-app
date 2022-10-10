@@ -6,9 +6,10 @@ import language from "../../language/language";
 import CategoriesCard from "../display/CategoriesCard";
 import styles from "../../styles/styles";
 import Images from "../../../public/images";
+import {getPublicIcon} from "../HelpFunctions";
 
 
-export const RecipesCardSmall = ({onPress, title, time, servings, category, photo}) => (
+export const RecipesCardSmall = ({onPress, title, time, servings, category, photo, publicStatus}) => (
     <View style={[stylesRecipes.recipesCardSmall]}>
 
         <Image source={
@@ -19,7 +20,10 @@ export const RecipesCardSmall = ({onPress, title, time, servings, category, phot
         <TouchableOpacity style={[stylesRecipes.recipesCardInfoSmall, {flex: 1}]}
                           onPress={onPress}
         >
-            <Text style={[styles.heading, {marginBottom: 5, fontSize: 15, lineHeight: 17, textTransform: "capitalize"}]}>{title}</Text>
+            <View style={{flex: 1, flexDirection: "row"}}>
+            <Text style={[styles.heading, {marginBottom: 5, fontSize: 15, lineHeight: 17, textTransform: "capitalize", flex: 1}]}>{title}</Text>
+            <Image source={getPublicIcon(publicStatus)} style={{height: 25, width: 25, marginRight: 5, marginTop: 5}}/>
+            </View>
             <View style={stylesRecipes.recipesCardInfoSmallInner}>
                 <View style={stylesRecipes.infoIconsWithTextSmall}>
                     <MaterialCommunityIcons name={"progress-clock"} color={"#999"} size={25}/>

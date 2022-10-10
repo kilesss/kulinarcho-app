@@ -7,6 +7,7 @@ import {getIconInfo} from "../../components/HelpFunctions";
 import {RecipesCardSmall} from "../../components/recipes/RecipesCardSamll";
 import renderLoading from "../../components/loading/ShowLoader";
 import {useIsFocused} from "@react-navigation/native";
+import language from "../../language/language";
 
 export default function AllRecipes({route, navigation}) {
     const isFocused = useIsFocused()
@@ -88,7 +89,6 @@ export default function AllRecipes({route, navigation}) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.heading}>Всички Рецепти</Text>
             <SafeAreaView style={{ alignSelf: "stretch", paddingBottom: 40}}>
 
             <FlatList
@@ -96,6 +96,7 @@ export default function AllRecipes({route, navigation}) {
                 keyExtractor={(item, index) => item.id}
                 onEndReached={fetchMore}
                 onEndReachedThreshold={0.4}
+                ListEmptyComponent={<Text style={styles.heading}>{language("noRecipes")}</Text>}
                 ListFooterComponent={renderLoading(showLoader2)}
                 renderItem={({item}) => (
                     <RecipesCardSmall title={item.title}

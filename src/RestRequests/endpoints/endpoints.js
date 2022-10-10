@@ -36,8 +36,7 @@ const endpoints = {
 
   deleteRecipe: 'https://kulinarcho.com/api/recipesDelete',
   transferRecipe: 'https:///kulinarcho.com/api/transferRecipe',
-  setPublicRecipe: 'https:///kulinarcho.com/api/setPublicRecipe'
-
+  setPublicRecipe: 'https:///kulinarcho.com/api/setPublicRecipe',
 
   getGroupInfo: 'https://kulinarcho.com/api/profile',
   newRequest: 'https://kulinarcho.com/api/newRequest',
