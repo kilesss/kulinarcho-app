@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {View, ScrollView, Image, Animated, Text, SafeAreaView} from 'react-native';
-import {BANNER_H} from '../../components/constants';
+import {View, Animated, Text, SafeAreaView} from 'react-native';
 import TopNavigation from '../../components/display/TopNavigation';
 import {stylesRecipes} from "../../styles/stylesRecipes";
 import {styles} from "../../styles/styles";
@@ -40,8 +39,6 @@ export default function RecipeDetails({route, navigation}) {
 
     function loadData() {
         AsyncStorage.getItem('access_token').then((value) => {
-            console.log(value)
-            console.log(recipeId)
             if (value) {
                 getSingleRecipe('GET', value, recipeId).then(data => {
                     if (data) {

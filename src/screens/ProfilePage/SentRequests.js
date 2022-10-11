@@ -1,14 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, Text, View} from "react-native";
+import {FlatList, View} from "react-native";
 import styles from "../../styles/styles";
 import SentRequestsComponent from "../../components/profile/SentRequestsComponent";
-import {deleteUserFromGroup, deleteUserRequest, getGroupInfo} from "../../RestRequests/generalRequest";
+import {deleteUserRequest, getGroupInfo} from "../../RestRequests/generalRequest";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useIsFocused} from "@react-navigation/native";
 import renderLoading from "../../components/loading/ShowLoader";
 
-function SentRequests({route}) {
-    const {details} = route.params;
+function SentRequests() {
     const isFocused = useIsFocused()
 
     const [DemoToken, setDemoToken] = useState('');
@@ -22,7 +21,6 @@ function SentRequests({route}) {
                 getGroupInfo('GET', value).then(data => {
                     if (data) {
                         setSentRequests(data["requests"])
-                        console.log(data['requests'])
                         setShowLoader(false)
                     }
                 }).catch((err) => {
@@ -42,10 +40,8 @@ function SentRequests({route}) {
 
         await deleteUserRequest(JSON.stringify({body}), DemoToken).then()
             .then(response => {
-                console.log(JSON.stringify({body}))
                 let filteredArray = sentRequests.filter(item2 => item2 !== item)
                 setSentRequests(filteredArray)
-                console.log(response)
                 if (response.errors) {
                     console.log(response.errors)
                 }

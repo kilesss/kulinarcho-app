@@ -1,10 +1,7 @@
 import React, {useState} from "react";
-import {Button, Image, ScrollView, Text, TextInput, View} from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import {Image, ScrollView, Text, TextInput, View} from "react-native";
 import styles from '../../styles/styles'
 import {CustomButton} from "../../components/display/CustomButton";
-import {stylesRecipes} from "../../styles/stylesRecipes";
-import Checkbox from "expo-checkbox";
 import language from "../../language/language";
 import * as ImagePicker from "expo-image-picker";
 
@@ -21,7 +18,6 @@ export default function ProfilePersonalInfo({ navigation }) {
             quality: 1,
         });
 
-        console.log(result);
 
         if (!result.cancelled) {
             setImage(result.uri);

@@ -45,7 +45,6 @@ export default function ShoppingListDetails(props) {
                 getShoppingListProducts(props.route.params.key, value).then(data => {
                     if (data) {
                         const result = Object.values(data);
-                        console.log(result);
                         editItems(result)
                         setarticleCount(result.length);
                         calculateFinalPrice(result);
@@ -139,7 +138,6 @@ export default function ShoppingListDetails(props) {
     }
 
     function returnData(data) {
-        console.log(data);
         if (data.newProductId !== null) {
             items.push({
                 "description": data.description,

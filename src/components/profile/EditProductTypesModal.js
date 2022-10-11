@@ -59,7 +59,7 @@ export default function EditProductTypesModal(
         }
         await AddEditProductType(JSON.stringify(requestBody), token).then()
             .then(response => {
-                console.log(response)
+
                 if (response.access_token) {
                     /** Set JWT  **/
                     AsyncStorage.setItem('access_token', response.access_token);
@@ -88,7 +88,6 @@ export default function EditProductTypesModal(
                     canNotDeleteAlert(response.errors)
 
                 }
-                console.log({id: modalDataID})
             })
         refresh()
     }
@@ -104,7 +103,7 @@ export default function EditProductTypesModal(
         await addEditProduct(JSON.stringify(requestBody), token).then()
             .then(response => {
                 setModalVisible(!modalVisible)
-                console.log(response)
+
                 if (response.access_token) {
                     /** Set JWT  **/
                     AsyncStorage.setItem('access_token', response.access_token);
@@ -132,7 +131,7 @@ export default function EditProductTypesModal(
                     //TODO: connect with error messages
                     console.log(restErr);
                 }
-                console.log({id: modalDataID})
+
             })
         refresh()
     }

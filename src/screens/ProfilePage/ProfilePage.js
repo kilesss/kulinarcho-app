@@ -1,25 +1,25 @@
 import React from "react";
-import {Button, Image, ScrollView, Text, TouchableOpacity, View} from "react-native";
-import {Ionicons, MaterialCommunityIcons, Octicons} from "@expo/vector-icons";
+import {Image, ScrollView, Text, TouchableOpacity, View} from "react-native";
+import {Octicons} from "@expo/vector-icons";
 import styles from '../../styles/styles'
 import {stylesCooks} from "../../styles/stylesCooks";
-import language from "../../language/language";
-import {CustomButton} from "../../components/display/CustomButton";
 import SettingsCardSmall from "../../components/profile/SettingsCardSmall";
 import SettingsCardLarge from "../../components/profile/SettingsCardLarge";
 import {stylesProfile} from "../../styles/stylesProfile";
 import Images from "../../../public/images";
 
-export default function RecipesPage({navigation}) {
+export default function RecipesPage({navigation, route}) {
+
+    const { name, photo } = route.params;
+
     return (
         <ScrollView>
             <View style={{...styles.container, alignItems: "flex-start", justifyContent: "flex-start"}}>
                 <TouchableOpacity style={stylesCooks.profileDetails}
                                   onPress={() => navigation.navigate("Personal Info")}>
-                    <Image source={require("../../../public/images/bob.jpg")} style={stylesCooks.profileImage}/>
+                    <Image source={photo ? {uri: 'https://kulinarcho.com' + photo} : Images.defaultProfile} style={stylesCooks.profileImage}/>
                     <View style={{flexDirection: "row", alignItems: "center", alignSelf:"center"}}>
-                        <Text style={[styles.heading, {fontSize: 24, marginVertical: 2, marginRight: 5}]}>Боян
-                            Йонков</Text>
+                        <Text style={[styles.heading, {fontSize: 24, marginVertical: 2, marginRight: 5}]}>{name}</Text>
                         <Octicons name={"pencil"} size={27} color={"#4B4C4C"}/>
                     </View>
 

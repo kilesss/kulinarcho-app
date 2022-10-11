@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, Image, Modal, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View} from "react-native";
+import {FlatList, Image, Modal, Text, TextInput, TouchableOpacity, View} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
-    AddEditProductType,
     deleteUserFromGroup,
     getGroupInfo,
-    getShoppingListProducts,
     newRequest
 } from "../../RestRequests/generalRequest";
 import renderLoading from "../../components/loading/ShowLoader";
@@ -17,7 +15,6 @@ import language from "../../language/language";
 import {stylesProfile} from "../../styles/stylesProfile";
 import CookCard from "../../components/display/CookCard";
 import stylesShoppingList from "../../styles/stylesShoppingList";
-import DropDownPicker from "react-native-dropdown-picker";
 import shoppingListStyle from "../../styles/stylesShoppingList";
 import {CustomButton} from "../../components/display/CustomButton";
 import {ALERT_TYPE, Dialog, AlertNotificationRoot, Toast} from 'react-native-alert-notification';
@@ -51,7 +48,6 @@ function MyGroup({navigation}) {
                         setGroupInfo(data)
                         setMembers(Object.values(data["groupUsers"]))
                         setSentRequests(data["requests"])
-                        console.log(data)
                         setShowLoader(false)
                     }
                 }).catch((err) => {
@@ -64,8 +60,6 @@ function MyGroup({navigation}) {
     async function submitNewRequest(email) {
         await newRequest(JSON.stringify({requestedEmail: email}), DemoToken).then()
             .then(response => {
-                console.log(JSON.stringify({requestedEmail: email}))
-                console.log(response)
                 if (response.errors) {
                     console.log(response.errors[0])
                     setRequestError(response.errors[0])
@@ -85,7 +79,6 @@ function MyGroup({navigation}) {
     async function removeUserFromGroup(id) {
         await deleteUserFromGroup(JSON.stringify({userID: id}), DemoToken).then()
             .then(response => {
-                console.log(response)
                 if (response.errors) {
                     console.log(response.errors)
                 }

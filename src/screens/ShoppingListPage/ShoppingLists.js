@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Button, FlatList, Image, Modal, Text, View} from "react-native";
+import {FlatList, Modal, Text, View} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import styles from '../../styles/styles'
@@ -53,9 +53,7 @@ export default function ShoppingListsPage({navigation}) {
 
                         }
                         delete data.first_login;
-
                         const result = Object.values(data);
-                        console.log(result)
                         editShoppingLists(result)
                         setShowLoader(false);
                     }

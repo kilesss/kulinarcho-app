@@ -24,7 +24,6 @@ function GroupRequests() {
                 getGroupInfo('GET', value).then(data => {
                     if (data) {
                         setGroupInfo(data)
-                        console.log(data["requestsIncome"])
                         setIncomingRequests(data["requestsIncome"])
                         setShowLoader(false)
                     }
@@ -36,7 +35,6 @@ function GroupRequests() {
     async function acceptRequest(invite) {
         await acceptUserRequest(JSON.stringify({requesterId: invite.id}), DemoToken).then()
             .then(response => {
-                console.log(response)
                 if (response.errors) {
                     console.log(response.errors)
                 }else{
@@ -54,8 +52,6 @@ function GroupRequests() {
     async function rejectRequest(invite) {
         await deleteUserRequest(JSON.stringify({requesterId: invite.id}), DemoToken).then()
             .then(response => {
-                console.log(JSON.stringify({requesterId: invite.id}))
-                console.log(response)
                 if (response.errors) {
                     console.log(response.errors)
                 }else {removeInviteCard(invite)}

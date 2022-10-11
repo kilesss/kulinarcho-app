@@ -76,7 +76,8 @@ export default function language(key){
         description:"Описание",
         makePublic: "Направи Публична",
         noInvites: "В момента нямате покани...",
-        noRecipes: "Няма намерни рецепти..."
+        noRecipes: "Няма намерни рецепти...",
+        cooksFollowing: "Последвани Готвачи"
 
 
 

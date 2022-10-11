@@ -25,6 +25,9 @@ import language from "../language/language";
 import MyGroup from "../screens/ProfilePage/MyGroup";
 import GroupRequests from "../screens/ProfilePage/GroupRequests";
 import SentRequests from "../screens/ProfilePage/SentRequests";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {getGroupInfo} from "../RestRequests/generalRequest";
+import {useEffect, useState} from "react";
 
 
 
@@ -32,6 +35,30 @@ const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 function MainTabs() {
+
+    const [demoToken, setDemoToken] = useState('');
+    const [personalInfo, setPersonalInfo] = useState([]);
+    const [showLoader, setShowLoader] = useState(true);
+
+    function loadData() {
+        AsyncStorage.getItem('access_token').then((value) => {
+            setDemoToken(value);
+            if (value) {
+                getGroupInfo('GET', value).then(data => {
+                    if (data) {
+                        setPersonalInfo(data)
+                        setShowLoader(false)
+                    }
+                })
+            }
+        }, []);
+    }
+
+    useEffect(() => {
+        loadData()
+    }, []);
+
+
     return (
         <Tab.Navigator screenOptions={({navigation}) => ({
             tabBarStyle: {paddingVertical: 10, height: 60},
@@ -41,7 +68,7 @@ function MainTabs() {
                 shadowColor: "#999",
             },
             headerTitle: () => (
-                <LogoTitle onPress={() => navigation.push("Settings")} navigation={navigation}  />
+                <LogoTitle navigation={navigation} photo={personalInfo.photo} name={personalInfo.name}  />
             )
 
         })}>
@@ -135,7 +162,7 @@ export default function TabNavigator(props) {
             <Stack.Screen name="Shopping List Details" component={ShoppingListDetails}/>
 
 
-            <Stack.Screen name="Settings" component={ProfilePage} options={{ title: language('settings')}}/>
+            <Stack.Screen name="Settings" component={ProfilePage} options={{ title: language('settings')}} initialParams={{ photo: '', name: "Can't load name" }}/>
             <Stack.Screen name="Products and Categories" component={ProductsAndCategoriesPage} options={{ title: language('productsAndCategories') }}/>
             <Stack.Screen name={"Personal Info"} component={ProfilePersonalInfo} options={{ title: language('personalInfo') }}/>
             <Stack.Screen name={"My Group"} component={MyGroup} options={{title: 'Моята Група'}}/>

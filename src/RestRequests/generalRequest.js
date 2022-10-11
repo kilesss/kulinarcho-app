@@ -178,7 +178,7 @@ const getPublicRecipes = async function (method, JWT, page = "", title="", categ
 }
 
 function formatResponse2(response) {
-    console.log(response)
+
     if ('premium' in response){
         delete response.premium;
     }
@@ -303,8 +303,7 @@ const firstLogin = async function (token) {
             'Content-Type': 'application/json',
         }
     });
-    console.log(body)
-    console.log(res.text())
+
     return await res.json();
 }
 
@@ -414,8 +413,6 @@ const acceptUserRequest = async function (body, token) {
             'Content-Type': 'application/json',
         }
     });
-    console.log(body)
-    console.log(token)
     return await res.json();
 }
 
@@ -444,6 +441,16 @@ const deleteUserFromGroup = async function (body, token) {
 }
 
 
+const getFollower = async function (JWT) {
+    const res = await fetch(endpoints.getFollower, {
+        method: "GET",
+        headers: {
+            'Authorization': 'Bearer ' + JWT
+        }
+    });
+    return formatResponse(await res.json());
+}
+
 export {
     login, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu,
     getSingleRecipe, getCategories, getProducts, getProductTypes, getSingleProfile,
@@ -451,7 +458,7 @@ export {
     AddEditProductShoppingList,deleteProductFromList, AddEditProductType, deleteProductTypes,
     addEditProduct, deleteProduct, firstLogin, addRecipe, getUnits, editRecipe, getGroupInfo, newRequest,
     deleteUserRequest, acceptUserRequest, deleteUserFromGroup, deleteRecipe,
-    transferRecipe, setPublicRecipe
+    transferRecipe, setPublicRecipe, getFollower
 }
 
 

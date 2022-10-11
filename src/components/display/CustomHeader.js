@@ -4,30 +4,35 @@ const {MaterialIcons} = require("@expo/vector-icons");
 const React = require("react");
 import {useNavigationState} from '@react-navigation/native';
 import styles from "../../styles/styles";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {getGroupInfo} from "../../RestRequests/generalRequest";
+import {useEffect, useState} from "react";
+import {Text} from "react-native";
 
 const asdasd = 'asdasd';
-export function LogoTitle(onPress) {
+export function LogoTitle({navigation, photo, name}) {
     const state = useNavigationState(state => state);
     const routeName = (state.routeNames[state.index]);
+
+
     return (
         <View style={{
             flexDirection: "row",
-            justifyContent: "space-between",
+            justifyContent: "flex-end",
             flex: 1,
             paddingBottom: 3,
             alignItems: "center",
             width: "100%",
 
         }}>
-            {showSearch(routeName, onPress.navigation)}
-            <TouchableOpacity onPress={onPress.onPress}>
+            <TouchableOpacity onPress={() => navigation.push("Settings", {photo: photo, name: name})}>
                 <Image
                     style={{
                         width: 47,
                         height: 47,
                         borderRadius: 50,
                     }}
-                    source={Images.defaultProfile}
+                    source={photo ? {uri: 'https://kulinarcho.com' + photo} : Images.defaultProfile}
                 />
             </TouchableOpacity>
         </View>

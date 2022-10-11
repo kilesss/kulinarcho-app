@@ -1,18 +1,13 @@
 import React, {useEffect, useState} from "react";
-import {FlatList, SafeAreaView, ScrollView, Text, View} from "react-native";
+import {FlatList, Text, View} from "react-native";
 import styles from '../../styles/styles'
 import CategoriesCard from "../../components/display/CategoriesCard";
 import {RecipesCardSmall} from "../../components/recipes/RecipesCardSamll";
-import {GestureHandlerRootView} from "react-native-gesture-handler";
-import Swipeable from "react-native-gesture-handler/Swipeable";
-import {rightSwipeActions} from "../../components/shoppingList/ShoppingListItem";
 import language from "../../language/language";
-import {categories, getIconInfo, loadData, showConfirmDialog, showLoader} from "../../components/HelpFunctions";
+import {getIconInfo, loadData} from "../../components/HelpFunctions";
 import renderLoading from "../../components/loading/ShowLoader";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {getCategories, getPublicRecipes} from "../../RestRequests/generalRequest";
-import {FloatingAction} from "react-native-floating-action";
-import {actions} from "../RecipesPage/RecepiesPage";
+import {getPublicRecipes} from "../../RestRequests/generalRequest";
 import FloatingActionButton from "../../components/display/FloatingActionButton";
 import AddShoppingListModal from "../../components/shoppingList/AddShoppingListModal";
 import {useIsFocused} from "@react-navigation/native";
@@ -37,7 +32,6 @@ export default function CookingBookPage({navigation}) {
                     if (data) {
                         const result = Object.values(data);
                         setRecipes([...recipes, ...result[0]])
-                        console.log(result)
                         setLastPage(result[2])
                         setShowLoader2(false)
                     }

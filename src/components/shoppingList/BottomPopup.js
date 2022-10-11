@@ -1,16 +1,13 @@
-import {Modal, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View} from "react-native";
+import {Modal, Text, TextInput, TouchableWithoutFeedback, View} from "react-native";
 import styles from "../../styles/styles";
-import stylesShoppingList from "../../styles/stylesShoppingList";
 import language from "../../language/language";
 import shoppingListStyle from "../../styles/stylesShoppingList";
 import {CustomButton} from "../display/CustomButton";
-import {MaterialIcons} from "@expo/vector-icons";
 import React, {useEffect, useState} from "react";
 import {LinearGradient} from "expo-linear-gradient";
 import {AutocompleteDropdown} from 'react-native-autocomplete-dropdown';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {getProducts} from "../../RestRequests/generalRequest";
-import RBSheet from "react-native-raw-bottom-sheet";
 
 // Component for Modal on shopping lists page
 export default function BottomPopup({
@@ -127,9 +124,6 @@ export default function BottomPopup({
                 clearOnFocus={false}
                 closeOnBlur={true}
 
-                onChangeText={(data) => {
-                    console.log(data)
-                }}
                 closeOnSubmit={false}
                 initialValue={{}} // or just '2'
                 onSelectItem={setSelectedItem}
