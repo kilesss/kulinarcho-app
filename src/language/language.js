@@ -77,11 +77,8 @@ export default function language(key){
         makePublic: "Направи Публична",
         noInvites: "В момента нямате покани...",
         noRecipes: "Няма намерни рецепти...",
-        cooksFollowing: "Последвани Готвачи"
-
-
-
-
+        cooksFollowing: "Последвани Готвачи",
+        changeWeekMenu: "Редактиране на седмично меню",
 
     }
     return words[key];
