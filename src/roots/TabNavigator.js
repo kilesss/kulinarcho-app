@@ -28,6 +28,10 @@ import SentRequests from "../screens/ProfilePage/SentRequests";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {getGroupInfo} from "../RestRequests/generalRequest";
 import {useEffect, useState} from "react";
+import WeekMenuCreate from "../screens/WeekMenuPage/WeekMenuCreate";
+import WeekMenuAddRecipes from "../screens/WeekMenuPage/WeekMenuAddRecipes";
+import WeekMenuShoppingList from "../screens/WeekMenuPage/WeekMenuShoppingList";
+import WeekMenuPickARecipe from "../screens/WeekMenuPage/WeekMenuPickARecipe";
 
 
 
@@ -174,6 +178,12 @@ export default function TabNavigator(props) {
             <Stack.Screen name={"Cooks Details"} component={CookerDetails}/>
 
             <Stack.Screen name={"Week Menu Details"} component={WeekMenuDetails}/>
+            <Stack.Screen name={"Week Menu Create"} component={WeekMenuCreate} options={{title: "Създай Седмично Меню"}}/>
+            <Stack.Screen name={"Week Menu Add Recipes"} component={WeekMenuAddRecipes}
+                          options={({ route }) => ({ title: route.params.title ? route.params.title : 'Меню без заглавие' })}
+                          />
+            <Stack.Screen name={"Week Menu Pick Recipe"} component={WeekMenuPickARecipe} options={"Избери Рецепта"}/>
+            <Stack.Screen name={"Week Menu Shopping List"} component={WeekMenuShoppingList} options={{title: "Създай Списък за Пазар"}}/>
 
             <Stack.Screen name={"Add Edit Recipe"} component={AddEditRecipe} initialParams={{recipeDetails: '', productList: '', stepList: '', edit: false } }/>
 

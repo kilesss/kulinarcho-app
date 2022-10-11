@@ -13,7 +13,7 @@ export const RecipesCardLarge = ({onPress, title, time, servings, category, phot
         >
 
             <Image source={
-                photo ? {uri: 'https://kulinarcho.com' + photo} : Images.defaultProfile
+                photo ? {uri: 'https://kulinarcho.com' + photo} : Images.defaultRecipe
             }
                    style={stylesRecipes.recipesCardImage}
             />

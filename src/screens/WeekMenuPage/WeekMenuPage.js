@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from "react";
-import {Button, FlatList, ScrollView, Text, View} from "react-native";
-import {Ionicons} from "@expo/vector-icons";
+import {FlatList, Text, View} from "react-native";
 import styles from '../../styles/styles'
 import {ListCard} from "../../components/display/ListCard";
 import AddShoppingListModal from "../../components/shoppingList/AddShoppingListModal";
 import language from "../../language/language";
-import CookCard from "../../components/display/CookCard";
 import renderLoading from "../../components/loading/ShowLoader";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {getWeeklyMenus} from "../../RestRequests/generalRequest";
 import getRandomColor from "../../components/HelpFunctions";
 import FloatingActionButton from "../../components/display/FloatingActionButton";
+import {CustomButton} from "../../components/display/CustomButton";
+import stylesShoppingList from "../../styles/stylesShoppingList";
 
 export default function WeekMenuPage({navigation}) {
     const [changeModalVisible, setChangeModalVisible] = useState(false);
@@ -56,7 +56,19 @@ export default function WeekMenuPage({navigation}) {
 
                                       showDeleteOption={true}
                 />
-                <Text style={styles.heading}>{language("weeklyMenu")}</Text>
+                <View style={stylesShoppingList.buttonWithTitle}>
+                    <View style={{flex: 2}}>
+                        <Text style={styles.heading}>{language("weeklyMenu")}</Text>
+                    </View>
+                    <View>
+                        <CustomButton title={language("add")}
+                                      bgColor={"#15A051"}
+                                      txtColor={"#fff"}
+                                      padding={7}
+                                      onPress={() => navigation.navigate("Week Menu Create")}
+                        />
+                    </View>
+                </View>
 
                 <FlatList
                     data={menus}
@@ -70,7 +82,7 @@ export default function WeekMenuPage({navigation}) {
                                   onPressEdit={() => setChangeModalVisible(!changeModalVisible)}
                         />
                     )}/>
-        </View>
+            </View>
             <FloatingActionButton navigation={navigation} addModalVisible={addModalVisible}
                                   setAddModalVisible={setAddModalVisible}/>
             <AddShoppingListModal modalVisible={addModalVisible}
