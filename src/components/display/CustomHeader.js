@@ -25,6 +25,7 @@ export function LogoTitle({navigation, photo, name}) {
             width: "100%",
 
         }}>
+            {showSearch(routeName, navigation)}
             <TouchableOpacity onPress={() => navigation.push("Settings", {photo: photo, name: name})}>
                 <Image
                     style={{
@@ -48,11 +49,14 @@ function showSearch(route, navigation) {
                     ...styles.customButton,
                     alignSelf: "stretch",
                     backgroundColor: 'white',
-                    borderColor: 'black',
+                    borderColor: '#ccc',
                     borderWidth: 1,
-                    paddingLeft: 6,
+                    paddingLeft: 7,
+                    marginLeft: -5,
+                    marginRight: 15,
+                    marginTop: 0,
                     color: "#4B4C4C",
-                    padding: 0,
+                    padding: 3,
                 }}
                  placeholder={'Търси рецепта'}
                  onSubmitEditing={(text) => {
