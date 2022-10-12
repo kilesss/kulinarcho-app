@@ -24,6 +24,24 @@ export default function CookingBookPage({navigation}) {
     const [addModalVisible, setAddModalVisible] = useState(false);
 
     function loadRecipes() {
+        AsyncStorage.getItem('access_token').then((value) => {
+            setDemoToken(value);
+            if (value) {
+                getPublicRecipes('GET', value, 1, "", 0, 1).then(data => {
+                    if (data) {
+                        const result = Object.values(data);
+                        setRecipes(result[0])
+                        setLastPage(result[2])
+                        setShowLoader2(false)
+                    }
+                }).catch((err) => {
+                    console.log(err);
+                });
+            }
+        }, []);
+    }
+
+    function loadMore() {
         setShowLoader2(true)
         AsyncStorage.getItem('access_token').then((value) => {
             setDemoToken(value);
@@ -32,10 +50,8 @@ export default function CookingBookPage({navigation}) {
                     if (data) {
                         const result = Object.values(data);
                         setRecipes([...recipes, ...result[0]])
-                        setLastPage(result[2])
                         setShowLoader2(false)
                     }
-
                 }).catch((err) => {
                     console.log(err);
                 });
@@ -57,8 +73,17 @@ export default function CookingBookPage({navigation}) {
     }, []);
 
     useEffect(() => {
-        loadRecipes()
+        loadMore()
     }, [page]);
+
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            setRecipes([])
+            setPage(1)
+            loadRecipes()
+        });
+        return unsubscribe;
+    }, [navigation]);
 
 
 
@@ -102,7 +127,7 @@ export default function CookingBookPage({navigation}) {
                                                   photo={item.photo}
                                                   time={item.all_time}
                                                   servings={item.portion}
-                                                  category={getIconInfo(2)}
+                                                  category={getIconInfo(item.categories)}
                                                   publicStatus={item.public}
                                                   onPress={() => {
                                                       navigation.push("Recipe Details", {recipeId: item.id})

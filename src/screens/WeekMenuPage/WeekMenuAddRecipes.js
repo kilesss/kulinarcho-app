@@ -12,6 +12,7 @@ import {FontAwesome5, Ionicons} from "@expo/vector-icons";
 function WeekMenuAddRecipes({navigation}) {
 
     return (
+
         <View style={styles.container}>
             <View style={{...stylesShoppingList.buttonWithTitle, marginBottom: 0}}>
                 <View style={{flex: 1}}>
@@ -26,6 +27,7 @@ function WeekMenuAddRecipes({navigation}) {
                     />
                 </View>
             </View>
+
             <RecipesCardSmall
                 title={"opa"}
                 time={20}
@@ -33,6 +35,7 @@ function WeekMenuAddRecipes({navigation}) {
                 publicStatus={2}
                 photo={"/pictures/profilePicture/70/0_1652967840.jpg"}
                 category={getIconInfo(1)} />
+
 
             <View style={stylesShoppingList.buttonWithTitle}>
                 <View style={{flex: 1}}>

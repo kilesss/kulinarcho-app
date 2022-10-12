@@ -21,7 +21,7 @@ export const RecipesCardSmall = ({onPress, title, time, servings, category, phot
                           onPress={onPress}
         >
             <View style={{flex: 1, flexDirection: "row"}}>
-            <Text style={[styles.heading, {marginBottom: 5, fontSize: 15, lineHeight: 17, textTransform: "capitalize", flex: 1}]}>{title}</Text>
+            <Text style={[styles.heading, {marginBottom: 0, marginTop: 5, fontSize: 15, lineHeight: 17, textTransform: "capitalize", flex: 1}]}>{title}</Text>
             <Image source={getPublicIcon(publicStatus)} style={{height: 25, width: 25, marginRight: 5, marginTop: 5}}/>
             </View>
             <View style={stylesRecipes.recipesCardInfoSmallInner}>

@@ -10,14 +10,22 @@ export const actions = [
         text: "Добави Списък за Пазар",
         icon: Images.navIcons.shoppingLists,
         name: "addList",
-        position: 2,
+        position: 3,
         color: "#15a051",
         buttonSize: 43,
     },
     {
         text: "Добави Рецепта",
         icon: Images.navIcons.recipes,
-        name: "bt_accessibility",
+        name: "addRecipe",
+        position: 2,
+        color: "#15a051",
+        buttonSize: 43,
+    },
+    {
+        text: "Добави Седмично Меню",
+        icon: Images.navIcons.calendar,
+        name: "addMenu",
         position: 1,
         color: "#15a051",
         buttonSize: 43,
@@ -35,8 +43,11 @@ function FloatingActionButton({navigation, addModalVisible, setAddModalVisible})
             onPressItem={name => {
                 if (name === "addList") {
                     setAddModalVisible(!addModalVisible)
-                } else {
+                }else if (name === "addRecipe"){
                     navigation.navigate("Add Edit Recipe")
+                }
+                else if (name === "addMenu"){
+                    navigation.navigate("Week Menu Create")
                 }
             }}
         />

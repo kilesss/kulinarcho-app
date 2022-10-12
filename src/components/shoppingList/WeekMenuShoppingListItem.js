@@ -5,17 +5,17 @@ import {stylesProfile} from "../../styles/stylesProfile";
 import language from "../../language/language";
 import {MaterialIcons} from "@expo/vector-icons";
 
-function WeekMenuShoppingListItem(props) {
+function WeekMenuShoppingListItem({title, requiredAmount, onDelete}) {
     return (
         <View>
             <View style={{...styles.customButton, ...stylesProfile.requestComponent}}>
                 <View style={{flex: 1}}>
-                    <Text style={{...styles.heading, marginTop: 0}}>Ябълки</Text>
-                    <Text style={{...styles.subHeading, fontWeight: "regular", marginTop: 0, marginBottom: 0}}>Нужно количество:
+                    <Text style={{...styles.heading, marginTop: 0}}>{title}</Text>
+                    <Text style={{...styles.subHeading, fontWeight: "regular", marginTop: 0, marginBottom: 0}}>Нужно: <Text style={{color: "#15A051"}}>{requiredAmount}</Text>
                     </Text>
                 </View>
-                <TextInput style={{borderBottomColor: "#ccc", borderBottomWidth: 3, width: 40, height: 30, marginHorizontal: 20, paddingBottom: 0, textAlign: "center"}}/>
-                <TouchableOpacity style={{...stylesProfile.requestButton, backgroundColor: "#D40000"}} onPress={() => console.log("Pressed Delete")}>
+                <TextInput style={styles.borderBottomTextInput} placeholder={"0"}/>
+                <TouchableOpacity style={{...stylesProfile.requestButton, backgroundColor: "#D40000"}} onPress={() => onDelete}>
                     <MaterialIcons name={"delete"} size={25} color={"#fff"}/>
                 </TouchableOpacity>
             </View>

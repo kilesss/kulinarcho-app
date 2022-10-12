@@ -62,15 +62,13 @@ export default function TopNavigation({recipeDetails, products, steps, scrollA, 
 
     async function saveRecipe(id){
         console.log(JSON.stringify({recipe_id: id}))
-        await transferRecipe(JSON.stringify({recipe_id: id}), token).then()
-            .then(response => {
-                if (response.access_token) {
-                    AsyncStorage.setItem('access_token', response.access_token);
-                }
-            }).catch((error)=>{
-                console.log("Api call error");
-                console.log(error)
-            });
+        AsyncStorage.getItem('access_token').then((value) => {
+            if (value) {
+                transferRecipe(JSON.stringify({recipe_id: id}), value).then().catch((err) => {
+                    console.log(err);
+                });
+            }
+        }, []);
     }
 
     return (
@@ -86,9 +84,13 @@ export default function TopNavigation({recipeDetails, products, steps, scrollA, 
                     <MaterialIcons name={"arrow-back"} size={28} color={"#fff"}/>
                 </TouchableOpacity>
                 <View style={{flexDirection: "row"}}>
-                    <TouchableOpacity onPress={() => saveRecipe(recipeDetails.id)}>
-                        <MaterialCommunityIcons name={"heart-outline"} size={32} color={"#fff"} style={{marginHorizontal: 10}}/>
-                    </TouchableOpacity>
+                    {recipeDetails.ownRecipe === 1 ?
+                        <MaterialCommunityIcons name={"heart"} size={32} color={"red"} style={{marginHorizontal: 10}}/>
+                    :
+                        <TouchableOpacity onPress={() => saveRecipe(recipeDetails.id)}>
+                            <MaterialCommunityIcons name={"heart-outline"} size={32} color={"#fff"} style={{marginHorizontal: 10}}/>
+                        </TouchableOpacity>
+                    }
                     <ShareButton/>
                     <Menu style={{marginTop: 35}}>
                         <MenuTrigger style={{marginTop: -35, marginLeft: 10}}>

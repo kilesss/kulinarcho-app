@@ -79,6 +79,7 @@ export default function language(key){
         noRecipes: "Няма намерни рецепти...",
         cooksFollowing: "Последвани Готвачи",
         changeWeekMenu: "Редактиране на седмично меню",
+        follow: "Последвай"
 
     }
     return words[key];

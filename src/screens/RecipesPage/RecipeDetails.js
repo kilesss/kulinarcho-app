@@ -44,6 +44,7 @@ export default function RecipeDetails({route, navigation}) {
                     if (data) {
                         console.log(recipeId)
                         const result = Object.values(data);
+                        console.log(result[0])
                         setRecipeDetails(result[0])
                         setProducts(result[1])
                         setSteps(Object.values(result[2]))

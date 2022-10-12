@@ -1,24 +1,28 @@
 import React, {useState} from 'react';
-import {Button, TextInput, View} from "react-native";
+import {Button, Text, TextInput, TouchableOpacity, View} from "react-native";
 import styles from "../../styles/styles";
 import {CustomButton} from "../../components/display/CustomButton";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 function WeekMenuCreate({navigation}) {
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    const [isDatePickerVisible2, setDatePickerVisibility2] = useState(false);
     const [text, setText] = useState('');
 
-    const showDatePicker = () => {
-        setDatePickerVisibility(true);
-    };
+    const [dateStart, setDateStart] = useState('Начална Дата');
+    const [dateEnd, setDateEnd] = useState('Крайна Дата');
 
-    const hideDatePicker = () => {
+
+    const handleConfirmStart = (date) => {
+        const formattedDate = `${date.getUTCDate()}/${date.getUTCMonth()+1}/${date.getFullYear()}`
+        setDateStart(formattedDate)
         setDatePickerVisibility(false);
     };
 
-    const handleConfirm = (date) => {
-        console.log("A date has been picked: ", date);
-        hideDatePicker();
+    const handleConfirmEnd = (date) => {
+        const formattedDate = `${date.getUTCDate()}/${date.getUTCMonth()+1}/${date.getFullYear()}`
+        setDateEnd(formattedDate)
+        setDatePickerVisibility2(false);
     };
 
 
@@ -29,22 +33,21 @@ function WeekMenuCreate({navigation}) {
 
                 <View style={{flexDirection: "row", justifyContent: "space-between"}}>
                     <View style={{width: "48%"}}>
-                        <CustomButton
-                            title="Начална Дата"
-                            onPress={showDatePicker}
-                            bgColor={"#ffffff"}
-                            txtColor={"#b0b0b0"}
-                            padding={12}
-                        />
+                        {/*<CustomButton*/}
+                        {/*    title={dateStart}*/}
+                        {/*    onPress={() => setDatePickerVisibility(true)}*/}
+                        {/*    bgColor={"#ffffff"}*/}
+                        {/*    txtColor={"#b0b0b0"}*/}
+                        {/*    padding={12}*/}
+                        {/*/>*/}
+                        <TouchableOpacity style={{...styles.customButton, padding: 15}} onPress={() => setDatePickerVisibility(true)}>
+                            <Text style={styles.subHeading}>{dateStart}</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={{width: "48%"}}>
-                        <CustomButton
-                            title="Крайна Дата"
-                            onPress={showDatePicker}
-                            bgColor={"#ffffff"}
-                            txtColor={"#b0b0b0"}
-                            padding={12}
-                        />
+                        <TouchableOpacity style={{...styles.customButton, padding: 15}} onPress={() => setDatePickerVisibility2(true)}>
+                            <Text style={styles.subHeading}>{dateEnd}</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
 
@@ -64,8 +67,15 @@ function WeekMenuCreate({navigation}) {
             <DateTimePickerModal
                 isVisible={isDatePickerVisible}
                 mode="date"
-                onConfirm={handleConfirm}
-                onCancel={hideDatePicker}
+                onConfirm={handleConfirmStart}
+                onCancel={() => setDatePickerVisibility(false)}
+            />
+
+            <DateTimePickerModal
+                isVisible={isDatePickerVisible2}
+                mode="date"
+                onConfirm={handleConfirmEnd}
+                onCancel={() => setDatePickerVisibility2(false)}
             />
         </View>
     );

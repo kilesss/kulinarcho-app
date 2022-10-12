@@ -57,7 +57,7 @@ export default function CookerDetails({route, navigation}) {
                             : Images.defaultProfile} style={stylesCooks.profileImage}/>
                         <Text style={[styles.heading, {fontSize: 22, marginTop: 0, textAlign: "center"}]}>{cook.name}</Text>
                         <Text style={stylesCooks.numRecipesText}>{cook.recipes} {language("recipes")}</Text>
-                        <CustomButton title={language("addToGroup")} padding={9} txtColor={"#fff"}/>
+                        <CustomButton title={language("follow")} padding={9} txtColor={"#fff"}/>
 
                         </View>
                     }

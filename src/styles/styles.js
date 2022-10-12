@@ -63,6 +63,15 @@ export const styles = StyleSheet.create({
     color: "#15A051",
     marginTop: -5,
     marginBottom: 0
+  },
+  borderBottomTextInput: {
+    borderBottomColor: "#ccc",
+    borderBottomWidth: 3,
+    width: 50,
+    height: 30,
+    marginHorizontal: 20,
+    paddingBottom: 0,
+    textAlign: "center"
   }
 
 });
