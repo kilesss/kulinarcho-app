@@ -7,11 +7,11 @@
         "photosPermission": "The app accesses your photos to let you share them with your friends."
       }
     ]],
-    "name": "kulinarcho4.0",
+    "name": "Кулинарчо",
     "slug": "kulinarcho",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./clipboard.png",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/splash.png",
