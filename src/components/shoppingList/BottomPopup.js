@@ -32,16 +32,16 @@ export default function BottomPopup({
     const [item, setItem] = useState([]);
 
     useEffect(() => {
-        if (txtAmount === "") {
+        if (amount) {
             setAmount(amount);
         }
-        if (txtPrice === "") {
+        if (price) {
             setPrice(price);
         }
-        if (txtDescription === "") {
+        if (description) {
             setDescription(description);
         }
-        if (txtFinalPrice === "") {
+        if (finalPrice) {
             setFinalPrice(finalPrice)
         }
         loadProducts();
@@ -86,6 +86,17 @@ export default function BottomPopup({
         }
     }
 
+    function resetFields(){
+        setPrice('');
+        setSelectedItem(null);
+        setAmount('');
+        setProduct('');
+        setFinalPrice('');
+        setItem('');
+        setDescription('');
+
+    }
+
     function submitProduct() {
         returnData({
             price: txtPrice,
@@ -96,14 +107,7 @@ export default function BottomPopup({
             description: txtDescription
         })
 
-
-        setPrice('');
-        setSelectedItem(null);
-        setAmount('');
-        setProduct('');
-        setFinalPrice('');
-        setItem('');
-        setDescription('');
+        resetFields()
         setModalVisible(!modalVisible);
     }
 
@@ -134,13 +138,7 @@ export default function BottomPopup({
     }
 
     function closeModal() {
-        setPrice('');
-        setSelectedItem(null);
-        setAmount('');
-        setProduct('');
-        setFinalPrice('');
-        setItem('');
-        setDescription('');
+        resetFields()
         setModalVisible(false)
     }
 
@@ -148,6 +146,7 @@ export default function BottomPopup({
         <Modal animationType="slide"
                transparent={true}
                visible={modalVisible}
+               onRequestClose={() => closeModal()}
         >
             <TouchableWithoutFeedback style={shoppingListStyle.outsideTouchable}>
                 <View style={{backgroundColor: "rgba(74,74,74,0.4)", flex: 1, justifyContent: "flex-end"}}>
@@ -181,9 +180,9 @@ export default function BottomPopup({
                                         <Text style={styles.subHeading}>{language("amount")}</Text>
                                         <TextInput style={{...styles.customButton, padding: 8, alignSelf: "stretch"}}
                                                    value={txtAmount}
+                                                   keyboardType={"number-pad"}
                                                    onChangeText={changedText => onInputChanged(changedText, 'amount')}
-
-                                                   placeholder={"2"}
+                                                   placeholder={"0"}
                                         />
                                     </View>
 
@@ -191,10 +190,9 @@ export default function BottomPopup({
                                         <Text style={styles.subHeading}>{language("price")}</Text>
                                         <TextInput style={{...styles.customButton, padding: 8, alignSelf: "stretch"}}
                                                    value={txtPrice}
-
+                                                   keyboardType={"number-pad"}
                                                    onChangeText={changedText => onInputChanged(changedText, 'price')}
-
-                                                   placeholder={"e.g. 3лв"}/>
+                                                   placeholder={"0лв"}/>
                                     </View>
                                 </View>
 

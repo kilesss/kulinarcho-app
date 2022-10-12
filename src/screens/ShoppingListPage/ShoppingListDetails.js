@@ -15,13 +15,13 @@ import {
     updateList,
     deleteProductFromList
 } from "../../RestRequests/generalRequest";
-import {useRoute} from "@react-navigation/native";
+import {useIsFocused, useRoute} from "@react-navigation/native";
 import {finalize} from "@babel/core/lib/config/helpers/deep-array";
 
 
 export default function ShoppingListDetails(props) {
 
-
+    const isFocused = useIsFocused();
     const [items, editItems] = useState([]);
     const [DemoToken, setDemoToken] = useState(true);
     const [articleCount, setarticleCount] = useState(0);
