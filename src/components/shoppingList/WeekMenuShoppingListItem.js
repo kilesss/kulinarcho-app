@@ -14,7 +14,7 @@ function WeekMenuShoppingListItem({title, requiredAmount, onDelete}) {
                     <Text style={{...styles.subHeading, fontWeight: "regular", marginTop: 0, marginBottom: 0}}>Нужно: <Text style={{color: "#15A051"}}>{requiredAmount}</Text>
                     </Text>
                 </View>
-                <TextInput style={styles.borderBottomTextInput} placeholder={"0"}/>
+                <TextInput style={styles.borderBottomTextInput} placeholder={"0"} keyboardType={"numeric"}/>
                 <TouchableOpacity style={{...stylesProfile.requestButton, backgroundColor: "#D40000"}} onPress={() => onDelete}>
                     <MaterialIcons name={"delete"} size={25} color={"#fff"}/>
                 </TouchableOpacity>
