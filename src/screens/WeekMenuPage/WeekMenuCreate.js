@@ -25,6 +25,16 @@ function WeekMenuCreate({navigation}) {
         setDatePickerVisibility2(false);
     };
 
+    function generateWeekMenu(){
+        if (dateStart !== 'Начална Дата' && dateEnd !== 'Крайна Дата'){
+            if (text === ""){
+                setText('Седмично меню: '+dateStart+' - '+dateEnd);
+            }
+            navigation.navigate("Week Menu Add Recipes", {title: text, startDate:dateStart, endDate: dateEnd})
+        }else {
+            alert("Моля изберете дати.")
+        }
+    }
 
     return (
 
@@ -53,13 +63,13 @@ function WeekMenuCreate({navigation}) {
 
                 <TextInput
                     style={{...styles.customButton, padding: 12}}
-                    placeholder={"Име"}
+                    placeholder={"Заглавие"}
                     onChangeText={text => setText(text)}
                 />
                 <CustomButton
                     title={"Генерирай Меню"}
                     txtColor={"#fff"}
-                    onPress={() => navigation.navigate("Week Menu Add Recipes", {title: text})}
+                    onPress={() =>generateWeekMenu() } //
                 />
             </View>
 
