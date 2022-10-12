@@ -12,23 +12,18 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
     getShoppingListProducts,
     AddEditProductShoppingList,
-    updateList,
     deleteProductFromList
 } from "../../RestRequests/generalRequest";
-import {useIsFocused, useRoute} from "@react-navigation/native";
-import {finalize} from "@babel/core/lib/config/helpers/deep-array";
 
 
 export default function ShoppingListDetails(props) {
 
-    const isFocused = useIsFocused();
     const [items, editItems] = useState([]);
     const [DemoToken, setDemoToken] = useState(true);
     const [articleCount, setarticleCount] = useState(0);
     const [finalPriceList, setfinalPriceList] = useState(0);
 
     const [modalData, setModalData] = useState([]);
-    const [addModalVisible, setAddModalVisible] = useState([]);
     const [buyModalVisible, setBuyModalVisible] = useState(false);
 
 
@@ -122,10 +117,15 @@ export default function ShoppingListDetails(props) {
     async function AddEditProductShoppingListRequest(data) {
 
 
+
         var requestBody = {
             listId: props.route.params.key,
             ...data
         };
+        if (requestBody.amount !== undefined){
+            requestBody.value = requestBody.amount;
+            delete requestBody.amount;
+        }
         await AddEditProductShoppingList(JSON.stringify(requestBody), DemoToken).then()
             .then(response => {
                 if (response.errors) {
@@ -169,6 +169,8 @@ export default function ShoppingListDetails(props) {
                     items[key].description = data.description
                 }
             });
+
+
             AddEditProductShoppingListRequest(items[keyData]).then(r => {
             })
 

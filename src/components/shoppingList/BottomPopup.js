@@ -91,7 +91,7 @@ export default function BottomPopup({
         setSelectedItem(null);
         setAmount('');
         setProduct('');
-        setFinalPrice('');
+        setFinalPrice('0');
         setItem('');
         setDescription('');
 
@@ -146,6 +146,7 @@ export default function BottomPopup({
         <Modal animationType="slide"
                transparent={true}
                visible={modalVisible}
+               onShow={() => resetFields()}
                onRequestClose={() => closeModal()}
         >
             <TouchableWithoutFeedback style={shoppingListStyle.outsideTouchable}>
