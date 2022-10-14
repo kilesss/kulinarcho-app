@@ -7,8 +7,20 @@ import SettingsCardSmall from "../../components/profile/SettingsCardSmall";
 import SettingsCardLarge from "../../components/profile/SettingsCardLarge";
 import {stylesProfile} from "../../styles/stylesProfile";
 import Images from "../../../public/images";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function RecipesPage({navigation, route}) {
+
+    async function removeItemValue(key) {
+        try {
+            await AsyncStorage.removeItem(key);
+            return true;
+        }
+        catch(exception) {
+            return false;
+        }
+    }
+
 
     const { name, photo } = route.params;
 
@@ -40,6 +52,13 @@ export default function RecipesPage({navigation, route}) {
                                    onPress={() => navigation.navigate("Products and Categories")}/>
                 <SettingsCardSmall name={"Моите рецепти"} icon={"book-open-page-variant-outline"}
                                    onPress={() => navigation.navigate("Cooking Book")}
+                />
+                <SettingsCardSmall name={"Изход"} icon={"door-open"} color={"#D40000"}
+                                   onPress={() => {
+                                       // TODO: When you clear the access token it tries to log you in automatically again.
+                                       // removeItemValue("access_token").then(r => console.log(r))
+                                       navigation.navigate("Login")
+                                   }}
                 />
 
             </View>

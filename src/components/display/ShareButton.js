@@ -2,12 +2,12 @@ import React from 'react';
 import {Share, View, Button, Text, TouchableOpacity} from 'react-native';
 import {MaterialCommunityIcons, Octicons} from "@expo/vector-icons";
 
-const ShareButton = () => {
+const ShareButton = ({id}) => {
     const onShare = async () => {
         try {
             const result = await Share.share({
                 message:
-                    'React Native | A framework for building native apps using React',
+                    'kulinarcho.com/recipe/'+id,
             });
             if (result.action === Share.sharedAction) {
                 if (result.activityType) {

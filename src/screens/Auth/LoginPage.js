@@ -21,7 +21,7 @@ export default class LoginPage extends React.Component {
             restError: '',
             showWait: false,
             showMessage: false,
-            showLoader:false
+            showLoader:false,
         };
         if (this.props.route.params !== undefined) {
             if (this.props.route.params.waitConfirm !== undefined && this.props.route.params.waitConfirm === true) {
@@ -29,7 +29,7 @@ export default class LoginPage extends React.Component {
             }
         }
         // to not fill every time
-        // this.state = {email: "lmariqnov@gmail.com", password: "qwerty2", errors: '', restError: ''};
+        this.state = {email: "lmariqnov@gmail.com", password: "qwerty2", errors: '', restError: ''};
     }
       async facebookLogIn() {
         // try {

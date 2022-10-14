@@ -91,7 +91,7 @@ export default function TopNavigation({recipeDetails, products, steps, scrollA, 
                             <MaterialCommunityIcons name={"heart-outline"} size={32} color={"#fff"} style={{marginHorizontal: 10}}/>
                         </TouchableOpacity>
                     }
-                    <ShareButton/>
+                    <ShareButton id={recipeDetails.id}/>
                     <Menu style={{marginTop: 35}}>
                         <MenuTrigger style={{marginTop: -35, marginLeft: 10}}>
                             <MaterialCommunityIcons name={"dots-vertical"} size={32} color={"#fff"}/>
