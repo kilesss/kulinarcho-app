@@ -27,7 +27,7 @@ export default class CustomInout extends React.Component {
                     }}
                     secureTextEntry={this.props.isPassword}
                     onChangeText={(name) => this.sendCallback(name)} value={this.props.value}/>
-                <Text>{this.props.errorMessage}</Text>
+                <Text style={{color: "red", fontWeight: "bold"}}>{this.props.errorMessage}</Text>
             </View>
         );
     }

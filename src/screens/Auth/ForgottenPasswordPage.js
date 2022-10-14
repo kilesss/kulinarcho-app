@@ -11,6 +11,7 @@ import language from '../../language/language';
 import loadingIndicator from "../../components/loading/loadingIndicator";
 import ErrorMessage from "../../components/display/ErrorMessage";
 import {forgotenPassword} from '../../RestRequests/generalRequest';
+import {ALERT_TYPE, AlertNotificationRoot, Dialog} from "react-native-alert-notification";
 
 export default class ForgottenPassword extends React.Component {
 
@@ -61,6 +62,15 @@ export default class ForgottenPassword extends React.Component {
                         return response.errors;
                     }
 
+                    console.log("eeeeeeeeeeeeeeeeeee")
+                    Dialog.show({
+                        type: ALERT_TYPE.SUCCESS,
+                        title: 'Успех!',
+                        textBody: 'Изпратена е заявка за смяна на паролата: ',
+                        button: 'Затвори',
+                    })
+
+
                 });
         } else {
             this.setState({errors: err})
@@ -79,8 +89,14 @@ export default class ForgottenPassword extends React.Component {
         }
     }
 
+    IColors = {
+        card: "#fff",
+        success: "#15A051"
+    };
+
     render() {
         return (
+            <AlertNotificationRoot colors={[this.IColors, this.IColors]}>
             <View style={{...styles.container, alignItems: "center", justifyContent: "center"}}>
 
                 <Text
@@ -91,8 +107,8 @@ export default class ForgottenPassword extends React.Component {
                 />
                 <ErrorMessage showMessage={this.state.showMessage} message={this.state.restError}/>
                 {this.showMessageConfirmEmail()}
-				<View style={{justifyContent: "flex-start", alignSelf: "stretch"}}>
-                <Text>{language('email')}</Text>
+                <View style={{justifyContent: "flex-start", alignSelf: "stretch"}}>
+                    <Text>{language('email')}</Text>
                     <CustomInput
                         value={this.state.email}
                         errorMessage={this.state.errors.email}
@@ -100,19 +116,20 @@ export default class ForgottenPassword extends React.Component {
                         bgColor={"#fff"}
                         callback={this.getResponseEmail.bind(this)}
                     />
-				</View>
-                    <CustomButton
-                        title={language('send')}
-                        txtColor={"#fff"}
-                        bgColor={"#15A051"}
-                        onPress={() => this._onPressButton(this.state)}
-                    />
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
-                        <Text style={styles.boldTextButton}>{language('backTo')} {language('enter')}!</Text>
-                    </TouchableOpacity>
+                </View>
+                <CustomButton
+                    title={language('send')}
+                    txtColor={"#fff"}
+                    bgColor={"#15A051"}
+                    onPress={() => this._onPressButton(this.state)}
+                />
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
+                    <Text style={styles.boldTextButton}>{language('backTo')} {language('enter')}!</Text>
+                </TouchableOpacity>
 
 
             </View>
+            </AlertNotificationRoot>
         );
     }
 }
