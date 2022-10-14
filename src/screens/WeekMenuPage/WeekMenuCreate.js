@@ -3,6 +3,7 @@ import {Button, Text, TextInput, TouchableOpacity, View} from "react-native";
 import styles from "../../styles/styles";
 import {CustomButton} from "../../components/display/CustomButton";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function WeekMenuCreate({navigation}) {
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -30,6 +31,7 @@ function WeekMenuCreate({navigation}) {
             if (text === ""){
                 setText('Седмично меню: '+dateStart+' - '+dateEnd);
             }
+            AsyncStorage.removeItem('weekMenu');
             navigation.navigate("Week Menu Add Recipes", {title: text, startDate:dateStart, endDate: dateEnd})
         }else {
             alert("Моля изберете дати.")

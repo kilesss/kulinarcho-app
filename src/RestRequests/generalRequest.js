@@ -451,6 +451,15 @@ const getFollower = async function (JWT) {
     return formatResponse(await res.json());
 }
 
+const getUserRecipes = async function (JWT) {
+    const res = await fetch(endpoints.getUserRecipes, {
+        method: "GET",
+        headers: {
+            'Authorization': 'Bearer ' + JWT
+        }
+    });
+    return formatResponse(await res.json());
+}
 export {
     login, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu,
     getSingleRecipe, getCategories, getProducts, getProductTypes, getSingleProfile,
@@ -458,7 +467,7 @@ export {
     AddEditProductShoppingList,deleteProductFromList, AddEditProductType, deleteProductTypes,
     addEditProduct, deleteProduct, firstLogin, addRecipe, getUnits, editRecipe, getGroupInfo, newRequest,
     deleteUserRequest, acceptUserRequest, deleteUserFromGroup, deleteRecipe,
-    transferRecipe, setPublicRecipe, getFollower
+    transferRecipe, setPublicRecipe, getFollower,getUserRecipes
 }
 
 

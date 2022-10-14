@@ -24,6 +24,7 @@ const endpoints = {
   addProductShoppingList: 'https://kulinarcho.com/api/AddProductShoppingList',
 
   getLatestRecipes: 'https://kulinarcho.com/api/latestRecipe/',
+  getUserRecipes: 'https://kulinarcho.com/api/recipes/',
   getPublicRecipes: 'https://kulinarcho.com/api/getPublicRecipes',
   AddEditProductShoppingList: 'https://kulinarcho.com/api/AddEditProductShoppingList',
   deleteProductFromList: 'https://kulinarcho.com/api/deleteProductFromList',

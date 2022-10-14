@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useState} from 'react';
 
-import {Text, TouchableOpacity, View,ScrollView } from "react-native";
+import {Text, TouchableOpacity, View, ScrollView} from "react-native";
 import stylesShoppingList from "../../styles/stylesShoppingList";
 import styles from "../../styles/styles";
 import language from "../../language/language";
@@ -10,23 +10,29 @@ import {RecipesCardSmall} from "../../components/recipes/RecipesCardSamll";
 import {getIconInfo} from "../../components/HelpFunctions";
 import {stylesProfile} from "../../styles/stylesProfile";
 import {FontAwesome5, Ionicons} from "@expo/vector-icons";
-import {rotate} from "expo-image-manipulator/build/actions/index.web";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function WeekMenuAddRecipes({route, navigation}) {
 
     const [dates, setDates] = useState([]);
-
+    const [recipes, setRecipes] = useState([]);
     useEffect(() => {
-        getDatesBetween(new Date(route.params.startDate.split('/')[2] + '-' +
-                formatDates(route.params.startDate.split('/')[1]) + '-' +
-                formatDates(route.params.startDate.split('/')[0])
-            ),
-            new Date(route.params.endDate.split('/')[2] + '-' +
-                formatDates(route.params.endDate.split('/')[1]) + '-' +
-                formatDates(route.params.endDate.split('/')[0])
+        navigation.addListener('focus', async () => {
+            await AsyncStorage.getItem('weekMenu').then((value) => {
+                setRecipes(JSON.parse(value));
+            })
+            getDatesBetween(new Date(route.params.startDate.split('/')[2] + '-' +
+                    formatDates(route.params.startDate.split('/')[1]) + '-' +
+                    formatDates(route.params.startDate.split('/')[0])
+                ),
+                new Date(route.params.endDate.split('/')[2] + '-' +
+                    formatDates(route.params.endDate.split('/')[1]) + '-' +
+                    formatDates(route.params.endDate.split('/')[0])
+                )
             )
-        )
-    }, []);
+        });
+
+    }, [navigation]);
 
     const getDatesBetween = (startDate, endDate) => {
         const dates = [];
@@ -55,57 +61,57 @@ function WeekMenuAddRecipes({route, navigation}) {
         return number;
     }
 
-
-
     return (
 
         <View style={styles.container}>
             <ScrollView>
 
-            {Object.keys(dates).map(key => {
-                return (
-                    <View>
-                    <View style={{flexDirection:'row', width:'55%'}}>
-                        <View style={{flex: 5}}>
-                            <Text style={{...styles.heading, fontSize: 18}}>{dates[key]}</Text>
+                {Object.keys(dates).map(key => {
+                    return (
+                        <View>
+                            <View style={{flexDirection: 'row', width: '55%'}}>
+                                <View style={{flex: 5}}>
+                                    <Text style={{...styles.heading, fontSize: 18}}>{dates[key]}</Text>
 
-                        </View>
-                        <View style={{flex:2}}>
-                            <CustomButton title={language("add")}
-                                          bgColor={"#15A051"}
-                                          txtColor={"#fff"}
-                                          padding={7}
-                                          onPress={() => navigation.navigate("Week Menu Pick Recipe")}
-                            />
-                        </View>
-                    </View>
-
-                    <RecipesCardSmall
-                        title={"opa"}
-                        time={20}
-                        servings={2}
-                        publicStatus={2}
-                        photo={"/pictures/profilePicture/70/0_1652967840.jpg"}
-                        category={getIconInfo(1)}/>
-                </View>)
-            })}
+                                </View>
+                                <View style={{flex: 2}}>
+                                    <CustomButton title={language("add")}
+                                                  bgColor={"#15A051"}
+                                                  txtColor={"#fff"}
+                                                  padding={7}
+                                                  onPress={() => navigation.navigate("Week Menu Pick Recipe", {date: dates[key]})}
+                                    />
+                                </View>
+                            </View>
+                            {recipes !== null ? Object.keys(recipes).map(key2 => {
+                                if (recipes[key2].date === dates[key])
+                                    return (<RecipesCardSmall
+                                        title={recipes[key2].title}
+                                        time={recipes[key2].allTime}
+                                        servings={recipes[key2].portions}
+                                        publicStatus={recipes[key2].publicRec}
+                                        photo={recipes[key2].photo}
+                                        category={getIconInfo(recipes[key2].category)}/>)
+                            }) : <View></View>}
+                        </View>)
+                })}
             </ScrollView>
 
 
-            <View style={{flexDirection:'row'}}>
-                <View style={{flex:1}}>
-            <CustomButton
-                title={"Запази меню"}
-                txtColor={"#fff"}
-                onPress={() => console.log("Запази рецепта функция")}
-            />
+            <View style={{flexDirection: 'row'}}>
+                <View style={{flex: 1}}>
+                    <CustomButton
+                        title={"Запази меню"}
+                        txtColor={"#fff"}
+                        onPress={() => console.log("Запази рецепта функция")}
+                    />
                 </View>
-            <TouchableOpacity
-                style={[styles.customButton, stylesProfile.settingsCardSmall, {paddingVertical: 13, flex:1}]}
-                onPress={() => navigation.navigate("Week Menu Shopping List")}>
-                <Ionicons name={"receipt"} color={"#15A051"} size={27}/>
-                <Text style={{...styles.subHeading, flex: 1, paddingLeft: 5, fontSize: 16}}>Генерирай</Text>
-            </TouchableOpacity>
+                <TouchableOpacity
+                    style={[styles.customButton, stylesProfile.settingsCardSmall, {paddingVertical: 13, flex: 1}]}
+                    onPress={() => navigation.navigate("Week Menu Shopping List")}>
+                    <Ionicons name={"receipt"} color={"#15A051"} size={27}/>
+                    <Text style={{...styles.subHeading, flex: 1, paddingLeft: 5, fontSize: 16}}>Генерирай</Text>
+                </TouchableOpacity>
             </View>
         </View>
     );

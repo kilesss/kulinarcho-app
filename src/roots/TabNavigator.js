@@ -180,7 +180,7 @@ export default function TabNavigator(props) {
             <Stack.Screen name={"Week Menu Details"} component={WeekMenuDetails}/>
             <Stack.Screen name={"Week Menu Create"} component={WeekMenuCreate} options={{title: "Създай Седмично Меню"}}/>
             <Stack.Screen name={"Week Menu Add Recipes"} component={WeekMenuAddRecipes}
-                          options={({ route }) => ({ title: route.params.title ? route.params.title : 'Меню без заглавие' })}
+                          // options={({ route }) => ({ title: route.params.title ? route.params.title : 'Меню без заглавие' })}
                           />
             <Stack.Screen name={"Week Menu Pick Recipe"} component={WeekMenuPickARecipe} options={"Избери Рецепта"}/>
             <Stack.Screen name={"Week Menu Shopping List"} component={WeekMenuShoppingList} options={{title: "Създай Списък за Пазар"}}/>
