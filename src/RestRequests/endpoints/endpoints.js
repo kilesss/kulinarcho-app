@@ -45,6 +45,7 @@ const endpoints = {
   acceptUserRequest: 'https://kulinarcho.com/api/acceptRequestUser',
   deleteUserFromGroup: 'https://kulinarcho.com/api/deleteUser',
   getFollower: 'https://kulinarcho.com/api/getFollower',
+  getRecipesProduct:'https://kulinarcho.com/api/getRecipesProducts'
 }
 
 export default endpoints;

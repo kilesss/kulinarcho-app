@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useState} from 'react';
 
-import {Text, TouchableOpacity, View, ScrollView} from "react-native";
+import {Text, TouchableOpacity, View, ScrollView, FlatList} from "react-native";
 import stylesShoppingList from "../../styles/stylesShoppingList";
 import styles from "../../styles/styles";
 import language from "../../language/language";
@@ -11,6 +11,7 @@ import {getIconInfo} from "../../components/HelpFunctions";
 import {stylesProfile} from "../../styles/stylesProfile";
 import {FontAwesome5, Ionicons} from "@expo/vector-icons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import renderLoading from "../../components/loading/ShowLoader";
 
 function WeekMenuAddRecipes({route, navigation}) {
 
@@ -18,6 +19,7 @@ function WeekMenuAddRecipes({route, navigation}) {
     const [recipes, setRecipes] = useState([]);
     useEffect(() => {
         navigation.addListener('focus', async () => {
+
             await AsyncStorage.getItem('weekMenu').then((value) => {
                 setRecipes(JSON.parse(value));
             })
@@ -33,6 +35,7 @@ function WeekMenuAddRecipes({route, navigation}) {
         });
 
     }, [navigation]);
+
 
     const getDatesBetween = (startDate, endDate) => {
         const dates = [];
@@ -60,42 +63,43 @@ function WeekMenuAddRecipes({route, navigation}) {
         }
         return number;
     }
-
     return (
 
-        <View style={styles.container}>
-            <ScrollView>
+        <View style={{...styles.container, paddingBottom:0}}>
+            <FlatList
+                style={{width:'100%', maxHeight:'89%',minHeight:'87%'}}
+                data={dates}
+                keyExtractor={(item, index) => item}
+                ListEmptyComponent={<Text style={styles.heading}>{language("noRecipes")}</Text>}
+                renderItem={({item}) => (
 
-                {Object.keys(dates).map(key => {
-                    return (
-                        <View>
-                            <View style={{flexDirection: 'row', width: '55%'}}>
-                                <View style={{flex: 5}}>
-                                    <Text style={{...styles.heading, fontSize: 18}}>{dates[key]}</Text>
-
-                                </View>
-                                <View style={{flex: 2}}>
-                                    <CustomButton title={language("add")}
-                                                  bgColor={"#15A051"}
-                                                  txtColor={"#fff"}
-                                                  padding={7}
-                                                  onPress={() => navigation.navigate("Week Menu Pick Recipe", {date: dates[key]})}
-                                    />
-                                </View>
+                    <View style={{...styles.recipesCardSmall, width:'100%'}}>
+                        <View style={{flexDirection: 'row'}}>
+                            <View style={{flex: 5}}>
+                                <Text style={{...styles.heading, fontSize: 18}}>{item}</Text>
                             </View>
-                            {recipes !== null ? Object.keys(recipes).map(key2 => {
-                                if (recipes[key2].date === dates[key])
-                                    return (<RecipesCardSmall
-                                        title={recipes[key2].title}
-                                        time={recipes[key2].allTime}
-                                        servings={recipes[key2].portions}
-                                        publicStatus={recipes[key2].publicRec}
-                                        photo={recipes[key2].photo}
-                                        category={getIconInfo(recipes[key2].category)}/>)
-                            }) : <View></View>}
-                        </View>)
-                })}
-            </ScrollView>
+                            <View style={{flex: 2}}>
+                                <CustomButton title={language("add")}
+                                              bgColor={"#15A051"}
+                                              txtColor={"#fff"}
+                                              padding={7}
+                                              onPress={() => navigation.navigate("Week Menu Pick Recipe", {date: item})}
+                                />
+                            </View>
+                        </View>
+                        {recipes !== null? Object.keys(recipes).map(key2 => {
+                            if (recipes[key2].date === item)
+                                return (<RecipesCardSmall
+                                    title={recipes[key2].title}
+                                    time={recipes[key2].allTime}
+                                    servings={recipes[key2].portions}
+                                    publicStatus={recipes[key2].publicRec}
+                                    photo={recipes[key2].photo}
+                                    category={getIconInfo(recipes[key2].category)}/>)
+                        }):<View></View>}
+                    </View>
+                )}/>
+
 
 
             <View style={{flexDirection: 'row'}}>

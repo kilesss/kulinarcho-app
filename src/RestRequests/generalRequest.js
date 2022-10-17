@@ -439,6 +439,19 @@ const deleteUserFromGroup = async function (body, token) {
     });
     return await res.json();
 }
+const getRecipesProduct = async function (body, token) {
+    const res = await fetch(endpoints.getRecipesProduct+body, {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+    return formatResponse(await res.json());
+
+}
+
+
 
 
 const getFollower = async function (JWT) {
@@ -467,7 +480,7 @@ export {
     AddEditProductShoppingList,deleteProductFromList, AddEditProductType, deleteProductTypes,
     addEditProduct, deleteProduct, firstLogin, addRecipe, getUnits, editRecipe, getGroupInfo, newRequest,
     deleteUserRequest, acceptUserRequest, deleteUserFromGroup, deleteRecipe,
-    transferRecipe, setPublicRecipe, getFollower,getUserRecipes
+    transferRecipe, setPublicRecipe, getFollower,getUserRecipes,getRecipesProduct
 }
 
 
