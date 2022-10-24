@@ -17,7 +17,7 @@ export default class LoginPage extends React.Component {
         super(props);
         this.state = {email: "",
             password: "",
-            errors: '',
+            errors: [],
             restError: '',
             showWait: false,
             showMessage: false,
@@ -29,7 +29,7 @@ export default class LoginPage extends React.Component {
             }
         }
         // to not fill every time
-        this.state = {email: "lmariqnov@gmail.com", password: "qwerty2", errors: '', restError: ''};
+        // this.state = {email: "lmariqnov@gmail.com", password: "qwerty2", errors: '', restError: ''};
     }
       async facebookLogIn() {
         // try {
@@ -69,7 +69,6 @@ export default class LoginPage extends React.Component {
                                     index: 0,
                                     routes: [{name: 'Shopping List'}],
                                 });
-
                                 return;
                             }
 
@@ -78,8 +77,6 @@ export default class LoginPage extends React.Component {
                                 this.setState({showMessage: true})
                                 const restErr = JSON.stringify(response.errors);
                                 this.setState({restError: restErr.substring(2, restErr.length - 2)})
-
-                                return;
                             }
                         }
                     ).catch(error => {
@@ -98,7 +95,8 @@ export default class LoginPage extends React.Component {
     }
     async componentDidMount() {
         const token = await AsyncStorage.getItem('access_token');
-        if (token === null || token.length > 0) {
+        console.log(token);
+        if (token !== null && token.length > 0) {
             this.props.navigation.reset({
                 index: 0,
                 routes: [{name: 'Shopping List'}],
@@ -128,8 +126,10 @@ export default class LoginPage extends React.Component {
             {'email': state.email, 'password': state.password},
             {'email': {required: true, email: true}, 'password': {required: true, min: 6}}
         );
-      if (Object.keys(err).length === 0) {
-        const loginPayload = JSON.stringify({
+
+        if (Object.keys(err).length === 0) {
+
+            const loginPayload = JSON.stringify({
           email: this.state.email,
           password: this.state.password
         });
@@ -161,11 +161,14 @@ export default class LoginPage extends React.Component {
               }
             }
           ).catch(error => {
+
                 this.setState({showLoader:false})
               console.log('ERROR:::::');
               console.log(error);
           });
         } else {
+            this.setState({showLoader:false})
+
             this.setState({errors: err})
         }
         return true;

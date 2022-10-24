@@ -1,6 +1,7 @@
 import validationRules from "./validatorMessages";
 
 export default function validateFields(fields, rules) {
+    console.log(fields)
     const errors = {};
     const rulesMessages = validationRules();
     Object.keys(fields).map(function (keyf) {
@@ -42,5 +43,6 @@ export default function validateFields(fields, rules) {
             }
         })
     })
+    console.log(errors)
     return errors;
 }

@@ -21,7 +21,7 @@ const login = async function (body, method) {
 const signup = async function (body, method) {
   const res = await fetch(endpoints.signup, {
     method: method,
-    body: JSON.stringify(body),
+    body: body,
     headers: {
       'Content-Type': 'application/json',
     }
@@ -196,17 +196,25 @@ function formatResponse2(response) {
 
 }
 
-function formatResponse(response) {
-    if ('premium' in response){
+async function formatResponse(response) {
+    if ('premium' in response) {
         delete response.premium;
     }
-    if ('first_login' in response){
+    if ('first_login' in response) {
         delete response.first_login
     }
-    if ('user_requests' in response){
+    if ('user_requests' in response) {
         delete response.user_requests;
     }
-    if ('new_token' in response){
+    if ('login' in response) {
+        if (response.login === true) {
+            await AsyncStorage.removeItem(key).then(()=>{
+                // navigation.navigate("Login")
+            })
+        }
+        delete response.login;
+    }
+    if ('new_token' in response) {
         AsyncStorage.setItem('access_token', response.new_token);
         delete response.new_token;
         delete response['new_token'];
@@ -233,7 +241,7 @@ const AddEditProductShoppingList = async function (body, token) {
             'Content-Type': 'application/json',
         }
     });
-    return '';
+    return formatResponse(await res.json());
 }
 const deleteProductFromList = async function (body, token) {
     const res = await fetch(endpoints.deleteProductFromList, {
@@ -244,7 +252,7 @@ const deleteProductFromList = async function (body, token) {
             'Content-Type': 'application/json',
         }
     });
-    return '';
+    return formatResponse(await res.json());
 }
 
 const AddEditProductType = async function (body, token) {
@@ -256,7 +264,7 @@ const AddEditProductType = async function (body, token) {
             'Content-Type': 'application/json',
         }
     });
-    return '';
+    return formatResponse(await res.json());
 }
 
 const deleteProductTypes = async function (body, token) {
@@ -268,7 +276,7 @@ const deleteProductTypes = async function (body, token) {
             'Content-Type': 'application/json',
         }
     });
-    return await res.json();
+    return formatResponse(await res.json());
 }
 
 const addEditProduct = async function (body, token) {
@@ -280,7 +288,7 @@ const addEditProduct = async function (body, token) {
             'Content-Type': 'application/json',
         }
     });
-    return '';
+    return formatResponse(await res.json());
 }
 
 const deleteProduct = async function (body, token) {
@@ -292,7 +300,7 @@ const deleteProduct = async function (body, token) {
             'Content-Type': 'application/json',
         }
     });
-    return await res.json();
+    return formatResponse(await res.json());
 }
 
 const firstLogin = async function (token) {
@@ -304,7 +312,7 @@ const firstLogin = async function (token) {
         }
     });
 
-    return await res.json();
+    return formatResponse(await res.json());
 }
 
 
@@ -318,7 +326,7 @@ const addRecipe = async function (body, token) {
         }
     });
 
-    return await res.json();
+    return formatResponse(await res.json());
 }
 
 const editRecipe = async function (body, token) {
@@ -331,7 +339,7 @@ const editRecipe = async function (body, token) {
         }
     });
 
-    return await res.json();
+    return formatResponse(await res.json());
 }
 
 
@@ -366,7 +374,7 @@ const newRequest = async function (body, token) {
             'Content-Type': 'application/json',
         }
     });
-    return await res.json();
+    return formatResponse(await res.json());
 }
 
 
@@ -379,7 +387,7 @@ const transferRecipe = async function (body, token) {
             'Content-Type': 'application/json',
         }
     });
-    return await res.json();
+    return formatResponse(await res.json());
 }
 
 const getGroupInfo = async function (method, JWT) {
@@ -401,7 +409,7 @@ const deleteUserRequest = async function (body, token) {
             'Content-Type': 'application/json',
         }
     });
-    return await res.json();
+    return formatResponse(await res.json());
 }
 
 const acceptUserRequest = async function (body, token) {
@@ -413,7 +421,7 @@ const acceptUserRequest = async function (body, token) {
             'Content-Type': 'application/json',
         }
     });
-    return await res.json();
+    return formatResponse(await res.json());
 }
 
 const setPublicRecipe = async function (body, token) {
@@ -425,7 +433,7 @@ const setPublicRecipe = async function (body, token) {
             'Content-Type': 'application/json',
         }
     });
-    return await res.json();
+    return formatResponse(await res.json());
 }
 
 const deleteUserFromGroup = async function (body, token) {
@@ -437,7 +445,7 @@ const deleteUserFromGroup = async function (body, token) {
             'Content-Type': 'application/json',
         }
     });
-    return await res.json();
+    return formatResponse(await res.json());
 }
 const getRecipesProduct = async function (body, token) {
     const res = await fetch(endpoints.getRecipesProduct+body, {
@@ -473,6 +481,30 @@ const getUserRecipes = async function (JWT) {
     });
     return formatResponse(await res.json());
 }
+const submitWeekMenu = async function (body, token) {
+    const res = await fetch(endpoints.submitWeekMenu, {
+        method: "POST",
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+    return formatResponse(await res.json());
+}
+const deleteWeekMenu = async function (body, token) {
+    const res = await fetch(endpoints.deleteWeekMenu, {
+        method: "POST",
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+    return formatResponse(await res.json());
+}
+
+
 export {
     login, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu,
     getSingleRecipe, getCategories, getProducts, getProductTypes, getSingleProfile,
@@ -480,7 +512,7 @@ export {
     AddEditProductShoppingList,deleteProductFromList, AddEditProductType, deleteProductTypes,
     addEditProduct, deleteProduct, firstLogin, addRecipe, getUnits, editRecipe, getGroupInfo, newRequest,
     deleteUserRequest, acceptUserRequest, deleteUserFromGroup, deleteRecipe,
-    transferRecipe, setPublicRecipe, getFollower,getUserRecipes,getRecipesProduct
+    transferRecipe, setPublicRecipe, getFollower,getUserRecipes,getRecipesProduct,submitWeekMenu,deleteWeekMenu
 }
 
 

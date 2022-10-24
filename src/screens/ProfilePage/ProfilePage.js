@@ -56,7 +56,7 @@ export default function RecipesPage({navigation, route}) {
                 <SettingsCardSmall name={"Изход"} icon={"door-open"} color={"#D40000"}
                                    onPress={() => {
                                        // TODO: When you clear the access token it tries to log you in automatically again.
-                                       // removeItemValue("access_token").then(r => console.log(r))
+                                       removeItemValue("access_token").then(r => console.log(r))
                                        navigation.navigate("Login")
                                    }}
                 />

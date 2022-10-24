@@ -12,17 +12,25 @@ import {stylesProfile} from "../../styles/stylesProfile";
 import {FontAwesome5, Ionicons} from "@expo/vector-icons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import renderLoading from "../../components/loading/ShowLoader";
+import {submitWeekMenu} from "../../RestRequests/generalRequest";
 
 function WeekMenuAddRecipes({route, navigation}) {
 
     const [dates, setDates] = useState([]);
     const [recipes, setRecipes] = useState([]);
+    const [dateStart, setDateStart] = useState('');
+    const [dateEnd, setDateEnd] = useState('');
+    const [title, setTitle] = useState('');
     useEffect(() => {
         navigation.addListener('focus', async () => {
 
             await AsyncStorage.getItem('weekMenu').then((value) => {
                 setRecipes(JSON.parse(value));
             })
+            setDateStart(route.params.startDate)
+            setDateEnd(route.params.endDate)
+            setTitle(route.params.title)
+
             getDatesBetween(new Date(route.params.startDate.split('/')[2] + '-' +
                     formatDates(route.params.startDate.split('/')[1]) + '-' +
                     formatDates(route.params.startDate.split('/')[0])
@@ -63,6 +71,33 @@ function WeekMenuAddRecipes({route, navigation}) {
         }
         return number;
     }
+    async function saveWeekMenu() {
+        AsyncStorage.getItem('access_token').then((value) => {
+            if (value) {
+                submitWeekMenu(JSON.stringify({
+                    title: title,
+                    dateStart: dateStart,
+                    dateEnd: dateEnd,
+                    recipe: recipes
+                }), value).then(data => {
+                    if (data) {
+                        console.log(JSON.stringify({
+                            title: title,
+                            dateStart: dateStart,
+                            dateEnd: dateEnd,
+                            recipe: recipes
+                        }));
+                        console.log(data);
+                        navigation.navigate('Shopping List');
+                    }
+                }).catch((err) => {
+                    console.log(err);
+                });
+            }
+        }, []);
+
+    }
+
     return (
 
         <View style={{...styles.container, paddingBottom:0}}>
@@ -107,12 +142,13 @@ function WeekMenuAddRecipes({route, navigation}) {
                     <CustomButton
                         title={"Запази меню"}
                         txtColor={"#fff"}
-                        onPress={() => console.log("Запази рецепта функция")}
+                        onPress={() => saveWeekMenu()}
                     />
                 </View>
                 <TouchableOpacity
                     style={[styles.customButton, stylesProfile.settingsCardSmall, {paddingVertical: 13, flex: 1}]}
-                    onPress={() => navigation.navigate("Week Menu Shopping List")}>
+                    onPress={() => navigation.navigate("Week Menu Shopping List", {title:title, startDate:dateStart, endDate: dateEnd })}>
+
                     <Ionicons name={"receipt"} color={"#15A051"} size={27}/>
                     <Text style={{...styles.subHeading, flex: 1, paddingLeft: 5, fontSize: 16}}>Генерирай</Text>
                 </TouchableOpacity>

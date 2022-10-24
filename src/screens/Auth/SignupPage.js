@@ -24,16 +24,7 @@ export default class LoginPage extends React.Component {
             restError: '',
             showMessage: false
         };
-        this.state = {
-            email: "lmariqnov@gmail.com",
-            name: "kurcho",
-            confirmPassword: "qwerty2",
-            password: "qwerty2",
-            errors: '',
-            restError: '',
-            showMessage: false
 
-        };
         // to not fill every time
         //TODO: delete before production : bad practise but simple to use
         //  this.state = {email: "lmariqnov@gmail.com", password: "qwerty2", errors: '', restError: '', showMessage: false};
@@ -68,7 +59,6 @@ export default class LoginPage extends React.Component {
     async _onPressButton(state) {
         this.setState({errors: {}})
         this.setState({restError: ''})
-
         const err = validateFields(
             {
                 'email': state.email,
@@ -89,7 +79,7 @@ export default class LoginPage extends React.Component {
                 password: this.state.password,
             });
 
-            await signup(signupPayload, 'POST').then(response => response.json())
+            await signup(signupPayload, 'POST')
                 .then(response => {
                     if (response.access_token) {
                         loadingIndicator(false);

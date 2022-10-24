@@ -5,7 +5,7 @@ import {stylesProfile} from "../../styles/stylesProfile";
 import language from "../../language/language";
 import {MaterialIcons} from "@expo/vector-icons";
 
-function WeekMenuShoppingListItem({title, requiredAmount, onDelete}) {
+function WeekMenuShoppingListItem({title, requiredAmount, onDelete, onChange}) {
     return (
         <View>
             <View style={{...styles.customButton, ...stylesProfile.requestComponent}}>
@@ -14,7 +14,9 @@ function WeekMenuShoppingListItem({title, requiredAmount, onDelete}) {
                     <Text style={{...styles.subHeading, fontWeight: "regular", marginTop: 0, marginBottom: 0}}>Нужно: <Text style={{color: "#15A051"}}>{requiredAmount}</Text>
                     </Text>
                 </View>
-                <TextInput style={styles.borderBottomTextInput} placeholder={"0"} keyboardType={"numeric"}/>
+                <TextInput style={styles.borderBottomTextInput} placeholder={"0"} keyboardType={"numeric"}
+                           onChangeText={changedText => console.log(changedText)}/>
+
                 <TouchableOpacity style={{...stylesProfile.requestButton, backgroundColor: "#D40000"}} onPress={() => onDelete}>
                     <MaterialIcons name={"delete"} size={25} color={"#fff"}/>
                 </TouchableOpacity>

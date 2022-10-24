@@ -6,7 +6,7 @@ import AddShoppingListModal from "../../components/shoppingList/AddShoppingListM
 import language from "../../language/language";
 import renderLoading from "../../components/loading/ShowLoader";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {getWeeklyMenus} from "../../RestRequests/generalRequest";
+import {getWeeklyMenus,deleteWeekMenu} from "../../RestRequests/generalRequest";
 import getRandomColor from "../../components/HelpFunctions";
 import FloatingActionButton from "../../components/display/FloatingActionButton";
 import {CustomButton} from "../../components/display/CustomButton";
@@ -50,10 +50,8 @@ export default function WeekMenuPage({navigation}) {
             <View style={{...styles.container, marginBottom: 5}}>
                 <AddShoppingListModal modalVisible={changeModalVisible}
                                       setModalVisible={setChangeModalVisible}
-
                                       modalTitle={language("changeWeekMenu")}
                                       buttonTitle={language("change")}
-
                                       showDeleteOption={true}
                 />
                 <View style={stylesShoppingList.buttonWithTitle}>
