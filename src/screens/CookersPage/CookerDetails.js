@@ -55,8 +55,8 @@ export default function CookerDetails({route, navigation}) {
                         <Image source={ cook.profilePicture ?
                             {uri: 'https://kulinarcho.com' + cook.profilePicture}
                             : Images.defaultProfile} style={stylesCooks.profileImage}/>
-                        <Text style={[styles.heading, {fontSize: 22, marginTop: 0, textAlign: "center"}]}>{cook.name}</Text>
-                        <Text style={stylesCooks.numRecipesText}>{cook.recipes} {language("recipes")}</Text>
+                        <Text style={[styles.heading, {fontSize: 22, marginTop: 0, marginBottom: 8, textAlign: "center"}]}>{cook.name}</Text>
+                        <Text style={stylesCooks.numRecipesText}>{recipes.length} {language("recipes")}</Text>
                         <CustomButton title={language("follow")} padding={9} txtColor={"#fff"}/>
 
                         </View>

@@ -128,6 +128,7 @@ function MyGroup({navigation}) {
                                 image={item.profilePicture}
                                 showDelete={groupInfo["master"] === 1}
                                 handleDelete={() => removeUserFromGroup(item.id)}
+                                hideNumRecipes={true}
                                 onPress={() => navigation.navigate("Cooks Details", {cookId: item.id})}
                             />
                         )

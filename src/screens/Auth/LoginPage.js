@@ -209,9 +209,10 @@ export default class LoginPage extends React.Component {
                         errorMessage={this.state.errors.password}
                         isPassword={true}
                         bgColor={"#fff"}
+                        paddingTop={12}
                         callback={this.getResponsePassword.bind(this)}
                     />
-                    <TouchableOpacity style={{marginTop:-20}}
+                    <TouchableOpacity style={{marginTop:-35}}
                                         onPress={() => this.props.navigation.navigate('Forgotten Password')}>
                         <Text style={styles.boldTextButton}>{language('forgottenPassword')}!</Text>
                     </TouchableOpacity>

@@ -3,7 +3,7 @@ import {FlatList, Text, View} from "react-native";
 import styles from "../../styles/styles";
 import DropDownPicker from "react-native-dropdown-picker";
 import {RecipesCardSmall} from "../../components/recipes/RecipesCardSamll";
-import {getIconInfo} from "../../components/HelpFunctions";
+import {getIconInfo, getProductTypeIcon} from "../../components/HelpFunctions";
 import {ProductCard} from "../../components/display/ProductCard";
 import Images from "../../../public/images";
 import language from "../../language/language";
@@ -80,14 +80,16 @@ function WeekMenuPickARecipe({route, navigation}) {
                         var products = [];
                         Object.keys(result[1]).map(function(key) {
                             var title = result[1][key].productName;
+                            var category = result[1][key].catName;
                             var ing = result[1][key].volume+' '+result[1][key].unitsName;
                             if (result[1][key].hint !== '' && result[1][key].hint !== null){
                                 title = title+' ('+result[1][key].hint+')';
                             }
                             products.push({
-                                title: title, image: '', textRight: ing
+                                title: title, catName: category, textRight: ing
                             })
                         })
+                        console.log(products)
                         setproducts(products);
                     }
                 }).catch((err) => {
@@ -164,7 +166,7 @@ function WeekMenuPickARecipe({route, navigation}) {
                 data={products}
                 style={{alignSelf: "stretch"}}
                 renderItem={({item}) => (
-                    <ProductCard title={item.title} image={item.image} textRight={item.textRight}/>
+                    <ProductCard title={item.title} image={getProductTypeIcon(item.catName)} textRight={item.textRight} />
                 )}/>
 
             <View style={{flexDirection: "row", alignItems: "center", alignSelf: "flex-end"}}>

@@ -76,7 +76,7 @@ export default function AddEditRecipe({route, navigation}) {
             setImage(result.uri);
         }
     };
-    
+
 
     function onInputChanged(changedText, set) {
         set(changedText)
@@ -512,7 +512,7 @@ export default function AddEditRecipe({route, navigation}) {
                                         style={{color: "#15A051"}}>*</Text></Text>
                                     <TextInput
                                         style={{...styles.customButton, padding: 8}}
-                                        // keyboardType={"numeric"}
+                                        keyboardType={"numeric"}
                                         onChangeText={props.handleChange('portions')}
                                         value={props.values.portions}
                                     />

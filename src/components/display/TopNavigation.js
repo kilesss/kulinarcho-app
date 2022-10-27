@@ -25,6 +25,7 @@ export default function TopNavigation({recipeDetails, products, steps, scrollA, 
 
     const isFloating = !!scrollA;
     const [isTransparent, setTransparent] = useState(isFloating);
+    const [liked, setLiked] = useState(false);
 
 
     useEffect(() => {
@@ -62,6 +63,7 @@ export default function TopNavigation({recipeDetails, products, steps, scrollA, 
 
     async function saveRecipe(id){
         console.log(JSON.stringify({recipe_id: id}))
+        setLiked(true)
         AsyncStorage.getItem('access_token').then((value) => {
             if (value) {
                 transferRecipe(JSON.stringify({recipe_id: id}), value).then().catch((err) => {
@@ -88,41 +90,55 @@ export default function TopNavigation({recipeDetails, products, steps, scrollA, 
                         <MaterialCommunityIcons name={"heart"} size={32} color={"red"} style={{marginHorizontal: 10}}/>
                     :
                         <TouchableOpacity onPress={() => saveRecipe(recipeDetails.id)}>
-                            <MaterialCommunityIcons name={"heart-outline"} size={32} color={"#fff"} style={{marginHorizontal: 10}}/>
+                            <MaterialCommunityIcons name={liked ? "heart" : "heart-outline"} size={32} color={liked ? "red":"#fff"} style={{marginHorizontal: 10}}/>
                         </TouchableOpacity>
                     }
                     <ShareButton id={recipeDetails.id}/>
-                    <Menu style={{marginTop: 35}}>
-                        <MenuTrigger style={{marginTop: -35, marginLeft: 10}}>
-                            <MaterialCommunityIcons name={"dots-vertical"} size={32} color={"#fff"}/>
-                        </MenuTrigger>
-                        <MenuOptions>
-                            <MenuOption onSelect={() => navigation.navigate("Add Edit Recipe", {
-                                recipeDetails: recipeDetails,
-                                productList: products,
-                                stepList: steps,
-                                edit: true
-                            })}
-                                        style={stylesRecipes.popupMenu}>
-                                <MaterialCommunityIcons name={"pen"} size={25} color={"#4B4C4C"}/>
-                                <Text style={{...styles.subHeading, marginLeft: 5}}>Edit</Text>
-                            </MenuOption>
 
-                            {recipeDetails.public === 0 ?
-                                <MenuOption onSelect={() => makeRecipePublic(recipeDetails.id)}
+                    {recipeDetails.ownRecipe === 1 ?
+                        <Menu style={{marginTop: 35}}>
+                            <MenuTrigger style={{marginTop: -35, marginLeft: 10}}>
+                                <MaterialCommunityIcons name={"dots-vertical"} size={32} color={"#fff"}/>
+                            </MenuTrigger>
+                            <MenuOptions>
+                                <MenuOption onSelect={() => navigation.navigate("Add Edit Recipe", {
+                                    recipeDetails: recipeDetails,
+                                    productList: products,
+                                    stepList: steps,
+                                    edit: true
+                                })}
                                             style={stylesRecipes.popupMenu}>
-                                    <Octicons name={"people"} size={25} color={"#15A051"}/>
-                                    <Text style={{...styles.subHeading, marginLeft: 5}}>{language("makePublic")}</Text>
-                                </MenuOption> : ''
-                            }
+                                    <MaterialCommunityIcons name={"pen"} size={25} color={"#4B4C4C"}/>
+                                    <Text style={{...styles.subHeading, marginLeft: 5}}>Edit</Text>
+                                </MenuOption>
 
-                            <MenuOption onSelect={() => showConfirmDialog(() => {deleteARecipe(recipeDetails.id)})}
-                                        style={stylesRecipes.popupMenu}>
-                                <MaterialCommunityIcons name={"delete"} size={25} color={"red"}/>
-                                <Text style={{...styles.subHeading, color: "#4B4C4C", marginLeft: 5}}>{language("delete")}</Text>
-                            </MenuOption>
-                        </MenuOptions>
-                    </Menu>
+                                {recipeDetails.public === 0 ?
+                                    <MenuOption onSelect={() => makeRecipePublic(recipeDetails.id)}
+                                                style={stylesRecipes.popupMenu}>
+                                        <Octicons name={"people"} size={25} color={"#15A051"}/>
+                                        <Text style={{
+                                            ...styles.subHeading,
+                                            marginLeft: 5
+                                        }}>{language("makePublic")}</Text>
+                                    </MenuOption> : ''
+                                }
+
+                                <MenuOption onSelect={() => showConfirmDialog(() => {
+                                    deleteARecipe(recipeDetails.id)
+                                })}
+                                            style={stylesRecipes.popupMenu}>
+                                    <MaterialCommunityIcons name={"delete"} size={25} color={"red"}/>
+                                    <Text style={{
+                                        ...styles.subHeading,
+                                        color: "#4B4C4C",
+                                        marginLeft: 5
+                                    }}>{language("delete")}</Text>
+                                </MenuOption>
+                            </MenuOptions>
+                        </Menu>
+                        :
+                        ""
+                    }
 
                 </View>
             </View>
