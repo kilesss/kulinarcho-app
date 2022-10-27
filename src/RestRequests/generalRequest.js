@@ -505,6 +505,19 @@ const deleteWeekMenu = async function (body, token) {
 }
 
 
+const addFollower = async function (body, token) {
+    const res = await fetch(endpoints.addFollower, {
+        method: "POST",
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+    return formatResponse(await res.json());
+}
+
+
 export {
     login, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu,
     getSingleRecipe, getCategories, getProducts, getProductTypes, getSingleProfile,
@@ -512,7 +525,8 @@ export {
     AddEditProductShoppingList,deleteProductFromList, AddEditProductType, deleteProductTypes,
     addEditProduct, deleteProduct, firstLogin, addRecipe, getUnits, editRecipe, getGroupInfo, newRequest,
     deleteUserRequest, acceptUserRequest, deleteUserFromGroup, deleteRecipe,
-    transferRecipe, setPublicRecipe, getFollower,getUserRecipes,getRecipesProduct,submitWeekMenu,deleteWeekMenu
+    transferRecipe, setPublicRecipe, getFollower,getUserRecipes,getRecipesProduct,submitWeekMenu,deleteWeekMenu,
+    addFollower
 }
 
 

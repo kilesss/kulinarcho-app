@@ -50,6 +50,7 @@ const endpoints = {
   getRecipesProduct:host+'getRecipesProducts',
   submitWeekMenu:host+'submitWeekMenu',
   deleteWeekMenu:host+'deleteWeekMenu',
+  addFollower: host+"addFollower",
 }
 
 export default endpoints;

@@ -7,6 +7,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {getFollower, getProducts, getProductTypes, getPublicProfiles} from "../../RestRequests/generalRequest";
 import FloatingActionButton from "../../components/display/FloatingActionButton";
 import AddShoppingListModal from "../../components/shoppingList/AddShoppingListModal";
+import {useIsFocused} from '@react-navigation/native'
+import renderLoading from "../../components/loading/ShowLoader";
 
 export default function CookersPage({navigation}) {
     const [showLoader, setShowLoader] = useState(true);
@@ -14,6 +16,7 @@ export default function CookersPage({navigation}) {
     const [cooks, setCooks] = useState([]);
     const [cooksFollowing, setCooksFollowing] = useState();
     const [addModalVisible, setAddModalVisible] = useState(false);
+    const isFocused = useIsFocused();
 
     function loadData() {
         AsyncStorage.getItem('access_token').then((value) => {
@@ -40,9 +43,9 @@ export default function CookersPage({navigation}) {
     useEffect(() => {
         loadData();
 
-    }, []);
+    }, [isFocused]);
 
-    return (
+    return (renderLoading(showLoader,
         <View style={{flex: 1}}>
             <View style={{marginHorizontal: 20, marginVertical: 10}}>
                 <Text style={styles.heading}>{language("cooksFollowing")}</Text>
@@ -81,5 +84,5 @@ export default function CookersPage({navigation}) {
                                   goBack={() => navigation.navigate("Shopping List")}
             />
         </View>
-    );
+    ));
 }

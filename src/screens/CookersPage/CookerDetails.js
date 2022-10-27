@@ -6,7 +6,7 @@ import {CustomButton} from "../../components/display/CustomButton";
 import {RecipesCardLarge} from "../../components/recipes/RecipesCardLarge";
 import language from "../../language/language";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {getSingleProfile} from "../../RestRequests/generalRequest";
+import {addFollower, getSingleProfile, setPublicRecipe} from "../../RestRequests/generalRequest";
 import {getIconInfo} from "../../components/HelpFunctions";
 import renderLoading from "../../components/loading/ShowLoader";
 import Images from "../../../public/images";
@@ -25,11 +25,23 @@ export default function CookerDetails({route, navigation}) {
                 getSingleProfile('GET', value, cookId).then(data => {
                     if (data) {
                         const result = Object.values(data);
+                        console.log(result[0])
                         setCook(result[0])
                         setRecipes(result[1])
                         setShowLoader(false);
                     }
                 }).catch((err) => {
+                    console.log(err);
+                });
+            }
+        }, []);
+    }
+
+    async function followCook(id){
+        console.log("Follow " + id)
+        AsyncStorage.getItem('access_token').then((value) => {
+            if (value) {
+                addFollower(JSON.stringify({follow_id: id}), value).then().catch((err) => {
                     console.log(err);
                 });
             }
@@ -57,7 +69,7 @@ export default function CookerDetails({route, navigation}) {
                             : Images.defaultProfile} style={stylesCooks.profileImage}/>
                         <Text style={[styles.heading, {fontSize: 22, marginTop: 0, marginBottom: 8, textAlign: "center"}]}>{cook.name}</Text>
                         <Text style={stylesCooks.numRecipesText}>{recipes.length} {language("recipes")}</Text>
-                        <CustomButton title={language("follow")} padding={9} txtColor={"#fff"}/>
+                        <CustomButton title={language("follow")} padding={9} txtColor={"#fff"} onPress={() => followCook(cookId)}/>
 
                         </View>
                     }
