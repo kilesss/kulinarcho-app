@@ -96,6 +96,13 @@ function WeekMenuShoppingList({route, navigation}) {
     async function generateShoppingList() {
         AsyncStorage.getItem('access_token').then((value) => {
             if (value) {
+                console.log(JSON.stringify({
+                    title: title,
+                    dateStart: dateStart,
+                    dateEnd: dateEnd,
+                    articles: shoppingListItems,
+                    recipe: recipeIds
+                }));
                 submitWeekMenu(JSON.stringify({
                     title: title,
                     dateStart: dateStart,
@@ -104,17 +111,12 @@ function WeekMenuShoppingList({route, navigation}) {
                     recipe: recipeIds
                 }), value).then(data => {
                     if (data) {
-                        console.log(JSON.stringify({
-                            title: title,
-                            dateStart: dateStart,
-                            dateEnd: dateEnd,
-                            articles: shoppingListItems,
-                            recipe: recipeIds
-                        }));
+
                         console.log(data)
                         navigation.navigate('Shopping List');
                     }
                 }).then(data => {
+                    console.log(data);
                 }).catch((err) => {
                     console.log(err);
                 });

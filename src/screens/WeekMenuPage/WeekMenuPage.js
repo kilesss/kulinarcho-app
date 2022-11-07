@@ -50,6 +50,7 @@ export default function WeekMenuPage({navigation}) {
             <View style={{...styles.container, marginBottom: 5}}>
                 <AddShoppingListModal modalVisible={changeModalVisible}
                                       setModalVisible={setChangeModalVisible}
+                                      typeRequest = {"week_menu"}
                                       modalTitle={language("changeWeekMenu")}
                                       buttonTitle={language("change")}
                                       showDeleteOption={true}

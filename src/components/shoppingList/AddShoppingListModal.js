@@ -16,6 +16,7 @@ import renderLoading from "../loading/ShowLoader";
 export default function AddShoppingListModal({
                                                  modalVisible,
                                                  setModalVisible,
+                                                 typeRequest,
                                                  modalTitle,
                                                  token,
                                                  buttonTitle,
@@ -47,12 +48,19 @@ export default function AddShoppingListModal({
             })
     }
 
+    function deleteRequest(){
+        if (typeRequest === 'week_menu'){
+            console.log(modalId,modalData);
+        }else{
+            deleteShoppingList().then(r => {});
+        }
+    }
 
 // Determines whether to show delete button or not
     function showDeleteIcon(show, onPress) {
         if (show) {
             return (<View style={shoppingListStyle.modalDeleteButton}>
-                <TouchableOpacity onPress={deleteShoppingList} style={{flexDirection:'row'}}>
+                <TouchableOpacity onPress={deleteRequest} style={{flexDirection:'row'}}>
                     <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 17}}>Изтрий</Text>
                     <MaterialIcons name={"delete"} size={23} color={"#fff"}/>
                 </TouchableOpacity>

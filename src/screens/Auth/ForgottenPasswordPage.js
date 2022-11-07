@@ -39,7 +39,7 @@ export default class ForgottenPassword extends React.Component {
             {'email': {required: true, email: true}}
         );
         if (Object.keys(err).length === 0) {
-            const forgotenPasswordPayload = JSON.stringify({email: this.state.email});
+            const forgotenPasswordPayload = {email: this.state.email};
             await forgotenPassword(forgotenPasswordPayload, 'POST').then(response => response.json())
                 .then(response => {
                     if (response.access_token) {

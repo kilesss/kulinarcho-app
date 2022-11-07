@@ -37,6 +37,7 @@ export default function AddEditRecipe({route, navigation}) {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [image, setImage] = useState(null);
+    const [imagebase64, setImagebase64] = useState(null);
 
     const [product, setProduct] = useState("");
     const [amount, setAmount] = useState("");
@@ -70,10 +71,9 @@ export default function AddEditRecipe({route, navigation}) {
         );
         const base64 = await FileSystem.readAsStringAsync(manipResult.uri, { encoding: 'base64' });
 
-        console.log(base64)
-        console.log('asdasdasdasdasdasd')
         if (!result.cancelled) {
             setImage(result.uri);
+            setImagebase64(base64)
         }
     };
 
@@ -157,8 +157,6 @@ export default function AddEditRecipe({route, navigation}) {
         AsyncStorage.getItem('access_token').then((value) => {
             setDemoToken(value);
             if (value) {
-                console.log(body);
-                console.log(value);
                 addRecipe(JSON.stringify(body), value).then()
                     .then(response => {
                         if (response.errors) {
@@ -298,7 +296,7 @@ export default function AddEditRecipe({route, navigation}) {
                             category: value,
                             textInputIngridients: products,
                             textInput: stepsValues,
-                            photo: image,
+                            photo: imagebase64,
                             public: values.public
                         }
 

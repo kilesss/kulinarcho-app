@@ -320,12 +320,17 @@ const addRecipe = async function (body, token) {
     const res = await fetch(endpoints.addRecipe, {
         method: 'POST',
         body: body,
+        bodyParser: {
+            json: { limit: '50mb', extended: true },
+            urlencoded: { limit: '50mb', extended: true }
+        },
         headers: {
             'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json',
         }
     });
-
+    console.log(body);
+console.log(await res);
     return formatResponse(await res.json());
 }
 
@@ -490,6 +495,7 @@ const submitWeekMenu = async function (body, token) {
             'Content-Type': 'application/json',
         }
     });
+    console.log(await res);
     return formatResponse(await res.json());
 }
 const deleteWeekMenu = async function (body, token) {

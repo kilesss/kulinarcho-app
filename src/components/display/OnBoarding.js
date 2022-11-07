@@ -35,27 +35,34 @@ function OnBoarding({closeOnBoardingModal}) {
                 {
                     backgroundColor: '#fff',
                     image: <Image source={Images.onBoarding.recipes} style={{height: "72%", width: "100%"}}/>,
-                    title: '2',
-                    subtitle: 'Done with React Native Onboarding Swiper',
+                    title: 'Списъци за пазар',
+                    subtitle: 'Кулинарчо позволява да създавате списъци за пазар който са винаги достъпни както за вас така и за цялото ви семейство в реално време.',
                 },
                 {
                     backgroundColor: '#fff',
                     image: <Image source={Images.onBoarding.recipes} style={{height: "72%", width: "100%"}}/>,
-                    title: '3',
-                    subtitle: 'Done with React Native Onboarding Swiper',
+                    title: 'Седмично меню',
+                    subtitle: 'С Кулинарчо вие можете лесно да създадете седмично меню и да ви създаде списък за пазар с всички необходими продукти автоматично.',
                 },
                 {
                     backgroundColor: '#fff',
                     image: <Image source={Images.onBoarding.recipes} style={{height: "72%", width: "100%"}}/>,
-                    title: '4',
-                    subtitle: 'Done with React Native Onboarding Swiper',
+                    title: 'Рецепти',
+                    subtitle: 'С Кулинарчо е по-лесно от всякога да запазвате любимите си рецепти и да ги споделяте с вашите приятели и познати.',
                 },
                 {
                     backgroundColor: '#fff',
                     image: <Image source={Images.onBoarding.recipes} style={{height: "72%", width: "100%"}}/>,
-                    title: '5',
-                    subtitle: 'Done with React Native Onboarding Swiper',
+                    title: 'Първи член в групата',
+                    subtitle: 'Можете да създадете група с всички членове на вашето семейство така списъците ви за пазар ще са достъпни за цялото семейство в реално време.',
                 },
+                {
+                    backgroundColor: '#fff',
+                    image: <Image source={Images.onBoarding.recipes} style={{height: "72%", width: "100%"}}/>,
+                    title: 'Добавяне на член',
+                    subtitle: 'Нека добавим първия член на вашето семейство. Нужно е да въведете само емайл адреса му и той ще получи емайл с вашата покана (не е нужно да има инсталирано приложение). Можете да управлявате групата си от настройките в профил.',
+                },
+
             ]}
         />
     );
