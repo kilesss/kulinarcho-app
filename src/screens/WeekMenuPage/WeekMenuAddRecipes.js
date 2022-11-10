@@ -146,7 +146,7 @@ function WeekMenuAddRecipes({route, navigation}) {
                     />
                 </View>
                 <TouchableOpacity
-                    style={[styles.customButton, stylesProfile.settingsCardSmall, {paddingVertical: 13, flex: 1}]}
+                    style={[styles.customButton, stylesProfile.settingsCardSmall, {marginLeft: 10, flex: 1}]}
                     onPress={() => navigation.navigate("Week Menu Shopping List", {title:title, startDate:dateStart, endDate: dateEnd })}>
 
                     <Ionicons name={"receipt"} color={"#15A051"} size={27}/>

@@ -25,7 +25,7 @@ export default function CookCard({name, image, numRecipes, onPress, hideNumRecip
                         : Images.defaultProfile
                 }
             />
-            <View style={{paddingLeft: 7}}>
+            <View style={{paddingLeft: 7, flex: 1}}>
                 <Text style={[styles.heading, {marginTop: hideNumRecipes ? 4 : 0}]}>{name}</Text>
                 {hideNumRecipes ?
                     '' : <Text style={[styles.smallGreenText, {marginTop: -6,}]}>{numRecipes} {language("recipes")}</Text>

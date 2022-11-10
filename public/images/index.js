@@ -50,7 +50,12 @@ const images = {
     },
     onBoarding:{
         recipes: require('./onBoarding/onBoarding_1.png'),
-        multiple: require('./onBoarding/onBoarding_0.png')
+        multiple: require('./onBoarding/onBoarding_0.png'),
+        shoppingLists: require('./onBoarding/shoppingLists.png'),
+        recipes1: require('./onBoarding/recipes1.png'),
+        weekMenu: require('./onBoarding/weekMenu.png'),
+        groups1: require('./onBoarding/groups1.png'),
+        group2: require('./onBoarding/groups2.png'),
     },
     defaultProfile: require('./defaultProfile.png'),
     defaultRecipe: require("./rsz_plate.png"),
