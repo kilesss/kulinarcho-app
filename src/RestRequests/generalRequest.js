@@ -519,6 +519,18 @@ const addFollower = async function (body, token) {
     return formatResponse(await res.json());
 }
 
+export const updateProfile = async function (body, token) {
+    const res = await fetch(endpoints.updateProfile, {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        }
+    });
+    return await res.json();
+}
+
 
 export {
     login, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu,

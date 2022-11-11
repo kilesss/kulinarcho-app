@@ -51,6 +51,7 @@ const endpoints = {
   submitWeekMenu:host+'submitWeekMenu',
   deleteWeekMenu:host+'deleteWeekMenu',
   addFollower: host+"addFollower",
+  updateProfile: host + "updateProfile",
 }
 
 export default endpoints;
