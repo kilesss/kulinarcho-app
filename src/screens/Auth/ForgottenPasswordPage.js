@@ -40,29 +40,9 @@ export default class ForgottenPassword extends React.Component {
         );
         if (Object.keys(err).length === 0) {
             const forgotenPasswordPayload = {email: this.state.email};
-            await forgotenPassword(forgotenPasswordPayload, 'POST').then(response => response.json())
+            await forgotenPassword(forgotenPasswordPayload, 'POST')
                 .then(response => {
-                    if (response.access_token) {
-                        loadingIndicator(false);
-                        AsyncStorage.setItem('access_token', response.access_token);
-                        this.props.navigation.reset({
-                            index: 0,
-                            routes: [{name: 'Shopping List'}],
-                        })
-
-                        return response;
-                    }
-
-                    if (response.errors) {
-                        loadingIndicator(false);
-                        this.setState({showMessage: true})
-                        const restErr = JSON.stringify(response.errors);
-                        this.setState({restError: restErr.substring(2, restErr.length - 2)});
-
-                        return response.errors;
-                    }
-
-                    console.log("eeeeeeeeeeeeeeeeeee")
+                    console.log("PLIUVNI SYOBrSHTENIE")
                     Dialog.show({
                         type: ALERT_TYPE.SUCCESS,
                         title: 'Успех!',

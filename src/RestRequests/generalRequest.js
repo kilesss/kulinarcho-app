@@ -12,7 +12,7 @@ const login = async function (body, method) {
       'Content-Type': 'application/json',
     }
     });
-  return await res.json();
+    return formatResponse(await res.json());
 }
 
 
@@ -27,7 +27,7 @@ const signup = async function (body, method) {
     }
   });
 
-  return res.json();
+    return formatResponse(await res.json());
 }
 
 const forgotenPassword = async function (body, method) {
@@ -38,8 +38,7 @@ const forgotenPassword = async function (body, method) {
       'Content-Type': 'application/json',
     }
     });
-
-  return await res.json();
+return formatResponse(await res.json());
 }
 
 export const updateList = async function (body, token) {
@@ -51,7 +50,7 @@ export const updateList = async function (body, token) {
             'Content-Type': 'application/json',
         }
     });
-    return await res.json();
+    return formatResponse(await res.json());
 }
 export const deleteList = async function (body, token) {
     const res = await fetch(endpoints.deleteList, {
@@ -329,8 +328,6 @@ const addRecipe = async function (body, token) {
             'Content-Type': 'application/json',
         }
     });
-    console.log(body);
-console.log(await res);
     return formatResponse(await res.json());
 }
 
@@ -495,7 +492,6 @@ const submitWeekMenu = async function (body, token) {
             'Content-Type': 'application/json',
         }
     });
-    console.log(await res);
     return formatResponse(await res.json());
 }
 const deleteWeekMenu = async function (body, token) {
