@@ -95,7 +95,7 @@ export const stylesRecipes = StyleSheet.create({
     headingSection: {
         flexDirection: "row",
         justifyContent: "space-between",
-        alignItems: "flex-end"
+        alignItems: "flex-start"
     },
     timeSection:{
         alignItems: "center"

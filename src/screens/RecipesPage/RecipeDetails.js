@@ -104,7 +104,7 @@ export default function RecipeDetails({route, navigation}) {
                         <View style={stylesRecipes.topLine}/>
 
                         <View style={stylesRecipes.headingSection}>
-                            <Text style={styles.bigHeading}>{recipeDetails.title}</Text>
+                            <Text style={{...styles.bigHeading, maxWidth:"87%"}}>{recipeDetails.title}</Text>
                             <View style={stylesRecipes.timeSection}>
                                 <MaterialCommunityIcons name={"progress-clock"} size={25} color={"#4B4C4C"}/>
                                 <Text style={[styles.subHeading, {fontWeight: "regular"}]}>{recipeDetails.all_time} {language("min")}</Text>
