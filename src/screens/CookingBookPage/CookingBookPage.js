@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {FlatList, Text, View} from "react-native";
 import styles from '../../styles/styles'
 import CategoriesCard from "../../components/display/CategoriesCard";
-import {RecipesCardSmall} from "../../components/recipes/RecipesCardSamll";
+import {RecipesCardSmall} from "../../components/recipes/RecipesCardSmall";
 import language from "../../language/language";
 import {getIconInfo, loadData} from "../../components/HelpFunctions";
 import renderLoading from "../../components/loading/ShowLoader";

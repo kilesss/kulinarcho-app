@@ -11,7 +11,6 @@ import {getPublicIcon} from "../HelpFunctions";
 
 export const RecipesCardSmall = ({onPress, title, time, servings, category, photo, publicStatus}) => (
     <View style={[stylesRecipes.recipesCardSmall]}>
-        <View style={{flex: 1}}></View>
 
         <Image source={
             photo ? {uri: 'https://kulinarcho.com' + photo} : Images.defaultRecipe}

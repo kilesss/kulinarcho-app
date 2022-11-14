@@ -2,7 +2,7 @@ import React, {useState,useEffect} from 'react';
 import {FlatList, Text, View} from "react-native";
 import styles from "../../styles/styles";
 import DropDownPicker from "react-native-dropdown-picker";
-import {RecipesCardSmall} from "../../components/recipes/RecipesCardSamll";
+import {RecipesCardSmall} from "../../components/recipes/RecipesCardSmall";
 import {getIconInfo, getProductTypeIcon} from "../../components/HelpFunctions";
 import {ProductCard} from "../../components/display/ProductCard";
 import Images from "../../../public/images";

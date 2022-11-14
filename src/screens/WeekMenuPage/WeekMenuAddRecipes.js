@@ -6,7 +6,7 @@ import stylesShoppingList from "../../styles/stylesShoppingList";
 import styles from "../../styles/styles";
 import language from "../../language/language";
 import {CustomButton} from "../../components/display/CustomButton";
-import {RecipesCardSmall} from "../../components/recipes/RecipesCardSamll";
+import {RecipesCardSmall} from "../../components/recipes/RecipesCardSmall";
 import {getIconInfo} from "../../components/HelpFunctions";
 import {stylesProfile} from "../../styles/stylesProfile";
 import {FontAwesome5, Ionicons} from "@expo/vector-icons";

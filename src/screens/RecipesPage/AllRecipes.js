@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {getCategories, getLatestRecipes, getPublicRecipes} from "../../RestRequests/generalRequest";
 import React, {useEffect, useState} from "react";
 import {getIconInfo} from "../../components/HelpFunctions";
-import {RecipesCardSmall} from "../../components/recipes/RecipesCardSamll";
+import {RecipesCardSmall} from "../../components/recipes/RecipesCardSmall";
 import renderLoading from "../../components/loading/ShowLoader";
 import {useIsFocused} from "@react-navigation/native";
 import language from "../../language/language";
