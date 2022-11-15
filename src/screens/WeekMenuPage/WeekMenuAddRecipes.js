@@ -55,7 +55,7 @@ function WeekMenuAddRecipes({route, navigation}) {
             startDate.getDate()
         );
         while (currentDate <= endDate) {
-            dates.push(currentDate.getUTCDate() + '/' + (currentDate.getUTCMonth() + 1) + '/' + currentDate.getFullYear());
+            dates.push(currentDate.getUTCDate()+1 + '/' + (currentDate.getUTCMonth() + 1) + '/' + currentDate.getFullYear());
             currentDate = new Date(
                 currentDate.getFullYear(),
                 currentDate.getMonth(),
