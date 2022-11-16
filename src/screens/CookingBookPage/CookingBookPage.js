@@ -11,6 +11,7 @@ import {getPublicRecipes} from "../../RestRequests/generalRequest";
 import FloatingActionButton from "../../components/display/FloatingActionButton";
 import AddShoppingListModal from "../../components/shoppingList/AddShoppingListModal";
 import {useIsFocused} from "@react-navigation/native";
+import ExampleAdd from "../../components/ExampleAdd";
 
 export default function CookingBookPage({navigation}) {
 
@@ -113,7 +114,7 @@ export default function CookingBookPage({navigation}) {
 
 
                 <View style={{flex: 1, width: "100%", paddingRight: 20, marginHorizontal: 20}}>
-                    <Text style={[styles.heading]}>{language("popularRecipes")}</Text>
+                    <Text style={[styles.heading]}>{language("myRecipes")}</Text>
                     <FlatList
                         data={recipes}
                         showsVerticalScrollIndicator={false}
@@ -122,7 +123,12 @@ export default function CookingBookPage({navigation}) {
                         onEndReached={fetchMore}
                         onEndReachedThreshold={0.4}
                         ListFooterComponent={renderLoading(showLoader2)}
-                        renderItem={({item}) => (
+                        renderItem={({item, index}) => (
+                            <View>
+                                {index !== 0 && index % 4 === 0 ?
+                                    <View style={{marginVertical: 5}}>
+                                        <ExampleAdd height={70}/>
+                                    </View>: ''}
                                 <RecipesCardSmall title={item.title}
                                                   photo={item.photo}
                                                   time={item.all_time}
@@ -133,8 +139,10 @@ export default function CookingBookPage({navigation}) {
                                                       navigation.push("Recipe Details", {recipeId: item.id})
                                                   }}
                                 />
+                            </View>
                     )
                     }/>
+                    {recipes ? recipes.length < 4 ? <View style={{paddingRight: 20}}><ExampleAdd height={70}/></View> : '' : '' }
                 </View>
                 <FloatingActionButton navigation={navigation} addModalVisible={addModalVisible} setAddModalVisible={setAddModalVisible}/>
                 <AddShoppingListModal modalVisible={addModalVisible}

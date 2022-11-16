@@ -11,6 +11,7 @@ import getRandomColor from "../../components/HelpFunctions";
 import FloatingActionButton from "../../components/display/FloatingActionButton";
 import {CustomButton} from "../../components/display/CustomButton";
 import stylesShoppingList from "../../styles/stylesShoppingList";
+import ExampleAdd from "../../components/ExampleAdd";
 
 export default function WeekMenuPage({navigation}) {
     const [changeModalVisible, setChangeModalVisible] = useState(false);
@@ -18,6 +19,7 @@ export default function WeekMenuPage({navigation}) {
     const [showLoader, setShowLoader] = useState(true);
     const [DemoToken, setDemoToken] = useState(true);
     const [addModalVisible, setAddModalVisible] = useState(false);
+    const [modalID, setModalID] = useState(0);
 
     const [menus, setMenus] = useState([]);
 
@@ -54,6 +56,7 @@ export default function WeekMenuPage({navigation}) {
                                       modalTitle={language("changeWeekMenu")}
                                       buttonTitle={language("change")}
                                       showDeleteOption={true}
+                                      // modalId={modalID}
                 />
                 <View style={stylesShoppingList.buttonWithTitle}>
                     <View style={{flex: 2}}>
@@ -73,14 +76,21 @@ export default function WeekMenuPage({navigation}) {
                     data={menus}
                     style={{alignSelf: 'stretch'}}
                     renderItem={({item, index}) => (
-                        <ListCard period={`${item.beginDate} - ${item.endDate}`}
-                                  iconName={"calendar"}
-                                  title={item.title}
-                                  bgColor={getRandomColor(index)}
-                                  onPress={() => navigation.navigate('Week Menu Details', {id: item.id})}
-                                  onPressEdit={() => setChangeModalVisible(!changeModalVisible)}
-                        />
+                        <View>
+                            {index !== 0 && index % 2 === 0 ? <ExampleAdd height={150}/> : ''}
+                            <ListCard period={`${item.beginDate} - ${item.endDate}`}
+                                      iconName={"calendar"}
+                                      title={item.title}
+                                      bgColor={getRandomColor(index)}
+                                      onPress={() => navigation.navigate('Week Menu Details', {id: item.id})}
+                                      onPressEdit={() => {
+                                          setModalID(item.id)
+                                          setChangeModalVisible(!changeModalVisible)
+                                      }}
+                            />
+                        </View>
                     )}/>
+                {menus ? menus.length < 2 ? <ExampleAdd height={70}/> : '' : '' }
             </View>
             <FloatingActionButton navigation={navigation} addModalVisible={addModalVisible}
                                   setAddModalVisible={setAddModalVisible}/>

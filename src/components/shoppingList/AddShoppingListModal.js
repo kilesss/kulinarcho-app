@@ -80,6 +80,7 @@ export default function AddShoppingListModal({
         }
         await updateList(JSON.stringify(requestBody), token).then()
             .then(response => {
+                console.log(JSON.stringify(requestBody))
                 setShowLoader(false);
                 if(goBack){goBack()}
                 setModalVisible(!modalVisible)

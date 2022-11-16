@@ -14,6 +14,7 @@ import renderLoading from "../../components/loading/ShowLoader";
 import { FloatingAction } from "react-native-floating-action";
 import AddShoppingListModal from "../../components/shoppingList/AddShoppingListModal";
 import FloatingActionButton from "../../components/display/FloatingActionButton";
+import ExampleAdd from "../../components/ExampleAdd";
 
 
 export default function RecipesPage( {route,navigation}) {
@@ -85,7 +86,6 @@ export default function RecipesPage( {route,navigation}) {
                               )}/>
 
                 </View>
-
                 <View style={{flex: 2, minHeight: 250}}>
                     <Text style={styles.heading}>{language("popularRecipes")}</Text>
                     <FlatList data={recipesPopular}
@@ -104,7 +104,7 @@ export default function RecipesPage( {route,navigation}) {
                                   </View>
                               )}/>
                 </View>
-
+                <ExampleAdd height={70}/>
                 <View style={{flex: 3, minHeight: 250}}>
                     <Text style={styles.heading}>{language("newRecipes")}</Text>
                     <FlatList data={recipesNew}

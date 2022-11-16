@@ -14,6 +14,7 @@ import {firstLogin, getShopingList} from "../../RestRequests/generalRequest";
 import FloatingActionButton from "../../components/display/FloatingActionButton";
 import OnBoarding from "../../components/display/OnBoarding";
 import {useIsFocused} from '@react-navigation/native'
+import ExampleAdd from "../../components/ExampleAdd";
 
 export default function ShoppingListsPage({navigation}) {
 
@@ -65,9 +66,10 @@ export default function ShoppingListsPage({navigation}) {
         }, []);
     }
 
-    function closeOnBoardingModal(){
+    function closeOnBoardingModal() {
         setOnBoardingModal(false)
-        firstLogin(DemoToken).then(r => {}).catch((err) => {
+        firstLogin(DemoToken).then(r => {
+        }).catch((err) => {
             console.log(err);
         });
     }
@@ -115,28 +117,36 @@ export default function ShoppingListsPage({navigation}) {
                     />
                 </View>
             </View>
+            <View style={{alignSelf: "stretch", flex: 1}}>
             <FlatList data={shoppingLists}
-                      style={{alignSelf: "stretch"}}
+                      style={{alignSelf: "stretch", flex: 1, paddingBottom: 30}}
                       keyExtractor={(item, index) => index.toString()}
                       renderItem={({item, index}) => (
-                          item !== 0 ?
-                          <ListCard bgColor={randomColor(index)}
-                                    title={item.name}
-                                    iconName={"receipt"}
-                                    numItems={item.count}
-                                    onPress={() => navigation.navigate('Shopping List Details', {
-                                        key: item.id,
-                                        title: item.name,
-                                    })}
-                                    onPressEdit={() => {
-                                        showEditProduct(item)
-                                    }}
-                          />
-                        : ''
+                          <View>
+                              {index !== 0 && index % 3 === 0 ? <ExampleAdd height={100}/> : ''}
+                              {item !== 0 ?
+                                  <ListCard bgColor={randomColor(index)}
+                                            title={item.name}
+                                            iconName={"receipt"}
+                                            numItems={item.count}
+                                            onPress={() => navigation.navigate('Shopping List Details', {
+                                                key: item.id,
+                                                title: item.name,
+                                            })}
+                                            onPressEdit={() => {
+                                                showEditProduct(item)
+                                            }}
+                                  />
+                                  : ''}
+                          </View>
                       )}/>
+            {shoppingLists.length < 4 ? <ExampleAdd height={80}/> : ''}
+            </View>
+
 
         </View>
-        <FloatingActionButton navigation={navigation} addModalVisible={addModalVisible} setAddModalVisible={setAddModalVisible}/>
+        <FloatingActionButton navigation={navigation} addModalVisible={addModalVisible}
+                              setAddModalVisible={setAddModalVisible}/>
 
     </View>)
 }

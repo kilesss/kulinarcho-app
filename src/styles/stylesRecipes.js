@@ -156,7 +156,8 @@ export const stylesRecipes = StyleSheet.create({
         marginBottom: 7,
         width: "100%",
         justifyContent: "space-between",
-        minHeight: 75
+        minHeight: 75,
+        flex: 1
         // alignItems: "center"
     },
     recipesCardInfoSmall: {

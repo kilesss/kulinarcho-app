@@ -4,6 +4,7 @@ import styles from "../../styles/styles";
 import {CustomButton} from "../../components/display/CustomButton";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import ExampleAdd from "../../components/ExampleAdd";
 
 function WeekMenuCreate({navigation}) {
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -89,6 +90,7 @@ function WeekMenuCreate({navigation}) {
                 onConfirm={handleConfirmEnd}
                 onCancel={() => setDatePickerVisibility2(false)}
             />
+            <ExampleAdd height={55}/>
         </View>
     );
 }

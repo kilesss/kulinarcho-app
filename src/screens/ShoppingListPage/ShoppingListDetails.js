@@ -64,7 +64,7 @@ export default function ShoppingListDetails(props) {
         setarticleCount(newItemsList.length);
         calculateFinalPrice()
         deleteProductFromListRequest(i.id).then(r => {
-        })
+        }).catch((err) => {console.log(err)})
     };
 
 

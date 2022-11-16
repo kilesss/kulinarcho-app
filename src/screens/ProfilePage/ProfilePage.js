@@ -8,6 +8,7 @@ import SettingsCardLarge from "../../components/profile/SettingsCardLarge";
 import {stylesProfile} from "../../styles/stylesProfile";
 import Images from "../../../public/images";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import ExampleAdd from "../../components/ExampleAdd";
 
 export default function RecipesPage({navigation, route}) {
 
@@ -25,8 +26,8 @@ export default function RecipesPage({navigation, route}) {
     const { name, photo } = route.params;
 
     return (
-        <ScrollView>
-            <View style={{...styles.container, alignItems: "flex-start", justifyContent: "flex-start"}}>
+            <View style={{padding: 20, paddingBottom: 55}}>
+                <ScrollView showsVerticalScrollIndicator={false}>
                 <TouchableOpacity style={stylesCooks.profileDetails}
                                   onPress={() => navigation.navigate("Personal Info")}>
                     <Image source={photo ? {uri: 'https://kulinarcho.com' + photo} : Images.defaultProfile} style={stylesCooks.profileImage}/>
@@ -60,9 +61,10 @@ export default function RecipesPage({navigation, route}) {
                                        navigation.navigate("Login")
                                    }}
                 />
-
-            </View>
         </ScrollView>
+                <ExampleAdd height={55}/>
+            </View>
+
     );
 }
 

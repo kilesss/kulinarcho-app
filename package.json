@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
+    "@react-native-admob/admob": "^2.0.1",
     "@react-native-async-storage/async-storage": "^1.17.9",
     "@react-native-community/datetimepicker": "6.2.0",
     "@react-navigation/bottom-tabs": "^6.3.2",
@@ -17,6 +18,7 @@
     "@react-navigation/native-stack": "^6.7.0",
     "@react-navigation/stack": "^6.2.2",
     "expo": "~46.0.6",
+    "expo-ads-admob": "^13.0.0",
     "expo-blur": "^11.2.0",
     "expo-checkbox": "~2.2.0",
     "expo-facebook": "^12.2.0",

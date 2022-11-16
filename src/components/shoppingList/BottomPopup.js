@@ -46,7 +46,7 @@ export default function BottomPopup({
         }
         loadProducts();
 
-    });
+    },[modalVisible]);
     const onInputChanged = function (changedText, set) {
 
         changedText = changedText.replace(',', '.')
@@ -107,7 +107,7 @@ export default function BottomPopup({
             description: txtDescription
         })
 
-        resetFields()
+
         setModalVisible(!modalVisible);
     }
 
@@ -146,7 +146,7 @@ export default function BottomPopup({
         <Modal animationType="slide"
                transparent={true}
                visible={modalVisible}
-               onShow={() => resetFields()}
+               // onShow={() => resetFields()}
                onRequestClose={() => closeModal()}
         >
             <TouchableWithoutFeedback style={shoppingListStyle.outsideTouchable}>
@@ -182,7 +182,7 @@ export default function BottomPopup({
                                         <TextInput style={{...styles.customButton, padding: 8, alignSelf: "stretch"}}
                                                    value={txtAmount}
                                                    keyboardType={"number-pad"}
-                                                   onChangeText={changedText => onInputChanged(changedText, 'amount')}
+                                                   onChangeText={changedText => setAmount(changedText)}
                                                    placeholder={"0"}
                                         />
                                     </View>

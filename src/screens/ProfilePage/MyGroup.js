@@ -19,6 +19,7 @@ import shoppingListStyle from "../../styles/stylesShoppingList";
 import {CustomButton} from "../../components/display/CustomButton";
 import {ALERT_TYPE, Dialog, AlertNotificationRoot, Toast} from 'react-native-alert-notification';
 import {useIsFocused} from '@react-navigation/native'
+import ExampleAdd from "../../components/ExampleAdd";
 
 function MyGroup({navigation}) {
 
@@ -200,7 +201,9 @@ function MyGroup({navigation}) {
                         </View>
                     </View>
                 </Modal>
-
+            </View>
+            <View style={{paddingHorizontal: 20}}>
+                <ExampleAdd height={55}/>
             </View>
         </AlertNotificationRoot>
     ));

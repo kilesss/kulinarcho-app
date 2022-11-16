@@ -9,6 +9,7 @@ import FloatingActionButton from "../../components/display/FloatingActionButton"
 import AddShoppingListModal from "../../components/shoppingList/AddShoppingListModal";
 import {useIsFocused} from '@react-navigation/native'
 import renderLoading from "../../components/loading/ShowLoader";
+import ExampleAdd from "../../components/ExampleAdd";
 
 export default function CookersPage({navigation}) {
     const [showLoader, setShowLoader] = useState(true);
@@ -31,7 +32,7 @@ export default function CookersPage({navigation}) {
                     console.log(err);
                 });
                 getFollower(value).then(data => {
-                    if(data){
+                    if (data) {
                         setCooksFollowing(Object.values(data.response))
                         setShowLoader(false);
                     }
@@ -53,31 +54,43 @@ export default function CookersPage({navigation}) {
                 <FlatList
                     data={cooksFollowing}
                     style={{alignSelf: "stretch"}}
-                    renderItem={({item}) => (
-                        <CookCard
-                            name={item.name}
-                            image={item.profilePicture}
-                            numRecipes={item.count}
-                            onPress={() => navigation.navigate("Cooks Details", {cookId: item.id})}/>
+                    renderItem={({item, index}) => (
+                        <View>
+                            {index !== 0 && index % 4 === 0 ? <ExampleAdd height={55}/> : ''}
+                            <CookCard
+                                name={item.name}
+                                image={item.profilePicture}
+                                numRecipes={item.count}
+                                onPress={() => navigation.navigate("Cooks Details", {cookId: item.id})}/>
+                        </View>
                     )}/>
+                {cooksFollowing ? cooksFollowing.length < 4 ? <ExampleAdd height={55}/> : '' : ''}
 
                 <Text style={styles.heading}>{language("cooks")}</Text>
 
                 <FlatList
                     data={cooks}
                     style={{alignSelf: "stretch"}}
-                    renderItem={({item}) => (
-                        <CookCard
-                            name={item.name}
-                            image={item.profilePicture}
-                            numRecipes={item.count}
-                            onPress={() => navigation.navigate("Cooks Details", {cookId: item.id})}/>
+                    renderItem={({item, index}) => (
+                        <View>
+                            {index !== 0 && index % 4 === 0 ? <ExampleAdd height={55}/> : ''}
+                            <CookCard
+                                name={item.name}
+                                image={item.profilePicture}
+                                numRecipes={item.count}
+                                onPress={() => navigation.navigate("Cooks Details", {cookId: item.id})}/>
+                        </View>
+
                     )}/>
+
+                {cooks ? cooks.length < 4 ? <ExampleAdd height={55}/> : '' : ''}
+
             </View>
-            <FloatingActionButton navigation={navigation} addModalVisible={addModalVisible} setAddModalVisible={setAddModalVisible}/>
+            <FloatingActionButton navigation={navigation} addModalVisible={addModalVisible}
+                                  setAddModalVisible={setAddModalVisible}/>
             <AddShoppingListModal modalVisible={addModalVisible}
                                   setModalVisible={setAddModalVisible}
-                                  token = {DemoToken}
+                                  token={DemoToken}
                                   modalTitle={language("newShoppingList")}
                                   buttonTitle={language("add")}
                                   showDeleteOption={false}

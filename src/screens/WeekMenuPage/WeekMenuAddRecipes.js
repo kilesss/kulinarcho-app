@@ -13,6 +13,7 @@ import {FontAwesome5, Ionicons} from "@expo/vector-icons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import renderLoading from "../../components/loading/ShowLoader";
 import {submitWeekMenu} from "../../RestRequests/generalRequest";
+import {CommonActions} from "@react-navigation/native";
 
 function WeekMenuAddRecipes({route, navigation}) {
 
@@ -71,6 +72,7 @@ function WeekMenuAddRecipes({route, navigation}) {
         }
         return number;
     }
+
     async function saveWeekMenu() {
         AsyncStorage.getItem('access_token').then((value) => {
             if (value) {
@@ -88,7 +90,13 @@ function WeekMenuAddRecipes({route, navigation}) {
                             recipe: recipes
                         }));
                         console.log(data);
-                        navigation.navigate('Shopping List');
+                        navigation.dispatch(
+                            CommonActions.reset({
+                                index: 0,
+                                routes: [{ name: 'Week Menu' }],
+                            })
+                        );
+                        navigation.navigate("Week Menu")
                     }
                 }).catch((err) => {
                     console.log(err);

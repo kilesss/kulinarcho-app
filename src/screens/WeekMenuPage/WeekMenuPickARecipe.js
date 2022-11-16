@@ -151,7 +151,7 @@ function WeekMenuPickARecipe({route, navigation}) {
                     shadowColor: "#888",
                 }}
             />
-            {title === ''? <View></View>:
+            {title === ''? '':
 
             <RecipesCardSmall
                 title={title}
