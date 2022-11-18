@@ -6,7 +6,7 @@ import shoppingListStyle from "../../styles/stylesShoppingList";
 import {LinearGradient} from "expo-linear-gradient";
 
 
-export const ListCard = ({onPress, bgColor, title, numItems, onPressEdit, iconName, period}) => (
+export const ListCard = ({onPress, bgColor, title, numItems, onPressEdit, iconName, period,weekMenu}) => (
     <TouchableOpacity
         onPress={onPress}
         style={[

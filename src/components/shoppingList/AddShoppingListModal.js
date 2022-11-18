@@ -5,10 +5,11 @@ import language from "../../language/language";
 import shoppingListStyle from "../../styles/stylesShoppingList";
 import {CustomButton} from "../display/CustomButton";
 import {MaterialIcons} from "@expo/vector-icons";
-import React, {useState} from "react";
-import {deleteList, updateList} from "../../RestRequests/generalRequest";
+import React, {useEffect, useState} from "react";
+import {deleteList, updateList,deleteWeekMenu} from "../../RestRequests/generalRequest";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import renderLoading from "../loading/ShowLoader";
+import * as navigation from "expo-updates";
 
 
 
@@ -30,6 +31,12 @@ export default function AddShoppingListModal({
     const [id] = useState("")
     const [showLoader, setShowLoader] = useState(false);
 
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            console.log('asdasdasd');
+        });
+        return unsubscribe;
+    }, [navigation]);
     async function  deleteShoppingList(){
         setShowLoader(true);
         await deleteList(JSON.stringify({id: modalId}), token).then()
@@ -48,8 +55,30 @@ export default function AddShoppingListModal({
             })
     }
 
+    async function deleteWeekMen(){
+        setShowLoader(true);
+        await deleteWeekMenu(JSON.stringify({id: modalData.id}), token).then()
+            .then(response => {
+                console.log(response);
+                setShowLoader(false);
+                setModalVisible(!modalVisible)
+                if (response.access_token) {
+                    /** Set JWT  **/
+                    AsyncStorage.setItem('access_token', response.access_token);
+                }
+                if (response.errors) {
+                    const restErr = JSON.stringify(response.errors);
+                    //TODO: connect with error messages
+                    console.log(restErr);
+                }
+            })
+
+    }
+
     function deleteRequest(){
         if (typeRequest === 'week_menu'){
+
+            deleteWeekMen().then(r => {})
             console.log(modalId,modalData);
         }else{
             deleteShoppingList().then(r => {});
