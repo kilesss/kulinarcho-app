@@ -15,6 +15,7 @@ import FloatingActionButton from "../../components/display/FloatingActionButton"
 import OnBoarding from "../../components/display/OnBoarding";
 import {useIsFocused} from '@react-navigation/native'
 import ExampleAdd from "../../components/ExampleAdd";
+import { BannerAd, BannerAdSize, TestIds } from 'react-native-google-mobile-ads';
 
 export default function ShoppingListsPage({navigation}) {
 

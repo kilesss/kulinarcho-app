@@ -520,6 +520,7 @@ const addFollower = async function (body, token) {
 }
 
 export const updateProfile = async function (body, token) {
+    console.log(token,endpoints.updateProfile)
     const res = await fetch(endpoints.updateProfile, {
         method: 'POST',
         body: body,

@@ -27,6 +27,7 @@ export default function ProfilePersonalInfo({navigation}) {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [description, setDescription] = useState('');
+    const [imagebase64, setImagebase64] = useState(null);
 
 
     function loadData() {
@@ -84,9 +85,8 @@ export default function ProfilePersonalInfo({navigation}) {
         if (description) {
             obj['description'] = description
         }
-        if (image) {obj['picture'] = image}
+        if (imagebase64) {obj['picture'] = imagebase64}
 
-        console.log(JSON.stringify(obj))
         AsyncStorage.getItem('access_token').then((value) => {
             setDemoToken(value);
             if (value) {
@@ -112,6 +112,7 @@ export default function ProfilePersonalInfo({navigation}) {
         );
         const base64 = await FileSystem.readAsStringAsync(manipResult.uri, {encoding: 'base64'});
         // console.log(base64)
+        setImagebase64(base64)
         // console.log('asdasdasdasdasdasd')
         if (!result.cancelled) {
             setImage(result.uri);

@@ -1,6 +1,8 @@
 import React from 'react';
 
 import {Image, Text, TouchableHighlight, TouchableOpacity, View} from "react-native";
+import * as Linking from 'expo-linking';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Facebook from 'expo-facebook';
 
@@ -12,6 +14,7 @@ import language from '../../language/language';
 import renderLoading from "../../components/loading/ShowLoader";
 import ErrorMessage from "../../components/display/ErrorMessage";
 import { login } from "../../RestRequests/generalRequest";
+import {AccessToken, LoginManager} from "react-native-fbsdk-next";
 export default class LoginPage extends React.Component {
     constructor(props) {
         super(props);
@@ -28,67 +31,75 @@ export default class LoginPage extends React.Component {
                 this.state.showWait = true;
             }
         }
-        // to not fill every time
-        // this.state = {email: "lmariqnov@gmail.com", password: "qwerty2", errors: '', restError: ''};
+
     }
       async facebookLogIn() {
-        // try {
-        await Facebook.initializeAsync({
-            appId: '1106295049885077',
-        });
-        const {
-            type,
-            token,
-            expirationDate,
-            permissions,
-            declinedPermissions,
-        } = await Facebook.logInWithReadPermissionsAsync({
-            permissions: ['public_profile', 'email'],
-        });
-        if (type === 'success') {
-            // Get the user's name using Facebook's Graph API
-            const response = await fetch(`https://graph.facebook.com/me?fields=name,email&access_token=${token}`);
-            await response.json().then(async response => {
-
-                const loginPayload =  JSON.stringify({
-                    type: 'fb',
-                    email: response.email,
-                    name: response.name
-                });
-                await login(loginPayload, 'POST', this.props.navigation).then()
-                    .then(response => {
-                            if (response.first_login === 0) {
-                                this.setState({showLoader: false})
-                                AsyncStorage.setItem('access_token', response.access_token);
-                            }
-                            if (response.access_token) {
-                                this.setState({showLoader: false})
-                                /** Set JWT  **/
-                                AsyncStorage.setItem('access_token', response.access_token);
-                                this.props.navigation.reset({
-                                    index: 0,
-                                    routes: [{name: 'Shopping List'}],
-                                });
-                                return;
-                            }
-
-                            if (response.errors) {
-                                this.setState({showLoader: false})
-                                this.setState({showMessage: true})
-                                const restErr = JSON.stringify(response.errors);
-                                this.setState({restError: restErr.substring(2, restErr.length - 2)})
-                            }
-                        }
-                    ).catch(error => {
-                        this.setState({showLoader: false})
-                        console.log('ERROR:::::');
-                        console.log(error);
-                    });
-
-            })
-        } else {
-            // type === 'cancel'
+        try{
+           await LoginManager.logInWithPermissions(['email']);
+            const data = await AccessToken.getCurrentAccessToken()
+            console.log('asdasdasd');
+            console.log(data);
+        }catch (e){
+            console.log(e);
         }
+
+        //
+        // try {
+        // await Facebook.initializeAsync({
+        //     appId: '1106295049885077',
+        // });
+        // console.log('sssssssssssssss');
+        // const {
+        //     type,
+        //     token,
+        // } = await Facebook.logInWithReadPermissionsAsync({
+        //     permissions: ['public_profile'],
+        // });
+        // console.log(token,type)
+        // if (type === 'success') {
+        //     // Get the user's name using Facebook's Graph API
+        //     const response = await fetch(`https://graph.facebook.com/me?fields=name,email&access_token=${token}`);
+        //     await response.json().then(async response => {
+        //
+        //         const loginPayload =  JSON.stringify({
+        //             type: 'fb',
+        //             email: response.email,
+        //             name: response.name
+        //         });
+        //         await login(loginPayload, 'POST', this.props.navigation).then()
+        //             .then(response => {
+        //                     if (response.first_login === 0) {
+        //                         this.setState({showLoader: false})
+        //                         AsyncStorage.setItem('access_token', response.access_token);
+        //                     }
+        //                     if (response.access_token) {
+        //                         this.setState({showLoader: false})
+        //                         /** Set JWT  **/
+        //                         AsyncStorage.setItem('access_token', response.access_token);
+        //                         this.props.navigation.reset({
+        //                             index: 0,
+        //                             routes: [{name: 'Shopping List'}],
+        //                         });
+        //                         return;
+        //                     }
+        //
+        //                     if (response.errors) {
+        //                         this.setState({showLoader: false})
+        //                         this.setState({showMessage: true})
+        //                         const restErr = JSON.stringify(response.errors);
+        //                         this.setState({restError: restErr.substring(2, restErr.length - 2)})
+        //                     }
+        //                 }
+        //             ).catch(error => {
+        //                 this.setState({showLoader: false})
+        //                 console.log('ERROR:::::');
+        //                 console.log(error);
+        //             });
+        //
+        //     })
+        // } else {
+        //     // type === 'cancel'
+        // }
         // } catch ({ message }) {
         //   alert(`Facebook Login Error: ${message}`);
         // }
