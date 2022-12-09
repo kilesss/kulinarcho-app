@@ -12,6 +12,7 @@ import FloatingActionButton from "../../components/display/FloatingActionButton"
 import {CustomButton} from "../../components/display/CustomButton";
 import stylesShoppingList from "../../styles/stylesShoppingList";
 import ExampleAdd from "../../components/ExampleAdd";
+import * as navigation from "expo-updates";
 
 export default function WeekMenuPage({navigation}) {
     const [changeModalVisible, setChangeModalVisible] = useState(false);
@@ -56,7 +57,9 @@ export default function WeekMenuPage({navigation}) {
                                       modalTitle={language("changeWeekMenu")}
                                       buttonTitle={language("change")}
                                       showDeleteOption={true}
-                                      // modalId={modalID}
+                                      modalId={modalID}
+                                      goBack={() => loadData()}
+
                 />
                 <View style={stylesShoppingList.buttonWithTitle}>
                     <View style={{flex: 2}}>

@@ -52,27 +52,33 @@ export default function AddShoppingListModal({
                     //TODO: connect with error messages
                     console.log(restErr);
                 }
+
             })
     }
 
     async function deleteWeekMen(){
         setShowLoader(true);
-        await deleteWeekMenu(JSON.stringify({id: modalData.id}), token).then()
-            .then(response => {
-                console.log(response);
-                setShowLoader(false);
-                setModalVisible(!modalVisible)
-                if (response.access_token) {
-                    /** Set JWT  **/
-                    AsyncStorage.setItem('access_token', response.access_token);
-                }
-                if (response.errors) {
-                    const restErr = JSON.stringify(response.errors);
-                    //TODO: connect with error messages
-                    console.log(restErr);
-                }
-            })
+        AsyncStorage.getItem('access_token').then(async (value) => {
 
+            await deleteWeekMenu(JSON.stringify({id: modalId}), value).then()
+                .then(response => {
+                    console.log(response);
+                    setShowLoader(false);
+                    setModalVisible(!modalVisible)
+                    if (response.access_token) {
+                        /** Set JWT  **/
+                        AsyncStorage.setItem('access_token', response.access_token);
+                    }
+                    if (response.errors) {
+                        const restErr = JSON.stringify(response.errors);
+                        //TODO: connect with error messages
+                        console.log(restErr);
+                    }goBack()
+
+                    // this.props.navigation.navigate("Week Menu Details")
+
+                })
+        })
     }
 
     function deleteRequest(){

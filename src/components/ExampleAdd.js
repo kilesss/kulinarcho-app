@@ -2,6 +2,8 @@ import React from 'react';
 import {Text, View} from "react-native";
 import {BannerAd, BannerAdSize} from "react-native-google-mobile-ads";
 
+
+const dev = true;
 function ExampleAdd({height}) {
     let addKeys = [
         'ca-app-pub-5428132222163769/6832450395',
@@ -17,17 +19,22 @@ function ExampleAdd({height}) {
         var RandomNumber = Math.floor(Math.random() * 8);
     return addKeys[RandomNumber];
     }
-    return (
-        <BannerAd
-            unitId={'ca-app-pub-3940256099942544/6300978111'}
+    function showDev(){
+        if (dev === true){
+            return <View></View>
+        }else{
+            return <BannerAd
+                unitId={randAds()}
 
-            // unitId={randAds()}
-            size={BannerAdSize.FULL_BANNER}
-            requestOptions={{
-                requestNonPersonalizedAdsOnly: true,
-            }}
-        />
-    );
+                // unitId={randAds()}
+                size={BannerAdSize.FULL_BANNER}
+                requestOptions={{
+                    requestNonPersonalizedAdsOnly: true,
+                }}
+            />
+        }
+    }
+    return (showDev());
 }
 
 export default ExampleAdd;

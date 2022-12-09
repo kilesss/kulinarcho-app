@@ -76,6 +76,12 @@ function WeekMenuAddRecipes({route, navigation}) {
     async function saveWeekMenu() {
         AsyncStorage.getItem('access_token').then((value) => {
             if (value) {
+                console.log(JSON.stringify({
+                    title: title,
+                    dateStart: dateStart,
+                    dateEnd: dateEnd,
+                    recipe: recipes
+                }))
                 submitWeekMenu(JSON.stringify({
                     title: title,
                     dateStart: dateStart,

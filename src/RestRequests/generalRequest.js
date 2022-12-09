@@ -136,6 +136,7 @@ const getProducts = async function (method, JWT) {
 
 
 const getSingleProfile = async function (method, JWT, id) {
+    console.log(`${endpoints.getPublicProfile}${id}`,JWT)
     const res = await fetch(`${endpoints.getPublicProfile}${id}`, {
         method: method,
         headers: {
@@ -196,6 +197,7 @@ function formatResponse2(response) {
 }
 
 async function formatResponse(response) {
+    console.log(response);
     if ('premium' in response) {
         delete response.premium;
     }
@@ -205,10 +207,12 @@ async function formatResponse(response) {
     if ('user_requests' in response) {
         delete response.user_requests;
     }
+    console.log('login' in response)
+    console.log(response.login === true)
     if ('login' in response) {
         if (response.login === true) {
-            await AsyncStorage.removeItem(key).then(()=>{
-                // navigation.navigate("Login")
+            await AsyncStorage.removeItem('access_token').then(()=>{
+                navigation.navigate("Login")
             })
         }
         delete response.login;
@@ -232,6 +236,7 @@ const getShoppingListProducts = async function (listId, JWT) {
     return formatResponse(await res.json());
 }
 const AddEditProductShoppingList = async function (body, token) {
+    console.log(body,token,endpoints.AddEditProductShoppingList)
     const res = await fetch(endpoints.AddEditProductShoppingList, {
         method: 'POST',
         body: body,
@@ -450,6 +455,7 @@ const deleteUserFromGroup = async function (body, token) {
     return formatResponse(await res.json());
 }
 const getRecipesProduct = async function (body, token) {
+    console.log(endpoints.getRecipesProduct+body)
     const res = await fetch(endpoints.getRecipesProduct+body, {
         method: 'GET',
         headers: {
@@ -475,6 +481,7 @@ const getFollower = async function (JWT) {
 }
 
 const getUserRecipes = async function (JWT) {
+    console.log(endpoints.getUserRecipes, JWT);
     const res = await fetch(endpoints.getUserRecipes, {
         method: "GET",
         headers: {

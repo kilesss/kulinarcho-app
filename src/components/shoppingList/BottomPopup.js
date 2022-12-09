@@ -32,6 +32,9 @@ export default function BottomPopup({
     const [item, setItem] = useState([]);
 
     useEffect(() => {
+        setAmount("")
+        setDescription("");
+        setPrice("");
         if (amount) {
             setAmount(amount);
         }
@@ -98,14 +101,19 @@ export default function BottomPopup({
     }
 
     function submitProduct() {
-        returnData({
+        let data = {
             price: txtPrice,
             finalPrice: txtFinalPrice,
             amount: txtAmount,
             productId: newProduct,
-            newProductId: selectedItem,
+            newProductId: null,
             description: txtDescription
-        })
+        }
+        if (newProduct === undefined){
+            data.newProductId = selectedItem
+        }
+
+        returnData(data)
 
 
         setModalVisible(!modalVisible);
@@ -113,6 +121,7 @@ export default function BottomPopup({
 
 
     function showDifferentButtonText() {
+        console.log(newProduct)
         if (newProduct === undefined) {
             return 'saveProduct';
         } else {

@@ -208,7 +208,6 @@ export const AddProductPopup = React.forwardRef((
                         style={{...styles.heading, marginBottom: 0, marginTop: 6}}>{language("hint")}</Text>
                     <TextInput
                         style={{...styles.customButton, padding: 10}}
-                        defaultValue={hint}
                         onChangeText={(changedText) => onInputChanged(changedText, setHint)}
                     />
                 </View>

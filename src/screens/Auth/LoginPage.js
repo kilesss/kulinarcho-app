@@ -38,8 +38,10 @@ export default class LoginPage extends React.Component {
            await LoginManager.logInWithPermissions(['email']);
             const data = await AccessToken.getCurrentAccessToken()
             console.log('asdasdasd');
+            alert(JSON.stringify(data))
             console.log(data);
         }catch (e){
+            alert(JSON.stringify(e))
             console.log(e);
         }
 

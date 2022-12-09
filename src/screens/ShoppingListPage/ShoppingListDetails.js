@@ -153,11 +153,15 @@ export default function ShoppingListDetails(props) {
             })
             AddEditProductShoppingListRequest(data).then(r => {
             })
+            loadData()
+
         } else {
+
             let keyData = '';
             Object.keys(items).forEach(function (key) {
                 if (items[key].id === data.productId) {
                     keyData = key;
+
                     if (items[key].status === 1) {
                         items[key].status = 0;
                     } else {
@@ -173,6 +177,7 @@ export default function ShoppingListDetails(props) {
 
             AddEditProductShoppingListRequest(items[keyData]).then(r => {
             })
+            loadData()
 
         }
         //TODO send request
@@ -242,6 +247,7 @@ export default function ShoppingListDetails(props) {
                          description={modalData.description}
                          finalPrice={modalData.finalPrice}
             />
+            <View style={{ flexDirection:'row'}}><Text style={{color:"red", textAlign:'right',width:'100%'}}>Плъзни на ляво за изтриване! </Text></View>
 
         </SafeAreaView>
 

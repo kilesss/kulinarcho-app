@@ -53,6 +53,14 @@ export default function CookerDetails({route, navigation}) {
 
     }, []);
 
+    function followButton(follow){
+        console.log(follow)
+        if (follow === 0){
+            return <CustomButton title={language("follow")} padding={9} txtColor={"#fff"} onPress={() => followCook(cookId)}/>
+        }else {
+            return <Text></Text>
+        }
+    }
     return (renderLoading(showLoader,
         <View style={styles.container}>
             <View style={{alignSelf: "stretch"}}>
@@ -69,7 +77,7 @@ export default function CookerDetails({route, navigation}) {
                             : Images.defaultProfile} style={stylesCooks.profileImage}/>
                         <Text style={[styles.heading, {fontSize: 22, marginTop: 0, marginBottom: 8, textAlign: "center"}]}>{cook.name}</Text>
                         <Text style={stylesCooks.numRecipesText}>{recipes.length} {language("recipes")}</Text>
-                        <CustomButton title={language("follow")} padding={9} txtColor={"#fff"} onPress={() => followCook(cookId)}/>
+                        {followButton(cook.followed)}
 
                         </View>
                     }

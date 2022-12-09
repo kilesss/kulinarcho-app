@@ -6,6 +6,14 @@
         {
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
+      ],
+      [
+        "react-native-fbsdk-next",
+        {
+          "appID": "1106295049885077",
+          "clientToken": "e73f54d104e016e46361817e9d921739",
+          "displayName": "Кулинарчо"
+        }
       ]
     ],
     "name": "Кулинарчо",
@@ -13,8 +21,9 @@
     "version": "1.0.0",
     "facebookAppId": "1106295049885077",
     "facebookDisplayName": "Кулинарчо",
-
     "orientation": "portrait",
+    "scheme": "com.kilesss.kulinarcho",
+
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "splash": {
@@ -43,6 +52,14 @@
     },
     "web": {
       "favicon": "./assets/icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "13650c8e-1eee-4dbf-8820-306993ea83a6"
+      }
     }
+  },
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-5428132222163769~2137322335"
   }
 }

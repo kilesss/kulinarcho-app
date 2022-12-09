@@ -72,6 +72,7 @@ function WeekMenuShoppingList({route, navigation}) {
 
     function onChange(text, id) {
         let shoppingList = shoppingListItems;
+        console.log(shoppingList);
         Object.keys(shoppingList).forEach(function (key) {
             if (shoppingList[key].id === id) {
                 shoppingList[key].value = text
@@ -96,13 +97,6 @@ function WeekMenuShoppingList({route, navigation}) {
     async function generateShoppingList() {
         AsyncStorage.getItem('access_token').then((value) => {
             if (value) {
-                console.log(JSON.stringify({
-                    title: title,
-                    dateStart: dateStart,
-                    dateEnd: dateEnd,
-                    articles: shoppingListItems,
-                    recipe: recipeIds
-                }));
                 submitWeekMenu(JSON.stringify({
                     title: title,
                     dateStart: dateStart,
@@ -110,17 +104,16 @@ function WeekMenuShoppingList({route, navigation}) {
                     articles: shoppingListItems,
                     recipe: recipeIds
                 }), value).then(data => {
-                    if (data) {
-
-                        console.log(data)
-                        navigation.navigate('Shopping List');
-                    }
+                    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+                    navigation.navigate("Shopping List")
                 }).then(data => {
-                    console.log(data);
+                    navigation.navigate("Shopping List")
                 }).catch((err) => {
-                    console.log(err);
                 });
             }
+            console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbb');
+            navigation.navigate("Shopping List")
+
         }, []);
 
     }

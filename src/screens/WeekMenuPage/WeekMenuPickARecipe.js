@@ -53,7 +53,7 @@ function WeekMenuPickARecipe({route, navigation}) {
                                 value:data[key].id
                             })
                         })
-
+console.log(newData)
                         setItems(newData)
 
                     }

@@ -248,7 +248,6 @@ export default function AddEditRecipe({route, navigation}) {
                     <TextInput
                         multiline={true}
                         style={{...styles.customButton, padding: 10, height: 140, textAlignVertical: "top"}}
-                        defaultValue={step}
                         onChangeText={(changedText) => onInputChanged(changedText, setStep)}
                     />
 

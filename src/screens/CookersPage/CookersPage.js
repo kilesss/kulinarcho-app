@@ -46,6 +46,7 @@ export default function CookersPage({navigation}) {
 
     }, [isFocused]);
 
+
     return (renderLoading(showLoader,
         <View style={{flex: 1}}>
             <View style={{marginHorizontal: 20, marginVertical: 10}}>

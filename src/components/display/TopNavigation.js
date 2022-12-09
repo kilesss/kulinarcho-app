@@ -109,17 +109,17 @@ export default function TopNavigation({recipeDetails, products, steps, scrollA, 
                                 })}
                                             style={stylesRecipes.popupMenu}>
                                     <MaterialCommunityIcons name={"pen"} size={25} color={"#4B4C4C"}/>
-                                    <Text style={{...styles.subHeading, marginLeft: 5}}>Edit</Text>
+                                    <Text style={{...styles.subHeading, marginLeft: 5}}>Редактирай</Text>
                                 </MenuOption>
 
-                                {recipeDetails.public === 0 ?
+                                {(recipeDetails.public === 0 && recipeDetails.old_id == null ) ?
                                     <MenuOption onSelect={() => makeRecipePublic(recipeDetails.id)}
                                                 style={stylesRecipes.popupMenu}>
                                         <Octicons name={"people"} size={25} color={"#15A051"}/>
                                         <Text style={{
                                             ...styles.subHeading,
                                             marginLeft: 5
-                                        }}>{language("makePublic")}</Text>
+                                        }}>{language("makePublic")} {recipeDetails.old_id}</Text>
                                     </MenuOption> : ''
                                 }
 

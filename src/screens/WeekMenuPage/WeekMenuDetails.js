@@ -64,8 +64,14 @@ export default function DetailsScreen({route, navigation}) {
     }
 
     return (
-        renderLoading(showLoader, <ScrollView>
-            <View style={{...styles.container, alignItems: "flex-start", justifyContent: "flex-start"}}>
+        renderLoading(showLoader,
+            <View style={{flex:1}}>
+            <ScrollView  style={{}}>
+                <View style={{ flex: 1,
+                    marginLeft: 20,
+                    marginTop: 10,
+                    marginRight: 20,
+                    marginBottom: 15, }}>
 
                 {menuDetails.map((recipe) => {
                     return (
@@ -86,5 +92,6 @@ export default function DetailsScreen({route, navigation}) {
 
             </View>
         </ScrollView>
+            </View>
     ));
 }
