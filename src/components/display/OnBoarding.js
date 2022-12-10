@@ -16,7 +16,7 @@ function OnBoarding({closeOnBoardingModal}) {
         <Onboarding
             ref={onboardingRef}
             bottomBarHeight={70}
-            imageContainerStyles={{paddingHorizontal: 25, marginTop: "-22%", marginBottom: "-70%"}}
+            imageContainerStyles={{paddingHorizontal: 25, marginTop: "-23%", marginBottom: "-80%"}}
             titleStyles={{marginTop: 20, marginBottom: -20}}
             subTitleStyles={{paddingHorizontal: 20}}
             bottomBarColor={'#fff'}
@@ -40,25 +40,25 @@ function OnBoarding({closeOnBoardingModal}) {
                 },
                 {
                     backgroundColor: '#fff',
-                    image: <Image source={Images.onBoarding.weekMenu} style={{height: "72%", width: "100%"}}/>,
+                    image: <Image source={Images.onBoarding.weekMenu} style={{height: "66%", width: "115%"}}/>,
                     title: 'Седмично меню',
                     subtitle: 'С Кулинарчо вие можете лесно да създадете седмично меню и да ви създаде списък за пазар с всички необходими продукти автоматично.',
                 },
                 {
                     backgroundColor: '#fff',
-                    image: <Image source={Images.onBoarding.recipes1} style={{height: "72%", width: "100%"}}/>,
+                    image: <Image source={Images.onBoarding.recipes1} style={{height: "62%", width: "115%"}}/>,
                     title: 'Рецепти',
                     subtitle: 'С Кулинарчо е по-лесно от всякога да запазвате любимите си рецепти и да ги споделяте с вашите приятели и познати.',
                 },
                 {
                     backgroundColor: '#fff',
-                    image: <Image source={Images.onBoarding.recipes} style={{height: "65%", width: "100%"}}/>,
+                    image: <Image source={Images.onBoarding.groups1} style={{height: "67%", width: "100%", marginTop: 30, marginBottom: -20}}/>,
                     title: 'Първи член в групата',
                     subtitle: 'Можете да създадете група с всички членове на вашето семейство така списъците ви за пазар ще са достъпни за цялото семейство в реално време.',
                 },
                 {
                     backgroundColor: '#fff',
-                    image: <Image source={Images.onBoarding.recipes} style={{height: "67%", width: "100%", marginBottom: -20}}/>,
+                    image: <Image source={Images.onBoarding.group2} style={{height: "61%", width: "115%", marginTop: 10, marginBottom: -110}}/>,
                     title: 'Добавяне на член',
                     subtitle: 'Нека добавим първия член на вашето семейство. Нужно е да въведете само емайл адреса му и той ще получи емайл с вашата покана (не е нужно да има инсталирано приложение). Можете да управлявате групата си от настройките в профил.',
                 },

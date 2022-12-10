@@ -7,6 +7,8 @@ import {getRecipesProduct, submitWeekMenu} from "../../RestRequests/generalReque
 import {CustomButton} from "../../components/display/CustomButton";
 import {stylesProfile} from "../../styles/stylesProfile";
 import {Ionicons, MaterialIcons} from "@expo/vector-icons";
+import {NavigationActions} from "@react-navigation/native";
+import {CommonActions} from "@react-navigation/native";
 
 function WeekMenuShoppingList({route, navigation}) {
     const [recipeIds, setRecipeIds] = useState([]);
@@ -104,15 +106,15 @@ function WeekMenuShoppingList({route, navigation}) {
                     articles: shoppingListItems,
                     recipe: recipeIds
                 }), value).then(data => {
-                    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-                    navigation.navigate("Shopping List")
+                    navigation.reset({
+                        index: 0,
+                        routes: [{name: 'Shopping List'}],
+                    })
                 }).then(data => {
-                    navigation.navigate("Shopping List")
                 }).catch((err) => {
+                    console.log('error')
                 });
             }
-            console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbb');
-            navigation.navigate("Shopping List")
 
         }, []);
 
