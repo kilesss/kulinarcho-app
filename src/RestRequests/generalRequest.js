@@ -16,6 +16,17 @@ const login = async function (body, method) {
 }
 
 
+const loginFB = async function (body, method) {
+    const res = await fetch(endpoints.loginFB, {
+        method: method,
+        body: body,
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+    return formatResponse(await res.json());
+}
+
 
 
 const signup = async function (body, method) {
@@ -541,7 +552,7 @@ export const updateProfile = async function (body, token) {
 
 
 export {
-    login, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu,
+    login,loginFB, forgotenPassword, signup, getShopingList, getWeeklyMenus, getSingleWeeklyMenu,
     getSingleRecipe, getCategories, getProducts, getProductTypes, getSingleProfile,
     getPublicProfiles, getLatestRecipes, getPublicRecipes, getShoppingListProducts,
     AddEditProductShoppingList,deleteProductFromList, AddEditProductType, deleteProductTypes,

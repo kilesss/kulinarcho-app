@@ -2,6 +2,7 @@ const host = 'https://kulinarcho.com/api/'
 const endpoints = {
 
   login: host+'login',
+  loginFB: host+'loginFB',
   signup: host+'signup',
   forgotenPassword: host+'forgotenPassword',
   getShopingList: host+'shoppingList',
